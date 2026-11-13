@@ -76,7 +76,7 @@ export const Controls = memo(function Controls({ model, preset, update, selectPr
           onClick={() => selectPreset(id, { ...defaults, ...values }, view)}><Icon size={15} />{label}</button>)}
       </div>
     </section>
-    <section className="control-section optical">
+    <section className="control-section optical" id="optical-controls">
       <h3><Crosshair size={15} className="teal-text" /> 光镊 <small>532 nm</small></h3>
       <Range label="功率" name="光镊功率" unit="mW" value={p.powerMw} range={bounds.powerMw} step={0.01} update={powerMw => update({ powerMw })} />
       <Range label="束腰" unit="µm" value={p.waistUm} range={bounds.waistUm} step={0.01} update={waistUm => update({ waistUm })} />

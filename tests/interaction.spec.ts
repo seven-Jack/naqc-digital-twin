@@ -189,3 +189,33 @@ test('T23–T24: presets, supported bounds, laser off, refresh, reset and Showca
   await page.getByRole('button', { name: '模型说明', exact: true }).click();
   await expect(page.getByRole('dialog', { name: '模型说明' })).toContainText('¹⁷¹Yb 的完整标准不确定度仍待确定');
 });
+
+test('research panels calculate motion and compare locally imported calibration data', async ({ page }) => {
+  await page.goto('/?demo=compensation');
+  await page.getByRole('button', { name: '补偿当前光移' }).click();
+  await expect(page.getByTestId('effective-detuning')).toHaveAttribute('data-hz', '0');
+  await page.getByRole('button', { name: '恢复未补偿' }).click();
+  await expect(page.getByTestId('effective-detuning')).toContainText('−471.2');
+  await page.getByText('一维量子化运动', { exact: true }).click();
+  await expect(page.getByRole('img', { name: '一维热平均拉比动力学' })).toBeVisible();
+  const radial = await page.getByTestId('motion-population').innerText();
+  await page.getByLabel('运动轴').selectOption('axial');
+  await expect(page.getByTestId('motion-population')).not.toHaveText(radial);
+
+  await page.getByText('实验光移校准', { exact: true }).click();
+  await page.getByLabel('数据来源与实验条件').fill('浏览器测试用合成数据');
+  const csv = page.getByLabel('导入光移 CSV');
+  await csv.setInputFiles({
+    name: 'synthetic.csv',
+    mimeType: 'text/csv',
+    buffer: Buffer.from('power_mW,waist_um,shift_kHz,sigma_kHz,split\n0,1,2,1,fit\n1,1,5,1,fit\n2,1,8,1,fit\n3,1,13,1,validation'),
+  });
+  await expect(page.getByTestId('calibration-result')).toContainText('浏览器测试用合成数据');
+  await expect(page.getByTestId('calibration-validation-rmse')).toHaveText('2.000');
+  await expect(page.getByRole('img', { name: '理论与实测光移比较' })).toBeVisible();
+  await expect(page.getByTestId('effective-detuning')).toContainText('−471.2');
+
+  await csv.setInputFiles({ name: 'invalid.csv', mimeType: 'text/csv', buffer: Buffer.from('invalid') });
+  await expect(page.getByRole('alert')).toContainText('CSV 表头与模板不一致');
+  await expect(page.getByTestId('calibration-result')).toHaveCount(0);
+});

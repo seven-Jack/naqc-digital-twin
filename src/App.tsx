@@ -5,6 +5,9 @@ import { calculateModel, defaults, exportSnapshot, MODEL_VERSION, normalizeParam
 import { kHz, us } from './physics/units';
 import { compensationPreset, Controls, type Preset } from './panels/Controls';
 import { Readouts } from './panels/Readouts';
+import { Calibration } from './panels/Calibration';
+import { ExperimentGuide } from './panels/ExperimentGuide';
+import { MotionSection } from './panels/MotionalAnalysis';
 import { Comparison, Timeline } from './panels/Timeline';
 import { Analysis } from './plots/Analysis';
 import { SceneViewport } from './scene/SceneViewport';
@@ -109,7 +112,7 @@ export function App() {
       <div className="intro">
         <div>
           <h1>钟跃迁模拟器</h1>
-          <p><strong>¹⁷¹Yb</strong> 的态依赖俘获与相干控制</p>
+          <p>调节光镊，观察 <strong>¹⁷¹Yb</strong> 的钟跃迁如何失谐，再用频率补偿恢复共振。</p>
         </div>
         <div className="intro-tags">
           <span className="wavelength"><i className="dot teal" /> 532 nm 光镊</span>
@@ -120,6 +123,8 @@ export function App() {
       <div className="workspace">
         <Controls model={model} preset={preset} update={update} selectPreset={selectPreset} showModel={showModel} />
         <div className="instrument">
+          {!showcase && <ExperimentGuide model={model}
+            onCompensate={() => update({ mode: model.parameters.mode === 'compensated' ? 'free' : 'compensated' })} />}
           <section className="panel scene-panel">
             <SceneViewport model={model} options={sceneOptions} onOptions={updateScene} onSelect={selectSite} population={state.excited}
               active={active} onBloch={showBloch} />
@@ -136,6 +141,11 @@ export function App() {
         <Readouts model={model} openInfo={showModel} />
       </div>
       {!showcase && <Analysis {...analysis} seek={playback.seek} />}
+      <section className="research-section" id="research-models" aria-labelledby="research-title" hidden={showcase}>
+        <div className="section-heading"><h2 id="research-title">运动模型与实验校准</h2></div>
+        <MotionSection model={analysis.model} />
+        <Calibration model={analysis.model} />
+      </section>
       <footer><span>¹⁷¹Yb 钟跃迁数字孪生 · v{MODEL_VERSION}</span><button className="text-button" onClick={showModel}>数据来源与模型假设 ↗</button></footer>
     </main>
     {dialog === 'model' && <Dialog title="模型说明" onClose={closeDialog}>

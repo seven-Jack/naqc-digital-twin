@@ -18,8 +18,8 @@
 
 ## 自动化测试
 
-- `npm test`，18 项通过。覆盖 T01–T16、Gaussian/Rayleigh、单位、基准、谐振曲率、Bloch 归一性、反向失谐倾斜轴及参数校验。
-- `npm run test:e2e`，3 个 Chromium 场景通过，覆盖 T17–T24。使用真实 WebGL 2 画布与截图差异检验旋转、缩放、功率、束腰和势面切换，使用 raycast 点选原子。独立验证图表路径、激光调谐、π/2π 布居、播放／暂停／继续／时间游标、Bloch 球、导出、输入边界、预设、刷新、Reset 及 Showcase。
+- `npm test`，24 项通过。覆盖原始物理基准、一维谐振子同阱与零反冲极限、解析反冲强度、基底截断对照、加权校准及输入校验。
+- `npm run test:e2e`，5 个 Chromium 场景通过。覆盖 T17–T24、5 µs 深链接、一维运动轴切换、CSV 导入及留出验证。校准测试采用合成数据，检查方法和交互。
 - `npm run build`，TypeScript 和 Vite 生产构建通过。Three.js 使主 JS chunk 触发 Vite 默认 500 kB 体积提示，gzip 约 225 kB。
 
 浏览器调试初次遇到 Playwright 和系统缓存浏览器版本不匹配。安装匹配 Chromium 后定位到相机重置残留惯性及测试定位器的文本匹配范围，并在最终测试前修正。
