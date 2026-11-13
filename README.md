@@ -1,0 +1,50 @@
+# ¹⁷¹Yb Clock Digital Twin
+
+*Physics-Informed Optical Tweezer & Clock Transition Simulator*
+
+在浏览器中探索 532 nm 光镊对 ¹⁷¹Yb ¹S₀ ↔ ³P₀ 钟跃迁的差分 AC Stark shift，以及 578 nm 方波驱动在失谐和补偿下的理想两能级演化。项目是本地单页前端，计算和渲染均在浏览器中运行。
+
+## 本地启动
+
+需要 Node.js 22.12 或更高版本。3D 需要 WebGL 2。
+
+```sh
+npm ci
+npm run dev
+```
+
+打开终端显示的本机 URL，通常为 http://127.0.0.1:5173/。开发服务器只绑定回环地址。生产构建可用以下命令检查和预览。
+
+```sh
+npm run build
+npm run preview
+```
+
+## 实验流程
+
+1. 用鼠标或触控旋转、缩放 5 × 5 阵列，点击原子选点，或用场景右下角的位点下拉框。点 **Single atom** 聚焦。**Potentials** 提供两态叠加、单态、ΔU 与径向／轴向剖面。
+2. 改动 **Tweezer power** 和 **Beam waist**，观察高斯包络、中心势能、Stark shift、光谱和 Rabi 曲线。
+3. 保持 **Free atom** 调谐，把脉冲设为 5 µs，点击 **Start pulse**，或直接拖动时间轴至末端。以初始光镊和 100 kHz 驱动为例，失谐约 −471 kHz，理想激发上界约 4.3%。
+4. 点击 **Apply Compensation**，激光频率相对 ν₀ 增加约 471 kHz，所选位点的有效失谐归零。再次运行 5 µs 脉冲即可看到理想 π 翻转。Bloch 球按钮打开同一时钟驱动的旋转坐标系视图。
+5. **Export** 下载含输入来源、假设、SI 输出、当前时间和布居的 JSON。**Showcase** 请求浏览器全屏并保留场景和时间轴。**Research** 返回分析界面。
+
+刷新及 **Reset** 回到合法默认输入。可通过场景图层按钮选择画质、光束与 Glow。没有 WebGL 2 时仍可使用位点选择与科学分析。
+
+## 验证
+
+```sh
+npm test
+npx playwright install chromium
+npm run test:e2e
+npm run build
+```
+
+浏览器测试会启动本机 5174 端口的临时 Vite 服务器。应用运行时所需字体、图形和模型随构建打包。
+
+## 文档
+
+- [科学模型与局限](docs/PHYSICS.md)
+- [文献与数据来源](docs/REFERENCES.md)
+- [验收记录](docs/VALIDATION.md)
+- [架构](docs/ARCHITECTURE.md)
+- [扩展路线](docs/ROADMAP.md)
