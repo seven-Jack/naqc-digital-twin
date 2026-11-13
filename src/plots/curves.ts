@@ -26,7 +26,7 @@ export function rabiCurves(model: Model) {
     const cycles = source.generalizedHz * pulseSeconds;
     if (cycles > maxCycles && source.maxExcited > 0) {
       const bound = ground ? 1 - source.maxExcited : source.maxExcited;
-      return { id, label: label + (ground ? ' minimum' : ' maximum'), color,
+      return { id, label: label + (ground ? '下限' : '上限'), color,
         points: [[0, bound], [parameters.pulseUs, bound]], dashed: true };
     }
     const points = sample(0, parameters.pulseUs, source.maxExcited === 0 ? 240 : Math.max(240, Math.ceil(cycles * 18)), x => {
@@ -36,11 +36,11 @@ export function rabiCurves(model: Model) {
     return { id, label, color, points, fill: id === 'excited', dashed: id !== 'excited' };
   }
   const series = [
-    trace('excited', 'Pₑ · active', colors.cyan, drive),
-    trace('ground', 'P(g) · active', colors.muted, drive, true),
+    trace('excited', 'Pₑ · 当前调谐', colors.cyan, drive),
+    trace('ground', 'Pᵍ · 当前调谐', colors.muted, drive, true),
   ];
-  if (parameters.mode !== 'compensated') series.push(trace('compensated', 'Pₑ · compensated', colors.violet, compensatedDrive));
-  if (parameters.mode !== 'free') series.push(trace('free', 'Pₑ · free atom tune', colors.gold, freeDrive));
+  if (parameters.mode !== 'compensated') series.push(trace('compensated', 'Pₑ · 补偿后', colors.violet, compensatedDrive));
+  if (parameters.mode !== 'free') series.push(trace('free', 'Pₑ · 自由原子共振', colors.gold, freeDrive));
   return series;
 }
 
@@ -64,8 +64,8 @@ export function spectrumCurves(model: Model) {
   return {
     range,
     series: [
-      { id: 'free', label: 'Free atom', color: colors.muted, points: spectrum(0), dashed: true },
-      { id: 'local', label: 'At trap focus', color: colors.violet, points: spectrum(shiftKhz), fill: true },
+      { id: 'free', label: '自由原子', color: colors.muted, points: spectrum(0), dashed: true },
+      { id: 'local', label: '光镊焦点', color: colors.violet, points: spectrum(shiftKhz), fill: true },
     ],
     markers: [
       { x: 0, color: colors.muted, label: 'ν₀' },
@@ -97,5 +97,5 @@ export function potentialCurves(model: Model, axial: boolean) {
 
 export function starkCurve(model: Model) {
   const points = sample(0, 5, 125, x => model.starkHz * intensity({ ...model.beam, powerW: mW(x) }, 0, 0) / model.centerIntensityWm2 / kHz(1));
-  return [{ id: 'stark', label: 'Δν Stark', color: colors.teal, points, fill: true }];
+  return [{ id: 'stark', label: '光移 Δν', color: colors.teal, points, fill: true }];
 }

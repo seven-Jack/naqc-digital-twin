@@ -57,7 +57,7 @@ export class InstrumentScene {
 
   constructor(private host: HTMLDivElement, private onSelect: (site: number) => void, private onHover: (site?: number) => void) {
     const canvas = this.renderer.domElement;
-    canvas.setAttribute('aria-label', 'Interactive three-dimensional optical tweezer scene');
+    canvas.setAttribute('aria-label', '可交互的三维光镊场景');
     canvas.setAttribute('data-testid', 'scene-canvas');
     this.renderer.setClearColor('#08101b', 0);
     host.appendChild(canvas);

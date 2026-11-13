@@ -89,9 +89,9 @@ export function calculateModel(input: Partial<PhysicsParameterState>) {
     site: siteLocation(parameters.site),
     warnings: [
       atomicData.uncertainty,
-      'Software exploration limits are independent of experimental hardware limits.',
-      'The Gaussian model is paraxial. Vector focusing effects may matter near the tightest waists.',
-      'Harmonic levels are local estimates. Levels above the escape threshold are omitted.',
+      '参数范围用于软件探索，实验硬件的可用范围需单独确定。',
+      '高斯光束采用傍轴近似。束腰很小时，矢量聚焦效应可能显著。',
+      '能级按阱底附近的谐振近似估算，仅列出低于逃逸阈值的能级。',
     ],
   };
 }

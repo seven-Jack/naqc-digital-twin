@@ -1,5 +1,5 @@
 :root {
-  font-family: 'Geist Variable', sans-serif;
+  font-family: 'Geist Variable', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
   color: #e9f1fb;
   background: #080d16;
   font-synthesis: none;
@@ -15,7 +15,7 @@
   --teal: #63e4b6;
   --violet: #b59bff;
   --gold: #f3c779;
-  --mono: 'Geist Mono Variable', monospace;
+  --mono: 'Geist Mono Variable', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', monospace;
 }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }

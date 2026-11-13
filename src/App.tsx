@@ -91,30 +91,30 @@ export function App() {
     <header className="topbar">
       <div className="brand">
         <div className="brand-mark"><Atom size={24} strokeWidth={1.6} /></div>
-        <div><div className="brand-title">Yb-171 <span>CLOCK DIGITAL TWIN</span></div><div className="brand-subtitle">Optical Tweezer × Atomic Clock Transition</div></div>
+        <div><div className="brand-title">¹⁷¹Yb <span>钟跃迁数字孪生</span></div><div className="brand-subtitle">光镊俘获与钟跃迁</div></div>
       </div>
       <div className="top-actions">
-        <div className="mode-switch" role="group" aria-label="Display mode">
-          <button aria-pressed={!showcase} className={!showcase ? 'selected' : ''} onClick={() => void setShowcaseMode(false)}><FlaskConical size={14} /> Research</button>
+        <div className="mode-switch" role="group" aria-label="显示模式">
+          <button aria-pressed={!showcase} className={!showcase ? 'selected' : ''} onClick={() => void setShowcaseMode(false)}><FlaskConical size={14} /> 研究</button>
           <button aria-pressed={showcase} className={showcase ? 'selected' : ''} onClick={() => void setShowcaseMode(!showcase)}>
-            {showcase ? <Minimize2 size={14} /> : <Expand size={14} />} Showcase</button>
+            {showcase ? <Minimize2 size={14} /> : <Expand size={14} />} 展示</button>
         </div>
         <span className="nav-rule" />
-        <button className="nav-button" onClick={resetAll} aria-label="Reset parameters"><RotateCcw size={15} /><span>Reset</span></button>
-        <button className="nav-button" onClick={showModel} aria-label="Model info"><Info size={15} /><span>Model info</span></button>
-        <button className="export-button" aria-label="Export" onClick={download}><Download size={15} /><span>Export</span></button>
+        <button className="nav-button" onClick={resetAll} aria-label="重置参数"><RotateCcw size={15} /><span>重置</span></button>
+        <button className="nav-button" onClick={showModel} aria-label="模型说明"><Info size={15} /><span>模型说明</span></button>
+        <button className="export-button" aria-label="导出数据" onClick={download}><Download size={15} /><span>导出</span></button>
       </div>
     </header>
     <main>
       <div className="intro">
         <div>
-          <h1>Clock transition simulator</h1>
-          <p>State-dependent trapping and coherent control of <strong>¹⁷¹Yb</strong></p>
+          <h1>钟跃迁模拟器</h1>
+          <p><strong>¹⁷¹Yb</strong> 的态依赖俘获与相干控制</p>
         </div>
         <div className="intro-tags">
-          <span className="wavelength"><i className="dot teal" /> 532 nm trap</span>
-          <span className="wavelength"><i className="dot gold" /> 578 nm clock</span>
-          <button className="evidence" onClick={showModel}><i className="dot gold" /> Conditional theory</button>
+          <span className="wavelength"><i className="dot teal" /> 532 nm 光镊</span>
+          <span className="wavelength"><i className="dot gold" /> 578 nm 钟激光</span>
+          <button className="evidence" onClick={showModel}><i className="dot gold" /> 条件理论</button>
         </div>
       </div>
       <div className="workspace">
@@ -124,10 +124,10 @@ export function App() {
             <SceneViewport model={model} options={sceneOptions} onOptions={updateScene} onSelect={selectSite} population={state.excited}
               active={active} onBloch={showBloch} />
             {showcase && <div className="showcase-metrics">
-              <span>Δν Stark <strong>{signed(model.starkHz / kHz(1))} kHz</strong></span>
+              <span>斯塔克光移 Δν <strong>{signed(model.starkHz / kHz(1))} kHz</strong></span>
               <span>δ / 2π <strong>{signed(model.detuningHz / kHz(1))} kHz</strong></span>
               <span>Ω / 2π <strong>{(model.activeRabiHz / kHz(1)).toFixed(1)} kHz</strong></span>
-              <span>π pulse <strong>{(model.piSeconds / us(1)).toFixed(2)} µs</strong></span>
+              <span>π 脉冲 <strong>{(model.piSeconds / us(1)).toFixed(2)} µs</strong></span>
             </div>}
             <Timeline model={model} playback={playback} excitation={state.excited} onBloch={showBloch} />
           </section>
@@ -136,29 +136,29 @@ export function App() {
         <Readouts model={model} openInfo={showModel} />
       </div>
       {!showcase && <Analysis {...analysis} seek={playback.seek} />}
-      <footer><span>¹⁷¹Yb Clock Digital Twin · v{MODEL_VERSION}</span><button className="text-button" onClick={showModel}>Sources & model assumptions ↗</button></footer>
+      <footer><span>¹⁷¹Yb 钟跃迁数字孪生 · v{MODEL_VERSION}</span><button className="text-button" onClick={showModel}>数据来源与模型假设 ↗</button></footer>
     </main>
-    {dialog === 'model' && <Dialog title="Model information" onClose={closeDialog}>
+    {dialog === 'model' && <Dialog title="模型说明" onClose={closeDialog}>
       <div className="model-body">
-        <div className="model-badges"><span className="evidence"><i className="dot gold" /> Conditional theory</span><span className="evidence analytic">Verified analytic</span></div>
-        <p>{atomicData.source}. The full ¹⁷¹Yb uncertainty is open. The experimental papers provide context for this prototype.</p>
+        <div className="model-badges"><span className="evidence"><i className="dot gold" /> 条件理论</span><span className="evidence analytic">解析解已验证</span></div>
+        <p>{atomicData.source}。{atomicData.uncertainty}。下列实验文献提供物理背景。</p>
         <ul>{assumptions.map(item => <li key={item}>{item}</li>)}</ul>
-        <p>Angular frequencies use rad/s. Ordinary frequencies use Hz. The ν₀ reference is {atomicData.clockFrequencyCipmText} Hz (CIPM 2025). Computation uses relative laser offsets to retain numerical precision.</p>
-        <p>At focus the Gaussian model uses w₀ as the 1/e² intensity radius. The paraxial beam surfaces show w(z), and color encodes ideal population. Screen playback expands the pulse to 4.8 s at 1×.</p>
+        <p>角频率用 rad/s，频率用 Hz。自由原子参考频率 ν₀ 为 {atomicData.clockFrequencyCipmText} Hz（CIPM 2025）。计算使用激光相对频偏，以保留数值精度。</p>
+        <p>高斯光束的束腰 w₀ 是焦点处光强降至峰值 1/e² 的半径。傍轴光束包络显示 w(z)，原子颜色表示理想布居。1× 播放时，整个脉冲在屏幕上用 4.8 s 播完。</p>
         <div className="source-links">
           <a href={atomicData.calculationUrl} target="_blank" rel="noreferrer">Calculation #23 · R009 ↗</a>
-          <a href={atomicData.sourceUrl} target="_blank" rel="noreferrer">Höhn et al. · polarizabilities ↗</a>
-          <a href="https://doi.org/10.1103/PhysRevX.13.041035" target="_blank" rel="noreferrer">Lis et al. · 532 nm shifts ↗</a>
-          <a href="https://doi.org/10.1103/PhysRevX.13.041034" target="_blank" rel="noreferrer">Norcia et al. · magic trapping ↗</a>
-          <a href="https://doi.org/10.1103/PRXQuantum.6.020334" target="_blank" rel="noreferrer">Muniz et al. · clock control ↗</a>
+          <a href={atomicData.sourceUrl} target="_blank" rel="noreferrer">Höhn 等 · 极化率 ↗</a>
+          <a href="https://doi.org/10.1103/PhysRevX.13.041035" target="_blank" rel="noreferrer">Lis 等 · 532 nm 光移 ↗</a>
+          <a href="https://doi.org/10.1103/PhysRevX.13.041034" target="_blank" rel="noreferrer">Norcia 等 · 魔术波长俘获 ↗</a>
+          <a href="https://doi.org/10.1103/PRXQuantum.6.020334" target="_blank" rel="noreferrer">Muniz 等 · 钟跃迁控制 ↗</a>
         </div>
       </div>
     </Dialog>}
-    {dialog === 'bloch' && <Dialog title="Bloch sphere" onClose={closeDialog}>
+    {dialog === 'bloch' && <Dialog title="布洛赫球" onClose={closeDialog}>
       <BlochSphere model={model} vector={state.bloch} />
-      <div className="bloch-notes"><span><i className="dot cyan" /> State vector</span><span><i className="dot gold" /> Drive axis</span>
+      <div className="bloch-notes"><span><i className="dot cyan" /> 状态矢量</span><span><i className="dot gold" /> 驱动轴</span>
         <output>{(time / us(1)).toFixed(2)} µs</output></div>
-      <input aria-label="Bloch pulse time" className="bloch-timeline" type="range" min={0} max={model.pulseSeconds} step="any"
+      <input aria-label="布洛赫球脉冲时间" className="bloch-timeline" type="range" min={0} max={model.pulseSeconds} step="any"
         value={time} onChange={event => playback.seek(Number(event.target.value))} />
     </Dialog>}
   </div>;

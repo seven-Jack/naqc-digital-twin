@@ -70,6 +70,6 @@ export function BlochSphere({ model, vector }: { model: Model; vector: Vector })
     draw();
   }, [vector, model.drive]);
   return <div className="bloch-view" ref={host} data-testid="bloch-vector" data-vector={JSON.stringify(vector)}>
-    {failed && <p>WebGL 2 is unavailable.</p>}
+    {failed && <p>当前浏览器无法使用 WebGL 2。</p>}
   </div>;
 }
