@@ -23,8 +23,8 @@ test('T17–T20 and T22: orbit, pick an atom and link 3D geometry, trapping and 
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-  await page.goto('/');
-  await expect(page.getByRole('heading', { name: '钟跃迁模拟器' })).toBeVisible();
+  await page.goto('/#clock');
+  await expect(page.getByRole('heading', { name: '钟跃迁模拟器' })).toBeVisible({ timeout: 15_000 });
   const canvas = page.getByTestId('scene-canvas');
   const original = await frame(page);
   const rect = (await canvas.boundingBox())!;
@@ -87,7 +87,7 @@ test('T17–T20 and T22: orbit, pick an atom and link 3D geometry, trapping and 
 });
 
 test('T21: playback, chart cursor, Bloch sphere, phase and JSON export share the same time', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#clock');
   await page.getByRole('button', { name: '开始脉冲' }).click();
   await expect.poll(() => readAttribute(page, 'playback-time', 'data-seconds')).toBeGreaterThan(0);
   await page.getByRole('button', { name: '暂停', exact: true }).click();
@@ -150,7 +150,7 @@ test('project card entry opens a 5 µs pulse at free-atom tuning', async ({ page
 });
 
 test('T23–T24: presets, supported bounds, laser off, refresh, reset and Showcase', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#clock');
   await page.getByRole('button', { name: '光镊俘获', exact: true }).click();
   await expect(page.getByLabel('势阱显示')).toHaveValue('both');
   await page.getByRole('button', { name: '频率补偿', exact: true }).click();

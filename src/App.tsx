@@ -1,5 +1,5 @@
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { Atom, Download, Expand, FlaskConical, Info, Minimize2, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Atom, Download, Expand, FlaskConical, Info, Minimize2, RotateCcw } from 'lucide-react';
 import { atomicData, assumptions } from './data/atomicData';
 import { calculateModel, defaults, exportSnapshot, MODEL_VERSION, normalizeParameters, type PhysicsParameterState } from './physics/model';
 import { kHz, us } from './physics/units';
@@ -97,6 +97,7 @@ export function App() {
         <div><div className="brand-title">¹⁷¹Yb <span>钟跃迁数字孪生</span></div><div className="brand-subtitle">光镊俘获与钟跃迁</div></div>
       </div>
       <div className="top-actions">
+        <a href="#machine" className="clock-home-link"><ArrowLeft size={13} />返回整机演示</a>
         <div className="mode-switch" role="group" aria-label="显示模式">
           <button aria-pressed={!showcase} className={!showcase ? 'selected' : ''} onClick={() => void setShowcaseMode(false)}><FlaskConical size={14} /> 研究</button>
           <button aria-pressed={showcase} className={showcase ? 'selected' : ''} onClick={() => void setShowcaseMode(!showcase)}>

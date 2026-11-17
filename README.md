@@ -1,8 +1,8 @@
-# ¹⁷¹Yb Clock Digital Twin
+# 中性原子量子计算机整机数字孪生
 
-*Physics-Informed Optical Tweezer & Clock Transition Simulator*
+**Neutral-Atom Quantum Computer Digital Twin**
 
-在浏览器中探索 532 nm 光镊对 ¹⁷¹Yb ¹S₀ ↔ ³P₀ 钟跃迁的差分 AC Stark shift，以及 578 nm 方波驱动在失谐和补偿下的理想两能级演化。项目是本地单页前端，计算和渲染均在浏览器中运行。
+在浏览器中查看以 ¹⁷¹Yb 真机流程为依据的光镊装载、阱间交接、量子门与荧光读出。整机演示使用示意几何、理想量子电路与可复现的模拟采样。
 
 ## 本地启动
 
@@ -20,7 +20,16 @@ npm run build
 npm run preview
 ```
 
-## 实验流程
+## 整机演示
+
+1. 打开首页，选择 Bell 态、GHZ 态或乘积叠加态电路，设置测量基和尝试次数。
+2. 启动播放或逐阶段观察首轮装载、重排、储备阱与科学阱交接、门、基变换及荧光读出。可旋转整机视图或聚焦阵列。
+3. 比较理想概率与批次直方图。Z 基查看布居，X 基查看奇偶相关。可调装载概率、末端丢失与单比特读出翻转。导出的 JSON 保留每次尝试的状态和有效位串。
+4. 在「真机实验依据」查看有条件和出处的公开实验结果。在「钟跃迁子系统」进入原有模拟器，或用 `/#clock` 和 `/?demo=compensation` 直达。
+
+## 钟跃迁子系统
+
+在此子系统中探索 532 nm 光镊对 ¹⁷¹Yb ¹S₀ ↔ ³P₀ 钟跃迁的差分 AC Stark shift，以及 578 nm 方波驱动在失谐和补偿下的理想两能级演化。
 
 1. 用鼠标或触控旋转、缩放 5 × 5 阵列，点击原子选点，或用场景右下角的位点下拉框。点 **单原子** 聚焦。**势阱** 提供两态叠加、单态、ΔU 与径向／轴向剖面。
 2. 改动 **光镊功率** 和 **束腰**，观察高斯包络、中心势能、Stark shift、光谱和 Rabi 曲线。
@@ -43,7 +52,8 @@ npm run build
 
 ## 文档
 
-- [科学模型与局限](docs/PHYSICS.md)
+- [整机演示模型、参数与实验背景](docs/QUANTUM_COMPUTER.md)
+- [钟跃迁子系统的科学模型与局限](docs/PHYSICS.md)
 - [文献与数据来源](docs/REFERENCES.md)
 - [验收记录](docs/VALIDATION.md)
 - [架构](docs/ARCHITECTURE.md)

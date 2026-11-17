@@ -31,6 +31,7 @@ h1, h2, h3, p { margin: 0; }
 a { color: var(--cyan); }
 small { font-size: 0.8em; }
 sub { font-size: 0.76em; vertical-align: -0.18em; }
+.twin-loading { display: grid; place-items: center; min-height: 100vh; color: var(--muted); font-size: 14px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .app { min-height: 100vh; background: radial-gradient(ellipse 70% 520px at 43% 0%, #101b2d 0%, #080d16 83%); }
 .topbar {
@@ -59,6 +60,11 @@ sub { font-size: 0.76em; vertical-align: -0.18em; }
 .brand-title span { font-weight: 610; }
 .brand-subtitle { color: var(--muted); font-size: 11px; margin-top: 3px; }
 .top-actions { gap: 10px; }
+.clock-home-link {
+  display: inline-flex; align-items: center; gap: 5px; color: #a6d7e1; white-space: nowrap;
+  padding: 7px 8px; font-size: 11px; border: 1px solid #28404e; border-radius: 6px; text-decoration: none;
+}
+.clock-home-link:hover { background: #142c38; }
 .mode-switch { gap: 3px; padding: 4px; background: #080e17; border: 1px solid #202f40; border-radius: 9px; }
 .mode-switch button, .nav-button, .export-button {
   display: inline-flex;
@@ -389,7 +395,7 @@ dialog::backdrop { background: #030711cc; backdrop-filter: blur(4px); }
 }
 @media (max-width: 640px) {
   .topbar { min-height: 0; padding: 9px 10px 7px; flex-wrap: wrap; gap: 8px; }
-  .top-actions { width: 100%; }
+  .top-actions { width: 100%; flex-wrap: wrap; }
   .mode-switch { margin-right: auto; }
   .brand-subtitle { font-size: 10px; }
   .intro { align-items: start; flex-direction: column; gap: 10px; margin-bottom: 11px; }
