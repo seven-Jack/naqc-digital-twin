@@ -2,6 +2,8 @@
 
 **Neutral-Atom Quantum Computer Digital Twin**
 
+[打开线上演示](https://naqc-digital-twin.stonynote14.chatgpt.site/)
+
 在浏览器中查看以 ¹⁷¹Yb 真机流程为依据的光镊装载、阱间交接、量子门与荧光读出。整机演示使用示意几何、理想量子电路与可复现的模拟采样。
 
 ## 本地启动
