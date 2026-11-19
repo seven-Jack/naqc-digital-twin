@@ -1,0 +1,11 @@
+Id=knottnerus-p1-roi3-20261119t084921z.service
+SubState=exited
+Result=success
+ExecMainStartTimestamp=Thu 2026-11-19 16:51:17 CST
+ExecMainExitTimestamp=Thu 2026-11-19 16:51:17 CST
+ExecMainStatus=0
+MemoryPeak=18808832
+CPUUsageNSec=160592000
+CPUQuotaPerSecUSec=1s
+MemoryMax=1073741824
+MemorySwapMax=0

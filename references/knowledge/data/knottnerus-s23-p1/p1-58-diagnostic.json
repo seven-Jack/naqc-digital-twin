@@ -1,0 +1,527 @@
+{
+  "source": "Knottnerus 88Sr public S23 P1, cross-apparatus comparison",
+  "candidate_strict_gt": 6436,
+  "raw_member_hashes": {
+    "P1_58_1.tga": "03ce7e9890d9a70d5e18277a7c3aa79ef7c7cc112aa49be13b5763779db74581",
+    "P1_58_2.tga": "97886a2d9cc58b173eb8b9e5f9f4a744ba9726acef46f0fddea9e39c577aafae",
+    "P1_58.dat": "0330715407437ccb24c7ddb4af7e90f8db487ead180ad8b3831866a86dfe3b75",
+    "P1ROIs.dat": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+    "params.dat": "478e3898c4f9c59010d5566bb382ef19645274abf9ccf7cb26564badd7e5f32a"
+  },
+  "shot_timestamp": [
+    "2024.11.29",
+    "14:08:20::428"
+  ],
+  "native_xyxy_half_open": [
+    25,
+    130,
+    28,
+    133
+  ],
+  "params_cropped_xx_yy_half_open": [
+    25,
+    28,
+    50,
+    53
+  ],
+  "frames": [
+    {
+      "frame": 1,
+      "patch5x5": [
+        [
+          540,
+          399,
+          753,
+          374,
+          413
+        ],
+        [
+          364,
+          394,
+          944,
+          406,
+          415
+        ],
+        [
+          520,
+          416,
+          2579,
+          371,
+          993
+        ],
+        [
+          478,
+          398,
+          410,
+          562,
+          380
+        ],
+        [
+          419,
+          1211,
+          797,
+          1285,
+          527
+        ]
+      ],
+      "fixed_pixels": [
+        [
+          394,
+          944,
+          406
+        ],
+        [
+          416,
+          2579,
+          371
+        ],
+        [
+          398,
+          410,
+          562
+        ]
+      ],
+      "sums_rows_dy_columns_dx_minus1_to1": [
+        [
+          6909,
+          6636,
+          7248
+        ],
+        [
+          6503,
+          6480,
+          7060
+        ],
+        [
+          7228,
+          8029,
+          7904
+        ]
+      ],
+      "fixed_sum": 6480,
+      "max_sum": 8029,
+      "log_bit": 0,
+      "binary_log": "000010010101101111001101100001101111",
+      "threshold_margin": 44
+    },
+    {
+      "frame": 2,
+      "patch5x5": [
+        [
+          419,
+          664,
+          365,
+          422,
+          391
+        ],
+        [
+          369,
+          390,
+          390,
+          422,
+          396
+        ],
+        [
+          388,
+          394,
+          373,
+          399,
+          375
+        ],
+        [
+          342,
+          394,
+          396,
+          401,
+          380
+        ],
+        [
+          366,
+          378,
+          394,
+          412,
+          378
+        ]
+      ],
+      "fixed_pixels": [
+        [
+          390,
+          390,
+          422
+        ],
+        [
+          394,
+          373,
+          399
+        ],
+        [
+          394,
+          396,
+          401
+        ]
+      ],
+      "sums_rows_dy_columns_dx_minus1_to1": [
+        [
+          3752,
+          3819,
+          3533
+        ],
+        [
+          3436,
+          3559,
+          3532
+        ],
+        [
+          3425,
+          3541,
+          3508
+        ]
+      ],
+      "fixed_sum": 3559,
+      "max_sum": 3819,
+      "log_bit": 0,
+      "binary_log": "000000011110011110011110011110000000",
+      "threshold_margin": -2877
+    }
+  ],
+  "strict_integer_constraints": {
+    "all": {
+      "site_frames": 7200,
+      "log0": 5064,
+      "log1": 2136,
+      "maximum_log0": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "minimum_log1": [
+        {
+          "shot": 69,
+          "frame": 1,
+          "roi": 21,
+          "counts": 6551,
+          "log": 1
+        }
+      ],
+      "perfect_integer_interval": [
+        6480,
+        6550
+      ],
+      "min_errors": 0,
+      "optimal_integer_threshold_intervals": [
+        [
+          6480,
+          6550
+        ]
+      ],
+      "candidate_errors": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "at_6480_errors": [],
+      "log1_above_6436_through_6480": []
+    },
+    "Pic1": {
+      "site_frames": 3600,
+      "log0": 2090,
+      "log1": 1510,
+      "maximum_log0": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "minimum_log1": [
+        {
+          "shot": 69,
+          "frame": 1,
+          "roi": 21,
+          "counts": 6551,
+          "log": 1
+        }
+      ],
+      "perfect_integer_interval": [
+        6480,
+        6550
+      ],
+      "min_errors": 0,
+      "optimal_integer_threshold_intervals": [
+        [
+          6480,
+          6550
+        ]
+      ],
+      "candidate_errors": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "at_6480_errors": [],
+      "log1_above_6436_through_6480": []
+    },
+    "ROI3_both_frames": {
+      "site_frames": 200,
+      "log0": 156,
+      "log1": 44,
+      "maximum_log0": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "minimum_log1": [
+        {
+          "shot": 73,
+          "frame": 1,
+          "roi": 3,
+          "counts": 7411,
+          "log": 1
+        }
+      ],
+      "perfect_integer_interval": [
+        6480,
+        7410
+      ],
+      "min_errors": 0,
+      "optimal_integer_threshold_intervals": [
+        [
+          6480,
+          7410
+        ]
+      ],
+      "candidate_errors": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "at_6480_errors": [],
+      "log1_above_6436_through_6480": []
+    },
+    "ROI3_Pic1": {
+      "site_frames": 100,
+      "log0": 56,
+      "log1": 44,
+      "maximum_log0": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "minimum_log1": [
+        {
+          "shot": 73,
+          "frame": 1,
+          "roi": 3,
+          "counts": 7411,
+          "log": 1
+        }
+      ],
+      "perfect_integer_interval": [
+        6480,
+        7410
+      ],
+      "min_errors": 0,
+      "optimal_integer_threshold_intervals": [
+        [
+          6480,
+          7410
+        ]
+      ],
+      "candidate_errors": [
+        {
+          "shot": 58,
+          "frame": 1,
+          "roi": 3,
+          "counts": 6480,
+          "log": 0
+        }
+      ],
+      "at_6480_errors": [],
+      "log1_above_6436_through_6480": []
+    }
+  },
+  "Average": {
+    "P1_repetitions": 100,
+    "table_points": 20,
+    "record_time": [
+      "2024.11.29",
+      "14:10:43::807"
+    ],
+    "Pic0ROI3": 0.44,
+    "Pic1ROI3": 0.44,
+    "all36_Average_Pic0_equal_Average_Pic1": true,
+    "site_columns_matching_per100_log": {
+      "Pic0": {
+        "1": 36,
+        "2": 0
+      },
+      "Pic1": {
+        "1": 36,
+        "2": 0
+      }
+    },
+    "per_shot_log_occupied_ROI3_of_100": {
+      "1": 44,
+      "2": 0
+    }
+  },
+  "npy_headers_no_pickle_execution": [
+    {
+      "offset": 0,
+      "descr": "|O",
+      "fortran_order": false,
+      "shape": [],
+      "opcodes": 300,
+      "simple_metadata_strings": [
+        "241129",
+        "DRbRepumpDPAOMB2Intensity1",
+        "O8",
+        "S23",
+        "Survival rate",
+        "analysedrois",
+        "date",
+        "description",
+        "f8",
+        "ignoredarks",
+        "imagedimensions",
+        "invalidrois",
+        "numpy dtype",
+        "numpy ndarray",
+        "numpy.core.multiarray _reconstruct",
+        "numpy.core.multiarray scalar",
+        "repetitions",
+        "series",
+        "shots",
+        "thresholdimages",
+        "u2",
+        "xlabel",
+        "xvalues",
+        "ylabel"
+      ],
+      "byte_payload_lengths": [
+        1,
+        2,
+        160
+      ],
+      "stop": 1175
+    },
+    {
+      "offset": 1175,
+      "descr": "<f8",
+      "fortran_order": false,
+      "shape": [
+        20,
+        2
+      ],
+      "stop": 1623
+    },
+    {
+      "offset": 1623,
+      "descr": "<f8",
+      "fortran_order": false,
+      "shape": [
+        20,
+        2
+      ],
+      "stop": 2071
+    },
+    {
+      "offset": 2071,
+      "descr": "|O",
+      "fortran_order": false,
+      "shape": [
+        20,
+        2,
+        2
+      ],
+      "opcodes": 1854,
+      "simple_metadata_strings": [
+        "O8",
+        "f8",
+        "i8",
+        "numpy dtype",
+        "numpy ndarray",
+        "numpy.core.multiarray _reconstruct"
+      ],
+      "byte_payload_lengths": [
+        1,
+        88,
+        96,
+        104,
+        112,
+        120,
+        128,
+        136,
+        144,
+        152,
+        720,
+        728,
+        752,
+        760,
+        792,
+        800,
+        808,
+        824,
+        832,
+        840,
+        848,
+        856,
+        864,
+        872,
+        880,
+        888,
+        896,
+        904,
+        912,
+        920,
+        928,
+        936,
+        944,
+        952,
+        1008,
+        1016,
+        1056,
+        1064
+      ],
+      "stop": 52437
+    },
+    {
+      "offset": 52437,
+      "descr": "<f8",
+      "fortran_order": false,
+      "shape": [
+        20,
+        2,
+        100,
+        100
+      ],
+      "stop": 3252565
+    }
+  ]
+}
