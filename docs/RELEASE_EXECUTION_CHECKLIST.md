@@ -29,6 +29,10 @@ shasum -a 256 -c references/knowledge/data/kim-exp33-exp34-final.sha256
 
 GitHub 仓库保留程序、测试、数值明细、来源索引和复算脚本。论文原件、大型原始图像与作业回执按资料库既有规则保存在本地 `references/library/`，复查原件可从资料索引定位公开来源。 [资料库](../references/README.md) · [公开演示](https://naqc-digital-twin.stonynote14.chatgpt.site/)
 
+## GitHub 阶段版本 v0.1.1
+
+补入 Knottnerus ⁸⁸Sr 的跨装置对照记录、Taiyi 复算结果和校验回执。P1_58 首帧 ROI 3 的固定窗口和为 6,480 counts，周围九个候选窗口均超过 6,436 counts，在线日志判空。`>6436` 保留为候选阈值，在线判空原因仍待核实。Senoo 正式 CAL／VAL 继续暂缓。 [知识库追溯与复算材料](../references/knowledge/knottnerus-p1-58-online-decision.md)
+
 ## 正式科研验收顺序
 
 项目清单当前 22/28 项完成。以下六项均保留待验状态。CAL 和 VAL 依用户安排暂缓。收到其中一类资料即可核对其来源和完整性，整机验收按已核验的组件证据推进。

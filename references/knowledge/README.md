@@ -26,7 +26,7 @@
 | 复现 Ma 的 24 个阈值及 Kim Exp34 的分件 ROI、全帧计数、198 个阈值和跨分件双帧 | [公开读出数据的跨装置对照](cross-apparatus-readout-reproduction.md) |
 | 检验 Kim Exp34 冻结读出的跨批次差异，追溯 Exp33 的 2,817 个留出判决差异 | [Exp33 跨批次验证与同批次阈值复现](kim-exp33-cross-batch.md) |
 | 按轮核对装载、搬运前后帧与整阵成功的分母，并比较在线与离线占位 | [Senoo 扩展图 1d 与 Knottnerus ⁸⁸Sr 的 100 轮对照](public-transport-senoo-knottnerus.md) · [200 帧原像素复算与筛选差异](public-transport-senoo-knottnerus.md#taiyi-原图复算) |
-| 追查 P1 判决差异，并核对筛选前后的分母 | [39 处差异的阈值与坐标比较](knottnerus-p1-threshold-roi.md) · [剩余 26 处的固定窗口复算](knottnerus-p1-threshold-roi.md#固定窗口追查剩余-26-处) |
+| 追查 P1 判决差异，并核对筛选前后的分母 | [39 处差异的阈值与坐标比较](knottnerus-p1-threshold-roi.md) · [剩余 26 处的固定窗口复算](knottnerus-p1-threshold-roi.md#固定窗口追查剩余-26-处) · [P1_58 首帧 ROI 3 的像素和与在线配置](knottnerus-p1-58-online-decision.md) |
 | 补齐论文正式版或实验数据 | [待补清单](../MANUAL_DOWNLOAD.md) |
 
 ## 阅读范围
