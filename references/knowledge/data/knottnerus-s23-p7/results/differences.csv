@@ -1,0 +1,8 @@
+threshold,shot,frame,roi,target,raw_x0,raw_y0,raw_x1_exclusive,raw_y1_exclusive,counts,log_bit,fixed_bit,frame_member,log_member
+6436,35,1,24,0,61,105,64,108,6461,0,1,Datapackage_SLM/data/241129_S23/P7_35_1.tga,Datapackage_SLM/data/241129_S23/P7_35.dat
+6514,17,1,13,1,43,113,46,116,6514,1,0,Datapackage_SLM/data/241129_S23/P7_17_1.tga,Datapackage_SLM/data/241129_S23/P7_17.dat
+6515,17,1,13,1,43,113,46,116,6514,1,0,Datapackage_SLM/data/241129_S23/P7_17_1.tga,Datapackage_SLM/data/241129_S23/P7_17.dat
+6516,17,1,13,1,43,113,46,116,6514,1,0,Datapackage_SLM/data/241129_S23/P7_17_1.tga,Datapackage_SLM/data/241129_S23/P7_17.dat
+6517,17,1,13,1,43,113,46,116,6514,1,0,Datapackage_SLM/data/241129_S23/P7_17_1.tga,Datapackage_SLM/data/241129_S23/P7_17.dat
+6518,17,1,13,1,43,113,46,116,6514,1,0,Datapackage_SLM/data/241129_S23/P7_17_1.tga,Datapackage_SLM/data/241129_S23/P7_17.dat
+6519,17,1,13,1,43,113,46,116,6514,1,0,Datapackage_SLM/data/241129_S23/P7_17_1.tga,Datapackage_SLM/data/241129_S23/P7_17.dat
