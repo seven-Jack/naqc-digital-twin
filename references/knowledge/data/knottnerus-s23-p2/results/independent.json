@@ -1,0 +1,1051 @@
+{
+  "source": "Knottnerus S23 P2; same-series holdout, cross-apparatus 88Sr",
+  "method": "NumPy int64 integral images, native unflipped u16 LE with frozen P1 rectangles",
+  "candidate_strict_gt_counts": 6436,
+  "equal_6436": 0,
+  "dimensions_shots_frames_sites": [
+    100,
+    2,
+    36
+  ],
+  "targets_0based": [
+    7,
+    8,
+    9,
+    10,
+    13,
+    14,
+    15,
+    16,
+    19,
+    20,
+    21,
+    22,
+    25,
+    26,
+    27,
+    28
+  ],
+  "counts_sha256": "868feeaefd1509122bc17837101432d2e2d89ce64bfbde053604263e021eec8a",
+  "site_sha256": "55f8dbecd05642c6b2b7919da29bb670e18554d3594531638fa01d7f91631d6a",
+  "site_hash_encoding": "ASCII shot,frame,roi,counts,log_bit,fixed_bit LF; numeric ascending, no header; shot/frame 1-based, roi 0-based.",
+  "mismatches": [
+    {
+      "shot": 2,
+      "frame": 1,
+      "roi": 6,
+      "log_bit": 0,
+      "fixed_bit": 1,
+      "counts": 6482
+    },
+    {
+      "shot": 5,
+      "frame": 1,
+      "roi": 24,
+      "log_bit": 0,
+      "fixed_bit": 1,
+      "counts": 6438
+    },
+    {
+      "shot": 16,
+      "frame": 1,
+      "roi": 21,
+      "log_bit": 0,
+      "fixed_bit": 1,
+      "counts": 6499
+    },
+    {
+      "shot": 22,
+      "frame": 1,
+      "roi": 5,
+      "log_bit": 0,
+      "fixed_bit": 1,
+      "counts": 6450
+    },
+    {
+      "shot": 57,
+      "frame": 2,
+      "roi": 18,
+      "log_bit": 0,
+      "fixed_bit": 1,
+      "counts": 6483
+    }
+  ],
+  "cohorts": {
+    "all": {
+      "rounds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "logged": {
+        "initial": [
+          1572,
+          3600
+        ],
+        "final": [
+          814,
+          3600
+        ],
+        "final_targets": [
+          814,
+          1600
+        ],
+        "full_target_rounds": [
+          46,
+          100
+        ]
+      },
+      "fixed": {
+        "initial": [
+          1576,
+          3600
+        ],
+        "final": [
+          815,
+          3600
+        ],
+        "final_targets": [
+          814,
+          1600
+        ],
+        "full_target_rounds": [
+          46,
+          100
+        ]
+      },
+      "all_sites": {
+        "different": 5,
+        "log0_fixed1": 5,
+        "log1_fixed0": 0,
+        "denominator": 7200
+      },
+      "Pic1": {
+        "different": 4,
+        "log0_fixed1": 4,
+        "log1_fixed0": 0,
+        "denominator": 3600
+      },
+      "Pic2": {
+        "different": 1,
+        "log0_fixed1": 1,
+        "log1_fixed0": 0,
+        "denominator": 3600
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 1600
+      }
+    },
+    "log_in": {
+      "rounds": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        17,
+        18,
+        19,
+        21,
+        22,
+        24,
+        26,
+        32,
+        33,
+        34,
+        36,
+        37,
+        39,
+        42,
+        44,
+        45,
+        47,
+        50,
+        51,
+        55,
+        57,
+        59,
+        60,
+        62,
+        64,
+        67,
+        68,
+        72,
+        73,
+        74,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        84,
+        87,
+        88,
+        89,
+        90,
+        94,
+        95,
+        97,
+        98,
+        99
+      ],
+      "logged": {
+        "initial": [
+          930,
+          1836
+        ],
+        "final": [
+          810,
+          1836
+        ],
+        "final_targets": [
+          810,
+          816
+        ],
+        "full_target_rounds": [
+          46,
+          51
+        ]
+      },
+      "fixed": {
+        "initial": [
+          932,
+          1836
+        ],
+        "final": [
+          811,
+          1836
+        ],
+        "final_targets": [
+          810,
+          816
+        ],
+        "full_target_rounds": [
+          46,
+          51
+        ]
+      },
+      "all_sites": {
+        "different": 3,
+        "log0_fixed1": 3,
+        "log1_fixed0": 0,
+        "denominator": 3672
+      },
+      "Pic1": {
+        "different": 2,
+        "log0_fixed1": 2,
+        "log1_fixed0": 0,
+        "denominator": 1836
+      },
+      "Pic2": {
+        "different": 1,
+        "log0_fixed1": 1,
+        "log1_fixed0": 0,
+        "denominator": 1836
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 816
+      }
+    },
+    "fixed_in": {
+      "rounds": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        24,
+        26,
+        32,
+        33,
+        34,
+        36,
+        37,
+        39,
+        42,
+        44,
+        45,
+        47,
+        50,
+        51,
+        55,
+        57,
+        59,
+        60,
+        62,
+        64,
+        67,
+        68,
+        72,
+        73,
+        74,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        84,
+        87,
+        88,
+        89,
+        90,
+        94,
+        95,
+        97,
+        98,
+        99
+      ],
+      "logged": {
+        "initial": [
+          960,
+          1908
+        ],
+        "final": [
+          811,
+          1908
+        ],
+        "final_targets": [
+          811,
+          848
+        ],
+        "full_target_rounds": [
+          46,
+          53
+        ]
+      },
+      "fixed": {
+        "initial": [
+          964,
+          1908
+        ],
+        "final": [
+          812,
+          1908
+        ],
+        "final_targets": [
+          811,
+          848
+        ],
+        "full_target_rounds": [
+          46,
+          53
+        ]
+      },
+      "all_sites": {
+        "different": 5,
+        "log0_fixed1": 5,
+        "log1_fixed0": 0,
+        "denominator": 3816
+      },
+      "Pic1": {
+        "different": 4,
+        "log0_fixed1": 4,
+        "log1_fixed0": 0,
+        "denominator": 1908
+      },
+      "Pic2": {
+        "different": 1,
+        "log0_fixed1": 1,
+        "log1_fixed0": 0,
+        "denominator": 1908
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 848
+      }
+    },
+    "both": {
+      "rounds": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        17,
+        18,
+        19,
+        21,
+        22,
+        24,
+        26,
+        32,
+        33,
+        34,
+        36,
+        37,
+        39,
+        42,
+        44,
+        45,
+        47,
+        50,
+        51,
+        55,
+        57,
+        59,
+        60,
+        62,
+        64,
+        67,
+        68,
+        72,
+        73,
+        74,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        84,
+        87,
+        88,
+        89,
+        90,
+        94,
+        95,
+        97,
+        98,
+        99
+      ],
+      "logged": {
+        "initial": [
+          930,
+          1836
+        ],
+        "final": [
+          810,
+          1836
+        ],
+        "final_targets": [
+          810,
+          816
+        ],
+        "full_target_rounds": [
+          46,
+          51
+        ]
+      },
+      "fixed": {
+        "initial": [
+          932,
+          1836
+        ],
+        "final": [
+          811,
+          1836
+        ],
+        "final_targets": [
+          810,
+          816
+        ],
+        "full_target_rounds": [
+          46,
+          51
+        ]
+      },
+      "all_sites": {
+        "different": 3,
+        "log0_fixed1": 3,
+        "log1_fixed0": 0,
+        "denominator": 3672
+      },
+      "Pic1": {
+        "different": 2,
+        "log0_fixed1": 2,
+        "log1_fixed0": 0,
+        "denominator": 1836
+      },
+      "Pic2": {
+        "different": 1,
+        "log0_fixed1": 1,
+        "log1_fixed0": 0,
+        "denominator": 1836
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 816
+      }
+    },
+    "log_only": {
+      "rounds": [],
+      "logged": {
+        "initial": [
+          0,
+          0
+        ],
+        "final": [
+          0,
+          0
+        ],
+        "final_targets": [
+          0,
+          0
+        ],
+        "full_target_rounds": [
+          0,
+          0
+        ]
+      },
+      "fixed": {
+        "initial": [
+          0,
+          0
+        ],
+        "final": [
+          0,
+          0
+        ],
+        "final_targets": [
+          0,
+          0
+        ],
+        "full_target_rounds": [
+          0,
+          0
+        ]
+      },
+      "all_sites": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 0
+      },
+      "Pic1": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 0
+      },
+      "Pic2": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 0
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 0
+      }
+    },
+    "fixed_only": {
+      "rounds": [
+        2,
+        16
+      ],
+      "logged": {
+        "initial": [
+          30,
+          72
+        ],
+        "final": [
+          1,
+          72
+        ],
+        "final_targets": [
+          1,
+          32
+        ],
+        "full_target_rounds": [
+          0,
+          2
+        ]
+      },
+      "fixed": {
+        "initial": [
+          32,
+          72
+        ],
+        "final": [
+          1,
+          72
+        ],
+        "final_targets": [
+          1,
+          32
+        ],
+        "full_target_rounds": [
+          0,
+          2
+        ]
+      },
+      "all_sites": {
+        "different": 2,
+        "log0_fixed1": 2,
+        "log1_fixed0": 0,
+        "denominator": 144
+      },
+      "Pic1": {
+        "different": 2,
+        "log0_fixed1": 2,
+        "log1_fixed0": 0,
+        "denominator": 72
+      },
+      "Pic2": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 72
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 32
+      }
+    },
+    "neither": {
+      "rounds": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        20,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        35,
+        38,
+        40,
+        41,
+        43,
+        46,
+        48,
+        49,
+        52,
+        53,
+        54,
+        56,
+        58,
+        61,
+        63,
+        65,
+        66,
+        69,
+        70,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        91,
+        92,
+        93,
+        96,
+        100
+      ],
+      "logged": {
+        "initial": [
+          612,
+          1692
+        ],
+        "final": [
+          3,
+          1692
+        ],
+        "final_targets": [
+          3,
+          752
+        ],
+        "full_target_rounds": [
+          0,
+          47
+        ]
+      },
+      "fixed": {
+        "initial": [
+          612,
+          1692
+        ],
+        "final": [
+          3,
+          1692
+        ],
+        "final_targets": [
+          3,
+          752
+        ],
+        "full_target_rounds": [
+          0,
+          47
+        ]
+      },
+      "all_sites": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 3384
+      },
+      "Pic1": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 1692
+      },
+      "Pic2": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 1692
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 752
+      }
+    },
+    "log_out": {
+      "rounds": [
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        20,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        35,
+        38,
+        40,
+        41,
+        43,
+        46,
+        48,
+        49,
+        52,
+        53,
+        54,
+        56,
+        58,
+        61,
+        63,
+        65,
+        66,
+        69,
+        70,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        91,
+        92,
+        93,
+        96,
+        100
+      ],
+      "logged": {
+        "initial": [
+          642,
+          1764
+        ],
+        "final": [
+          4,
+          1764
+        ],
+        "final_targets": [
+          4,
+          784
+        ],
+        "full_target_rounds": [
+          0,
+          49
+        ]
+      },
+      "fixed": {
+        "initial": [
+          644,
+          1764
+        ],
+        "final": [
+          4,
+          1764
+        ],
+        "final_targets": [
+          4,
+          784
+        ],
+        "full_target_rounds": [
+          0,
+          49
+        ]
+      },
+      "all_sites": {
+        "different": 2,
+        "log0_fixed1": 2,
+        "log1_fixed0": 0,
+        "denominator": 3528
+      },
+      "Pic1": {
+        "different": 2,
+        "log0_fixed1": 2,
+        "log1_fixed0": 0,
+        "denominator": 1764
+      },
+      "Pic2": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 1764
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 784
+      }
+    },
+    "fixed_out": {
+      "rounds": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        20,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        35,
+        38,
+        40,
+        41,
+        43,
+        46,
+        48,
+        49,
+        52,
+        53,
+        54,
+        56,
+        58,
+        61,
+        63,
+        65,
+        66,
+        69,
+        70,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        91,
+        92,
+        93,
+        96,
+        100
+      ],
+      "logged": {
+        "initial": [
+          612,
+          1692
+        ],
+        "final": [
+          3,
+          1692
+        ],
+        "final_targets": [
+          3,
+          752
+        ],
+        "full_target_rounds": [
+          0,
+          47
+        ]
+      },
+      "fixed": {
+        "initial": [
+          612,
+          1692
+        ],
+        "final": [
+          3,
+          1692
+        ],
+        "final_targets": [
+          3,
+          752
+        ],
+        "full_target_rounds": [
+          0,
+          47
+        ]
+      },
+      "all_sites": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 3384
+      },
+      "Pic1": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 1692
+      },
+      "Pic2": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 1692
+      },
+      "Pic2_targets": {
+        "different": 0,
+        "log0_fixed1": 0,
+        "log1_fixed0": 0,
+        "denominator": 752
+      }
+    }
+  }
+}

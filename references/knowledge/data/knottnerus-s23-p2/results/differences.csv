@@ -1,0 +1,6 @@
+shot,frame,roi,target,raw_x0,raw_y0,raw_x1_exclusive,raw_y1_exclusive,counts,log_bit,fixed_bit,frame_member,log_member
+2,1,6,0,35,104,38,107,6482,0,1,Datapackage_SLM/data/241129_S23/P2_2_1.tga,Datapackage_SLM/data/241129_S23/P2_2.dat
+5,1,24,0,61,105,64,108,6438,0,1,Datapackage_SLM/data/241129_S23/P2_5_1.tga,Datapackage_SLM/data/241129_S23/P2_5.dat
+16,1,21,1,51,131,54,134,6499,0,1,Datapackage_SLM/data/241129_S23/P2_16_1.tga,Datapackage_SLM/data/241129_S23/P2_16.dat
+22,1,5,0,24,147,27,150,6450,0,1,Datapackage_SLM/data/241129_S23/P2_22_1.tga,Datapackage_SLM/data/241129_S23/P2_22.dat
+57,2,18,0,52,105,55,108,6483,0,1,Datapackage_SLM/data/241129_S23/P2_57_2.tga,Datapackage_SLM/data/241129_S23/P2_57.dat

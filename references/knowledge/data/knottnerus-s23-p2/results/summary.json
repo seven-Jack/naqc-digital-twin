@@ -1,0 +1,1593 @@
+{
+  "evidence": "Same-series held-out scan point; cross-apparatus 88Sr Knottnerus S23/P2, Senoo CAL/VAL deferred.",
+  "rule": "P1ROIs.dat rectangles, zero-based raw 3x3, half-open native endpoints; no correction, strict sum > 6436. Unrefitted candidate.",
+  "threshold": 6436,
+  "minimum_first_frame_atoms": 16,
+  "original_sha256": "16ba89851ae045172fb1e8139623128d0780ef348b2437f2c1e0fd8541b84802",
+  "source_manifest_sha256": "922511f0a3f401c117178cbf21a1e45f963de84e52eaaf527d1e00259bb3d9b6",
+  "conditions": {
+    "file_comparison": {
+      ".dat": {
+        "p1_sha256": "2cf60f4a17efbad287fc2846884af4fa2978f9d89aaebb73c25c1cab0a092682",
+        "p2_sha256": "1d729a37e1cbae7330dc1b9eec1e93a405a2f830dd6d57dae7d5530ac2bc91ea",
+        "identical": false
+      },
+      ".txt": {
+        "p1_sha256": "decf88cefa7ae3ff87c34b3d155999fbc2ca79a01c48890362897504c79ff811",
+        "p2_sha256": "a8bd63f138369ab0f41cd816ac4d32a136121efa81d273583833755b7de503c0",
+        "identical": false
+      },
+      "ROIs.dat": {
+        "p1_sha256": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+        "p2_sha256": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+        "identical": true
+      },
+      "_outputlist.dat": {
+        "p1_sha256": "08157a521f4acf7a0c24e0c0c38bc558edc521e9c8e05a75076a84d75a248d18",
+        "p2_sha256": "08157a521f4acf7a0c24e0c0c38bc558edc521e9c8e05a75076a84d75a248d18",
+        "identical": true
+      },
+      "_timinglist.dat": {
+        "p1_sha256": "2f7d7b8fe1834d0388859471b1ca44bf5a8d584205952d4a1ec268b740b475d3",
+        "p2_sha256": "2f7d7b8fe1834d0388859471b1ca44bf5a8d584205952d4a1ec268b740b475d3",
+        "identical": true
+      }
+    },
+    "control_text_lines": 1466,
+    "control_text_changes": [
+      {
+        "line": 4,
+        "p1": "DRbRepumpDPAOMB2Intensity1=1.00000",
+        "p2": "DRbRepumpDPAOMB2Intensity1=2.00000"
+      },
+      {
+        "line": 1202,
+        "p1": "DLastEndTime=1361863.00000",
+        "p2": "DLastEndTime=1362211.50000"
+      },
+      {
+        "line": 1410,
+        "p1": "SLastMessageList9=>> *0.0000000e+00-",
+        "p2": "SLastMessageList9=>> *TweezerImage-"
+      },
+      {
+        "line": 1411,
+        "p1": "SLastMessageList8=>> *0.0000000e+00-",
+        "p2": "SLastMessageList8=>> *      23-"
+      },
+      {
+        "line": 1412,
+        "p1": "SLastMessageList7=>> *0.0000000e+00-",
+        "p2": "SLastMessageList7=>> *       1-"
+      },
+      {
+        "line": 1413,
+        "p1": "SLastMessageList6=<< Ready",
+        "p2": "SLastMessageList6=>> *     100-"
+      },
+      {
+        "line": 1414,
+        "p1": "SLastMessageList5=<< 100110010110001010000110110001001001",
+        "p2": "SLastMessageList5=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1415,
+        "p1": "SLastMessageList4=>> *TweezerCameraSeriesParameters-",
+        "p2": "SLastMessageList4=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1416,
+        "p1": "SLastMessageList3=>> *       2-",
+        "p2": "SLastMessageList3=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1417,
+        "p1": "SLastMessageList2=>> *NumberOfIdenticalExperimentalSequences-",
+        "p2": "SLastMessageList2=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1418,
+        "p1": "SLastMessageList1=>> *RbRepumpDPAOMB2Intensity1-",
+        "p2": "SLastMessageList1=<< Ready"
+      },
+      {
+        "line": 1419,
+        "p1": "SLastMessageList0=>> *Stability measurement-",
+        "p2": "SLastMessageList0=<< 000110000100100100010011010001011110"
+      }
+    ],
+    "unequal_roi_indices": [],
+    "p1_raw_boxes": [
+      [
+        26,
+        104,
+        29,
+        107
+      ],
+      [
+        25,
+        112,
+        28,
+        115
+      ],
+      [
+        25,
+        121,
+        28,
+        124
+      ],
+      [
+        25,
+        130,
+        28,
+        133
+      ],
+      [
+        25,
+        139,
+        28,
+        142
+      ],
+      [
+        24,
+        147,
+        27,
+        150
+      ],
+      [
+        35,
+        104,
+        38,
+        107
+      ],
+      [
+        34,
+        113,
+        37,
+        116
+      ],
+      [
+        34,
+        121,
+        37,
+        124
+      ],
+      [
+        34,
+        130,
+        37,
+        133
+      ],
+      [
+        33,
+        139,
+        36,
+        142
+      ],
+      [
+        33,
+        147,
+        36,
+        150
+      ],
+      [
+        43,
+        104,
+        46,
+        107
+      ],
+      [
+        43,
+        113,
+        46,
+        116
+      ],
+      [
+        43,
+        122,
+        46,
+        125
+      ],
+      [
+        42,
+        130,
+        45,
+        133
+      ],
+      [
+        42,
+        139,
+        45,
+        142
+      ],
+      [
+        41,
+        148,
+        44,
+        151
+      ],
+      [
+        52,
+        105,
+        55,
+        108
+      ],
+      [
+        52,
+        113,
+        55,
+        116
+      ],
+      [
+        51,
+        122,
+        54,
+        125
+      ],
+      [
+        51,
+        131,
+        54,
+        134
+      ],
+      [
+        50,
+        139,
+        53,
+        142
+      ],
+      [
+        50,
+        148,
+        53,
+        151
+      ],
+      [
+        61,
+        105,
+        64,
+        108
+      ],
+      [
+        60,
+        113,
+        63,
+        116
+      ],
+      [
+        60,
+        123,
+        63,
+        126
+      ],
+      [
+        59,
+        131,
+        62,
+        134
+      ],
+      [
+        59,
+        140,
+        62,
+        143
+      ],
+      [
+        59,
+        148,
+        62,
+        151
+      ],
+      [
+        69,
+        105,
+        72,
+        108
+      ],
+      [
+        69,
+        114,
+        72,
+        117
+      ],
+      [
+        68,
+        122,
+        71,
+        125
+      ],
+      [
+        68,
+        131,
+        71,
+        134
+      ],
+      [
+        67,
+        140,
+        70,
+        143
+      ],
+      [
+        67,
+        149,
+        70,
+        152
+      ]
+    ],
+    "p2_raw_boxes": [
+      [
+        26,
+        104,
+        29,
+        107
+      ],
+      [
+        25,
+        112,
+        28,
+        115
+      ],
+      [
+        25,
+        121,
+        28,
+        124
+      ],
+      [
+        25,
+        130,
+        28,
+        133
+      ],
+      [
+        25,
+        139,
+        28,
+        142
+      ],
+      [
+        24,
+        147,
+        27,
+        150
+      ],
+      [
+        35,
+        104,
+        38,
+        107
+      ],
+      [
+        34,
+        113,
+        37,
+        116
+      ],
+      [
+        34,
+        121,
+        37,
+        124
+      ],
+      [
+        34,
+        130,
+        37,
+        133
+      ],
+      [
+        33,
+        139,
+        36,
+        142
+      ],
+      [
+        33,
+        147,
+        36,
+        150
+      ],
+      [
+        43,
+        104,
+        46,
+        107
+      ],
+      [
+        43,
+        113,
+        46,
+        116
+      ],
+      [
+        43,
+        122,
+        46,
+        125
+      ],
+      [
+        42,
+        130,
+        45,
+        133
+      ],
+      [
+        42,
+        139,
+        45,
+        142
+      ],
+      [
+        41,
+        148,
+        44,
+        151
+      ],
+      [
+        52,
+        105,
+        55,
+        108
+      ],
+      [
+        52,
+        113,
+        55,
+        116
+      ],
+      [
+        51,
+        122,
+        54,
+        125
+      ],
+      [
+        51,
+        131,
+        54,
+        134
+      ],
+      [
+        50,
+        139,
+        53,
+        142
+      ],
+      [
+        50,
+        148,
+        53,
+        151
+      ],
+      [
+        61,
+        105,
+        64,
+        108
+      ],
+      [
+        60,
+        113,
+        63,
+        116
+      ],
+      [
+        60,
+        123,
+        63,
+        126
+      ],
+      [
+        59,
+        131,
+        62,
+        134
+      ],
+      [
+        59,
+        140,
+        62,
+        143
+      ],
+      [
+        59,
+        148,
+        62,
+        151
+      ],
+      [
+        69,
+        105,
+        72,
+        108
+      ],
+      [
+        69,
+        114,
+        72,
+        117
+      ],
+      [
+        68,
+        122,
+        71,
+        125
+      ],
+      [
+        68,
+        131,
+        71,
+        134
+      ],
+      [
+        67,
+        140,
+        70,
+        143
+      ],
+      [
+        67,
+        149,
+        70,
+        152
+      ]
+    ],
+    "raw_frame_width": 100,
+    "raw_frame_height": 180,
+    "tga_header_hex": "0000030000000000000000006400b4001000",
+    "p1_format_reference_frames": 2,
+    "p2_format_checked_frames": 200,
+    "target_roi_indices": [
+      7,
+      8,
+      9,
+      10,
+      13,
+      14,
+      15,
+      16,
+      19,
+      20,
+      21,
+      22,
+      25,
+      26,
+      27,
+      28
+    ],
+    "target_source": "Datapackage_SLM/AnalyzeFastSLMMovesPaper.ipynb#cell9 targets",
+    "member_count_verified": 317
+  },
+  "groups": {
+    "all": {
+      "shots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "rounds": 100,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 1572,
+            "d": 3600
+          },
+          "final_occupied": {
+            "n": 814,
+            "d": 3600
+          },
+          "final_target_occupied": {
+            "n": 814,
+            "d": 1600
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 100
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 1576,
+            "d": 3600
+          },
+          "final_occupied": {
+            "n": 815,
+            "d": 3600
+          },
+          "final_target_occupied": {
+            "n": 814,
+            "d": 1600
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 100
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 5,
+          "denominator": 7200,
+          "log0_fixed1": 5,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 4,
+          "denominator": 3600,
+          "log0_fixed1": 4,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 1,
+          "denominator": 3600,
+          "log0_fixed1": 1,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 1600,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "log_ge16": {
+      "shots": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        17,
+        18,
+        19,
+        21,
+        22,
+        24,
+        26,
+        32,
+        33,
+        34,
+        36,
+        37,
+        39,
+        42,
+        44,
+        45,
+        47,
+        50,
+        51,
+        55,
+        57,
+        59,
+        60,
+        62,
+        64,
+        67,
+        68,
+        72,
+        73,
+        74,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        84,
+        87,
+        88,
+        89,
+        90,
+        94,
+        95,
+        97,
+        98,
+        99
+      ],
+      "rounds": 51,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 930,
+            "d": 1836
+          },
+          "final_occupied": {
+            "n": 810,
+            "d": 1836
+          },
+          "final_target_occupied": {
+            "n": 810,
+            "d": 816
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 51
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 932,
+            "d": 1836
+          },
+          "final_occupied": {
+            "n": 811,
+            "d": 1836
+          },
+          "final_target_occupied": {
+            "n": 810,
+            "d": 816
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 51
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 3,
+          "denominator": 3672,
+          "log0_fixed1": 3,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 2,
+          "denominator": 1836,
+          "log0_fixed1": 2,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 1,
+          "denominator": 1836,
+          "log0_fixed1": 1,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 816,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "fixed_ge16": {
+      "shots": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        24,
+        26,
+        32,
+        33,
+        34,
+        36,
+        37,
+        39,
+        42,
+        44,
+        45,
+        47,
+        50,
+        51,
+        55,
+        57,
+        59,
+        60,
+        62,
+        64,
+        67,
+        68,
+        72,
+        73,
+        74,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        84,
+        87,
+        88,
+        89,
+        90,
+        94,
+        95,
+        97,
+        98,
+        99
+      ],
+      "rounds": 53,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 960,
+            "d": 1908
+          },
+          "final_occupied": {
+            "n": 811,
+            "d": 1908
+          },
+          "final_target_occupied": {
+            "n": 811,
+            "d": 848
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 53
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 964,
+            "d": 1908
+          },
+          "final_occupied": {
+            "n": 812,
+            "d": 1908
+          },
+          "final_target_occupied": {
+            "n": 811,
+            "d": 848
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 53
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 5,
+          "denominator": 3816,
+          "log0_fixed1": 5,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 4,
+          "denominator": 1908,
+          "log0_fixed1": 4,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 1,
+          "denominator": 1908,
+          "log0_fixed1": 1,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 848,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "log_lt16": {
+      "shots": [
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        20,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        35,
+        38,
+        40,
+        41,
+        43,
+        46,
+        48,
+        49,
+        52,
+        53,
+        54,
+        56,
+        58,
+        61,
+        63,
+        65,
+        66,
+        69,
+        70,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        91,
+        92,
+        93,
+        96,
+        100
+      ],
+      "rounds": 49,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 642,
+            "d": 1764
+          },
+          "final_occupied": {
+            "n": 4,
+            "d": 1764
+          },
+          "final_target_occupied": {
+            "n": 4,
+            "d": 784
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 49
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 644,
+            "d": 1764
+          },
+          "final_occupied": {
+            "n": 4,
+            "d": 1764
+          },
+          "final_target_occupied": {
+            "n": 4,
+            "d": 784
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 49
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 2,
+          "denominator": 3528,
+          "log0_fixed1": 2,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 2,
+          "denominator": 1764,
+          "log0_fixed1": 2,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 0,
+          "denominator": 1764,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 784,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "fixed_lt16": {
+      "shots": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        20,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        35,
+        38,
+        40,
+        41,
+        43,
+        46,
+        48,
+        49,
+        52,
+        53,
+        54,
+        56,
+        58,
+        61,
+        63,
+        65,
+        66,
+        69,
+        70,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        91,
+        92,
+        93,
+        96,
+        100
+      ],
+      "rounds": 47,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 612,
+            "d": 1692
+          },
+          "final_occupied": {
+            "n": 3,
+            "d": 1692
+          },
+          "final_target_occupied": {
+            "n": 3,
+            "d": 752
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 47
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 612,
+            "d": 1692
+          },
+          "final_occupied": {
+            "n": 3,
+            "d": 1692
+          },
+          "final_target_occupied": {
+            "n": 3,
+            "d": 752
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 47
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 0,
+          "denominator": 3384,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 0,
+          "denominator": 1692,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 0,
+          "denominator": 1692,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 752,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "both": {
+      "shots": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        17,
+        18,
+        19,
+        21,
+        22,
+        24,
+        26,
+        32,
+        33,
+        34,
+        36,
+        37,
+        39,
+        42,
+        44,
+        45,
+        47,
+        50,
+        51,
+        55,
+        57,
+        59,
+        60,
+        62,
+        64,
+        67,
+        68,
+        72,
+        73,
+        74,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        84,
+        87,
+        88,
+        89,
+        90,
+        94,
+        95,
+        97,
+        98,
+        99
+      ],
+      "rounds": 51,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 930,
+            "d": 1836
+          },
+          "final_occupied": {
+            "n": 810,
+            "d": 1836
+          },
+          "final_target_occupied": {
+            "n": 810,
+            "d": 816
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 51
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 932,
+            "d": 1836
+          },
+          "final_occupied": {
+            "n": 811,
+            "d": 1836
+          },
+          "final_target_occupied": {
+            "n": 810,
+            "d": 816
+          },
+          "full_target_rounds": {
+            "n": 46,
+            "d": 51
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 3,
+          "denominator": 3672,
+          "log0_fixed1": 3,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 2,
+          "denominator": 1836,
+          "log0_fixed1": 2,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 1,
+          "denominator": 1836,
+          "log0_fixed1": 1,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 816,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "log_only": {
+      "shots": [],
+      "rounds": 0,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 0,
+          "denominator": 0,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 0,
+          "denominator": 0,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 0,
+          "denominator": 0,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 0,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "fixed_only": {
+      "shots": [
+        2,
+        16
+      ],
+      "rounds": 2,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 30,
+            "d": 72
+          },
+          "final_occupied": {
+            "n": 1,
+            "d": 72
+          },
+          "final_target_occupied": {
+            "n": 1,
+            "d": 32
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 2
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 32,
+            "d": 72
+          },
+          "final_occupied": {
+            "n": 1,
+            "d": 72
+          },
+          "final_target_occupied": {
+            "n": 1,
+            "d": 32
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 2
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 2,
+          "denominator": 144,
+          "log0_fixed1": 2,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 2,
+          "denominator": 72,
+          "log0_fixed1": 2,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 0,
+          "denominator": 72,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 32,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    },
+    "neither": {
+      "shots": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        20,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        35,
+        38,
+        40,
+        41,
+        43,
+        46,
+        48,
+        49,
+        52,
+        53,
+        54,
+        56,
+        58,
+        61,
+        63,
+        65,
+        66,
+        69,
+        70,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        91,
+        92,
+        93,
+        96,
+        100
+      ],
+      "rounds": 47,
+      "counts": {
+        "log": {
+          "initial_occupied": {
+            "n": 612,
+            "d": 1692
+          },
+          "final_occupied": {
+            "n": 3,
+            "d": 1692
+          },
+          "final_target_occupied": {
+            "n": 3,
+            "d": 752
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 47
+          }
+        },
+        "fixed": {
+          "initial_occupied": {
+            "n": 612,
+            "d": 1692
+          },
+          "final_occupied": {
+            "n": 3,
+            "d": 1692
+          },
+          "final_target_occupied": {
+            "n": 3,
+            "d": 752
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 47
+          }
+        }
+      },
+      "comparisons": {
+        "all": {
+          "disagreements": 0,
+          "denominator": 3384,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic1": {
+          "disagreements": 0,
+          "denominator": 1692,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2": {
+          "disagreements": 0,
+          "denominator": 1692,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        },
+        "pic2_targets": {
+          "disagreements": 0,
+          "denominator": 752,
+          "log0_fixed1": 0,
+          "log1_fixed0": 0
+        }
+      }
+    }
+  },
+  "discrepant_shots": [
+    2,
+    5,
+    16,
+    22,
+    57
+  ],
+  "exactly_at_candidate": [],
+  "canonical_site_sha256": "55f8dbecd05642c6b2b7919da29bb670e18554d3594531638fa01d7f91631d6a"
+}
