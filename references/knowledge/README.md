@@ -30,6 +30,7 @@
 | 检查 P1 的固定窗口和候选阈值能否在 S23 的 P2 重现在线位串 | [P2 同序列留出对照、差异轮号、两份入选名单和分母](knottnerus-s23-p2-holdout.md) · [P1 区间的 71 个阈值、五处原差异和三处新增差异](knottnerus-s23-p2-threshold-sweep.md) |
 | 核对 P1 候选判据及 P2 日志相容区间在 S23/P3 上的表现 | [P3 同序列留出、三处差异和 55 轮首帧入选名单](knottnerus-s23-p3-holdout.md) |
 | 检验 P3 吻合的 6499–6507 能否复现 S23/P4，并核对全部 P2 区间阈值 | [P4 同序列留出、P4_81 末帧差异及 53 轮入选分母](knottnerus-s23-p4-holdout.md) |
+| 核对 P3、P4 共同吻合的阈值在 S23/P5 上的逐帧表现 | [P5 同序列留出、22 个判据与 60 轮首帧入选名单](knottnerus-s23-p5-holdout.md) |
 | 补齐论文正式版或实验数据 | [待补清单](../MANUAL_DOWNLOAD.md) |
 
 ## 阅读范围
