@@ -26,6 +26,23 @@ def reference_methods():
     return module, module.load_reference()
 
 
+def read_joint_focus(freeze, historical_focus, ref):
+    if "focus_schema_version" not in freeze:
+        # P5–P9 summaries used the P3/P4 field for their common nine-point focus.
+        ref.require(freeze.get("joint_focus_integer_thresholds", historical_focus) == historical_focus,
+                    "A changed joint focus requires focus_schema_version 2")
+        return None
+    version = freeze["focus_schema_version"]
+    ref.require(type(version) is int and version == 2, "Unknown focus schema")
+    expected_sources = [f"241129_S23/P{n}" for n in range(3, freeze["dataset_nr"])]
+    ref.require(freeze["focus_source_batches"] == expected_sources, "Joint focus source batches out of order")
+    joint = freeze["joint_focus_integer_thresholds"]
+    ref.require(isinstance(joint, list) and all(type(t) is int for t in joint)
+                and joint == sorted(set(joint)) and set(joint) <= set(historical_focus),
+                "Joint focus must be a sorted, unique subset of the frozen P3/P4 thresholds")
+    return joint
+
+
 def inspect_inputs(archive, manifest, ref, point):
     label = f"P{point}"
     names = archive.namelist()
@@ -128,6 +145,7 @@ def main():
                 "P1/P2 freeze differs from the published rules")
     focus = freeze["p3_p4_matching_focus_integer_thresholds"]
     ref.require(focus == list(range(6499, 6508)), "Unexpected P3/P4 focus")
+    joint_focus = read_joint_focus(freeze, focus, ref)
     manifest = json.loads(manifest_bytes)
     ref.require(manifest["batch"] == freeze["batch"], "Manifest and frozen batch differ")
     with ZipFile(args.archive) as archive:
@@ -154,6 +172,10 @@ def main():
                    focus_matching_all_holdout_decisions=[t for t in focus if t in matching],
                    minimum_first_frame_atoms=ref.MIN_ATOMS, thresholds=thresholds,
                    decision_hash_encoding="7200 ASCII 0/1 digits, ascending shot/frame/zero-based ROI, no delimiters")
+    if joint_focus is not None:
+        summary.update(focus_schema_version=2, focus_source_batches=freeze["focus_source_batches"],
+                       joint_focus_integer_thresholds=joint_focus,
+                       joint_focus_matching_all_holdout_decisions=[t for t in joint_focus if t in matching])
     args.out.mkdir()
     with (args.out / "sites.csv.gz").open("wb") as raw, gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as gz:
         with io.TextIOWrapper(gz, encoding="utf-8", newline="") as stream:

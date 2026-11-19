@@ -90,6 +90,26 @@ def check_rounds(rows, logs, logged, baseline, ref, point):
                     ref.require(int(row[name + "_target_n"]) == bits[ref.TARGETS].sum(), shot)
 
 
+def verify_joint_focus(freeze, summary, matching, ref):
+    historical = list(range(6499, 6508))
+    ref.require(freeze["p3_p4_matching_focus_integer_thresholds"] == historical, "Frozen P3/P4 focus")
+    if "focus_schema_version" not in freeze:
+        ref.require(freeze.get("joint_focus_integer_thresholds", historical) == historical,
+                    "A changed joint focus requires focus_schema_version 2")
+        return {}
+    version = freeze["focus_schema_version"]
+    ref.require(type(version) is int and version == 2, "Unknown focus schema")
+    sources = [f"241129_S23/P{n}" for n in range(3, freeze["dataset_nr"])]
+    ref.require(freeze["focus_source_batches"] == sources, "Frozen joint focus source order")
+    joint = freeze["joint_focus_integer_thresholds"]
+    ref.require(isinstance(joint, list) and all(type(t) is int for t in joint)
+                and joint == [t for t in historical if t in joint], "Frozen joint focus threshold roster")
+    fields = dict(focus_schema_version=2, focus_source_batches=sources, joint_focus_integer_thresholds=joint,
+                  joint_focus_matching_all_holdout_decisions=[t for t in matching if t in joint])
+    ref.require(all(summary[k] == v for k, v in fields.items()), "Joint focus disagrees with independent raw decisions")
+    return fields
+
+
 def verify(archive_path, directory, freeze_path, ref):
     freeze_bytes = freeze_path.read_bytes()
     freeze = json.loads(freeze_bytes)
@@ -149,7 +169,8 @@ def verify(archive_path, directory, freeze_path, ref):
                 summary["focus_matching_all_holdout_decisions"] == [t for t in focus if t in matching], "P2 range and P3/P4 focus conclusion")
     return dict(verified=True, batch=f"Knottnerus S23/P{point}", method="Original DAT bits and independent int64 integral images",
                 source_frames=200, paired_rounds=len(logs), site_rows_checked=len(sites), round_rows_checked=len(rounds),
-                cohort_rows_checked=len(cohorts), difference_rows_checked=len(diffs), thresholds=verified)
+                cohort_rows_checked=len(cohorts), difference_rows_checked=len(diffs), thresholds=verified,
+                **verify_joint_focus(freeze, summary, matching, ref))
 
 
 def main():

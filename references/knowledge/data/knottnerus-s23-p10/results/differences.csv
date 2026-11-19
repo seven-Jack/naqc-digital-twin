@@ -1,0 +1,17 @@
+threshold,shot,frame,roi,target,raw_x0,raw_y0,raw_x1_exclusive,raw_y1_exclusive,counts,log_bit,fixed_bit,frame_member,log_member
+6436,2,1,26,1,60,123,63,126,6441,0,1,Datapackage_SLM/data/241129_S23/P10_2_1.tga,Datapackage_SLM/data/241129_S23/P10_2.dat
+6436,31,1,15,1,42,130,45,133,6446,0,1,Datapackage_SLM/data/241129_S23/P10_31_1.tga,Datapackage_SLM/data/241129_S23/P10_31.dat
+6436,37,1,35,0,67,149,70,152,6454,0,1,Datapackage_SLM/data/241129_S23/P10_37_1.tga,Datapackage_SLM/data/241129_S23/P10_37.dat
+6436,45,1,26,1,60,123,63,126,6469,0,1,Datapackage_SLM/data/241129_S23/P10_45_1.tga,Datapackage_SLM/data/241129_S23/P10_45.dat
+6436,83,1,18,0,52,105,55,108,6460,0,1,Datapackage_SLM/data/241129_S23/P10_83_1.tga,Datapackage_SLM/data/241129_S23/P10_83.dat
+6509,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6510,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6511,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6512,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6513,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6514,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6515,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6516,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6517,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6518,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
+6519,42,1,0,0,26,104,29,107,6509,1,0,Datapackage_SLM/data/241129_S23/P10_42_1.tga,Datapackage_SLM/data/241129_S23/P10_42.dat
