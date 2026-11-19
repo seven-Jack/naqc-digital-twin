@@ -1,0 +1,61 @@
+{
+  "evidence": "cross-apparatus check using public measured ROI counts",
+  "isotope": "87Rb",
+  "paper_doi": "10.1038/s41597-024-02926-9",
+  "source": {
+    "path": "Exp34.mat",
+    "doi": "10.6084/m9.figshare.23828004.v1",
+    "figshare_file_id": 42976216,
+    "url": "https://ndownloader.figshare.com/files/42976216",
+    "bytes": 4214819,
+    "metadata_md5": "31cd41d78157f10f404b8dfd3157d1a4",
+    "sha256": "448c8e6a025390bcc4d43deb434e656dc4c055862e59d85927c87f39888c05f1",
+    "license": "CC BY 4.0"
+  },
+  "axes": [
+    "site",
+    "image before or after evolution",
+    "repetition"
+  ],
+  "counts_and_bits_shape": [
+    198,
+    2,
+    3479
+  ],
+  "threshold_shape": [
+    198,
+    1
+  ],
+  "selection": {
+    "repetitions_1based": [
+      1,
+      8
+    ],
+    "sites_1based": [
+      1,
+      12
+    ]
+  },
+  "rule": "bit 1 iff fluorescence >= site threshold; same threshold in both images",
+  "rule_source": {
+    "archive_file": "Digitize_Data.m",
+    "doi": "10.6084/m9.figshare.23911368.v1",
+    "comparison_line": 96,
+    "equality_to_one_line": 99
+  },
+  "pairing": "same site and repetition; image 1 before evolution, image 2 after evolution",
+  "source_pair_columns": "1-based logical columns of the published MATLAB reshape, 2r-1 and 2r",
+  "pairs": 96,
+  "frames": 192,
+  "pairs_matching_published_bits": 96,
+  "image_1_matching_published_bits": 96,
+  "image_2_matching_published_bits": 96,
+  "threshold_equal_frames": 0,
+  "pair_classes": {
+    "00": 47,
+    "01": 0,
+    "10": 15,
+    "11": 34
+  },
+  "pairs_mismatching_after_swapping_image_order": 15
+}

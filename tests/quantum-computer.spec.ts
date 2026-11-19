@@ -1,6 +1,83 @@
 import { expect, test } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 
+test('Bell 回放同步三维光路、流程和读出，并可反向跳转', async ({ page }) => {
+  await page.goto('/#machine');
+  await expect(page.getByText('483/460 nm 演示配置', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Bell/ })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByLabel('测量基', { exact: true })).toHaveValue('Z');
+  await page.getByLabel('尝试次数', { exact: true }).selectOption('64');
+  await page.getByRole('slider', { name: '单比特读出翻转' }).fill('0');
+
+  const timeline = page.getByRole('slider', { name: '演示时间轴' });
+  const stage = page.getByTestId('machine-stage');
+  const canvas = page.getByTestId('quantum-scene-canvas');
+  const results = page.getByTestId('machine-results');
+  const histogram = results.getByLabel('Z 基测量直方图');
+  const shots = page.getByTestId('machine-shots');
+  const representative = page.getByText(/^第 1 次位串/);
+  await expect(canvas).toBeVisible();
+  await expect(timeline).toHaveAttribute('max', '12000');
+
+  await timeline.fill('5850');
+  await expect(stage).toHaveAttribute('data-stage-id', 'transfer');
+  await expect(page.getByRole('button', { name: /转入计算阱/ })).toHaveAttribute('aria-current', 'step');
+  await expect(canvas).toHaveAttribute('data-stage', 'transfer');
+  await expect(canvas).toHaveAttribute('data-active-path', 'to-science');
+  await expect(shots).toHaveAttribute('data-completed-shots', '0');
+
+  await timeline.fill('7730');
+  await expect(stage).toHaveAttribute('data-stage-id', 'gates');
+  await expect(canvas).toHaveAttribute('data-stage', 'gates');
+  await expect(canvas).toHaveAttribute('data-active-path', 'rydberg');
+  await expect(representative).toHaveCount(0);
+
+  const readoutStep = page.getByRole('button', { name: /荧光读出 09/ });
+  await readoutStep.click();
+  await expect(timeline).toHaveValue('9950');
+  await expect(readoutStep).toHaveAttribute('aria-current', 'step');
+  await expect(canvas).toHaveAttribute('data-stage', 'readout');
+  await expect.poll(() => canvas.getAttribute('data-fluorescence')).toBeNull();
+  await expect(shots).toHaveAttribute('data-completed-shots', '0');
+  const beforeProbe = await canvas.screenshot({ animations: 'disabled' });
+
+  await timeline.fill('10079');
+  await expect(canvas).toHaveAttribute('data-active-path', 'readout');
+  await expect(canvas).toHaveAttribute('data-fluorescence', '11');
+  await expect(representative).toHaveText('第 1 次位串 11');
+  await expect(shots).toHaveAttribute('data-completed-shots', '4');
+  await expect(results.locator('.md-last-shot')).toHaveText('最近有效位串00');
+  await expect(histogram.getByLabel(/^00 计数 1，/)).toBeVisible();
+  await expect(histogram.getByLabel(/^11 计数 3，/)).toBeVisible();
+  await expect.poll(async () => (await canvas.screenshot({ animations: 'disabled' })).equals(beforeProbe)).toBe(false);
+  await expect(timeline).toHaveValue('10079');
+
+  await timeline.fill('12000');
+  await expect(stage).toHaveAttribute('data-stage-id', 'readout');
+  await expect(canvas).toHaveAttribute('data-fluorescence', '11');
+  await expect(shots).toHaveAttribute('data-completed-shots', '64');
+  for (const [bits, count, probability] of [['00', 34, '50(?:\\.0)?'], ['01', 0, '0'], ['10', 0, '0'], ['11', 30, '50(?:\\.0)?']] as const) {
+    await expect(histogram.getByLabel(new RegExp(`^${bits} 计数 ${count}，理想概率 ${probability}%$`))).toBeVisible();
+  }
+
+  await timeline.fill('7730');
+  await expect(canvas).toHaveAttribute('data-stage', 'gates');
+  await expect(canvas).toHaveAttribute('data-active-path', 'rydberg');
+  await expect.poll(() => canvas.getAttribute('data-fluorescence')).toBeNull();
+  await expect(representative).toHaveCount(0);
+  await expect(shots).toHaveAttribute('data-completed-shots', '0');
+  await expect(results.getByRole('button', { name: '导出运行数据' })).toBeDisabled();
+
+  await page.getByLabel('播放速度', { exact: true }).selectOption('2');
+  await page.getByRole('button', { name: '继续演示', exact: true }).click();
+  await expect(timeline).toHaveValue('12000', { timeout: 10_000 });
+  await expect(canvas).toHaveAttribute('data-fluorescence', '11');
+  await expect(shots).toHaveAttribute('data-completed-shots', '64');
+  for (const [bits, count] of [['00', 34], ['11', 30]] as const) {
+    await expect(histogram.getByLabel(new RegExp(`^${bits} 计数 ${count}，理想概率 50(?:\\.0)?%$`))).toBeVisible();
+  }
+});
+
 test('整机演示逐阶段执行 GHZ 电路并以 X 基读出', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -53,6 +130,7 @@ test('整机演示逐阶段执行 GHZ 电路并以 X 基读出', async ({ page }
   const saved = JSON.parse(await readFile((await download.path())!, 'utf8'));
   expect(saved.kind).toBe('neutral-atom-quantum-computer-simulation');
   expect(saved.modelVersion).toBe(2);
+  expect(saved).not.toHaveProperty('profile');
   expect(saved.config.circuit).toBe('ghz');
   expect(saved.config.basis).toBe('X');
   expect(saved.attemptedShots).toBe(1024);

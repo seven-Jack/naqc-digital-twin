@@ -1,0 +1,492 @@
+{
+  "datasetDoi": "10.21942/uva.28166483.v1",
+  "fileId": 51549938,
+  "license": "CC BY 4.0",
+  "sourceUrl": "https://ndownloader.figshare.com/files/51549938",
+  "officialArchiveMd5": "9d23bd7aa40202676792ede35208beaf",
+  "logSha256": {
+    "Datapackage_SLM/data/241129_S23/P1_1.dat": "2f5a18f5ea4174537616ea3f45096b8db24802c49e20d438168c8326d1004057",
+    "Datapackage_SLM/data/241129_S23/P1_2.dat": "d1809301d957acc09401884d123bc1a0e596db3da2f2ace255924da295bdd33c",
+    "Datapackage_SLM/data/241129_S23/P1_3.dat": "d4e2b234c8d03d2175382fc4baee842f461c18e37a3e7a76bd6b48beba766cf6",
+    "Datapackage_SLM/data/241129_S23/P1_4.dat": "d22a122a1f21e994948518345b2f2281acfc0a33fc16c2db135ea00b112617a1",
+    "Datapackage_SLM/data/241129_S23/P1_5.dat": "84f9aeee44317f29cc6c82a3e10887446095b4f1d8e6958eef14448b25e3d264",
+    "Datapackage_SLM/data/241129_S23/P1_6.dat": "9cefbf52750ad0bd9bb4681e2be67424724736f900f81537a6144856db90a7e6",
+    "Datapackage_SLM/data/241129_S23/P1_7.dat": "56ce00543122925ef9eb8c001afd77b771d7799d096e29dec68ab9b1561818fe",
+    "Datapackage_SLM/data/241129_S23/P1_8.dat": "6b9fe87e423b21c3c0918dcfe01e53307a4db0642939349bfe157ea6b54afa27",
+    "Datapackage_SLM/data/241129_S23/P1_9.dat": "2ece33f322cf4607178ca89632579c6d7308bd0fa230ea214ea6d94511342519",
+    "Datapackage_SLM/data/241129_S23/P1_10.dat": "d5c48e6ba4c4e27102510de5f13b619f0225461640f83ffcd2c16a8d97dd2af2",
+    "Datapackage_SLM/data/241129_S23/P1_11.dat": "f655986d4e6f6964017355d61dad7560be7370e0d20cb0f489cf31a84d83df64",
+    "Datapackage_SLM/data/241129_S23/P1_12.dat": "c1e4e6a9f920d150fe60e4fc34266f72c8f34ec38bb4804f18ecdc024f0632d4",
+    "Datapackage_SLM/data/241129_S23/P1_13.dat": "e409921bd6dbaddffbd5646aea389506a7cdd7d1a06c631a49532277ff2a4a48",
+    "Datapackage_SLM/data/241129_S23/P1_14.dat": "a5e2a32cf68c06b124837afca3def6644ca67c89e14086d23627a40af9716af1",
+    "Datapackage_SLM/data/241129_S23/P1_15.dat": "2caf5b5049e1ac46ad412f9f001ca1d90b8894029ff4b9cdb2f2d4492c077c71",
+    "Datapackage_SLM/data/241129_S23/P1_16.dat": "d2147f6d2dea38165747a4201284486e07666dbfab71eb21e0a78c9b94145575",
+    "Datapackage_SLM/data/241129_S23/P1_17.dat": "952663772bad56047b2d5e8cf3e4ec103d431a71f26e0b0002a630c2fa8f603d",
+    "Datapackage_SLM/data/241129_S23/P1_18.dat": "9ab8ce8acef32764aa7c8be1034a86de0d82c15e27265a558c01ceaa28dfad90",
+    "Datapackage_SLM/data/241129_S23/P1_19.dat": "f898114f235de2bbba841c69ec9d79eaaca5c2e5181822ee92dbd7d6469e355a",
+    "Datapackage_SLM/data/241129_S23/P1_20.dat": "c28423d7f97b9fd642bd53df2fd5a19ce23c40098d2d4f14012643f61c6e9244",
+    "Datapackage_SLM/data/241129_S23/P1_21.dat": "fec3bd511b8b94b72b74e4b7a3b63a2d8d7be57dba055af0c912a46db78686c2",
+    "Datapackage_SLM/data/241129_S23/P1_22.dat": "d6b9f0d9208afb44df60370d1d4af8c7d255fba2f386a5401942c6668d68efd3",
+    "Datapackage_SLM/data/241129_S23/P1_23.dat": "d3f9424f6bdc664e431e05d2ef4d3e26cf4e77db1714a6b676ffbf142a3276f9",
+    "Datapackage_SLM/data/241129_S23/P1_24.dat": "1c9d2c5589fffa2178d16a31e04080d4b5df03a8c30032bbbd77a4e34a2906ee",
+    "Datapackage_SLM/data/241129_S23/P1_25.dat": "940a1eabfe8c4223872e211906c328332cd59808f025be8529f8fd60fa7f8007",
+    "Datapackage_SLM/data/241129_S23/P1_26.dat": "ff8368a73491869810b360ff37ef2a322f15574dec3720c1651c8c0619b49ceb",
+    "Datapackage_SLM/data/241129_S23/P1_27.dat": "28db9e6991be3b733a17f8317d436c034e769861aa40f8d3a223d769c0d001ce",
+    "Datapackage_SLM/data/241129_S23/P1_28.dat": "6995d5728284427ad40a84fb28325b79e2ba74a09cfd9337c2cbc2f6ae3ed46c",
+    "Datapackage_SLM/data/241129_S23/P1_29.dat": "4c8fe9823b0bd55252dab9c08ee8386325fcff4857fe04982f1fe870e221bebc",
+    "Datapackage_SLM/data/241129_S23/P1_30.dat": "e12a9d046d83b5dfde201b213fe732908a12a7879fe9d37f3941795cf9321c9b",
+    "Datapackage_SLM/data/241129_S23/P1_31.dat": "f9a7bafef61f286015c9cb0f007fe77e4b2e1ecb759d62ad3faff52ffeb1b884",
+    "Datapackage_SLM/data/241129_S23/P1_32.dat": "ff9d58bd8424e79feb717adda9b8e729f039933fce27ef55247397dcd68ca9d5",
+    "Datapackage_SLM/data/241129_S23/P1_33.dat": "57b109964e63341eb4141d31f45e2fa7c022b7157cb95496db835859e08d061a",
+    "Datapackage_SLM/data/241129_S23/P1_34.dat": "deeaa24b03d3d292b92eb82d05ef66da5146fd2cc17d2225c9e72d27ccd816af",
+    "Datapackage_SLM/data/241129_S23/P1_35.dat": "f03e14ab346ee4f4254ff5285567ac41dad5964c969550c6187ad185c259194a",
+    "Datapackage_SLM/data/241129_S23/P1_36.dat": "00777a46de26dc3f8e4a84b2d7a7fa2f56cbcd9a046ad1b4ac9cb15d8c3acbbd",
+    "Datapackage_SLM/data/241129_S23/P1_37.dat": "4615a0dfb77ca87c694c72ff5a4f9ea135964ad8bb110faa4106ce2c0b9bf833",
+    "Datapackage_SLM/data/241129_S23/P1_38.dat": "f3e486858679b3cddb3aeba43711cc6b1ae00e27d943f309115a05a6b120bd5a",
+    "Datapackage_SLM/data/241129_S23/P1_39.dat": "fbdb6342294bc705c467805ec0705a445319ea79459052e8f967bf24671fb638",
+    "Datapackage_SLM/data/241129_S23/P1_40.dat": "daf1256c0a460fce54e70dd408de141ddf50a25a3fb1d733907e40ce496b8fde",
+    "Datapackage_SLM/data/241129_S23/P1_41.dat": "fbdf0559096571cda6f18782d0e981e56c65d9d19bdf2c6d7d73a3bf89997a85",
+    "Datapackage_SLM/data/241129_S23/P1_42.dat": "05f97920cadf04bbf278eb7724087cb73c67a11ab163591a3efff1e03320dd7d",
+    "Datapackage_SLM/data/241129_S23/P1_43.dat": "329e21d1c7237dcb8f9922a1022e3e4ed46b70b00d7c06467ea7186f85e9f1da",
+    "Datapackage_SLM/data/241129_S23/P1_44.dat": "94b0e3792dad6891f40c51e559578f4a323c9c1b51176a0d9c92c8bff8a30774",
+    "Datapackage_SLM/data/241129_S23/P1_45.dat": "0d9fcb45829e4fc22de8391a951c3d633f688d242f0f5a70ae39712de737c008",
+    "Datapackage_SLM/data/241129_S23/P1_46.dat": "618ed45f967759cc61a324bd2b209870741925d6ad54c39b92b457e5046f13c5",
+    "Datapackage_SLM/data/241129_S23/P1_47.dat": "fb6894c4bbd20a389c3eb9f4d6323f2d7e17a4dc3a8c32774596f87a5ef30a98",
+    "Datapackage_SLM/data/241129_S23/P1_48.dat": "ac83a6d15607c8273bcc2f1ce56a7d2f34ffa6db77a17a35cd46149eb2ebec9a",
+    "Datapackage_SLM/data/241129_S23/P1_49.dat": "4de6ec8b913800d8a9dc1c601462ddeea51a7b1b9776ce5c597f43e1d20e0f7b",
+    "Datapackage_SLM/data/241129_S23/P1_50.dat": "d562d66f5bbb52002f35e1288c76057cd3f849c98d2c4804643deee51ecb4fd4",
+    "Datapackage_SLM/data/241129_S23/P1_51.dat": "15f57b9a08c6fb418fe92aac492f0c2c5bfa908594e4e69c34d32b6a8e574bb7",
+    "Datapackage_SLM/data/241129_S23/P1_52.dat": "75da53f2b6a93d91933b4ac53411c4ec41c8d86eff3e01bd1f1e76cb27f73937",
+    "Datapackage_SLM/data/241129_S23/P1_53.dat": "ad7b1ef383976989b6b99a0e73e9daaa2cc429973abd95753d0be326c0bf054c",
+    "Datapackage_SLM/data/241129_S23/P1_54.dat": "fb70a4ef35f27c6de3010510461997c3bc03328154d2ff040c84bfadcedd99bd",
+    "Datapackage_SLM/data/241129_S23/P1_55.dat": "bb3fb7a0216c2fd9f28540bf262ff77a780bd2e24e4aacb92a07b2a631db0afa",
+    "Datapackage_SLM/data/241129_S23/P1_56.dat": "f2235b14476f82db804537802a73cb2cc3f76b8cf9af9763392de3aa0ced4212",
+    "Datapackage_SLM/data/241129_S23/P1_57.dat": "95cbcefe3bc37ee1126e8ff9fd239a846ad98c433acd02b8d8f2b81d0cecd92e",
+    "Datapackage_SLM/data/241129_S23/P1_58.dat": "0330715407437ccb24c7ddb4af7e90f8db487ead180ad8b3831866a86dfe3b75",
+    "Datapackage_SLM/data/241129_S23/P1_59.dat": "4ef3b655e47f3499452b3c5947ef9d38035f0076c725ebc760ced1ff2c8f8659",
+    "Datapackage_SLM/data/241129_S23/P1_60.dat": "1a3e71aea28795bfb88bf85f569d22787cd3dc9428e9704ecf26140781def28d",
+    "Datapackage_SLM/data/241129_S23/P1_61.dat": "3bfb9eda67b690d0aec5649fe40d57a0207c561ef13d544aa15d41cb4881078b",
+    "Datapackage_SLM/data/241129_S23/P1_62.dat": "41b4ae68f9506bb1fa671ecb48ddc492ffb7207c396fc5c5c91fe6be3ea4e047",
+    "Datapackage_SLM/data/241129_S23/P1_63.dat": "d475838dd8ec0e21636daafbe5b08eb8f5d352797061c210ea5a8aaaa0a97218",
+    "Datapackage_SLM/data/241129_S23/P1_64.dat": "dc9faca71059c2d4dcedbf70da35a90392af13cb7f55aa475267217ac5953253",
+    "Datapackage_SLM/data/241129_S23/P1_65.dat": "326fcba641cdc9c74fb8b4bcd121b7ecb9d4ed681135a0162d60858c324228b1",
+    "Datapackage_SLM/data/241129_S23/P1_66.dat": "6c7d1adde1b37322fc726d2213b25cb19b999e9cd1551bae1f74d4a614c04bc4",
+    "Datapackage_SLM/data/241129_S23/P1_67.dat": "6d0cf614a33508afb6ddc3a9b43d163c2c5e3c8990e3e025755093a183a8e8ad",
+    "Datapackage_SLM/data/241129_S23/P1_68.dat": "a9f97132b63129537de0787491e33940e26e98844ff5388b25c1693815dccd6b",
+    "Datapackage_SLM/data/241129_S23/P1_69.dat": "525c80df55ffe41bba64310322bfc092a2a8147f1c645815af660b1632c0f505",
+    "Datapackage_SLM/data/241129_S23/P1_70.dat": "889a41f2002da2b0639409b706dafffe8f3b73b128fc229048de1df88d95443f",
+    "Datapackage_SLM/data/241129_S23/P1_71.dat": "261213dc826c1a58c5c9e7d4804222096aecc28596750de281cde95dc4509996",
+    "Datapackage_SLM/data/241129_S23/P1_72.dat": "c46824981d34c723627f8318d6f9c1fff8e4181d6485359e5274d56769acc7de",
+    "Datapackage_SLM/data/241129_S23/P1_73.dat": "28707494eefdf0cf26ef49292065146d96277ba9cd21d16d552eda54d57f128d",
+    "Datapackage_SLM/data/241129_S23/P1_74.dat": "42cb6d523bdea81725243aeb5ddacaf9c024d8fefb177f91c52817ca8e777e32",
+    "Datapackage_SLM/data/241129_S23/P1_75.dat": "039393eac23569b32ff97a239a1c44f02c05538379265edd62065d9541d32e53",
+    "Datapackage_SLM/data/241129_S23/P1_76.dat": "f23379e911e10a816a98edd2a898b9c2a3911e78ae542c88f38aafa3a6bf2d68",
+    "Datapackage_SLM/data/241129_S23/P1_77.dat": "439505bbb73404fac26079c01fd87d00716bc8d7902d0de3d4e6a97606565ebe",
+    "Datapackage_SLM/data/241129_S23/P1_78.dat": "d896d2e0723fee093bf95d0518e03e87f51c6211ff6bb307eeba046fda2a3efa",
+    "Datapackage_SLM/data/241129_S23/P1_79.dat": "982887f89af5f474c21e520bf93fb69ce1840faaa214385f2d988f8737ce2a2c",
+    "Datapackage_SLM/data/241129_S23/P1_80.dat": "93895e190e6e0c128157f82bd68e7309df41db014bd08af73a2d0fb6c2f4842c",
+    "Datapackage_SLM/data/241129_S23/P1_81.dat": "85633c9a329389272b82f20d3711c507451472e13a30efd43054bd2bd3f3d81f",
+    "Datapackage_SLM/data/241129_S23/P1_82.dat": "2ac04828cce4e510b358a091d7f425d70cbd39962443f59811c7eeccbbdf6c87",
+    "Datapackage_SLM/data/241129_S23/P1_83.dat": "4b7ae01da793d428b7f9967ea5d74647139f0b13c311b5dd4924b6acbdad1193",
+    "Datapackage_SLM/data/241129_S23/P1_84.dat": "7e0ecb6d65b54ce08c10a7aad1a4bfb139141a9c2c708ec5b3c68b4fba6d3ef0",
+    "Datapackage_SLM/data/241129_S23/P1_85.dat": "2f151d0ec4a95bd46bba47b61803f32da160ad25691f7759fb60b3314ffb3c79",
+    "Datapackage_SLM/data/241129_S23/P1_86.dat": "627fa1a2dae91f1b4afed5798192ebaa57edaff29c5c97e1dc76502f096ae15a",
+    "Datapackage_SLM/data/241129_S23/P1_87.dat": "508adfb961b456229913dbc1454d9f4d9bc067ad7e74cc4cf64657d554b31016",
+    "Datapackage_SLM/data/241129_S23/P1_88.dat": "b6c7d91fed3a3cc9521302ef204d5d4da7d441a53b799beb069612aac18e5f59",
+    "Datapackage_SLM/data/241129_S23/P1_89.dat": "05a3a000ef95d3b8ce3ce114acbf06ebf8fa0f1bde4ed421507148ed1dc1989a",
+    "Datapackage_SLM/data/241129_S23/P1_90.dat": "c93c8749ef8f388757381e1760719a0009b0084ab6fd391fe1bebde499458222",
+    "Datapackage_SLM/data/241129_S23/P1_91.dat": "7b6abaf87e55ee5de059d7a3ad945015ec069db8cd299bedf876cb88195d0cb7",
+    "Datapackage_SLM/data/241129_S23/P1_92.dat": "ee46bbf7ebb1eb6046bd754d64b2771f8fd2f5ddaf31e9813a80273c2fec269a",
+    "Datapackage_SLM/data/241129_S23/P1_93.dat": "680e654358ddf5a6119ee5828f9cfc82bf87abbbf73a23a5ec5a33f24043bbec",
+    "Datapackage_SLM/data/241129_S23/P1_94.dat": "f604ae87a6ad73ca6ed716ab2b941ccf3165f039d6bbae127982eaf361804eef",
+    "Datapackage_SLM/data/241129_S23/P1_95.dat": "46270b8ba1ce1599e71e62ee2559ce8bce0e2afc994dbfb489dc7b99ae245555",
+    "Datapackage_SLM/data/241129_S23/P1_96.dat": "f841a8e86484c0ce357fcc8df7a0c2e3f465791a9e9956df28a7ebdc946cc102",
+    "Datapackage_SLM/data/241129_S23/P1_97.dat": "87c3fb2c5cdbcc5c42d4d376a1a18d361ae5ef622fc9e2dcc4aa2970fb4cfd4b",
+    "Datapackage_SLM/data/241129_S23/P1_98.dat": "4c01fc0fd0feaf8858ab1ed5aeb7adaefc8408345172a7f9937c039d65896dca",
+    "Datapackage_SLM/data/241129_S23/P1_99.dat": "0b09b85f3f17870bf237345ac2e32b0c3362cd0eb0e5a4dec09e5cfab4283e74",
+    "Datapackage_SLM/data/241129_S23/P1_100.dat": "7e121ee3e81201a77f7c7259fea639565ed73e0240a74c7d11c24c86f5191c48"
+  },
+  "referenceSha256": {
+    "Datapackage_SLM/AnalyzeFastSLMMovesPaper.ipynb": "73386f212c3aca6328548d20e42cbdf1565d8fb51e6f64102e613725eedf258a",
+    "Datapackage_SLM/data/241129_S23/P1ROIs.dat": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+    "Datapackage_SLM/data/241129_S23/P1_timinglist.dat": "2f7d7b8fe1834d0388859471b1ca44bf5a8d584205952d4a1ec268b740b475d3",
+    "Datapackage_SLM/data/241129_S23/P1_outputlist.dat": "08157a521f4acf7a0c24e0c0c38bc558edc521e9c8e05a75076a84d75a248d18",
+    "Datapackage_SLM/data/241129_S23/P1.txt": "decf88cefa7ae3ff87c34b3d155999fbc2ca79a01c48890362897504c79ff811",
+    "Datapackage_SLM/data/241129_S23/Average.dat": "767647e610fcef9e4d48af4826225cdbd6e174e5d2d44d801c3c4ab14eec4c4e",
+    "Datapackage_SLM/data/241129_S23/params.dat": "478e3898c4f9c59010d5566bb382ef19645274abf9ccf7cb26564badd7e5f32a"
+  },
+  "tgaDimensionsAndBytes": [
+    [
+      100,
+      180,
+      36018
+    ]
+  ],
+  "rawInstrumentRoiRectangles": [
+    [
+      26,
+      104,
+      29,
+      107
+    ],
+    [
+      25,
+      112,
+      28,
+      115
+    ],
+    [
+      25,
+      121,
+      28,
+      124
+    ],
+    [
+      25,
+      130,
+      28,
+      133
+    ],
+    [
+      25,
+      139,
+      28,
+      142
+    ],
+    [
+      24,
+      147,
+      27,
+      150
+    ],
+    [
+      35,
+      104,
+      38,
+      107
+    ],
+    [
+      34,
+      113,
+      37,
+      116
+    ],
+    [
+      34,
+      121,
+      37,
+      124
+    ],
+    [
+      34,
+      130,
+      37,
+      133
+    ],
+    [
+      33,
+      139,
+      36,
+      142
+    ],
+    [
+      33,
+      147,
+      36,
+      150
+    ],
+    [
+      43,
+      104,
+      46,
+      107
+    ],
+    [
+      43,
+      113,
+      46,
+      116
+    ],
+    [
+      43,
+      122,
+      46,
+      125
+    ],
+    [
+      42,
+      130,
+      45,
+      133
+    ],
+    [
+      42,
+      139,
+      45,
+      142
+    ],
+    [
+      41,
+      148,
+      44,
+      151
+    ],
+    [
+      52,
+      105,
+      55,
+      108
+    ],
+    [
+      52,
+      113,
+      55,
+      116
+    ],
+    [
+      51,
+      122,
+      54,
+      125
+    ],
+    [
+      51,
+      131,
+      54,
+      134
+    ],
+    [
+      50,
+      139,
+      53,
+      142
+    ],
+    [
+      50,
+      148,
+      53,
+      151
+    ],
+    [
+      61,
+      105,
+      64,
+      108
+    ],
+    [
+      60,
+      113,
+      63,
+      116
+    ],
+    [
+      60,
+      123,
+      63,
+      126
+    ],
+    [
+      59,
+      131,
+      62,
+      134
+    ],
+    [
+      59,
+      140,
+      62,
+      143
+    ],
+    [
+      59,
+      148,
+      62,
+      151
+    ],
+    [
+      69,
+      105,
+      72,
+      108
+    ],
+    [
+      69,
+      114,
+      72,
+      117
+    ],
+    [
+      68,
+      122,
+      71,
+      125
+    ],
+    [
+      68,
+      131,
+      71,
+      134
+    ],
+    [
+      67,
+      140,
+      70,
+      143
+    ],
+    [
+      67,
+      149,
+      70,
+      152
+    ]
+  ],
+  "offlineNotebookCentersInCroppedPixels": [
+    [
+      27,
+      25
+    ],
+    [
+      26,
+      34
+    ],
+    [
+      26,
+      43
+    ],
+    [
+      26,
+      52
+    ],
+    [
+      26,
+      61
+    ],
+    [
+      25,
+      69
+    ],
+    [
+      36,
+      25
+    ],
+    [
+      36,
+      34
+    ],
+    [
+      35,
+      43
+    ],
+    [
+      35,
+      52
+    ],
+    [
+      34,
+      61
+    ],
+    [
+      34,
+      70
+    ],
+    [
+      44,
+      26
+    ],
+    [
+      44,
+      35
+    ],
+    [
+      43,
+      43
+    ],
+    [
+      43,
+      52
+    ],
+    [
+      42,
+      61
+    ],
+    [
+      42,
+      70
+    ],
+    [
+      53,
+      26
+    ],
+    [
+      52,
+      35
+    ],
+    [
+      52,
+      43
+    ],
+    [
+      52,
+      52
+    ],
+    [
+      51,
+      61
+    ],
+    [
+      51,
+      70
+    ],
+    [
+      61,
+      26
+    ],
+    [
+      61,
+      35
+    ],
+    [
+      61,
+      43
+    ],
+    [
+      60,
+      52
+    ],
+    [
+      60,
+      61
+    ],
+    [
+      60,
+      70
+    ],
+    [
+      70,
+      26
+    ],
+    [
+      69,
+      35
+    ],
+    [
+      69,
+      44
+    ],
+    [
+      68,
+      52
+    ],
+    [
+      68,
+      61
+    ],
+    [
+      68,
+      70
+    ]
+  ],
+  "timestampScope": "One instrument log date and time per shot; time zone and frame triggers unspecified.",
+  "nonIncreasingLogTimeAttempts": [],
+  "archiveSha256": "16ba89851ae045172fb1e8139623128d0780ef348b2437f2c1e0fd8541b84802"
+}

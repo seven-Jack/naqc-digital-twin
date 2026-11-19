@@ -1,0 +1,6 @@
+cells,direction,distance_um,error_distance_um,observed_mhz,error_shift_mhz,c6_over_2pi_ghz_um6,model_mhz,model_minus_observed_mhz,model_low_over_x_error_mhz,model_high_over_x_error_mhz,inside_y_error,overlaps_xy_error_box
+ExtendedDataFig5f_1!B2:B5,perpendicular,3.6049,0.05,10.98,0.22,24,10.935834028886209,-0.04416597111379161,10.068348698925387,11.891781229742008,true,true
+ExtendedDataFig5f_1!C2:C5,perpendicular,3.858,0.03,7.18,0.18,24,7.278433223025935,0.09843322302593549,6.947902321270268,7.627455228057593,true,true
+ExtendedDataFig5f_1!D2:D5,perpendicular,3.782,0.05,8.04,0.15,24,8.20128859710503,0.16128859710503107,7.5798086000193425,8.88303618614618,false,true
+ExtendedDataFig5f_1!E2:E5,perpendicular,3.6708,0.05,9.65,0.18,24,9.809500722715045,0.15950072271504467,9.044681593712623,10.65084395852098,true,true
+ExtendedDataFig5f_2!B2:B5,parallel,3.68,0.02,8.31,0.23,21,8.45536544373509,0.14536544373508953,8.184816559683311,8.73640547532892,true,true

@@ -1,0 +1,68 @@
+.sts-scene { margin: 0; min-width: 0; }
+.sts-viewport {
+  position: relative;
+  overflow: hidden;
+  height: clamp(195px, 28vw, 340px);
+  background: radial-gradient(ellipse at 50% 48%, #1b3647, #102330 50%, #0b1824 85%);
+}
+.sts-canvas, .sts-plan { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sts-canvas canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+.sts-canvas canvas:active { cursor: grabbing; }
+.sts-reset {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  border: 1px solid #405767;
+  border-radius: 5px;
+  padding: 5px 8px;
+  background: #142431e8;
+  color: var(--md-ink, #e9f2f6);
+  font: inherit;
+}
+.sts-scene figcaption {
+  display: grid;
+  gap: 6px;
+  padding: 9px 11px;
+  border-top: 1px solid var(--md-line, #263b48);
+  color: var(--md-muted, #a2b3c3);
+  font-size: 11px;
+}
+.sts-scene figcaption p { margin: 0; }
+.sts-legend, .sts-site-summary ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.sts-legend li { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.sts-legend li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--sts-key);
+  border-radius: 50%;
+}
+.sts-legend li[data-key="occupied"] { --sts-key: #74f2c3; }
+.sts-legend li[data-key="occupied"]::before { background: var(--sts-key); }
+.sts-legend li[data-key="empty"] { --sts-key: #839fb3; }
+.sts-legend li[data-key="unknown"] { --sts-key: #f3cc86; }
+.sts-legend li[data-key="target"] { --sts-key: #9ebeff; }
+.sts-legend li[data-key="target"]::before { border-radius: 0; }
+.sts-legend li[data-key="tracked"] { --sts-key: #65d9f4; }
+.sts-legend li[data-key="commanded"] { --sts-key: #a991ef; }
+.sts-legend li:is([data-key="tracked"], [data-key="commanded"])::before {
+  width: 13px;
+  height: 0;
+  border-width: 1px 0 0;
+  border-radius: 0;
+}
+.sts-legend li[data-key="commanded"]::before { border-style: dashed; }
+.sts-site-summary summary { cursor: pointer; }
+.sts-site-summary ul { margin-top: 4px; overflow-wrap: anywhere; }
+.sts-site-summary li { min-width: 0; }
+@media (max-width: 670px) {
+  .sts-viewport { height: 205px; }
+  .sts-legend, .sts-site-summary ul { gap: 4px 8px; }
+}

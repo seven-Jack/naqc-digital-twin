@@ -1,0 +1,31 @@
+.sct-scan {
+  padding-block-start: 8px;
+  border-top: 1px solid var(--md-line);
+}
+
+.sct-result {
+  padding-block-start: 8px;
+  border-top: 1px solid var(--md-line);
+}
+
+.sct-result p { overflow-wrap: anywhere; }
+
+.sct-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr));
+  gap: 6px;
+}
+
+.sct-group {
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--md-line);
+  border-radius: 5px;
+  background: #0d1824;
+}
+
+.sct-group h5 { margin: 0 0 4px; font-size: 12px; }
+.sct-group dl { display: grid; gap: 2px; margin: 0; }
+.sct-group dl > div { display: flex; justify-content: space-between; gap: 6px; }
+.sct-group dt { color: var(--md-muted); }
+.sct-group dd { margin: 0; color: var(--md-ink); font: 12px var(--mono); }

@@ -1,0 +1,15 @@
+.sp-description { margin-bottom: 0; }
+.sp-detail .sr-controls { margin-bottom: 8px; }
+.sp-detail p code { overflow-wrap: anywhere; }
+.sp-detail .sp-value {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 7px 10px;
+  margin: 10px 0 0; padding: 9px 0 0; border-bottom: 0;
+}
+.sp-value > :first-child, .sp-value > :last-child { grid-column: 1 / -1; }
+.sp-detail .sp-value dd { font-size: 11px; }
+.sp-detail .sp-value :first-child dd { color: #deecfa; font-size: 13px; }
+.sp-plot path { fill: none; }
+@media (max-width: 720px) {
+  .sp-description { margin-bottom: 6px; }
+  .sp-plot .sr-axis-label { font-size: 18px; }
+}

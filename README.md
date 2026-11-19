@@ -6,6 +6,10 @@
 
 在浏览器中查看以 ¹⁷¹Yb 真机流程为依据的光镊装载、阱间交接、量子门与荧光读出。整机演示使用示意几何、理想量子电路与可复现的模拟采样。
 
+整机导航中的 **Senoo 装置** 提供 767 nm 平台的文献回放，包括双曝光读出、单原子 Rabi、双原子阻塞、CZ 表征及 Bell 态制备与映射。可沿时间轴查看光路、原子态和观测，或用 `/#senoo` 直达。实际门波形、同装置读出标定和独立验收仍待实测。 [装置依据与数据缺口](docs/SENOO_APPARATUS.md)
+
+同页的 **Senoo 实测工作簿** 本地导入逐轮 XLSX，检查曝光配对、时序与筛选分母。 [模板与合成验收](docs/SENOO_APPARATUS.md#导入与校验)
+
 ## 本地启动
 
 需要 Node.js 22.12 或更高版本。3D 需要 WebGL 2。
@@ -50,13 +54,17 @@ npm run test:e2e
 npm run build
 ```
 
-浏览器测试会启动本机 5174 端口的临时 Vite 服务器。应用运行时所需字体、图形和模型随构建打包。
+浏览器测试会先构建应用，再在本机 5174 端口启动生产预览。应用运行时所需字体、图形和模型随构建打包。
 
 ## 文档
 
 - [整机演示模型、参数与实验背景](docs/QUANTUM_COMPUTER.md)
+- [Senoo 767 nm 装置与双曝光文献回放](docs/SENOO_APPARATUS.md)
 - [钟跃迁子系统的科学模型与局限](docs/PHYSICS.md)
 - [文献与数据来源](docs/REFERENCES.md)
+- [整机资料库与方案](references/README.md)
+- [整机数字孪生长期项目清单](docs/PROJECT_CHECKLIST.md)
+- [演示发布与科研验收执行清单](docs/RELEASE_EXECUTION_CHECKLIST.md)
 - [验收记录](docs/VALIDATION.md)
 - [架构](docs/ARCHITECTURE.md)
 - [扩展路线](docs/ROADMAP.md)

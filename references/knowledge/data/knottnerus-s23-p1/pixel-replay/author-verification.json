@@ -1,0 +1,321 @@
+{
+  "status": "verified",
+  "initial_ge16_masks": {
+    "logged": [
+      2,
+      4,
+      6,
+      7,
+      8,
+      11,
+      14,
+      15,
+      18,
+      21,
+      22,
+      23,
+      26,
+      28,
+      36,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      50,
+      52,
+      54,
+      57,
+      58,
+      60,
+      61,
+      68,
+      69,
+      70,
+      72,
+      82,
+      84,
+      85,
+      88,
+      90,
+      91,
+      97,
+      98
+    ],
+    "author": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      14,
+      15,
+      18,
+      21,
+      22,
+      23,
+      26,
+      28,
+      30,
+      36,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      50,
+      52,
+      54,
+      57,
+      58,
+      60,
+      61,
+      68,
+      69,
+      70,
+      72,
+      82,
+      83,
+      84,
+      85,
+      88,
+      90,
+      91,
+      93,
+      96,
+      97,
+      98
+    ]
+  },
+  "by_selection": {
+    "logged": {
+      "logged": {
+        "initial_occupied": 727,
+        "initial_site_observations": 1440,
+        "final_target_occupied": 624,
+        "final_target_observations": 640,
+        "fully_assembled": 26,
+        "attempts": 40
+      },
+      "author": {
+        "initial_occupied": 737,
+        "initial_site_observations": 1440,
+        "final_target_occupied": 625,
+        "final_target_observations": 640,
+        "fully_assembled": 27,
+        "attempts": 40
+      }
+    },
+    "author": {
+      "logged": {
+        "initial_occupied": 816,
+        "initial_site_observations": 1656,
+        "final_target_occupied": 624,
+        "final_target_observations": 736,
+        "fully_assembled": 26,
+        "attempts": 46
+      },
+      "author": {
+        "initial_occupied": 834,
+        "initial_site_observations": 1656,
+        "final_target_occupied": 626,
+        "final_target_observations": 736,
+        "fully_assembled": 27,
+        "attempts": 46
+      }
+    },
+    "all": {
+      "logged": {
+        "initial_occupied": 1510,
+        "initial_site_observations": 3600,
+        "final_target_occupied": 626,
+        "final_target_observations": 1600,
+        "fully_assembled": 26,
+        "attempts": 100
+      },
+      "author": {
+        "initial_occupied": 1537,
+        "initial_site_observations": 3600,
+        "final_target_occupied": 631,
+        "final_target_observations": 1600,
+        "fully_assembled": 27,
+        "attempts": 100
+      }
+    },
+    "intersection": {
+      "logged": {
+        "initial_occupied": 727,
+        "initial_site_observations": 1440,
+        "final_target_occupied": 624,
+        "final_target_observations": 640,
+        "fully_assembled": 26,
+        "attempts": 40
+      },
+      "author": {
+        "initial_occupied": 737,
+        "initial_site_observations": 1440,
+        "final_target_occupied": 625,
+        "final_target_observations": 640,
+        "fully_assembled": 27,
+        "attempts": 40
+      }
+    }
+  },
+  "sites_exactly_6300": [],
+  "online_qualified_defect_shots": {
+    "6": {
+      "logged_missing": [
+        14
+      ],
+      "author_missing": []
+    },
+    "11": {
+      "logged_missing": [
+        9
+      ],
+      "author_missing": [
+        9
+      ]
+    },
+    "14": {
+      "logged_missing": [
+        27
+      ],
+      "author_missing": [
+        27
+      ]
+    },
+    "21": {
+      "logged_missing": [
+        27
+      ],
+      "author_missing": [
+        27
+      ]
+    },
+    "44": {
+      "logged_missing": [
+        14,
+        28
+      ],
+      "author_missing": [
+        14,
+        28
+      ]
+    },
+    "45": {
+      "logged_missing": [
+        15
+      ],
+      "author_missing": [
+        15
+      ]
+    },
+    "47": {
+      "logged_missing": [
+        27
+      ],
+      "author_missing": [
+        27
+      ]
+    },
+    "52": {
+      "logged_missing": [
+        10
+      ],
+      "author_missing": [
+        10
+      ]
+    },
+    "54": {
+      "logged_missing": [
+        21
+      ],
+      "author_missing": [
+        21
+      ]
+    },
+    "57": {
+      "logged_missing": [
+        21,
+        22
+      ],
+      "author_missing": [
+        21,
+        22
+      ]
+    },
+    "72": {
+      "logged_missing": [
+        28
+      ],
+      "author_missing": [
+        28
+      ]
+    },
+    "82": {
+      "logged_missing": [
+        26
+      ],
+      "author_missing": [
+        26
+      ]
+    },
+    "85": {
+      "logged_missing": [
+        26
+      ],
+      "author_missing": [
+        26
+      ]
+    },
+    "90": {
+      "logged_missing": [
+        20
+      ],
+      "author_missing": [
+        20
+      ]
+    }
+  },
+  "roi14_at_special_shots": {
+    "16": {
+      "1": {
+        "logged": 1,
+        "author": 1,
+        "maximum_counts": 13644
+      },
+      "2": {
+        "logged": 1,
+        "author": 1,
+        "maximum_counts": 7949
+      }
+    },
+    "40": {
+      "1": {
+        "logged": 1,
+        "author": 1,
+        "maximum_counts": 9835
+      },
+      "2": {
+        "logged": 1,
+        "author": 1,
+        "maximum_counts": 7891
+      }
+    }
+  },
+  "author_notebook_sha256": "73386f212c3aca6328548d20e42cbdf1565d8fb51e6f64102e613725eedf258a",
+  "numpy_version": "1.26.4",
+  "site_table_sha256": "7eeadba9b6679ae54807416baad5221d9fa11b0971a40a48e965eb3bb6bc8d4e",
+  "raw_frames": 200,
+  "site_frames": 7200,
+  "author_bit_matches": 7200,
+  "log_bit_matches": 7200,
+  "author_count_matches": 7200,
+  "count_check": "Original > test passes reported maximum minus one and fails at reported maximum."
+}
