@@ -1,0 +1,500 @@
+{
+  "source": "Knottnerus 88Sr, S23/P2 same-series holdout; Senoo cross-apparatus comparison",
+  "candidate_strict_gt_counts": 6436,
+  "p1_interval_inclusive": [
+    6480,
+    6550
+  ],
+  "denominator_site_frames": 7200,
+  "shots": 100,
+  "targets_per_shot": 16,
+  "selection": "Initial occupied sites >=16, out of 36; final target mask has 16 sites.",
+  "threshold_source": "Entire perfect integer interval derived from P1 labels with frozen P1 windows.",
+  "baseline_errors": [
+    {
+      "shot": 2,
+      "frame": 1,
+      "roi": 6,
+      "counts": 6482,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0
+    },
+    {
+      "shot": 5,
+      "frame": 1,
+      "roi": 24,
+      "counts": 6438,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0
+    },
+    {
+      "shot": 16,
+      "frame": 1,
+      "roi": 21,
+      "counts": 6499,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 1
+    },
+    {
+      "shot": 22,
+      "frame": 1,
+      "roi": 5,
+      "counts": 6450,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0
+    },
+    {
+      "shot": 57,
+      "frame": 2,
+      "roi": 18,
+      "counts": 6483,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0
+    }
+  ],
+  "input_sha256": {
+    "sites.csv.gz": "0247189abee79a2319cf6af6c6e7f3d37050af2e55e1a5a4ec9563bda766d01d",
+    "rounds.csv": "c250a228a21abed54f461db17f24f6610060916895d34918f5a0cc9321fa9a64",
+    "differences.csv": "25f242b32db5a5b423dc87478a44161c2256931e614472afa59930e26e132859",
+    "summary.json": "24b76888ceb8cd7b2050bda8bf67aa336ad2ed24a101b371666c66522078abef",
+    "p1-58-diagnostic.json": "5bb9799076deb6f8f0680d9fc6a6643d0f360db78d4795fe6c3e55698119ca15"
+  },
+  "decision_sha256_by_threshold": {
+    "6436": "a8600138eb539122fca0e059e4ba03ebfaa062c04a0d1e99f4a1c3bd76c5373b",
+    "6480": "ea51008dee1b9cfce2df84a2d5582a11e50576b084239fc722f7c7f5237a0b3b",
+    "6481": "ea51008dee1b9cfce2df84a2d5582a11e50576b084239fc722f7c7f5237a0b3b",
+    "6482": "e046dc08eb4bf005f2fdb761019ef288945491c724b6f8ab4f0b6dbc635153bb",
+    "6483": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6484": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6485": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6486": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6487": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6488": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6489": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6490": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6491": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6492": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6493": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6494": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6495": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6496": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6497": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6498": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+    "6499": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6500": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6501": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6502": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6503": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6504": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6505": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6506": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6507": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6508": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6509": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6510": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6511": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6512": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6513": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6514": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6515": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6516": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6517": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6518": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6519": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+    "6520": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6521": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6522": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6523": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6524": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6525": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6526": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6527": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6528": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6529": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6530": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+    "6531": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6532": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6533": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6534": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6535": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6536": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6537": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6538": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6539": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6540": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6541": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6542": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6543": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6544": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6545": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6546": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6547": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6548": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6549": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+    "6550": "231cb40c9b0b24917e7005d89cc439efdef8be6a9ad64bb9828b2a9d9290084c"
+  },
+  "hash_format": "7,200 ASCII 0/1 digits ordered by ascending shot, frame, roi, no separators or LF.",
+  "bands": [
+    {
+      "first_T": 6480,
+      "last_T": 6481,
+      "decision_sha256": "ea51008dee1b9cfce2df84a2d5582a11e50576b084239fc722f7c7f5237a0b3b",
+      "resolved": 2,
+      "persistent": 3,
+      "introduced": 0,
+      "errors": 3,
+      "selected": 53
+    },
+    {
+      "first_T": 6482,
+      "last_T": 6482,
+      "decision_sha256": "e046dc08eb4bf005f2fdb761019ef288945491c724b6f8ab4f0b6dbc635153bb",
+      "resolved": 3,
+      "persistent": 2,
+      "introduced": 0,
+      "errors": 2,
+      "selected": 52
+    },
+    {
+      "first_T": 6483,
+      "last_T": 6498,
+      "decision_sha256": "7cedaa90a5d4ec7a4019b5c5e8f449aa159d817d676da0923db04b715580ba44",
+      "resolved": 4,
+      "persistent": 1,
+      "introduced": 0,
+      "errors": 1,
+      "selected": 52
+    },
+    {
+      "first_T": 6499,
+      "last_T": 6519,
+      "decision_sha256": "214fc4dbc4f1056eec0e53e07c5580366020fede3ae9f3fa916744ff01700f6a",
+      "resolved": 5,
+      "persistent": 0,
+      "introduced": 0,
+      "errors": 0,
+      "selected": 51
+    },
+    {
+      "first_T": 6520,
+      "last_T": 6530,
+      "decision_sha256": "3f429f081ee9f1a1df14c26830edd47f808b6ae24d22621cf2f6c5db6603251f",
+      "resolved": 5,
+      "persistent": 0,
+      "introduced": 1,
+      "errors": 1,
+      "selected": 51
+    },
+    {
+      "first_T": 6531,
+      "last_T": 6549,
+      "decision_sha256": "9afed1ef5eb40442efa1e8e835b7ec0aab6f52b65c29ab6506680fffd8bb2eb3",
+      "resolved": 5,
+      "persistent": 0,
+      "introduced": 2,
+      "errors": 2,
+      "selected": 51
+    },
+    {
+      "first_T": 6550,
+      "last_T": 6550,
+      "decision_sha256": "231cb40c9b0b24917e7005d89cc439efdef8be6a9ad64bb9828b2a9d9290084c",
+      "resolved": 5,
+      "persistent": 0,
+      "introduced": 3,
+      "errors": 3,
+      "selected": 51
+    }
+  ],
+  "difference_intervals": [
+    {
+      "shot": 2,
+      "frame": 1,
+      "roi": 6,
+      "counts": 6482,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "persistent",
+      "intervals": [
+        [
+          6480,
+          6481
+        ]
+      ]
+    },
+    {
+      "shot": 2,
+      "frame": 1,
+      "roi": 6,
+      "counts": 6482,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "resolved",
+      "intervals": [
+        [
+          6482,
+          6550
+        ]
+      ]
+    },
+    {
+      "shot": 5,
+      "frame": 1,
+      "roi": 24,
+      "counts": 6438,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "resolved",
+      "intervals": [
+        [
+          6480,
+          6550
+        ]
+      ]
+    },
+    {
+      "shot": 6,
+      "frame": 1,
+      "roi": 0,
+      "counts": 6520,
+      "log_bit": 1,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "introduced",
+      "intervals": [
+        [
+          6520,
+          6550
+        ]
+      ]
+    },
+    {
+      "shot": 9,
+      "frame": 1,
+      "roi": 9,
+      "counts": 6531,
+      "log_bit": 1,
+      "baseline_bit": 1,
+      "target": 1,
+      "status": "introduced",
+      "intervals": [
+        [
+          6531,
+          6550
+        ]
+      ]
+    },
+    {
+      "shot": 16,
+      "frame": 1,
+      "roi": 21,
+      "counts": 6499,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 1,
+      "status": "persistent",
+      "intervals": [
+        [
+          6480,
+          6498
+        ]
+      ]
+    },
+    {
+      "shot": 16,
+      "frame": 1,
+      "roi": 21,
+      "counts": 6499,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 1,
+      "status": "resolved",
+      "intervals": [
+        [
+          6499,
+          6550
+        ]
+      ]
+    },
+    {
+      "shot": 22,
+      "frame": 1,
+      "roi": 5,
+      "counts": 6450,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "resolved",
+      "intervals": [
+        [
+          6480,
+          6550
+        ]
+      ]
+    },
+    {
+      "shot": 57,
+      "frame": 2,
+      "roi": 18,
+      "counts": 6483,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "persistent",
+      "intervals": [
+        [
+          6480,
+          6482
+        ]
+      ]
+    },
+    {
+      "shot": 57,
+      "frame": 2,
+      "roi": 18,
+      "counts": 6483,
+      "log_bit": 0,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "resolved",
+      "intervals": [
+        [
+          6483,
+          6550
+        ]
+      ]
+    },
+    {
+      "shot": 67,
+      "frame": 1,
+      "roi": 18,
+      "counts": 6550,
+      "log_bit": 1,
+      "baseline_bit": 1,
+      "target": 0,
+      "status": "introduced",
+      "intervals": [
+        [
+          6550,
+          6550
+        ]
+      ]
+    }
+  ],
+  "log_selected_shots": [
+    1,
+    4,
+    5,
+    6,
+    7,
+    17,
+    18,
+    19,
+    21,
+    22,
+    24,
+    26,
+    32,
+    33,
+    34,
+    36,
+    37,
+    39,
+    42,
+    44,
+    45,
+    47,
+    50,
+    51,
+    55,
+    57,
+    59,
+    60,
+    62,
+    64,
+    67,
+    68,
+    72,
+    73,
+    74,
+    76,
+    77,
+    78,
+    80,
+    81,
+    82,
+    84,
+    87,
+    88,
+    89,
+    90,
+    94,
+    95,
+    97,
+    98,
+    99
+  ],
+  "baseline_selected_shots": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    16,
+    17,
+    18,
+    19,
+    21,
+    22,
+    24,
+    26,
+    32,
+    33,
+    34,
+    36,
+    37,
+    39,
+    42,
+    44,
+    45,
+    47,
+    50,
+    51,
+    55,
+    57,
+    59,
+    60,
+    62,
+    64,
+    67,
+    68,
+    72,
+    73,
+    74,
+    76,
+    77,
+    78,
+    80,
+    81,
+    82,
+    84,
+    87,
+    88,
+    89,
+    90,
+    94,
+    95,
+    97,
+    98,
+    99
+  ]
+}
