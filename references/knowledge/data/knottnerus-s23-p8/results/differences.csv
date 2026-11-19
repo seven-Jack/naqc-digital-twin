@@ -1,0 +1,3 @@
+threshold,shot,frame,roi,target,raw_x0,raw_y0,raw_x1_exclusive,raw_y1_exclusive,counts,log_bit,fixed_bit,frame_member,log_member
+6436,23,1,4,0,25,139,28,142,6463,0,1,Datapackage_SLM/data/241129_S23/P8_23_1.tga,Datapackage_SLM/data/241129_S23/P8_23.dat
+6436,34,2,19,1,52,113,55,116,6450,0,1,Datapackage_SLM/data/241129_S23/P8_34_2.tga,Datapackage_SLM/data/241129_S23/P8_34.dat
