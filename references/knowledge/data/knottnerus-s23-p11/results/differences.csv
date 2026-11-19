@@ -1,0 +1,15 @@
+threshold,shot,frame,roi,target,raw_x0,raw_y0,raw_x1_exclusive,raw_y1_exclusive,counts,log_bit,fixed_bit,frame_member,log_member
+6436,6,1,27,1,59,131,62,134,6493,0,1,Datapackage_SLM/data/241129_S23/P11_6_1.tga,Datapackage_SLM/data/241129_S23/P11_6.dat
+6436,44,1,13,1,43,113,46,116,6457,0,1,Datapackage_SLM/data/241129_S23/P11_44_1.tga,Datapackage_SLM/data/241129_S23/P11_44.dat
+6508,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6509,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6510,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6511,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6512,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6513,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6514,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6515,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6516,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6517,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6518,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
+6519,25,1,2,0,25,121,28,124,6508,1,0,Datapackage_SLM/data/241129_S23/P11_25_1.tga,Datapackage_SLM/data/241129_S23/P11_25.dat
