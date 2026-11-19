@@ -1,0 +1,53 @@
+{
+  "frozen_utc": "2026-11-19T10:20:39.029782+00:00",
+  "source_release": "v0.1.4",
+  "source_commit": "4600fddc71fa119703e9f8a45e083a98d1ae261c",
+  "public_source_doi": "10.21942/uva.28166483.v1",
+  "reference_files_sha256": {
+    "references/knowledge/data/knottnerus-s23-p2/p1-threshold-sweep/results/summary.json": "5a4cffeabf4ea280e9499e22706dd723df91de9d69347163d1788b341c2b2218",
+    "references/knowledge/data/knottnerus-s23-p3/results/summary.json": "b45112fd0b39d28ad456ecaffbb4bc9181de1393da05e6263ce995a0bd707705"
+  },
+  "batch": "241129_S23/P4",
+  "selection": "First scan point after P3; all original shots 1 through 100; selection fixed before reading P4 agreement outcomes.",
+  "admission": "Check two distinct TGA members and both 36-bit Pic logs per original shot, (Series,DataSetNr,RunNr) identity, monotone round timestamps, original image layout and size, P1/P4 detector rectangles, control configuration, timing and output lists.",
+  "strict_gt_candidate_counts": 6436,
+  "rule": "Sum over the 36 native P1 3x3 half-open rectangles in P4 raw pixels; strict count > T, no shifts, no background subtraction.",
+  "p1_roi_sha256": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+  "p2_log_compatible_integer_thresholds": [
+    6499,
+    6500,
+    6501,
+    6502,
+    6503,
+    6504,
+    6505,
+    6506,
+    6507,
+    6508,
+    6509,
+    6510,
+    6511,
+    6512,
+    6513,
+    6514,
+    6515,
+    6516,
+    6517,
+    6518,
+    6519
+  ],
+  "p3_matching_focus_integer_thresholds": [
+    6499,
+    6500,
+    6501,
+    6502,
+    6503,
+    6504,
+    6505,
+    6506,
+    6507
+  ],
+  "acceptance": "Assess each fixed integer threshold separately against all original P4 Pic1/Pic2 log bits (7200 if 100 valid pairs). Report all thresholds, exact mismatch direction and identities, intersections with P3 focus, independent cohort masks and denominators. No P4 threshold refit.",
+  "selection_rule": "Pic1 count of all occupied sites >=16/36, independently for log and predicted mask. Pic2 target comprises zero-based ROI 7-10,13-16,19-22,25-28; report both point filling and fully occupied rounds.",
+  "scope": "Same-series holdout on Knottnerus 88Sr; cross-apparatus comparison to Senoo 171Yb. Formal Senoo CAL/VAL uses its own measured inputs."
+}

@@ -29,6 +29,7 @@
 | 追查 P1 判决差异，并核对筛选前后的分母 | [39 处差异的阈值与坐标比较](knottnerus-p1-threshold-roi.md) · [剩余 26 处的固定窗口复算](knottnerus-p1-threshold-roi.md#固定窗口追查剩余-26-处) · [P1_58 首帧 ROI 3 的像素和与在线配置](knottnerus-p1-58-online-decision.md) |
 | 检查 P1 的固定窗口和候选阈值能否在 S23 的 P2 重现在线位串 | [P2 同序列留出对照、差异轮号、两份入选名单和分母](knottnerus-s23-p2-holdout.md) · [P1 区间的 71 个阈值、五处原差异和三处新增差异](knottnerus-s23-p2-threshold-sweep.md) |
 | 核对 P1 候选判据及 P2 日志相容区间在 S23/P3 上的表现 | [P3 同序列留出、三处差异和 55 轮首帧入选名单](knottnerus-s23-p3-holdout.md) |
+| 检验 P3 吻合的 6499–6507 能否复现 S23/P4，并核对全部 P2 区间阈值 | [P4 同序列留出、P4_81 末帧差异及 53 轮入选分母](knottnerus-s23-p4-holdout.md) |
 | 补齐论文正式版或实验数据 | [待补清单](../MANUAL_DOWNLOAD.md) |
 
 ## 阅读范围
