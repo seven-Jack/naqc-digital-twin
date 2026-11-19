@@ -51,6 +51,8 @@ Knottnerus 等人使用 813 nm 光阱俘获 ⁸⁸Sr，在 689 nm 的 ¹S₀ ↔
 
 ## 复算凭据与适用范围
 
+随后固定本批的 ROI 与像素和，把 P1 区间内的 71 个整数阈值逐一用于 P2。P2_2 和 P2_16 分别从 6,482、6,499 counts 起退出首帧入选名单。 [逐阈值差异和分母](knottnerus-s23-p2-threshold-sweep.md)
+
 Taiyi 于 2026-11-19 北京时间 17:22:09–17:22:10 完成作业。先核验公开数据 v1 的来源摘要、317 个工作包成员、P1/P2 设置及帧格式，再按冻结的 P1 矩形求和。主程序逐行读取原图的 3 个连续像素，独立程序用二维积分图计算同一矩形。两个程序按轮号、帧号、ROI 排序后得到相同的 7,200 个计数及双方判决，规范化全表的 SHA-256 为 `55f8dbecd05642c6b2b7919da29bb670e18554d3594531638fa01d7f91631d6a`。独立核对覆盖全部五条差异及九组筛选名单和分母。 [独立核验](data/knottnerus-s23-p2/results/independent.json) · [输入哈希](data/knottnerus-s23-p2/input-sha256.txt) · [输出哈希](data/knottnerus-s23-p2/result-sha256.txt) · [作业退出记录](data/knottnerus-s23-p2/compute-unit-final.log)
 
 复算主程序按顺序接受原始 ZIP、成员清单和新的结果目录。独立程序接受同一 ZIP，将核验结果写到标准输出。两者均可使用上述 DOI 的完整 ZIP。作业输入清单中的 `verify-p2.py` 对应仓库中的独立核验脚本。 [主程序](../../scripts/audit-knottnerus-s23-p2.py) · [独立核验脚本](../../scripts/verify-knottnerus-s23-p2.py)

@@ -1,0 +1,15 @@
+{
+  "thresholds_checked_including_baseline": 72,
+  "occupancy_digest_matches": 72,
+  "primary_cohort_rows_checked": 720,
+  "classification_keys_and_direction_per_threshold": "passed",
+  "focus_rosters_and_denominators": "passed",
+  "crosscheck_source": "primary CSV/JSON vs independent raw image integral scan JSON; saved outputs only",
+  "result_sha256": {
+    "cohorts.csv": "85836e70b658067bbfba5654d7d8e3586b8e8424e16126bc27995a5fc7eb2326",
+    "differences.csv": "e9d6c9cb9c9bb09a21c4a2a4e9a408cc8105eda1bb0aae8e66e68bac85b17e82",
+    "independent.json": "f0c567677ed4b3c19f3e6649b4461bc8544dcdaec0986910a7d1b618b65939ca",
+    "summary.json": "5a4cffeabf4ea280e9499e22706dd723df91de9d69347163d1788b341c2b2218",
+    "thresholds.csv": "2946eccd241afde4c70b116dc014409699b1c7f1abb275cb97f016f0aaf1b2ae"
+  }
+}

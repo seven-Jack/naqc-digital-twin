@@ -1,0 +1,11 @@
+Id=knottnerus-p2-sweep-20261119t093745z.service
+SubState=exited
+Result=success
+ExecMainStartTimestamp=Thu 2026-11-19 17:40:33 CST
+ExecMainExitTimestamp=Thu 2026-11-19 17:40:33 CST
+ExecMainStatus=0
+MemoryPeak=29450240
+CPUUsageNSec=773506000
+CPUQuotaPerSecUSec=1s
+MemoryMax=1073741824
+MemorySwapMax=0
