@@ -1,0 +1,105 @@
+.czc-page { display: grid; gap: 14px; min-width: 0; }
+.czc-toolbar, .czc-depth-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px 14px;
+}
+.czc-toolbar {
+  justify-content: space-between;
+  padding: 10px 13px;
+  background: #121f2c;
+}
+.czc-depth-controls > span { color: var(--md-muted); font-size: 12px; font-weight: 610; }
+.czc-depth-buttons { gap: 5px; }
+.czc-depth-buttons button { min-width: 36px; font-family: var(--mono); font-size: 12px; }
+.czc-depth-buttons button[aria-pressed="true"] {
+  color: #d8fff0;
+  border-color: #4a7a6b;
+  background: #1b3c3d;
+}
+.czc-evidence { color: var(--md-mint); font-size: 12px; font-weight: 620; }
+.czc-evidence span { color: var(--md-muted); font-weight: 480; }
+.czc-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.czc-page .md-panel-header small { color: var(--md-muted); font-size: 11px; text-align: right; }
+.czc-plot { margin: 0; padding: 8px 13px 7px; background: #0d1824; }
+.czc-plot svg { display: block; width: 100%; }
+.czc-plot svg text { fill: #9eb2c8; font: 11px var(--mono); }
+.czc-plot svg .czc-axis-label { fill: #c9d9e6; font: 11px var(--sans, system-ui); }
+.czc-plot svg .czc-selected-tick text { fill: var(--md-mint); font-weight: 760; }
+.czc-grid { stroke: #26394b; stroke-width: 0.8; }
+.czc-depth-band { fill: #85dfcd; opacity: .12; }
+.czc-fit, .czc-error-bar { fill: none; stroke: var(--czc-series); }
+.czc-fit { opacity: .68; stroke-width: 1.15; stroke-dasharray: 4 3; }
+.czc-error-bar { opacity: .85; stroke-width: 1.15; }
+.czc-point { fill: var(--czc-series); stroke: #0c1b27; stroke-width: 1; }
+.czc-plot [data-selected="true"] .czc-point { stroke: #f0f8ff; stroke-width: 1.15; }
+.czc-hit { fill: transparent; cursor: pointer; }
+.czc-legend, .czc-conditions { margin: 0; list-style: none; }
+.czc-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 15px;
+  padding: 0;
+  color: var(--md-muted);
+  font-size: 11px;
+}
+.czc-legend li { display: flex; align-items: center; gap: 6px; }
+.czc-legend-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--czc-series); }
+.czc-legend-fit { width: 14px; border-bottom: 1px dashed #a6bccd; }
+.czc-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 12px;
+}
+.czc-table caption {
+  padding: 8px 13px;
+  border-bottom: 1px solid var(--md-line);
+  text-align: left;
+  color: var(--md-ink);
+  font-weight: 630;
+}
+.czc-table caption code { color: var(--md-mint); }
+.czc-table th, .czc-table td { padding: 7px 8px; border-bottom: 1px solid var(--md-line); vertical-align: top; }
+.czc-table th:first-child { padding-left: 13px; }
+.czc-table td:last-child, .czc-table th:last-child { padding-right: 13px; }
+.czc-table thead th { color: var(--md-muted); font-size: 11px; font-weight: 540; }
+.czc-table tbody th { color: var(--czc-series); font-weight: 590; }
+.czc-table td code { color: var(--md-ink); overflow-wrap: anywhere; }
+.czc-table small { display: block; margin-top: 3px; color: var(--md-muted); font-size: 10px; font-weight: 460; }
+.czc-table small code { color: inherit; }
+.czc-point-table th:nth-child(1) { width: 20%; }
+.czc-point-table th:nth-child(2) { width: 28%; }
+.czc-point-table th:nth-child(3) { width: 22%; }
+.czc-fit-table th:nth-child(1) { width: 24%; }
+.czc-fit-table th:nth-child(2) { width: 38%; }
+.czc-note, .czc-provenance {
+  color: var(--md-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.czc-note { padding: 9px 13px; }
+.czc-provenance { display: grid; gap: 7px; padding: 11px 13px; }
+.czc-provenance code { color: var(--md-ink); overflow-wrap: anywhere; }
+.czc-conditions { display: grid; gap: 4px; padding: 0; }
+.czc-provenance details summary { color: var(--md-mint); cursor: pointer; }
+.czc-provenance dl { display: grid; gap: 4px; margin: 6px 0 0; }
+.czc-provenance dl > div { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.czc-provenance dd { margin: 0; }
+@media (max-width: 850px) {
+  .czc-columns { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 490px) {
+  .czc-depth-controls { column-gap: 8px; }
+  .czc-depth-buttons button { min-width: 32px; padding-inline: 6px; }
+  .czc-plot { padding-inline: 5px; }
+  .czc-plot svg text, .czc-plot svg .czc-axis-label { font-size: 12px; }
+  .czc-table { font-size: 11px; }
+  .czc-point-table td:nth-child(3) > code { font-size: clamp(8px, 2.6vw, 11px); white-space: nowrap; }
+  .czc-table td, .czc-table th { padding-inline: 5px; }
+  .czc-table th:first-child { padding-left: 8px; }
+  .czc-table td:last-child, .czc-table th:last-child { padding-right: 8px; }
+}

@@ -1,52 +1,22 @@
 import * as T from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import type { MachineProfile } from '../data/machineProfile';
+import type { MachineSceneProfile } from '../data/machineSceneProfile';
 import { glowTexture, gridLines } from './arrayGeometry';
+import type { MachineSceneFrame } from './machineSceneFrame';
 
 export type MachineView = 'machine' | 'array';
 
-type Atom = { id: string; row: number; column: number; qubit?: number; bright?: boolean; moving?: boolean };
-
-export interface SceneFrame {
-  stage: string;
-  atoms: readonly Atom[];
-  activeQubits?: readonly number[];
-  progress?: number;
-  gateProgress?: number;
-  representativeReady?: boolean;
-  completed?: boolean;
-}
-
-export function czOpticalPhase(progress = 0.5) {
-  if (progress < 1 / 3) return 'shelve';
-  if (progress < 2 / 3) return 'blockade';
-  return 'unshelve';
-}
-
 const colors = {
   atom: '#63f6cd', qubit: '#b49dff', bright: '#ffc081', dark: '#586887',
-  edge: '#647f99', reservoir: '#4feab7', science: '#74adfc', transport: '#5beafb',
-  clock: '#ffcc7e', rydberg: '#b089fc', raman: '#f18de1', imaging: '#ffad69', cooling: '#4fb7fe',
+  edge: '#647f99',
 };
 
-const labelPositions: Record<string, T.Vector3> = {
-  slm: new T.Vector3(-7.4, 1.65, 1.35),
-  aod: new T.Vector3(-7.05, 2.45, -1.25),
-  vacuum: new T.Vector3(-2.35, 2.03, 0.75),
-  imaging: new T.Vector3(0.20, 4.42, 0),
-  gate: new T.Vector3(7.13, 1.76, 0.1),
-};
-
-const pitch = 0.5;
-const arrayY = 0.36;
 const tableY = -1.75;
 
 const vector = (x: number, y: number, z: number) => new T.Vector3(x, y, z);
-const delivery = vector(0, -0.55, 0);
-const collection = vector(0, 2.49, 0);
 const beamAxis = vector(0, 1, 0);
 const beamDirection = new T.Vector3();
-const reservoirColor = new T.Color(colors.reservoir);
-const scienceColor = new T.Color(colors.science);
 
 function basic(color: string, opacity = 1) {
   return new T.MeshBasicMaterial({ color, opacity, transparent: opacity < 1, depthWrite: opacity === 1 });
@@ -153,7 +123,7 @@ function table() {
   return table;
 }
 
-function vacuumChamber(glowMap: T.Texture) {
+function vacuumChamber(glowMap: T.Texture, reservoirColor: string) {
   const chamber = new T.Group();
   const wall = new T.Mesh(new T.CylinderGeometry(2.41, 2.41, 2.29, 12, 1, true),
     new T.MeshBasicMaterial({ color: '#7cb8e2', transparent: true, opacity: 0.055, side: T.DoubleSide, depthWrite: false }));
@@ -186,9 +156,9 @@ function vacuumChamber(glowMap: T.Texture) {
   chamber.add(pump);
   const trapObjective = metal('#335464');
   chamber.add(cylinder(0.57, 0.36, trapObjective, 0, -1.1, 0),
-    cylinder(0.45, 0.33, trapObjective, 0, -0.79, 0), ring(0.38, 0.041, basic(colors.reservoir, 0.49), 0, -0.605, 0));
+    cylinder(0.45, 0.33, trapObjective, 0, -0.79, 0), ring(0.38, 0.041, basic(reservoirColor, 0.49), 0, -0.605, 0));
   const halo = new T.Sprite(new T.SpriteMaterial({
-    map: glowMap, color: colors.reservoir, transparent: true, opacity: 0.32, blending: T.AdditiveBlending, depthWrite: false,
+    map: glowMap, color: reservoirColor, transparent: true, opacity: 0.32, blending: T.AdditiveBlending, depthWrite: false,
   }));
   halo.position.set(0, 0.12, 0);
   halo.scale.set(4.6, 2.8, 1);
@@ -215,7 +185,7 @@ function atomicSource() {
   return source;
 }
 
-function slmSystem() {
+function slmSystem(reservoirColor: string, scienceColor: string) {
   const system = new T.Group();
   const body = metal('#243f51');
   const trim = metal('#416473');
@@ -237,7 +207,7 @@ function slmSystem() {
       screen.add(box(0.039, 0.028, 0.012, pixel, x - 0.59 + column * 0.09, -0.53 + row * 0.065, z + 0.708));
     }
   }
-  for (const [offset, color] of [[-0.26, colors.reservoir], [0.26, colors.science]] as const) {
+  for (const [offset, color] of [[-0.26, reservoirColor], [0.26, scienceColor]] as const) {
     system.add(segment(vector(x + 0.95, 0.02, z + offset), vector(x + 1.26, 0.02, z + offset), 0.16, trim),
       segment(vector(x + 1.26, 0.02, z + offset), vector(x + 1.31, 0.02, z + offset), 0.10, basic(color, 0.68)));
   }
@@ -245,7 +215,7 @@ function slmSystem() {
   return system;
 }
 
-function aodSystem() {
+function aodSystem(transportColor: string) {
   const system = new T.Group();
   const body = metal('#284357');
   const trim = metal('#42637b');
@@ -257,20 +227,19 @@ function aodSystem() {
     outline(box(1.61, 0.66, 0.76, body, x, -0.21, z), '#557a94'),
     outline(box(0.48, 0.53, 0.79, trim, x + 0.43, -0.21, z), '#648ba1'),
     segment(vector(x + 0.78, 0.02, z), vector(x + 1.06, 0.02, z), 0.12, body),
-    box(0.31, 0.04, 0.02, basic(colors.transport, 0.71), x - 0.38, -0.15, z + 0.39),
+    box(0.31, 0.04, 0.02, basic(transportColor, 0.71), x - 0.38, -0.15, z + 0.39),
   );
   return system;
 }
 
-function laserSystem() {
+function laserSystem({ sidePathX, paths, arrayY }: MachineSceneProfile) {
   const system = new T.Group();
   const body = metal('#3a3658');
   const trim = metal('#534a75');
-  const x = 6.84;
-  const z = 0.24;
-  for (const [offset, beamColor] of [[-0.81, colors.clock], [0, colors.rydberg], [0.81, colors.imaging]] as const) {
+  const x = sidePathX[0] + 1.66;
+  const z = paths.rydberg.entranceZ;
+  for (const { entranceZ: centerZ, color: beamColor } of [paths.clock, paths.rydberg, paths.probe]) {
     const color = basic(beamColor);
-    const centerZ = z + offset;
     system.add(outline(box(2.13, 0.85, 0.74, body, x, 0.08, centerZ), '#6b5a91'),
       outline(box(2.17, 0.11, 0.78, trim, x, 0.54, centerZ), '#7a63a4'),
       segment(vector(x - 1.64, arrayY, centerZ), vector(x - 1, arrayY, centerZ), 0.16, trim),
@@ -287,7 +256,7 @@ function laserSystem() {
   return system;
 }
 
-function imagingSystem() {
+function imagingSystem(probeColor: string) {
   const system = new T.Group();
   const dark = metal('#25374c');
   const lintel = metal('#4c687e');
@@ -301,7 +270,7 @@ function imagingSystem() {
     outline(box(1.18, 0.075, 1.29, lintel, 0, 3.93, 0), '#6b8fa3', 0.52),
     cylinder(0.63, 0.31, warm, 0, 2.90, 0),
     cylinder(0.49, 0.26, dark, 0, 2.65, 0),
-    ring(0.40, 0.048, basic(colors.imaging, 0.79), 0, 2.50, 0),
+    ring(0.40, 0.048, basic(probeColor, 0.79), 0, 2.50, 0),
     cylinder(0.36, 0.038, basic('#94593c', 0.66), 0, 2.493, 0),
     box(0.28, 0.075, 0.019, basic('#e4a96d', 0.74), 0.31, 3.59, 0.736),
   );
@@ -333,14 +302,25 @@ export class QuantumMachineRenderer {
   private pathProbe;
   private pathCooling;
   private trapFan;
-  private transportFocus = focusBeam(colors.transport, 0.035, 0.17, 0.54);
-  private collectionCone = focusBeam(colors.imaging, 0.36, 0.04, 0.11);
+  private transportFocus: ReturnType<typeof focusBeam>;
+  private collectionCone: ReturnType<typeof focusBeam>;
   private ramanFocus: ReturnType<typeof focusBeam>[];
   private interactionLink;
   private gridGlow;
+  private delivery: T.Vector3;
+  private collection: T.Vector3;
+  private reservoirColor: T.Color;
+  private scienceColor: T.Color;
+  private pendingFrame: MachineSceneFrame | null = null;
   private projected = new T.Vector3();
 
-  constructor(private host: HTMLDivElement, rows: number, columns: number, private labels: Record<string, HTMLSpanElement | null>) {
+  constructor(private host: HTMLDivElement, private profile: MachineProfile, private labels: Record<string, HTMLSpanElement | null>) {
+    const { rows, columns, registerRow } = profile.array;
+    const { arrayY, arrayPitch: pitch, paths, sidePathX } = profile.scene;
+    this.delivery = vector(...profile.scene.delivery);
+    this.collection = vector(...profile.scene.collection);
+    this.reservoirColor = new T.Color(paths.reservoir.color);
+    this.scienceColor = new T.Color(paths.science.color);
     const canvas = this.renderer.domElement;
     canvas.setAttribute('aria-label', '可旋转和缩放的三维整机光路');
     canvas.setAttribute('role', 'img');
@@ -371,26 +351,32 @@ export class QuantumMachineRenderer {
     }));
     floorGlow.position.set(0, -1.85, -4);
     floorGlow.scale.set(30, 13.0, 1);
-    this.hardware.add(floorGlow, floor, table(), vacuumChamber(this.haloMap), atomicSource(), slmSystem(), aodSystem(), laserSystem(), imagingSystem());
+    this.hardware.add(
+      floorGlow, floor, table(), vacuumChamber(this.haloMap, paths.reservoir.color), atomicSource(),
+      slmSystem(paths.reservoir.color, paths.science.color), aodSystem(paths.transport.color),
+      laserSystem(profile.scene), imagingSystem(paths.probe.color),
+    );
     // Common delivery objective for fixed/moving tweezers and local Raman beams.
-    const merge = vector(-4.25, 0.02, 1.33);
-    this.pathReservoir = opticalPath(this.hardware, [vector(-5.95, 0.02, 1.07), merge], colors.reservoir);
-    this.pathScience = opticalPath(this.hardware, [vector(-5.95, 0.02, 1.59), merge], colors.science);
-    this.pathTransport = opticalPath(this.hardware, [vector(-6.02, 0.02, -1.17), vector(-5.1, 0.02, -1.17), merge], colors.transport);
-    this.pathObjective = opticalPath(this.hardware, [merge, vector(-3.16, -0.74, 0), vector(0, -0.74, 0), delivery], colors.reservoir, 0.18);
+    const createPath = ({ points, color, width }: MachineSceneProfile['paths']['reservoir']) =>
+      opticalPath(this.hardware, points.map(point => vector(...point)), color, width);
+    this.pathReservoir = createPath(paths.reservoir);
+    this.pathScience = createPath(paths.science);
+    this.pathTransport = createPath(paths.transport);
+    this.pathObjective = createPath(paths.objective);
 
     // Side illumination runs along the interaction row, not through the camera.
-    const rowZ = (Math.floor(rows / 2) - (rows - 1) / 2) * pitch;
-    const sidePath = (startZ: number, color: string, width: number) => opticalPath(this.hardware,
-      [vector(5.18, arrayY, startZ), vector(3.85, arrayY, rowZ), vector(-2.15, arrayY, rowZ)], color, width);
-    this.pathClock = sidePath(-0.57, colors.clock, 0.18);
-    this.pathRydberg = sidePath(0.24, colors.rydberg, 0.22);
-    this.pathProbe = sidePath(1.05, colors.imaging, 0.30);
-    this.pathCooling = [
-      opticalPath(this.hardware, [vector(-2.28, 0.55, -1.44), vector(0, arrayY, 0), vector(1.94, 0.21, 1.68)], colors.cooling, 0.37),
-      opticalPath(this.hardware, [vector(-1.96, 0.31, 1.48), vector(0, arrayY, 0), vector(1.96, 0.47, -1.48)], colors.cooling, 0.33),
-    ];
-    this.ramanFocus = Array.from({ length: columns }, () => focusBeam(colors.raman, 0.04, 0.15, 0.50));
+    const rowZ = (registerRow - (rows - 1) / 2) * pitch;
+    const sidePath = ({ entranceZ, color, width }: MachineSceneProfile['paths']['clock']) => createPath({
+      points: [[sidePathX[0], arrayY, entranceZ], [sidePathX[1], arrayY, rowZ], [sidePathX[2], arrayY, rowZ]],
+      color, width,
+    });
+    this.pathClock = sidePath(paths.clock);
+    this.pathRydberg = sidePath(paths.rydberg);
+    this.pathProbe = sidePath(paths.probe);
+    this.pathCooling = paths.cooling.map(createPath);
+    this.transportFocus = focusBeam(paths.transport.color, 0.035, 0.17, 0.54);
+    this.collectionCone = focusBeam(paths.probe.color, 0.36, 0.04, 0.11);
+    this.ramanFocus = Array.from({ length: columns }, () => focusBeam(profile.scene.ramanColor, 0.04, 0.15, 0.50));
     this.hardware.add(this.transportFocus, this.collectionCone, ...this.ramanFocus);
 
     this.gridGlow = new T.Mesh(new T.PlaneGeometry((columns + 2) * pitch, (rows + 2) * pitch).rotateX(-Math.PI / 2),
@@ -423,7 +409,8 @@ export class QuantumMachineRenderer {
       for (let column = 0; column < columns; column++) {
         const site = new T.Mesh(siteGeometry, siteMaterial);
         site.position.set((column - (columns - 1) / 2) * pitch, arrayY - 0.085, (row - (rows - 1) / 2) * pitch);
-        tweezerRays.push(0, -0.52, 0, site.position.x, arrayY - 0.055, site.position.z);
+        tweezerRays.push(this.delivery.x, this.delivery.y + 0.03, this.delivery.z,
+          site.position.x, arrayY - 0.055, site.position.z);
         const atom = new T.Mesh(atomGeometry, basic(colors.atom));
         atom.visible = false;
         const halo = new T.Sprite(new T.SpriteMaterial({
@@ -439,7 +426,7 @@ export class QuantumMachineRenderer {
     }
     this.trapFan = new T.LineSegments(
       new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(tweezerRays, 3)),
-      new T.LineBasicMaterial({ color: colors.reservoir, transparent: true, opacity: 0.12, depthWrite: false, blending: T.AdditiveBlending }),
+      new T.LineBasicMaterial({ color: paths.reservoir.color, transparent: true, opacity: 0.12, depthWrite: false, blending: T.AdditiveBlending }),
     );
     this.hardware.add(this.trapFan);
     this.interactionLink = new T.LineSegments(
@@ -450,61 +437,40 @@ export class QuantumMachineRenderer {
     this.interactionLink.frustumCulled = false;
     this.array.add(this.interactionLink);
 
-    this.rows = rows;
-    this.columns = columns;
     this.observer = new ResizeObserver(this.resize);
     this.observer.observe(host);
     this.setView('machine');
   }
 
-  private rows: number;
-  private columns: number;
-
   setView(view: MachineView) {
     this.view = view;
     this.hardware.visible = view === 'machine';
     this.camera.zoom = 1;
-    this.controls.target.set(0, view === 'machine' ? 0.35 : arrayY, 0);
+    this.controls.target.set(0, view === 'machine' ? 0.35 : this.profile.scene.arrayY, 0);
     if (view === 'machine') this.camera.position.set(9.4, 13.8, 24.6);
     else this.camera.position.set(0.83, 11, 7.7);
     this.controls.update();
     this.resize();
   }
 
-  update({ stage, atoms, activeQubits = [], progress = 0, gateProgress, representativeReady = true, completed }: SceneFrame) {
-    const cooling = stage === 'cooling';
-    const rearranging = stage === 'rearrangement';
-    const gates = stage === 'gates';
-    const controlledPhase = gates && activeQubits.length === 2;
-    // Equal screen-time thirds describe the sequence, not the laboratory timing.
-    const blockade = controlledPhase && czOpticalPhase(gateProgress) === 'blockade';
-    const raman = (gates && activeQubits.length === 1) || (stage === 'analysis' && activeQubits.length > 0);
-    const readout = stage === 'readout';
-    const probing = readout && atoms.some(atom => atom.bright !== undefined);
-    const preparing = stage === 'preparation' && activeQubits.length > 0;
-    const pulse = completed ? 1 : 0.6 + 0.4 * Math.sin(progress * Math.PI);
-    let science = 0;
-    if (representativeReady) {
-      if (stage === 'transfer') science = progress;
-      if (gates || stage === 'analysis') science = 1;
-      if (stage === 'return') science = 1 - progress;
-    }
-
-    const trapPower = cooling ? 0.1 : 0.83;
-    this.setPath(this.pathReservoir, trapPower * (1 - science));
-    this.setPath(this.pathScience, trapPower * science);
-    this.setPath(this.pathTransport, rearranging && atoms.some(atom => atom.moving) ? pulse : 0.045);
-    this.setPath(this.pathObjective, trapPower);
-    this.pathObjective.core.color.copy(reservoirColor).lerp(scienceColor, science);
+  update(frame: MachineSceneFrame) {
+    const { atoms, activeQubits, strengths, scienceWeight, readout, raman, blockade, transport, collecting, occupancyExposure } = frame;
+    const { rows, columns, registerRow } = this.profile.array;
+    const { arrayY, arrayPitch: pitch, paths } = this.profile.scene;
+    this.setPath(this.pathReservoir, strengths.reservoir);
+    this.setPath(this.pathScience, strengths.science);
+    this.setPath(this.pathTransport, strengths.transport);
+    this.setPath(this.pathObjective, strengths.objective);
+    this.pathObjective.core.color.copy(this.reservoirColor).lerp(this.scienceColor, scienceWeight);
     this.pathObjective.line.color.copy(this.pathObjective.core.color);
     this.pathObjective.envelope.color.copy(this.pathObjective.core.color);
     this.trapFan.material.color.copy(this.pathObjective.core.color);
-    this.trapFan.material.opacity = cooling ? 0.045 : 0.18;
-    this.setPath(this.pathClock, controlledPhase && !blockade ? pulse : 0.07);
-    this.setPath(this.pathRydberg, blockade ? pulse : 0.07);
-    this.setPath(this.pathProbe, probing ? pulse : preparing ? 0.48 : 0.06);
-    for (const path of this.pathCooling) this.setPath(path, cooling ? pulse : 0.0);
-    this.gridGlow.material.opacity = cooling ? 0.12 : 0.30;
+    this.trapFan.material.opacity = strengths.trapFan;
+    this.setPath(this.pathClock, strengths.clock);
+    this.setPath(this.pathRydberg, strengths.rydberg);
+    this.setPath(this.pathProbe, strengths.probe);
+    for (const path of this.pathCooling) this.setPath(path, strengths.cooling);
+    this.gridGlow.material.opacity = strengths.grid;
 
     let movingPosition: T.Vector3 | undefined;
     const addressed: T.Vector3[] = [];
@@ -514,34 +480,35 @@ export class QuantumMachineRenderer {
       atom.visible = halo.visible = Boolean(data);
       qubitRing.visible = data?.qubit !== undefined && activeQubits.includes(data.qubit);
       if (!data) return;
-      const x = (data.column - (this.columns - 1) / 2) * pitch;
-      const z = (data.row - (this.rows - 1) / 2) * pitch;
+      const x = (data.column - (columns - 1) / 2) * pitch;
+      const z = (data.row - (rows - 1) / 2) * pitch;
+      const occupancyLit = occupancyExposure && Math.abs(data.row - registerRow) < 0.001;
       atom.position.set(x, arrayY, z);
       halo.position.copy(atom.position);
       qubitRing.position.set(x, arrayY - 0.044, z);
-      const color = data.bright === true ? colors.bright : data.bright === false ? colors.dark
-        : data.moving ? colors.transport : qubitRing.visible && !readout ? colors.qubit : colors.atom;
+      const color = data.bright === true || occupancyLit ? colors.bright : data.bright === false ? colors.dark
+        : data.moving ? paths.transport.color : qubitRing.visible && !readout ? colors.qubit : colors.atom;
       atom.material.color.set(color);
       atom.scale.setScalar(data.bright === false ? 0.82 : qubitRing.visible || data.moving ? 1.29 : 1.0);
       halo.material.color.set(color);
       halo.material.opacity = data.bright === false ? 0.20 : qubitRing.visible || data.moving ? 0.9 : 0.66;
       if (qubitRing.visible) addressed.push(atom.position);
-      if (data.bright) fluorescing.push(atom.position);
+      if (data.bright || occupancyLit) fluorescing.push(atom.position);
       if (data.moving) movingPosition = atom.position;
     });
-    this.transportFocus.visible = rearranging && Boolean(movingPosition);
-    if (movingPosition) steerBeam(this.transportFocus, delivery, movingPosition);
+    this.transportFocus.visible = transport && Boolean(movingPosition);
+    if (movingPosition) steerBeam(this.transportFocus, this.delivery, movingPosition);
 
     this.ramanFocus.forEach((beam, index) => {
       beam.visible = raman && Boolean(addressed[index]);
-      if (beam.visible) steerBeam(beam, delivery, addressed[index]);
+      if (beam.visible) steerBeam(beam, this.delivery, addressed[index]);
     });
-    this.collectionCone.visible = probing && fluorescing.length > 0;
+    this.collectionCone.visible = collecting && fluorescing.length > 0;
     if (this.collectionCone.visible) {
       const source = this.projected.set(0, 0, 0);
       for (const atom of fluorescing) source.add(atom);
       source.divideScalar(fluorescing.length);
-      steerBeam(this.collectionCone, source, collection);
+      steerBeam(this.collectionCone, source, this.collection);
     }
 
     const activeAtoms = blockade ? addressed : [];
@@ -554,6 +521,7 @@ export class QuantumMachineRenderer {
     }
     positions.needsUpdate = true;
     this.interactionLink.geometry.setDrawRange(0, Math.max(0, activeAtoms.length - 1) * 2);
+    this.pendingFrame = frame;
     this.invalidate();
   }
 
@@ -585,12 +553,34 @@ export class QuantumMachineRenderer {
     this.drawFrame = 0;
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
+    if (this.pendingFrame) {
+      const { stage, activePath, fluorescence, occupancy, occupancyPhase, movingAtom, skipped } = this.pendingFrame;
+      const { dataset } = this.renderer.domElement;
+      dataset.stage = stage;
+      if (activePath?.id) dataset.activePath = activePath.id;
+      else delete dataset.activePath;
+      if (fluorescence !== null) dataset.fluorescence = fluorescence;
+      else delete dataset.fluorescence;
+      if (occupancy !== null) dataset.occupancy = occupancy;
+      else delete dataset.occupancy;
+      if (occupancyPhase !== null) dataset.occupancyPhase = occupancyPhase;
+      else delete dataset.occupancyPhase;
+      if (movingAtom !== null) dataset.movingAtom = movingAtom;
+      else delete dataset.movingAtom;
+      if (skipped) dataset.stageSkipped = 'true';
+      else delete dataset.stageSkipped;
+      dataset.atomLayout = this.pendingFrame.atoms.map((atom, index) => {
+        const { x, y, z } = this.atomSlots[index].atom.position;
+        return `${atom.id}:${x.toFixed(4)},${y.toFixed(4)},${z.toFixed(4)}`;
+      }).join(';');
+      this.pendingFrame = null;
+    }
     if (this.view !== 'machine') return;
     const { clientWidth: width, clientHeight: height } = this.host;
-    for (const [name, position] of Object.entries(labelPositions)) {
-      const label = this.labels[name];
+    for (const { id, position } of this.profile.scene.labels) {
+      const label = this.labels[id];
       if (!label) continue;
-      this.projected.copy(position).project(this.camera);
+      this.projected.set(...position).project(this.camera);
       const x = (this.projected.x / 2 + 0.5) * width;
       const y = (0.5 - this.projected.y / 2) * height;
       const visible = x >= 27 && x <= width - 27 && y >= 25 && y <= height - 27;

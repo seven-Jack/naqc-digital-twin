@@ -1,0 +1,52 @@
+{
+  "experiment": "Kim Exp34, 87Rb",
+  "evidence": "spot check using five sites of the already archived MAT counts",
+  "source": {
+    "name": "Exp34.mat",
+    "doi": "10.6084/m9.figshare.23828004.v1",
+    "sha256": "448c8e6a025390bcc4d43deb434e656dc4c055862e59d85927c87f39888c05f1"
+  },
+  "rule": "70 uniform bins on [mean-45, mean+75], first minimum among 1-based bins 10 through 25",
+  "sites": [
+    {
+      "site_1based": 1,
+      "archived_count_values": 6958,
+      "selected_bin": 25,
+      "candidate_threshold_counts": 555.3302903133084,
+      "archived_threshold_counts": 555.3302903133076,
+      "difference_counts": 7.958078640513122e-13
+    },
+    {
+      "site_1based": 2,
+      "archived_count_values": 6958,
+      "selected_bin": 25,
+      "candidate_threshold_counts": 554.7269847657373,
+      "archived_threshold_counts": 554.7269847657376,
+      "difference_counts": -3.410605131648481e-13
+    },
+    {
+      "site_1based": 3,
+      "archived_count_values": 6958,
+      "selected_bin": 25,
+      "candidate_threshold_counts": 558.1611842483471,
+      "archived_threshold_counts": 558.1611842483461,
+      "difference_counts": 1.0231815394945443e-12
+    },
+    {
+      "site_1based": 12,
+      "archived_count_values": 6958,
+      "selected_bin": 24,
+      "candidate_threshold_counts": 558.654348950848,
+      "archived_threshold_counts": 558.6543489508482,
+      "difference_counts": -2.2737367544323206e-13
+    },
+    {
+      "site_1based": 198,
+      "archived_count_values": 6958,
+      "selected_bin": 25,
+      "candidate_threshold_counts": 560.4900891060649,
+      "archived_threshold_counts": 560.4900891060663,
+      "difference_counts": -1.3642420526593924e-12
+    }
+  ]
+}

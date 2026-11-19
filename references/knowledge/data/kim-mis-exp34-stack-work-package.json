@@ -1,0 +1,97 @@
+{
+  "experiment": "Kim Exp34, 87Rb",
+  "evidence_scope": "cross-apparatus comparison",
+  "public_tiff_doi": "10.25452/figshare.plus.24523198.v1",
+  "status": "taiyi_completed_and_verified",
+  "execution_host": "taiyi",
+  "execution_directory": "/home/HXLIU/Exp34/20261119T033716Z",
+  "runtime": {
+    "python": "3.11+",
+    "required_packages": [
+      "numpy",
+      "scipy",
+      "Pillow"
+    ]
+  },
+  "proposed_limits": {
+    "workers": 1,
+    "cpu": 1,
+    "ram_gib": 4,
+    "working_disk_available_gib": 6,
+    "thread_variables": 1
+  },
+  "tiff_inputs": [
+    {
+      "name": "Exp34_X1.tif",
+      "public_url": "https://ndownloader.figshare.com/files/43077082",
+      "figshare_file_id": 43077082,
+      "bytes": 1640260430,
+      "figshare_md5": "3b7ef98e35cc318232fbbb0934aafcdb",
+      "inferred_global_pages_1based": [
+        1,
+        5001
+      ],
+      "expected_tiff_pages": 5001
+    },
+    {
+      "name": "Exp34_X2.tif",
+      "public_url": "https://ndownloader.figshare.com/files/43097950",
+      "figshare_file_id": 43097950,
+      "bytes": 459508780,
+      "figshare_md5": "c143e77a5ce2c63233fbc7ca5d1ad21d",
+      "inferred_global_pages_1based": [
+        5002,
+        6402
+      ],
+      "expected_tiff_pages": 1401
+    },
+    {
+      "name": "Exp34_X3.tif",
+      "public_url": "https://ndownloader.figshare.com/files/43097944",
+      "figshare_file_id": 43097944,
+      "bytes": 182363026,
+      "figshare_md5": "7f3a634d2276524693b4275c561680cd",
+      "inferred_global_pages_1based": [
+        6403,
+        6958
+      ],
+      "expected_tiff_pages": 556
+    }
+  ],
+  "staged_local_files": [
+    {
+      "path": "scripts/reproduce-kim-mis-exp34-stack.py",
+      "bytes": 12233,
+      "sha256": "3feb3409639e3ca1a1382d439e17465d3275b8b1f39248b04cadf1e226593f6a"
+    },
+    {
+      "path": "references/library/neutral-atoms/kim-mis-figshare-v1/Exp34.mat",
+      "bytes": 4214819,
+      "sha256": "448c8e6a025390bcc4d43deb434e656dc4c055862e59d85927c87f39888c05f1"
+    },
+    {
+      "path": "references/library/neutral-atoms/kim-mis-figshare-v1/xxyy_init.mat",
+      "bytes": 652,
+      "sha256": "b38ad03e0d8b29c146a709c089c46a5af01d74d10531a214c3328ad8641e8494"
+    },
+    {
+      "path": "references/knowledge/data/kim-mis-exp34-tiff-audit.json",
+      "bytes": 4641,
+      "sha256": "0544788530e5eb0f37ae09cf0fcf41ad668dcfdb72d673c2c7d0a0cbac8e8d6e"
+    }
+  ],
+  "record": {
+    "rounds": 3479,
+    "sites": 198,
+    "expected_site_frames": 1377684
+  },
+  "expected_outputs": [
+    "summary.json",
+    "site-comparison.csv",
+    "frame-comparison.csv.gz",
+    "histograms.json"
+  ],
+  "compute_unit": "exp34-reproduce-20261119t033716z.service",
+  "returned_directory": "references/library/neutral-atoms/kim-mis-figshare-v1/exp34-taiyi-20261119T033716Z",
+  "return_bundle_sha256": "9b19e2d6fdcd4d143a52185821416e5c7f424f340d22dba11da9fca746bded75"
+}

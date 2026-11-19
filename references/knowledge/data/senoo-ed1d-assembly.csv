@@ -1,0 +1,16 @@
+target_sites_over_loading_sites,initial_loading_probability,initial_loading_yerr,full_array_success_probability,full_array_yerr,initial_source,array_source
+0.125,0.89156,0.00194,0.738,0.019,ExtendedDataFig1d_load!B2:B4,ExtendedDataFig1d_Rate!B2:B4
+0.15625,0.89629,0.00191,0.728,0.023,ExtendedDataFig1d_load!C2:C4,ExtendedDataFig1d_Rate!C2:C4
+0.1875,0.90023,0.00187,0.655,0.022,ExtendedDataFig1d_load!D2:D4,ExtendedDataFig1d_Rate!D2:D4
+0.25,0.89211,0.00194,0.668,0.029,ExtendedDataFig1d_load!E2:E4,ExtendedDataFig1d_Rate!E2:E4
+0.3125,0.88973,0.00196,0.55,0.02,ExtendedDataFig1d_load!F2:F4,ExtendedDataFig1d_Rate!F2:F4
+0.375,0.89191,0.00194,0.498,0.023,ExtendedDataFig1d_load!G2:G4,ExtendedDataFig1d_Rate!G2:G4
+0.4375,0.89734,0.0019,0.518,0.029,ExtendedDataFig1d_load!H2:H4,ExtendedDataFig1d_Rate!H2:H4
+0.5,0.88445,0.002,0.55,0.03,ExtendedDataFig1d_load!I2:I4,ExtendedDataFig1d_Rate!I2:I4
+0.5625,0.90572,0.00129,0.487,0.017,ExtendedDataFig1d_load!J2:J4,ExtendedDataFig1d_Rate!J2:J4
+0.625,0.8884,0.00139,0.489,0.016,ExtendedDataFig1d_load!K2:K4,ExtendedDataFig1d_Rate!K2:K4
+0.6875,0.90062,0.00187,0.515,0.025,ExtendedDataFig1d_load!L2:L4,ExtendedDataFig1d_Rate!L2:L4
+0.75,0.89562,0.00191,0.382,0.023,ExtendedDataFig1d_load!M2:M4,ExtendedDataFig1d_Rate!M2:M4
+0.8125,0.87523,0.00207,0.308,0.02,ExtendedDataFig1d_load!N2:N4,ExtendedDataFig1d_Rate!N2:N4
+0.84375,0.88035,0.00203,0.22,0.022,ExtendedDataFig1d_load!O2:O4,ExtendedDataFig1d_Rate!O2:O4
+0.875,0.88641,0.00198,0.185,0.017,ExtendedDataFig1d_load!P2:P4,ExtendedDataFig1d_Rate!P2:P4

@@ -1,0 +1,39 @@
+.str-panel { margin-block: 16px; min-width: 0; }
+.str-panel .md-panel-header > span { color: #efd294; font-size: 11px; }
+.str-content { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 12px; }
+.str-content > .md-controls, .str-meta { display: flex; flex-wrap: wrap; gap: 8px 12px; }
+.str-meta { align-items: center; justify-content: space-between; color: var(--md-muted); }
+.str-meta p, .str-facts dd, .str-moves li { overflow-wrap: anywhere; }
+.str-meta select {
+  max-width: min(250px, 65vw); padding: 4px 7px; border: 1px solid var(--md-line); border-radius: 5px;
+  color: var(--md-ink); background: #0b1622; font: 12px var(--mono);
+}
+.str-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(230px, 2fr); gap: 12px; }
+.str-axis, .str-observed { display: grid; gap: 8px; min-width: 0; }
+.str-axis { padding-block: 8px; }
+.str-axis > div:first-child { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.str-axis output { color: var(--md-mint); font-family: var(--mono); }
+.str-axis input { width: 100%; accent-color: var(--md-mint); }
+.str-observed { align-content: start; }
+.str-summary, .str-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.str-summary { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.str-facts > div, .str-scroll, .str-sources, .str-moves li {
+  min-width: 0; border: 1px solid var(--md-line); border-radius: 6px; background: #0b1622;
+}
+.str-facts > div, .str-sources, .str-moves li { padding: 7px 8px; }
+.str-facts dt, .str-facts small, .str-table small, .str-sources summary, .str-moves span { color: var(--md-muted); }
+.str-facts dd { padding-top: 3px; color: var(--md-ink); font-variant-numeric: tabular-nums; }
+.str-scroll { max-height: 280px; overflow: auto; }
+.str-table { width: 100%; border-collapse: collapse; text-align: left; }
+.str-table :is(th, td) { padding: 6px; border-bottom: 1px solid var(--md-line); overflow-wrap: anywhere; }
+.str-table small { display: inline-block; padding-inline-start: 5px; }
+.str-table tr[data-state="occupied"] td:first-of-type { color: var(--md-mint); }
+.str-moves { display: grid; gap: 5px; list-style: none; padding: 0; }
+.str-moves span { display: block; }
+.str-sources[open] > dl { margin-top: 8px; }
+.str-sources summary { cursor: pointer; }
+@media (max-width: 720px) {
+  .str-layout { grid-template-columns: minmax(0, 1fr); }
+  .str-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .str-content { padding: 9px; }
+}

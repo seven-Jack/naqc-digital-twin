@@ -1,0 +1,2513 @@
+{
+  "evidence": "Cross-apparatus, 88Sr Knottnerus S23/P1, 813 nm tweezers; Senoo CAL/VAL deferred.",
+  "method": "Strict >6436; half-open raw P1 rectangles. Fixed sum uses exactly the previous zero-offset 3 x 3 window.",
+  "scope": "6436 is a candidate online threshold. Algorithm agreement is measured against instrument Pic1/Pic2.",
+  "groups": {
+    "all": {
+      "shots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "rounds": 100,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 1510,
+            "d": 3600
+          },
+          "final_occupied": {
+            "n": 626,
+            "d": 3600
+          },
+          "final_target_occupied": {
+            "n": 626,
+            "d": 1600
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 100
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 1529,
+            "d": 3600
+          },
+          "final_occupied": {
+            "n": 633,
+            "d": 3600
+          },
+          "final_target_occupied": {
+            "n": 630,
+            "d": 1600
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 100
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 1511,
+            "d": 3600
+          },
+          "final_occupied": {
+            "n": 626,
+            "d": 3600
+          },
+          "final_target_occupied": {
+            "n": 626,
+            "d": 1600
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 100
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 7200,
+          "before": 26,
+          "after": 1,
+          "resolved": 25,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 25,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 26,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 3600,
+          "before": 19,
+          "after": 1,
+          "resolved": 18,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 18,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 19,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 3600,
+          "before": 7,
+          "after": 0,
+          "resolved": 7,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 7,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 7,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 1600,
+          "before": 4,
+          "after": 0,
+          "resolved": 4,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 4,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 4,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "log_ge16": {
+      "shots": [
+        2,
+        4,
+        6,
+        7,
+        8,
+        11,
+        14,
+        15,
+        18,
+        21,
+        22,
+        23,
+        26,
+        28,
+        36,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        50,
+        52,
+        54,
+        57,
+        58,
+        60,
+        61,
+        68,
+        69,
+        70,
+        72,
+        82,
+        84,
+        85,
+        88,
+        90,
+        91,
+        97,
+        98
+      ],
+      "rounds": 40,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 727,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 736,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 626,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 728,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 2880,
+          "before": 11,
+          "after": 1,
+          "resolved": 10,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 10,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 11,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 1440,
+          "before": 9,
+          "after": 1,
+          "resolved": 8,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 8,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 9,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 1440,
+          "before": 2,
+          "after": 0,
+          "resolved": 2,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 2,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 2,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 640,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "log_lt16": {
+      "shots": [
+        1,
+        3,
+        5,
+        9,
+        10,
+        12,
+        13,
+        16,
+        17,
+        19,
+        20,
+        24,
+        25,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        40,
+        41,
+        48,
+        49,
+        51,
+        53,
+        55,
+        56,
+        59,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        71,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        83,
+        86,
+        87,
+        89,
+        92,
+        93,
+        94,
+        95,
+        96,
+        99,
+        100
+      ],
+      "rounds": 60,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 783,
+            "d": 2160
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2160
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 960
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 60
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 793,
+            "d": 2160
+          },
+          "final_occupied": {
+            "n": 7,
+            "d": 2160
+          },
+          "final_target_occupied": {
+            "n": 6,
+            "d": 960
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 60
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 783,
+            "d": 2160
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2160
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 960
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 60
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 4320,
+          "before": 15,
+          "after": 0,
+          "resolved": 15,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 15,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 15,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 2160,
+          "before": 10,
+          "after": 0,
+          "resolved": 10,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 10,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 10,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 2160,
+          "before": 5,
+          "after": 0,
+          "resolved": 5,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 5,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 5,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 960,
+          "before": 4,
+          "after": 0,
+          "resolved": 4,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 4,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 4,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "max_ge16": {
+      "shots": [
+        2,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11,
+        14,
+        15,
+        18,
+        21,
+        22,
+        23,
+        26,
+        28,
+        36,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        50,
+        52,
+        54,
+        57,
+        58,
+        60,
+        61,
+        68,
+        69,
+        70,
+        72,
+        82,
+        83,
+        84,
+        85,
+        88,
+        90,
+        91,
+        93,
+        96,
+        97,
+        98
+      ],
+      "rounds": 44,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 787,
+            "d": 1584
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1584
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 704
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 44
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 800,
+            "d": 1584
+          },
+          "final_occupied": {
+            "n": 626,
+            "d": 1584
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 704
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 44
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 788,
+            "d": 1584
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1584
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 704
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 44
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 3168,
+          "before": 15,
+          "after": 1,
+          "resolved": 14,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 14,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 15,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 1584,
+          "before": 13,
+          "after": 1,
+          "resolved": 12,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 12,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 13,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 1584,
+          "before": 2,
+          "after": 0,
+          "resolved": 2,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 2,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 2,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 704,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "max_lt16": {
+      "shots": [
+        1,
+        3,
+        5,
+        10,
+        12,
+        13,
+        16,
+        17,
+        19,
+        20,
+        24,
+        25,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        40,
+        41,
+        48,
+        49,
+        51,
+        53,
+        55,
+        56,
+        59,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        71,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        86,
+        87,
+        89,
+        92,
+        94,
+        95,
+        99,
+        100
+      ],
+      "rounds": 56,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 723,
+            "d": 2016
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2016
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 896
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 56
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 729,
+            "d": 2016
+          },
+          "final_occupied": {
+            "n": 7,
+            "d": 2016
+          },
+          "final_target_occupied": {
+            "n": 6,
+            "d": 896
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 56
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 723,
+            "d": 2016
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2016
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 896
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 56
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 4032,
+          "before": 11,
+          "after": 0,
+          "resolved": 11,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 11,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 11,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 2016,
+          "before": 6,
+          "after": 0,
+          "resolved": 6,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 6,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 6,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 2016,
+          "before": 5,
+          "after": 0,
+          "resolved": 5,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 5,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 5,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 896,
+          "before": 4,
+          "after": 0,
+          "resolved": 4,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 4,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 4,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "fixed_ge16": {
+      "shots": [
+        2,
+        4,
+        6,
+        7,
+        8,
+        11,
+        14,
+        15,
+        18,
+        21,
+        22,
+        23,
+        26,
+        28,
+        36,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        50,
+        52,
+        54,
+        57,
+        58,
+        60,
+        61,
+        68,
+        69,
+        70,
+        72,
+        82,
+        84,
+        85,
+        88,
+        90,
+        91,
+        97,
+        98
+      ],
+      "rounds": 40,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 727,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 736,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 626,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 728,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 2880,
+          "before": 11,
+          "after": 1,
+          "resolved": 10,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 10,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 11,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 1440,
+          "before": 9,
+          "after": 1,
+          "resolved": 8,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 8,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 9,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 1440,
+          "before": 2,
+          "after": 0,
+          "resolved": 2,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 2,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 2,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 640,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "fixed_lt16": {
+      "shots": [
+        1,
+        3,
+        5,
+        9,
+        10,
+        12,
+        13,
+        16,
+        17,
+        19,
+        20,
+        24,
+        25,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        40,
+        41,
+        48,
+        49,
+        51,
+        53,
+        55,
+        56,
+        59,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        71,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        83,
+        86,
+        87,
+        89,
+        92,
+        93,
+        94,
+        95,
+        96,
+        99,
+        100
+      ],
+      "rounds": 60,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 783,
+            "d": 2160
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2160
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 960
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 60
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 793,
+            "d": 2160
+          },
+          "final_occupied": {
+            "n": 7,
+            "d": 2160
+          },
+          "final_target_occupied": {
+            "n": 6,
+            "d": 960
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 60
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 783,
+            "d": 2160
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2160
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 960
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 60
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 4320,
+          "before": 15,
+          "after": 0,
+          "resolved": 15,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 15,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 15,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 2160,
+          "before": 10,
+          "after": 0,
+          "resolved": 10,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 10,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 10,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 2160,
+          "before": 5,
+          "after": 0,
+          "resolved": 5,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 5,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 5,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 960,
+          "before": 4,
+          "after": 0,
+          "resolved": 4,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 4,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 4,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "both_ge16": {
+      "shots": [
+        2,
+        4,
+        6,
+        7,
+        8,
+        11,
+        14,
+        15,
+        18,
+        21,
+        22,
+        23,
+        26,
+        28,
+        36,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        50,
+        52,
+        54,
+        57,
+        58,
+        60,
+        61,
+        68,
+        69,
+        70,
+        72,
+        82,
+        84,
+        85,
+        88,
+        90,
+        91,
+        97,
+        98
+      ],
+      "rounds": 40,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 727,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 736,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 626,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 728,
+            "d": 1440
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1440
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 640
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 40
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 2880,
+          "before": 11,
+          "after": 1,
+          "resolved": 10,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 10,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 11,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 1440,
+          "before": 9,
+          "after": 1,
+          "resolved": 8,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 8,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 9,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 1440,
+          "before": 2,
+          "after": 0,
+          "resolved": 2,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 2,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 2,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 640,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "either_ge16": {
+      "shots": [
+        2,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11,
+        14,
+        15,
+        18,
+        21,
+        22,
+        23,
+        26,
+        28,
+        36,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        50,
+        52,
+        54,
+        57,
+        58,
+        60,
+        61,
+        68,
+        69,
+        70,
+        72,
+        82,
+        83,
+        84,
+        85,
+        88,
+        90,
+        91,
+        93,
+        96,
+        97,
+        98
+      ],
+      "rounds": 44,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 787,
+            "d": 1584
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1584
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 704
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 44
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 800,
+            "d": 1584
+          },
+          "final_occupied": {
+            "n": 626,
+            "d": 1584
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 704
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 44
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 788,
+            "d": 1584
+          },
+          "final_occupied": {
+            "n": 624,
+            "d": 1584
+          },
+          "final_target_occupied": {
+            "n": 624,
+            "d": 704
+          },
+          "full_target_rounds": {
+            "n": 26,
+            "d": 44
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 3168,
+          "before": 15,
+          "after": 1,
+          "resolved": 14,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 14,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 15,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 1584,
+          "before": 13,
+          "after": 1,
+          "resolved": 12,
+          "persistent": 1,
+          "introduced": 0,
+          "net_reduction": 12,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 13,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 1,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 1584,
+          "before": 2,
+          "after": 0,
+          "resolved": 2,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 2,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 2,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 704,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "entered": {
+      "shots": [],
+      "rounds": 0,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "exited": {
+      "shots": [
+        9,
+        83,
+        93,
+        96
+      ],
+      "rounds": 4,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 60,
+            "d": 144
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 144
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 64
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 4
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 64,
+            "d": 144
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 144
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 64
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 4
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 60,
+            "d": 144
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 144
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 64
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 4
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 288,
+          "before": 4,
+          "after": 0,
+          "resolved": 4,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 4,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 4,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 144,
+          "before": 4,
+          "after": 0,
+          "resolved": 4,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 4,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 4,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 144,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 64,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "neither_ge16": {
+      "shots": [
+        1,
+        3,
+        5,
+        10,
+        12,
+        13,
+        16,
+        17,
+        19,
+        20,
+        24,
+        25,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        40,
+        41,
+        48,
+        49,
+        51,
+        53,
+        55,
+        56,
+        59,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        71,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        86,
+        87,
+        89,
+        92,
+        94,
+        95,
+        99,
+        100
+      ],
+      "rounds": 56,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 723,
+            "d": 2016
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2016
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 896
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 56
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 729,
+            "d": 2016
+          },
+          "final_occupied": {
+            "n": 7,
+            "d": 2016
+          },
+          "final_target_occupied": {
+            "n": 6,
+            "d": 896
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 56
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 723,
+            "d": 2016
+          },
+          "final_occupied": {
+            "n": 2,
+            "d": 2016
+          },
+          "final_target_occupied": {
+            "n": 2,
+            "d": 896
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 56
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 4032,
+          "before": 11,
+          "after": 0,
+          "resolved": 11,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 11,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 11,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 2016,
+          "before": 6,
+          "after": 0,
+          "resolved": 6,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 6,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 6,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 2016,
+          "before": 5,
+          "after": 0,
+          "resolved": 5,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 5,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 5,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 896,
+          "before": 4,
+          "after": 0,
+          "resolved": 4,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 4,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 4,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "fixed_only_vs_log": {
+      "shots": [],
+      "rounds": 0,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    },
+    "log_only_vs_fixed": {
+      "shots": [],
+      "rounds": 0,
+      "counts": {
+        "log_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        },
+        "max_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        },
+        "fixed_bit": {
+          "initial_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "final_target_occupied": {
+            "n": 0,
+            "d": 0
+          },
+          "full_target_rounds": {
+            "n": 0,
+            "d": 0
+          }
+        }
+      },
+      "differences": {
+        "all_site_frames": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic1": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        },
+        "pic2_targets": {
+          "denominator": 0,
+          "before": 0,
+          "after": 0,
+          "resolved": 0,
+          "persistent": 0,
+          "introduced": 0,
+          "net_reduction": 0,
+          "direction": {
+            "max_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            },
+            "fixed_bit": {
+              "log0_result1": 0,
+              "log1_result0": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "equal_to_6436": {
+    "fixed_counts": [],
+    "max_counts": []
+  },
+  "input_sha256": {
+    "archive": "f1ec1a3b781e8efac994835f71579b3b0d76bb824a8755b7530934d757556af0",
+    "run": "c255745518bc30ceb181e202f2293dc0b5d7e6defe349c6584cd32632e3e078c",
+    "manifest": "b6ee5fe08ba1203c148b1a8d529355cb9e28295b88d9330aa87dc96c3e2d5415",
+    "prior_sites": "97d0a7d6397bdfdec58dd5084e5508475f1c99b829b83a39086b5f3c62882ceb",
+    "worker": "b2f741940d292ad22009822664e702d410a2e1cf721c87196bcea451a269b1b2",
+    "original_public_zip": "16ba89851ae045172fb1e8139623128d0780ef348b2437f2c1e0fd8541b84802",
+    "roi_file": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+    "params_file": "478e3898c4f9c59010d5566bb382ef19645274abf9ccf7cb26564badd7e5f32a"
+  },
+  "output_sha256": {
+    "rounds.csv": "a3944718faeb53837cae2b4895f9333f1bfe17bb278d3cec3ce9f56ee97379f0",
+    "differences.csv": "323de878b7a4b6ca70d4fa684ed40a3abb31b4f90238387cb267e98f3fbc5169",
+    "sites.csv.gz": "4205b16283cd53a2c17c2efaa44e2445990e35ff6ed35140afaee95c7dcc163d"
+  }
+}

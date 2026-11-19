@@ -1,55 +1,30 @@
 import { Box, Crosshair, RotateCcw } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
-import { czOpticalPhase, QuantumMachineRenderer, type MachineView, type SceneFrame } from './QuantumMachineRenderer';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { MachineProfile } from '../data/machineProfile';
+import type { MachineFrame } from '../physics/quantumComputer';
+import { projectMachineScene } from './machineSceneFrame';
+import { QuantumMachineRenderer, type MachineView } from './QuantumMachineRenderer';
 import './quantum-scene.css';
 
-interface Props extends SceneFrame {
-  rows: number;
-  columns: number;
+interface Props {
+  profile: MachineProfile;
+  frame: MachineFrame;
 }
 
-const labels = [
-  { type: 'slm', text: 'SLM 固定光镊', color: 'tweezer' },
-  { type: 'aod', text: 'AOD 搬运光镊', color: 'transport' },
-  { type: 'vacuum', text: '真空腔', color: 'vacuum' },
-  { type: 'imaging', text: '荧光收集物镜', color: 'imaging' },
-  { type: 'gate', text: '门与探测激光', color: 'gate' },
-] as const;
-
-function activePath({ stage, atoms, activeQubits = [], gateProgress, representativeReady = true }: SceneFrame) {
-  switch (stage) {
-    case 'cooling': return { color: 'cooling', label: '磁光阱冷却' };
-    case 'loading': return { color: 'tweezer', label: '483 nm 储备光镊' };
-    case 'rearrangement': return atoms.some(atom => atom.moving) ? { color: 'transport', label: '483 nm AOD 搬运' } : null;
-    case 'preparation': return activeQubits.length ? { color: 'imaging', label: '556 nm 光抽运' } : null;
-    case 'transfer': return representativeReady ? { color: 'science', label: '483 → 460 nm 光镊交接' } : null;
-    case 'gates': {
-      if (activeQubits.length === 1) return { color: 'raman', label: '局域 Raman 旋转' };
-      if (activeQubits.length !== 2) return null;
-      const phase = czOpticalPhase(gateProgress);
-      if (phase === 'blockade') return { color: 'gate', label: '302 nm · Rydberg 条件相位' };
-      return { color: 'clock', label: phase === 'shelve' ? '578 nm · 转入钟态' : '578 nm · 返回基态' };
-    }
-    case 'analysis': return activeQubits.length ? { color: 'raman', label: '局域 Raman 分析旋转' } : null;
-    case 'return': return representativeReady ? { color: 'tweezer', label: '460 → 483 nm 光镊交接' } : null;
-    case 'readout': return atoms.some(atom => atom.bright !== undefined)
-      ? { color: 'imaging', label: '556 nm σ− 探测 · |0⟩ 亮、|1⟩ 暗' } : null;
-    default: return null;
-  }
-}
-
-export function QuantumComputerScene({ rows, columns, stage, atoms, progress, completed, activeQubits,
-  gateProgress, representativeReady }: Props) {
+export function QuantumComputerScene({ profile, frame }: Props) {
   const host = useRef<HTMLDivElement>(null);
   const renderer = useRef<QuantumMachineRenderer | null>(null);
   const [view, setView] = useState<MachineView>('machine');
   const [failed, setFailed] = useState(false);
   const labelsRef = useRef<Record<string, HTMLSpanElement | null>>({});
+  const projection = useMemo(() => projectMachineScene(frame, profile), [frame, profile]);
+  const { stage, atoms, activePath } = projection;
+  const { rows, columns } = profile.array;
 
   useEffect(() => {
     setFailed(false);
     try {
-      renderer.current = new QuantumMachineRenderer(host.current!, rows, columns, labelsRef.current);
+      renderer.current = new QuantumMachineRenderer(host.current!, profile, labelsRef.current);
     } catch {
       setFailed(true);
     }
@@ -57,15 +32,16 @@ export function QuantumComputerScene({ rows, columns, stage, atoms, progress, co
       renderer.current?.dispose();
       renderer.current = null;
     };
-  }, [rows, columns]);
+  }, [profile]);
 
-  useEffect(() => renderer.current?.setView(view), [view, rows, columns]);
-  useEffect(() => renderer.current?.update({ stage, atoms, progress, completed, activeQubits, gateProgress, representativeReady }),
-    [stage, atoms, progress, completed, activeQubits, gateProgress, representativeReady, rows, columns]);
+  useEffect(() => renderer.current?.setView(view), [view, profile]);
+  useEffect(() => renderer.current?.update(projection), [projection]);
 
-  const path = activePath({ stage, atoms, activeQubits, gateProgress, representativeReady });
-
-  return <div className="qc-scene" data-testid="quantum-scene" data-view={view} aria-label="整机三维光路演示">
+  return <div className="qc-scene" data-testid="quantum-scene" data-view={view} data-stage={stage}
+    data-active-path={activePath?.id} data-occupancy={projection.occupancy ?? undefined}
+    data-occupancy-phase={projection.occupancyPhase ?? undefined}
+    data-moving-atom={projection.movingAtom ?? undefined} data-stage-skipped={projection.skipped || undefined}
+    aria-label="整机三维光路演示">
     <div className="qc-scene-canvas" ref={host} />
     {failed ? <div className="qc-scene-fallback" data-testid="quantum-scene-fallback">
       <p>WebGL 不可用，显示二维阵列</p>
@@ -73,15 +49,16 @@ export function QuantumComputerScene({ rows, columns, stage, atoms, progress, co
         role="img" aria-label={`${rows} 行 ${columns} 列，${atoms.length} 个原子`}>
         {Array.from({ length: rows * columns }, (_, index) => {
           const atom = atoms.find(atom => Math.round(atom.row) === Math.floor(index / columns) && Math.round(atom.column) === index % columns);
-          const state = atom ? atom.moving ? 'moving' : atom.bright === false ? 'dark' : atom.bright ? 'bright'
+          const occupancyLit = projection.occupancyExposure && atom && Math.abs(atom.row - profile.array.registerRow) < 0.001;
+          const state = atom ? atom.moving ? 'moving' : occupancyLit ? 'bright' : atom.bright === false ? 'dark' : atom.bright ? 'bright'
             : atom.qubit === undefined ? 'atom' : 'qubit' : 'empty';
           return <span key={index} data-state={state} />;
         })}
       </div>
     </div> : <>
       <div className="qc-scene-labels" aria-hidden="true">
-        {labels.map(({ type, text, color }) => <span className="qc-scene-label" key={type} data-color={color}
-          ref={element => { labelsRef.current[type] = element; }}><i />{text}</span>)}
+        {profile.scene.labels.map(({ id, text, color }) => <span className="qc-scene-label" key={id} data-color={color}
+          ref={element => { labelsRef.current[id] = element; }}><i />{text}</span>)}
       </div>
       <div className="qc-scene-tools" role="group" aria-label="三维视图">
         <button type="button" title="整机视图" aria-label="整机视图" aria-pressed={view === 'machine'} onClick={() => setView('machine')}><Box size={15} /><span>整机</span></button>
@@ -90,7 +67,7 @@ export function QuantumComputerScene({ rows, columns, stage, atoms, progress, co
       </div>
     </>}
     <div className="qc-scene-footer">
-      {path && <span className="qc-scene-active" data-color={path.color}><i />{path.label}</span>}
+      {activePath && <span className="qc-scene-active" data-color={activePath.color}><i />{activePath.label}</span>}
       {!failed && <span className="qc-scene-scale">光路示意 · 非等比例</span>}
     </div>
   </div>;

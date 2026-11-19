@@ -1,15 +1,19 @@
-import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import {
   Aperture, ArrowDownToLine, ArrowDownUp, ArrowUpRight, Atom, AudioWaveform, BookOpen, Boxes, Camera, ChevronDown, ChevronRight,
   CircleDot, CircuitBoard, Crosshair, Focus, Info, ListOrdered, Move, Pause, Play, RotateCcw,
   ScanLine, SkipForward, Snowflake, Zap, type LucideIcon,
 } from 'lucide-react';
 import { HardwareEvidence } from './HardwareEvidence';
+import { SenooReadoutSource } from './SenooReadoutSource';
+import { SenooPopulationSource } from './SenooPopulationSource';
 import { munizEvidence as reference } from '../data/hardwareEvidence';
+import { MUNIZ_DEMO_PROFILE, type MachineStage } from '../data/machineProfile';
 import { Dialog } from '../components/Dialog';
+import { importMachineRun } from '../physics/machineRunImport';
 import {
-  CIRCUITS, createMachineRun, DEFAULT_MACHINE_CONFIG, MACHINE_COLUMNS, MACHINE_ROWS, MACHINE_STAGES,
-  machineFrame, type MachineConfig, type MachineFrame, type MachineRun,
+  CIRCUITS, createMachineRun, DEFAULT_MACHINE_CONFIG, machineExport, machineFrame,
+  type MachineConfig, type MachineFrame, type MachineProtocol, type MachineRun,
 } from '../physics/quantumComputer';
 import { QuantumComputerScene } from '../scene/QuantumComputerScene';
 import './machine-dashboard.css';
@@ -19,6 +23,7 @@ const machineTitle = '中性原子量子计算机整机数字孪生';
 const stageIcons: Record<string, LucideIcon> = {
   cooling: Snowflake, loading: Focus, rearrangement: Move, preparation: Crosshair, transfer: ArrowDownUp, gates: Zap,
   analysis: ScanLine, return: ArrowDownUp, readout: Camera,
+  'occupancy-check': Camera, replenishment: Move, 'occupancy-recheck': Camera,
 };
 
 const circuitDetails: Record<MachineConfig['circuit'], { detail: string; target: string; icon: LucideIcon }> = {
@@ -45,6 +50,7 @@ function SectionInfo() {
     <p>演示以 Muniz 等的 ¹⁷¹Yb 基态核自旋装置为流程参考。光路为示意，时间轴使用浏览器播放时间。</p>
     <ul>
       <li>每次尝试独立装载和重排。只有计算位点完全填满，才执行量子线路。三维场景跟踪第 1 次尝试，右侧统计汇总整批尝试。</li>
+      <li>Bell 一次补位流程用合成占位观测触发至多一次储备区搬运。观测、判决和跳过操作随播放时间显示，复查填满后继续线路。</li>
       <li>门操作在科学阱中进行。测量 X 基时，在回到储备阱前对每个比特加一个 H，把 X 的本征态转成可用荧光判别的 Z 基布居。H 可用局部拉曼 Xπ/₂ 和虚拟 Z 旋转编译。</li>
       <li>每个已装配寄存器的原子独立发生模拟丢失，由理想末端存活检查标记。完整寄存器按 Born 概率采样，并独立模拟探测位翻转。</li>
       <li>实验通过多幅荧光图像和中间的抽运步骤区分基态、钟态泄漏与丢失。本页近似为理想存活检查和二值判别，暂未建模钟态泄漏、串扰或脉冲动力学。</li>
@@ -57,20 +63,21 @@ function SectionInfo() {
   </div>;
 }
 
-function Sequence({ frame, seek }: { frame: MachineFrame; seek: (time: number) => void }) {
+function Sequence({ stages, frame, seek }: { stages: readonly MachineStage[]; frame: MachineFrame; seek: (time: number) => void }) {
   return <section className="md-panel md-sequence">
     <PanelHeader icon={ListOrdered}>实验流程</PanelHeader>
     <ol>
-      {MACHINE_STAGES.map((stage, index) => {
+      {stages.map((stage, index) => {
         const Icon = stageIcons[stage.id] ?? CircleDot;
         const current = frame.stageIndex === index;
         const passed = frame.stageIndex > index || frame.complete;
         return <li key={stage.id}>
           <button type="button" className={current ? 'md-current' : ''} aria-current={current ? 'step' : undefined}
+            data-stage-status={current && frame.stageSkipped ? 'skipped' : undefined}
             onClick={() => seek(stage.startMs)}>
             <span className="md-step-icon"><Icon size={15} /></span>
             <span className="md-step-text">{stage.label}</span>
-            <span className={passed ? 'md-step-passed' : ''}>{String(index + 1).padStart(2, '0')}</span>
+            <span className={passed ? 'md-step-passed' : ''}>{current && frame.stageSkipped ? '已跳过' : String(index + 1).padStart(2, '0')}</span>
           </button>
         </li>;
       })}
@@ -108,10 +115,26 @@ function CircuitDiagram({ run, frame }: { run: MachineRun; frame: MachineFrame }
   </section>;
 }
 
-function RunSettings({ config, update }: { config: MachineConfig; update: (patch: Partial<MachineConfig>) => void }) {
+function RunSettings({ config, protocol, update, setProtocol, imported, sourceControl }: {
+  config: MachineConfig;
+  protocol: MachineProtocol;
+  update: (patch: Partial<MachineConfig>) => void;
+  setProtocol: (protocol: MachineProtocol) => void;
+  imported: boolean;
+  sourceControl: ReactNode;
+}) {
   return <section className="md-panel md-settings">
-    <PanelHeader icon={CircuitBoard} aside={<span className="md-panel-hint">仿真输入</span>}>运行配置</PanelHeader>
-    <div className="md-settings-body">
+    <PanelHeader icon={CircuitBoard} aside={<span className="md-panel-hint">{imported ? '本地记录' : '仿真输入'}</span>}>运行配置</PanelHeader>
+    {sourceControl}
+    <fieldset className="md-settings-body" aria-label="运行参数" disabled={imported}>
+      <div className="md-field">
+        <label htmlFor="machine-protocol">实验协议</label>
+        <select id="machine-protocol" value={protocol} onChange={event => setProtocol(event.target.value as MachineProtocol)}>
+          <option value="standard">标准流程</option>
+          <option value="bell-replenishment">Bell · 一次补位</option>
+        </select>
+      </div>
+      {protocol === 'bell-replenishment' && <p className="md-protocol-note">合成 Bell 案例。初次重排优先填 q0，检查空位后最多补位一次。</p>}
       <div className="md-circuit-options" role="group" aria-label="量子电路">
         {CIRCUITS.map(circuit => {
           const { icon: Icon, detail } = circuitDetails[circuit.id];
@@ -132,6 +155,7 @@ function RunSettings({ config, update }: { config: MachineConfig; update: (patch
       <div className="md-field">
         <label htmlFor="machine-shot-config">尝试次数</label>
         <select id="machine-shot-config" value={config.shots} onChange={event => update({ shots: Number(event.target.value) })}>
+          {[64, 256, 1024, 4096].includes(config.shots) ? null : <option value={config.shots}>{config.shots}</option>}
           {[64, 256, 1024, 4096].map(shots => <option key={shots} value={shots}>{shots}</option>)}
         </select>
       </div>
@@ -154,11 +178,50 @@ function RunSettings({ config, update }: { config: MachineConfig; update: (patch
         <span>随机种子 <code>{config.seed}</code></span>
         <button type="button" onClick={() => update({ seed: (config.seed + 1) >>> 0 })}>更换</button>
       </div>
-    </div>
+    </fieldset>
   </section>;
 }
 
-function Readout({ run, frame, download }: { run: MachineRun; frame: MachineFrame; download: () => void }) {
+function OccupancyStatus({ frame }: { frame: MachineFrame }) {
+  const occupancy = frame.occupancy;
+  if (!occupancy) return null;
+  const decision = occupancy.decisions.at(-1);
+  const observation = occupancy.observations.at(-1);
+  const decisions = {
+    replenish: '发现空位，安排一次补位。',
+    continue: '计算位点已填满，继续 Bell 电路。',
+    skip: '补位后仍有空位，跳过门和读出。',
+  };
+  const replenishment = {
+    pending: '等待补位',
+    moving: '正在搬运',
+    moved: '补位完成，等待复查',
+    'no-source': '储备区没有可用原子',
+  };
+  let status = decision ? decisions[decision.result] : '等待占位观测。';
+  if (occupancy.exposing) status = '正在采集合成占位观测。';
+  else if (observation && observation.id !== decision?.observationId) {
+    status = `${observation.phase === 'initial' ? '初检' : '复查'}观测已到达，等待判决。`;
+  }
+  const attemptLabel = `第 ${frame.attemptIndex + 1} 次尝试`;
+  return <section className="md-occupancy" aria-label={`${attemptLabel}的占位检查`}
+    data-testid="machine-occupancy" data-decision={decision?.result ?? 'pending'}
+    data-replenishment={occupancy.replenishment ?? undefined}>
+    <div className="md-occupancy-heading"><Camera size={13} /><strong>占位检查</strong><span>{attemptLabel}</span></div>
+    <div className="md-occupancy-observations">
+      {occupancy.observations.map(observation => <span key={observation.phase}
+        data-testid={`machine-occupancy-${observation.phase}`}>
+        {observation.phase === 'initial' ? '初检' : '复查'} <code>{observation.sites.filter(site => site.occupied).length} / {observation.sites.length}</code>
+      </span>)}
+    </div>
+    <p>{status}</p>
+    {occupancy.replenishment && frame.stage.id === 'replenishment' && <small>{replenishment[occupancy.replenishment]}</small>}
+  </section>;
+}
+
+function Readout({ run, frame, download, selectAttempt }: {
+  run: MachineRun; frame: MachineFrame; download: () => void; selectAttempt: (index: number) => void;
+}) {
   const xBasis = run.config.basis === 'X';
   const evenCount = run.outcomes.reduce((total, outcome, index) =>
     outcome.bitstring.replace(/0/g, '').length % 2 === 0 ? total + frame.outcomeCounts[index] : total, 0);
@@ -167,10 +230,18 @@ function Readout({ run, frame, download }: { run: MachineRun; frame: MachineFram
     <PanelHeader icon={AudioWaveform} aside={<button type="button" className="md-icon-button" aria-label="导出运行数据"
       title="导出运行数据" onClick={download} disabled={!frame.complete}><ArrowDownToLine size={15} /></button>}>批次测量 · {run.config.basis} 基</PanelHeader>
     <div className="md-readout-body">
+      {run.records.length > 1 && <label className="md-field md-attempt-picker">
+        <span>回放尝试编号</span>
+        <input type="number" min={1} max={run.records.length} step={1} value={frame.attemptIndex + 1}
+          onChange={event => {
+            const number = event.currentTarget.valueAsNumber;
+            if (Number.isInteger(number) && number >= 1 && number <= run.records.length) selectAttempt(number - 1);
+          }} />
+      </label>}
       <dl className="md-shot-tally">
         <div><dt>已处理尝试</dt><dd data-testid="machine-attempts" data-count={frame.visibleAttempts}>{frame.visibleAttempts} / {run.config.shots}</dd></div>
         <div><dt>有效位串</dt><dd data-testid="machine-shots" data-completed-shots={frame.visibleShots}>{frame.visibleShots}</dd></div>
-        <div><dt>重排未填满</dt><dd data-testid="machine-rejected" data-count={frame.visibleRejectedShots}>{frame.visibleRejectedShots}</dd></div>
+        <div><dt>{run.plan.protocol === 'bell-replenishment' ? '装配未完成' : '重排未填满'}</dt><dd data-testid="machine-rejected" data-count={frame.visibleRejectedShots}>{frame.visibleRejectedShots}</dd></div>
         <div><dt>有原子丢失</dt><dd data-testid="machine-lost" data-count={frame.visibleLostShots}>{frame.visibleLostShots}</dd></div>
       </dl>
       {frame.complete && !frame.visibleShots && <p className="md-shot-note">该批次没有有效位串。</p>}
@@ -201,8 +272,17 @@ export function MachineDashboard() {
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [infoOpen, setInfoOpen] = useState(false);
-  const run = useMemo(() => createMachineRun(config), [config]);
-  const frame = useMemo(() => machineFrame(run, elapsed), [run, elapsed]);
+  const [demoProtocol, setProtocol] = useState<MachineProtocol>('standard');
+  const [imported, setImported] = useState<{ name: string; run: MachineRun } | null>(null);
+  const [importError, setImportError] = useState('');
+  const [selectedAttempt, setSelectedAttempt] = useState(0);
+  const readId = useRef(0);
+  const run = useMemo(() => imported?.run ?? createMachineRun(config, MUNIZ_DEMO_PROFILE, demoProtocol), [config, demoProtocol, imported]);
+  const frame = useMemo(() => machineFrame(run, elapsed, selectedAttempt), [run, elapsed, selectedAttempt]);
+  const { profile } = run;
+  const { rows, columns } = profile.array;
+  const { protocol, timeline: { stages } } = run.plan;
+  const attemptNumber = frame.attemptIndex + 1;
 
   useEffect(() => {
     if (!playing) return;
@@ -228,15 +308,49 @@ export function MachineDashboard() {
   };
   const update = (patch: Partial<MachineConfig>) => {
     seek(0);
+    setSelectedAttempt(0);
+    if (patch.circuit && patch.circuit !== 'bell') setProtocol('standard');
     setConfig(old => ({ ...old, ...patch }));
+  };
+  const changeProtocol = (next: MachineProtocol) => {
+    seek(0);
+    setSelectedAttempt(0);
+    setProtocol(next);
+    if (next === 'bell-replenishment') setConfig(old => ({ ...old, circuit: 'bell' }));
   };
   const play = () => {
     if (frame.complete) setElapsed(0);
     setPlaying(!playing);
   };
+  const loadRecord = async (file: File) => {
+    const id = ++readId.current;
+    setImportError('');
+    try {
+      const content = await file.text();
+      if (id !== readId.current) return;
+      const run = importMachineRun(content);
+      setImported({ name: file.name, run });
+      setSelectedAttempt(0);
+      seek(0);
+    } catch (error) {
+      if (id !== readId.current) return;
+      setImportError(error instanceof Error ? error.message : '读取运行记录失败。');
+    }
+  };
+  const returnToSimulation = () => {
+    readId.current++;
+    setImported(null);
+    setImportError('');
+    setSelectedAttempt(0);
+    seek(0);
+  };
+  const selectAttempt = (index: number) => {
+    setPlaying(false);
+    setSelectedAttempt(index);
+  };
 
   const download = () => {
-    const file = { kind: 'neutral-atom-quantum-computer-simulation', modelVersion: 2, ...run };
+    const file = machineExport(run);
     const url = URL.createObjectURL(new Blob([JSON.stringify(file, null, 2)], { type: 'application/json' }));
     const link = document.createElement('a');
     link.href = url;
@@ -245,21 +359,32 @@ export function MachineDashboard() {
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
-  const status = frame.complete ? '已完成' : playing ? '运行中' : elapsed > 0 ? '已暂停' : '待运行';
+  const status = frame.complete ? '已完成' : playing ? '运行中' : frame.elapsedMs > 0 ? '已暂停' : '待运行';
   const stageNumber = String(frame.stageIndex + 1).padStart(2, '0');
-  const visibleLoaded = frame.stageIndex > 1 ? run.loadedCount : frame.atoms.length;
-  const visibleQubits = frame.stageIndex >= 2 ? frame.atoms.filter(atom => atom.qubit !== undefined).length : 0;
+  const loadingComplete = frame.stage.id !== 'cooling' && frame.stage.id !== 'loading';
+  const visibleLoaded = protocol === 'bell-replenishment' ? frame.atoms.length : loadingComplete ? run.loadedCount : frame.atoms.length;
+  const visibleQubits = loadingComplete ? frame.atoms.filter(atom => atom.qubit !== undefined).length : 0;
 
   let stageDescription: string = frame.stage.description;
   if (frame.stage.id === 'analysis') {
-    stageDescription = config.basis === 'X' ? '对各比特施加 H，将 X 基测量转换为 Z 基荧光测量。' : '选择 Z 基，保持量子态并直接进入荧光读出。';
+    stageDescription = run.config.basis === 'X' ? '对各比特施加 H，将 X 基测量转换为 Z 基荧光测量。' : '选择 Z 基，保持量子态并直接进入荧光读出。';
   }
-  if (frame.stageIndex >= 3 && !frame.representativeReady) {
+  if (protocol === 'standard' && loadingComplete && frame.stage.id !== 'rearrangement' && !frame.representativeReady) {
     stageDescription = '第 1 次尝试重排后仍有空位，跳过该次的制备、门和读出。';
   }
-  if (frame.representativeLostQubits.length) {
-    stageDescription = `第 1 次尝试检测到 ${frame.representativeLostQubits.map(q => `q${q}`).join('、')} 丢失，本次无有效位串。`;
+  if (frame.stageSkipped) {
+    const skipDescriptions = {
+      filled: '初检已填满寄存器，跳过补位和复查。',
+      'no-source': '储备区没有可用原子，本次补位未执行。',
+      vacant: '复查仍有空位，该次跳过制备、门和读出。',
+      'atom-lost': '末端检测到原子丢失，该次跳过位串读出。',
+    };
+    stageDescription = frame.stageSkipReason ? skipDescriptions[frame.stageSkipReason] : '该次跳过当前操作。';
   }
+  if (frame.representativeLostQubits.length) {
+    stageDescription = `第 ${attemptNumber} 次尝试检测到 ${frame.representativeLostQubits.map(q => `q${q}`).join('、')} 丢失，本次无有效位串。`;
+  }
+  if (!frame.geometryRecorded) stageDescription = '该轮记录缺少此阶段的原子坐标或重排路径。';
 
   const openEvidence = () => {
     const heading = document.getElementById('hardware-evidence-heading');
@@ -267,12 +392,13 @@ export function MachineDashboard() {
     heading?.scrollIntoView({ block: 'start' });
   };
 
-  return <div className="md-app">
+  return <div className="md-app" data-machine-profile={profile.id} data-machine-protocol={protocol}>
     <header className="md-topbar">
       <div className="md-topbar-inner">
         <a className="md-brand" href="#machine"><span><Atom size={23} strokeWidth={1.5} /></span><div>NAQC 数字孪生<small>NEUTRAL ATOM SYSTEM</small></div></a>
         <nav aria-label="演示导航">
           <a className="md-nav-active" href="#machine" aria-current="page"><Boxes size={15} />整机演示</a>
+          <a href="#senoo"><Crosshair size={15} />Senoo 装置</a>
           <a href="#clock"><AudioWaveform size={15} />钟跃迁子系统<ArrowUpRight size={12} /></a>
         </nav>
         <button type="button" className="md-info-button" onClick={() => setInfoOpen(true)}><Info size={15} /> 模型说明</button>
@@ -281,7 +407,7 @@ export function MachineDashboard() {
     <main className="md-main">
       <div className="md-intro">
         <div>
-          <p className="md-intro-kicker"><i /> 系统仿真 <span>/</span> ¹⁷¹Yb</p>
+          <p className="md-intro-kicker"><i /> ¹⁷¹Yb <span>/</span> <strong>{profile.label}</strong></p>
           <h1>{machineTitle}</h1>
           <p className="md-intro-subtitle" lang="en">Neutral-Atom Quantum Computer Digital Twin</p>
           <p className="md-intro-description">用基态核自旋编码，演示从光镊装载到量子门与荧光读出的完整流程。</p>
@@ -293,14 +419,14 @@ export function MachineDashboard() {
       </div>
       <div className="md-layout">
         <aside className="md-workflow-column">
-          <Sequence frame={frame} seek={seek} />
+          <Sequence stages={stages} frame={frame} seek={seek} />
           <section className="md-panel md-telemetry">
-            <PanelHeader icon={Aperture} aside={<span className="md-panel-hint">第 1 次尝试</span>}>阵列状态</PanelHeader>
+            <PanelHeader icon={Aperture} aside={<span className="md-panel-hint">第 {attemptNumber} 次尝试</span>}>阵列状态</PanelHeader>
             <dl>
-              <div><dt>光镊位点</dt><dd>{MACHINE_COLUMNS} × {MACHINE_ROWS}</dd></div>
-              <div><dt>已装载原子</dt><dd data-testid="machine-loaded-count">{visibleLoaded}<small> / {MACHINE_ROWS * MACHINE_COLUMNS}</small></dd></div>
-              <div><dt>计算寄存器</dt><dd>{visibleQubits}<small> / {run.circuit.qubits}</small></dd></div>
-              <div><dt title="独立装载、无搬运损失时，装载原子数达到寄存器大小的概率">模型重排成功率</dt><dd>{percent(run.expectedAssemblyProbability)}</dd></div>
+              <div><dt>光镊位点</dt><dd>{columns} × {rows}</dd></div>
+              <div><dt>{protocol === 'bell-replenishment' ? '当前原子' : '已装载原子'}</dt><dd data-testid="machine-loaded-count">{frame.geometryRecorded ? visibleLoaded : '缺测'}<small> / {run.sites.length}</small></dd></div>
+              <div><dt>计算寄存器</dt><dd>{frame.geometryRecorded ? visibleQubits : '缺测'}<small> / {run.circuit.qubits}</small></dd></div>
+              {protocol === 'standard' && <div><dt title="独立装载、无搬运损失时，装载原子数达到寄存器大小的概率">模型重排成功率</dt><dd>{percent(run.expectedAssemblyProbability)}</dd></div>}
             </dl>
           </section>
         </aside>
@@ -310,24 +436,23 @@ export function MachineDashboard() {
               <i />{stageNumber} · {frame.stage.label}
             </span>}>整机光路</PanelHeader>
             <div className="md-scene-body">
-              <QuantumComputerScene stage={frame.stage.id} rows={MACHINE_ROWS} columns={MACHINE_COLUMNS}
-                atoms={frame.atoms} activeQubits={frame.activeQubits} progress={frame.stageProgress} completed={frame.complete}
-                representativeReady={frame.representativeReady}
-                gateProgress={frame.gateIndex === null ? undefined : frame.stageProgress * run.circuit.gates.length - frame.gateIndex} />
+              <QuantumComputerScene profile={profile} frame={frame} />
             </div>
             <div className="md-playback">
+              <OccupancyStatus frame={frame} />
               <div className="md-playback-note">
                 <p>{stageDescription}</p>
-                {frame.representativeBitstring && <code>第 1 次位串 {frame.representativeBitstring}</code>}
+                {frame.parallelTrapHandoff && <p className="md-panel-hint">483 nm 与 460 nm 光路并行</p>}
+                {frame.representativeBitstring && <code>第 {attemptNumber} 次位串 {frame.representativeBitstring}</code>}
               </div>
               <div className="md-timeline">
-                <input type="range" aria-label="演示时间轴" min={0} max={run.durationMs} step="any" value={elapsed} style={rangeFill(elapsed, run.durationMs)}
+                <input type="range" aria-label="演示时间轴" min={0} max={run.durationMs} step="any" value={frame.elapsedMs} style={rangeFill(frame.elapsedMs, run.durationMs)}
                   onChange={event => seek(Number(event.target.value))} />
-                <code>{(elapsed / 1000).toFixed(1)} / {(run.durationMs / 1000).toFixed(1)} s</code>
+                <code>{(frame.elapsedMs / 1000).toFixed(1)} / {(run.durationMs / 1000).toFixed(1)} s</code>
               </div>
               <div className="md-controls">
                 <button type="button" className="md-play-button" onClick={play}>{playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
-                  {playing ? '暂停' : frame.complete ? '重新演示' : elapsed ? '继续演示' : '启动演示'}</button>
+                  {playing ? '暂停' : frame.complete ? '重新演示' : frame.elapsedMs ? '继续演示' : '启动演示'}</button>
                 <button type="button" onClick={() => seek(frame.stageEndMs)} disabled={frame.complete}><SkipForward size={15} />下一阶段</button>
                 <button type="button" onClick={() => seek(0)}><RotateCcw size={15} />重置</button>
                 <label className="md-speed"><span className="sr-only">播放速度</span>
@@ -341,10 +466,30 @@ export function MachineDashboard() {
           <CircuitDiagram run={run} frame={frame} />
         </div>
         <aside className="md-run-column">
-          <RunSettings config={config} update={update} />
-          <Readout run={run} frame={frame} download={download} />
+          <RunSettings config={run.config} protocol={protocol} update={update} setProtocol={changeProtocol} imported={imported !== null}
+            sourceControl={<><div className="md-run-source">
+              <label>导入运行 JSON<input type="file" accept=".json,application/json" onChange={event => {
+                const file = event.currentTarget.files?.[0];
+                event.currentTarget.value = '';
+                if (file) void loadRecord(file);
+              }} /></label>
+              {imported && <div><p data-testid="machine-record-source">本地回放 · {imported.name}</p>
+                <button type="button" onClick={returnToSimulation}>返回仿真</button></div>}
+              {importError && <p role="alert">{importError}</p>}
+            </div>
+              {run.atomicReference && <details className="md-run-source md-atomic-reference">
+                <summary>578 nm 原子参考</summary>
+                <p>¹⁷¹Yb ¹S₀ → ³P₀ · F = 1/2 → 1/2</p>
+                <p><code>{run.atomicReference.frequencyDecimalHz} Hz</code></p>
+                <p>超精细重心频率。装置驱动频率和 Rabi 频率待测。</p>
+                <a href={run.atomicReference.sourceUrl} target="_blank" rel="noreferrer">查看原始来源</a>
+              </details>}
+            </>} />
+          <Readout run={run} frame={frame} download={download} selectAttempt={selectAttempt} />
         </aside>
       </div>
+      <SenooReadoutSource />
+      <SenooPopulationSource />
       <HardwareEvidence />
       <footer className="md-footer"><span>{machineTitle}</span><button type="button" onClick={() => setInfoOpen(true)}>仿真模型与参考文献 <ArrowUpRight size={13} /></button></footer>
     </main>

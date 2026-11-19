@@ -1,7 +1,62 @@
 import { describe, expect, it } from 'vitest';
+import { MUNIZ_DEMO_PROFILE, type MachineProfile } from '../src/data/machineProfile';
 import { createMachineRun, MACHINE_STAGES, machineFrame } from '../src/physics/quantumComputer';
 
 describe('neutral atom machine demo', () => {
+  it('preserves the baseline Bell geometry and attempts for seed 171', () => {
+    const run = createMachineRun({
+      circuit: 'bell', basis: 'Z', shots: 64, loadProbability: 0.09,
+      readoutError: 0, atomLossProbability: 0.1, seed: 171,
+    });
+    expect(run.sites).toHaveLength(48);
+    expect(run.sites.filter(site => site.qubit !== undefined).map(site => [site.id, site.qubit]))
+      .toEqual([['D4', 0], ['D5', 1]]);
+    expect(run.moves.map(move => [move.atomId, move.path.map(site => site.id)]))
+      .toEqual([['F4', ['F4', 'E4', 'D4']], ['B3', ['B3', 'C3', 'C4', 'C5', 'D5']]]);
+    expect(run.durationMs).toBe(12000);
+    expect([run.rejectedShots, run.lostShots, run.completedShots]).toEqual([4, 8, 52]);
+    expect(run.outcomes.map(outcome => outcome.count)).toEqual([27, 0, 0, 25]);
+    expect(run.attempts[0]).toEqual({
+      loadedCount: 5, activeQubits: 2, status: 'measured', lostQubits: [], bitstring: '11',
+    });
+    expect(run.attempts[1]).toEqual({
+      loadedCount: 5, activeQubits: 2, status: 'atom-lost', lostQubits: [0], bitstring: null,
+    });
+    expect(run.attempts[7]).toEqual({
+      loadedCount: 1, activeQubits: 1, status: 'assembly-failed', lostQubits: [], bitstring: null,
+    });
+
+    const halfway = machineFrame(run, 10975);
+    expect(halfway.stage.id).toBe('readout');
+    expect(halfway.visibleAttempts).toBe(32);
+    expect(halfway.visibleShots).toBe(28);
+    expect(halfway.outcomeCounts).toEqual([13, 0, 0, 15]);
+  });
+
+  it('takes the array, timeline and fluorescence convention from the supplied profile', () => {
+    const profile: MachineProfile = {
+      ...MUNIZ_DEMO_PROFILE,
+      array: { rows: 4, columns: 5, registerRow: 1 },
+      readoutBrightBit: '1',
+      timeline: {
+        durationMs: MUNIZ_DEMO_PROFILE.timeline.durationMs * 2,
+        stages: MUNIZ_DEMO_PROFILE.timeline.stages.map(stage => ({
+          ...stage, durationMs: stage.durationMs * 2, startMs: stage.startMs * 2, endMs: stage.endMs * 2,
+        })),
+      },
+    };
+    const run = createMachineRun({ shots: 64, loadProbability: 1, readoutError: 0, seed: 171 }, profile);
+    expect(run.sites).toHaveLength(20);
+    expect(run.sites.filter(site => site.qubit !== undefined).map(site => site.id)).toEqual(['B2', 'B3']);
+    expect(run.durationMs).toBe(24000);
+    expect(machineFrame(run, 10975).stage.id).toBe('preparation');
+
+    const final = machineFrame(run, run.durationMs);
+    expect(final.stage.id).toBe('readout');
+    expect(final.representativeBitstring).toBe('11');
+    expect(final.atoms.filter(atom => atom.qubit !== undefined).map(atom => atom.bright)).toEqual([true, true]);
+  });
+
   it('loads deterministically, conserves atoms and fills the register through vacant sites', () => {
     const run = createMachineRun({ circuit: 'ghz', loadProbability: 0.35, seed: 171 });
     expect(createMachineRun(run.config)).toEqual(run);

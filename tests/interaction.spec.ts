@@ -169,7 +169,10 @@ test('T23–T24: presets, supported bounds, laser off, refresh, reset and Showca
   await enter(page, '束腰', '0.6');
   await enter(page, '拉比频率', '1');
   await enter(page, '脉冲时长', '4000');
-  await expect(page.getByRole('img', { name: '拉比动力学' }).locator('path[data-series="excited"]')).toBeVisible();
+  const boundaryRabi = page.getByRole('img', { name: '拉比动力学' });
+  await expect(boundaryRabi).toBeVisible();
+  // An extremely small excitation is a horizontal path with zero bounding height.
+  await expect(boundaryRabi.locator('path[data-series="excited"]')).toHaveAttribute('d', /^M[\d.,\sL-]+$/);
   await expect(page.getByText('Pₑ · 当前调谐上限', { exact: true })).toBeVisible();
   await page.getByLabel('启用方波脉冲驱动').uncheck();
   await expect(page.getByTestId('max-population')).toHaveText('0.0%');

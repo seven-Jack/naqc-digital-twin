@@ -1,0 +1,185 @@
+{
+  "kind": "senoo-transport-run",
+  "schemaVersion": 1,
+  "sourceKind": "synthetic",
+  "sourceRef": "synthetic://senoo-transport/run",
+  "isotope": 171,
+  "apparatusVersion": "SYN-SENOO-TRANSPORT-V1",
+  "workingPoint": "SYN-ROOM",
+  "trapWavelengthM": 7.67e-7,
+  "acquisitionRunId": "SYN-TRANSPORT-01",
+  "clockId": "SYN-CLOCK-01",
+  "timeOriginRef": "synthetic://senoo-transport/run/trigger",
+  "coordinateFrameRef": "synthetic://senoo-transport/run/coordinates-si",
+  "expectedAttempts": 4,
+  "sites": [
+    { "id": "T1", "positionM": [0, 0, 0], "target": true },
+    { "id": "T2", "positionM": [0.000004, 0, 0], "target": true },
+    { "id": "R1", "positionM": [0.000006, 0, 0.000009], "target": false }
+  ],
+  "attempts": [
+    {
+      "attemptId": "assembled",
+      "sourceRef": "synthetic://senoo-transport/assembled",
+      "startS": 0,
+      "endS": 0.010,
+      "load": { "startS": 0, "endS": 0.001, "sourceRef": "synthetic://senoo-transport/assembled/load" },
+      "initial": {
+        "availableAtS": 0.002,
+        "sourceRef": "synthetic://senoo-transport/assembled/occupancy-before",
+        "sites": [
+          { "siteId": "T1", "state": "occupied", "atomId": "A1" },
+          { "siteId": "T2", "state": "empty", "atomId": null },
+          { "siteId": "R1", "state": "occupied", "atomId": "A2" }
+        ]
+      },
+      "final": {
+        "availableAtS": 0.009,
+        "sourceRef": "synthetic://senoo-transport/assembled/occupancy-after",
+        "sites": [
+          { "siteId": "T1", "state": "occupied", "atomId": "A1" },
+          { "siteId": "T2", "state": "occupied", "atomId": "A2" },
+          { "siteId": "R1", "state": "empty", "atomId": null }
+        ]
+      },
+      "transport": {
+        "status": "executed", "startS": 0.003, "endS": 0.007,
+        "sourceRef": "synthetic://senoo-transport/assembled/rearrangement", "reason": null
+      },
+      "moves": [{
+        "id": "tracked-A2",
+        "atomId": "A2",
+        "fromSiteId": "R1",
+        "toSiteId": "T2",
+        "startS": 0.004,
+        "endS": 0.006,
+        "outcome": "survived",
+        "outcomeAtS": 0.008,
+        "sourceRef": "synthetic://senoo-transport/assembled/move-A2",
+        "outcomeSourceRef": "synthetic://senoo-transport/assembled/track-remains-A2",
+        "path": {
+          "kind": "tracked",
+          "sourceRef": "synthetic://senoo-transport/assembled/trajectory-A2",
+          "samples": [
+            { "timeS": 0.004, "positionM": [0.000006, 0, 0.000009] },
+            { "timeS": 0.005, "positionM": [0.000005, 0.000001, 0.000004] },
+            { "timeS": 0.006, "positionM": [0.000004, 0, 0] }
+          ]
+        }
+      }]
+    },
+    {
+      "attemptId": "incomplete",
+      "sourceRef": "synthetic://senoo-transport/incomplete",
+      "startS": 0.100,
+      "endS": 0.110,
+      "load": { "startS": 0.100, "endS": 0.101, "sourceRef": "synthetic://senoo-transport/incomplete/load" },
+      "initial": {
+        "availableAtS": 0.102,
+        "sourceRef": "synthetic://senoo-transport/incomplete/occupancy-before",
+        "sites": [
+          { "siteId": "T1", "state": "occupied", "atomId": "B1" },
+          { "siteId": "T2", "state": "empty", "atomId": null },
+          { "siteId": "R1", "state": "occupied", "atomId": "B2" }
+        ]
+      },
+      "final": {
+        "availableAtS": 0.109,
+        "sourceRef": "synthetic://senoo-transport/incomplete/occupancy-after",
+        "sites": [
+          { "siteId": "T1", "state": "occupied", "atomId": "B1" },
+          { "siteId": "T2", "state": "empty", "atomId": null },
+          { "siteId": "R1", "state": "empty", "atomId": null }
+        ]
+      },
+      "transport": {
+        "status": "failed", "startS": 0.103, "endS": 0.107,
+        "sourceRef": "synthetic://senoo-transport/incomplete/rearrangement", "reason": "tracked-atom-loss"
+      },
+      "moves": [{
+        "id": "command-B2",
+        "atomId": "B2",
+        "fromSiteId": "R1",
+        "toSiteId": "T2",
+        "startS": 0.104,
+        "endS": 0.106,
+        "outcome": "lost",
+        "outcomeAtS": 0.108,
+        "sourceRef": "synthetic://senoo-transport/incomplete/move-B2",
+        "outcomeSourceRef": "synthetic://senoo-transport/incomplete/track-lost-B2",
+        "path": {
+          "kind": "commanded",
+          "sourceRef": "synthetic://senoo-transport/incomplete/controller-path-B2",
+          "samples": [
+            { "timeS": 0.104, "positionM": [0.000006, 0, 0.000009] },
+            { "timeS": 0.106, "positionM": [0.000004, 0, 0] }
+          ]
+        }
+      }]
+    },
+    {
+      "attemptId": "missing-final",
+      "sourceRef": "synthetic://senoo-transport/missing-final",
+      "startS": 0.200,
+      "endS": 0.210,
+      "load": { "startS": 0.200, "endS": 0.201, "sourceRef": "synthetic://senoo-transport/missing-final/load" },
+      "initial": {
+        "availableAtS": 0.202,
+        "sourceRef": "synthetic://senoo-transport/missing-final/occupancy-before",
+        "sites": [
+          { "siteId": "T1", "state": "unknown", "atomId": null },
+          { "siteId": "T2", "state": "occupied", "atomId": "C1" },
+          { "siteId": "R1", "state": "occupied", "atomId": "C2" }
+        ]
+      },
+      "final": null,
+      "transport": {
+        "status": "executed", "startS": 0.203, "endS": 0.207,
+        "sourceRef": "synthetic://senoo-transport/missing-final/rearrangement", "reason": null
+      },
+      "moves": [{
+        "id": "untracked-C2",
+        "atomId": "C2",
+        "fromSiteId": "R1",
+        "toSiteId": "T1",
+        "startS": 0.204,
+        "endS": 0.206,
+        "outcome": "unknown",
+        "outcomeAtS": null,
+        "sourceRef": "synthetic://senoo-transport/missing-final/move-C2",
+        "outcomeSourceRef": null,
+        "path": null
+      }]
+    },
+    {
+      "attemptId": "skipped",
+      "sourceRef": "synthetic://senoo-transport/skipped",
+      "startS": 0.300,
+      "endS": 0.310,
+      "load": { "startS": 0.300, "endS": 0.301, "sourceRef": "synthetic://senoo-transport/skipped/load" },
+      "initial": {
+        "availableAtS": 0.302,
+        "sourceRef": "synthetic://senoo-transport/skipped/occupancy-before",
+        "sites": [
+          { "siteId": "T1", "state": "empty", "atomId": null },
+          { "siteId": "T2", "state": "unknown", "atomId": null },
+          { "siteId": "R1", "state": "empty", "atomId": null }
+        ]
+      },
+      "final": {
+        "availableAtS": 0.309,
+        "sourceRef": "synthetic://senoo-transport/skipped/occupancy-after",
+        "sites": [
+          { "siteId": "T1", "state": "empty", "atomId": null },
+          { "siteId": "T2", "state": "unknown", "atomId": null },
+          { "siteId": "R1", "state": "empty", "atomId": null }
+        ]
+      },
+      "transport": {
+        "status": "skipped", "startS": null, "endS": null,
+        "sourceRef": "synthetic://senoo-transport/skipped/controller", "reason": "no-available-reservoir-atom"
+      },
+      "moves": []
+    }
+  ]
+}

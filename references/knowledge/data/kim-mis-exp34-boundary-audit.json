@@ -1,0 +1,1907 @@
+{
+  "site_centers": [
+    [
+      64,
+      51
+    ],
+    [
+      85,
+      51
+    ],
+    [
+      105,
+      51
+    ],
+    [
+      126,
+      50
+    ],
+    [
+      146,
+      49
+    ],
+    [
+      166,
+      48
+    ],
+    [
+      188,
+      48
+    ],
+    [
+      208,
+      47
+    ],
+    [
+      229,
+      46
+    ],
+    [
+      249,
+      46
+    ],
+    [
+      269,
+      45
+    ],
+    [
+      289,
+      45
+    ]
+  ],
+  "aligning_source": "kim-mis-exp34-tiff-audit.json",
+  "mat_source": "Exp34.mat",
+  "matching_criterion": "exact pixel sums over the twelve centers aligned in first four rounds",
+  "tiff_order_based_on_source": "X1 then X2 then X3, followed each local IFD chain",
+  "source_mat_pages": 6958,
+  "edges": [
+    {
+      "source_range": {
+        "part": 1,
+        "edge": "start",
+        "name": "Exp34_X1.tif",
+        "doi": "10.25452/figshare.plus.24523198.v1",
+        "file_id": 43077082,
+        "url": "https://ndownloader.figshare.com/files/43077082",
+        "full_length": 1640260430,
+        "full_md5": "3b7ef98e35cc318232fbbb0934aafcdb",
+        "range_start": 0,
+        "range_end": 6291455,
+        "http_status": 206,
+        "http_content_range": "bytes 0-6291455/1640260430",
+        "range_sha256": "a02bb483132215cb9ffe9ac9cc852c3598e053a98a437622a1ebb12566d119c3",
+        "http_etag": "0f9df741af0774213cea85f48089a74d-2"
+      },
+      "pages": [
+        {
+          "ifd_offset": 327704,
+          "next_ifd_offset": 655672,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              8,
+              16330
+            ],
+            [
+              16338,
+              16331
+            ],
+            [
+              32669,
+              16336
+            ],
+            [
+              49005,
+              16335
+            ],
+            [
+              65340,
+              16339
+            ],
+            [
+              81679,
+              16335
+            ],
+            [
+              98014,
+              16332
+            ],
+            [
+              114346,
+              16334
+            ],
+            [
+              130680,
+              16331
+            ],
+            [
+              147011,
+              16332
+            ],
+            [
+              163343,
+              16341
+            ],
+            [
+              179684,
+              16329
+            ],
+            [
+              196013,
+              16329
+            ],
+            [
+              212342,
+              16322
+            ],
+            [
+              228664,
+              16325
+            ],
+            [
+              244989,
+              16338
+            ],
+            [
+              261327,
+              16329
+            ],
+            [
+              277656,
+              16315
+            ],
+            [
+              293971,
+              16326
+            ],
+            [
+              310297,
+              16319
+            ],
+            [
+              326616,
+              1088
+            ]
+          ],
+          "decoded_pixel_sha256": "d5bc823a195d708e7ef1d53f7f3fa46a9ec6ce5ad84a07b7a11daaf4e42c181d",
+          "matched_mat_page_1based": 1,
+          "matched_round_1based": 1,
+          "matched_image": 1,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            13467,
+            13499,
+            13510,
+            14609,
+            13326,
+            13489,
+            13489,
+            16028,
+            15506,
+            15516,
+            15390,
+            13216
+          ]
+        },
+        {
+          "ifd_offset": 655672,
+          "next_ifd_offset": 983672,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              328062,
+              16325
+            ],
+            [
+              344387,
+              16330
+            ],
+            [
+              360717,
+              16333
+            ],
+            [
+              377050,
+              16319
+            ],
+            [
+              393369,
+              16325
+            ],
+            [
+              409694,
+              16322
+            ],
+            [
+              426016,
+              16324
+            ],
+            [
+              442340,
+              16327
+            ],
+            [
+              458667,
+              16326
+            ],
+            [
+              474993,
+              16335
+            ],
+            [
+              491328,
+              16332
+            ],
+            [
+              507660,
+              16322
+            ],
+            [
+              523982,
+              16323
+            ],
+            [
+              540305,
+              16317
+            ],
+            [
+              556622,
+              16326
+            ],
+            [
+              572948,
+              16336
+            ],
+            [
+              589284,
+              16328
+            ],
+            [
+              605612,
+              16315
+            ],
+            [
+              621927,
+              16328
+            ],
+            [
+              638255,
+              16328
+            ],
+            [
+              654583,
+              1089
+            ]
+          ],
+          "decoded_pixel_sha256": "a596c8d41542aeda45cfb84a5ce5310f47d302d9a8cb99b9139a6f1e76aea54c",
+          "matched_mat_page_1based": 2,
+          "matched_round_1based": 1,
+          "matched_image": 2,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            13092,
+            13140,
+            13013,
+            13874,
+            13036,
+            13206,
+            13452,
+            14454,
+            13239,
+            14768,
+            14759,
+            13370
+          ]
+        }
+      ]
+    },
+    {
+      "source_range": {
+        "part": 1,
+        "edge": "end",
+        "name": "Exp34_X1.tif",
+        "doi": "10.25452/figshare.plus.24523198.v1",
+        "file_id": 43077082,
+        "url": "https://ndownloader.figshare.com/files/43077082",
+        "full_length": 1640260430,
+        "full_md5": "3b7ef98e35cc318232fbbb0934aafcdb",
+        "range_start": 1639211854,
+        "range_end": 1640260429,
+        "http_status": 206,
+        "http_content_range": "bytes 1639211854-1640260429/1640260430",
+        "range_sha256": "4206d6367d484c6938c3c3abf27a2372794e996655b48def85624dfd2bced276",
+        "http_etag": "\"0f9df741af0774213cea85f48089a74d-2\""
+      },
+      "pages": [
+        {
+          "ifd_offset": 1639932084,
+          "next_ifd_offset": 1640260072,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              1639604520,
+              16324
+            ],
+            [
+              1639620844,
+              16311
+            ],
+            [
+              1639637155,
+              16325
+            ],
+            [
+              1639653480,
+              16311
+            ],
+            [
+              1639669791,
+              16332
+            ],
+            [
+              1639686123,
+              16330
+            ],
+            [
+              1639702453,
+              16330
+            ],
+            [
+              1639718783,
+              16314
+            ],
+            [
+              1639735097,
+              16319
+            ],
+            [
+              1639751416,
+              16334
+            ],
+            [
+              1639767750,
+              16327
+            ],
+            [
+              1639784077,
+              16329
+            ],
+            [
+              1639800406,
+              16322
+            ],
+            [
+              1639816728,
+              16324
+            ],
+            [
+              1639833052,
+              16316
+            ],
+            [
+              1639849368,
+              16318
+            ],
+            [
+              1639865686,
+              16333
+            ],
+            [
+              1639882019,
+              16326
+            ],
+            [
+              1639898345,
+              16323
+            ],
+            [
+              1639914668,
+              16327
+            ],
+            [
+              1639930995,
+              1088
+            ]
+          ],
+          "decoded_pixel_sha256": "42cb0232fae309c0605ea75cf91806ee6cc1217d22823ae5d25448508ef6a94b",
+          "matched_mat_page_1based": 5000,
+          "matched_round_1based": 2500,
+          "matched_image": 2,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            15195,
+            13403,
+            15050,
+            13319,
+            13273,
+            13319,
+            13237,
+            14754,
+            13171,
+            13645,
+            14701,
+            13089
+          ]
+        },
+        {
+          "ifd_offset": 1640260072,
+          "next_ifd_offset": 0,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              1639932442,
+              16317
+            ],
+            [
+              1639948759,
+              16334
+            ],
+            [
+              1639965093,
+              16319
+            ],
+            [
+              1639981412,
+              16327
+            ],
+            [
+              1639997739,
+              16329
+            ],
+            [
+              1640014068,
+              16337
+            ],
+            [
+              1640030405,
+              16325
+            ],
+            [
+              1640046730,
+              16326
+            ],
+            [
+              1640063056,
+              16331
+            ],
+            [
+              1640079387,
+              16332
+            ],
+            [
+              1640095719,
+              16332
+            ],
+            [
+              1640112051,
+              16329
+            ],
+            [
+              1640128380,
+              16331
+            ],
+            [
+              1640144711,
+              16330
+            ],
+            [
+              1640161041,
+              16334
+            ],
+            [
+              1640177375,
+              16324
+            ],
+            [
+              1640193699,
+              16324
+            ],
+            [
+              1640210023,
+              16320
+            ],
+            [
+              1640226343,
+              16321
+            ],
+            [
+              1640242664,
+              16320
+            ],
+            [
+              1640258984,
+              1088
+            ]
+          ],
+          "decoded_pixel_sha256": "16ead10392b5e8a6609fbab2e139fe262a629bbcb764b24050ac209a4340e4df",
+          "matched_mat_page_1based": 5001,
+          "matched_round_1based": 2501,
+          "matched_image": 1,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            13261,
+            13232,
+            13264,
+            15341,
+            13472,
+            15368,
+            15870,
+            13642,
+            15063,
+            13399,
+            13538,
+            14802
+          ]
+        }
+      ]
+    },
+    {
+      "source_range": {
+        "part": 2,
+        "edge": "start",
+        "name": "Exp34_X2.tif",
+        "doi": "10.25452/figshare.plus.24523198.v1",
+        "file_id": 43097950,
+        "url": "https://ndownloader.figshare.com/files/43097950",
+        "full_length": 459508780,
+        "full_md5": "c143e77a5ce2c63233fbc7ca5d1ad21d",
+        "range_start": 0,
+        "range_end": 786431,
+        "http_status": 206,
+        "http_content_range": "bytes 0-786431/459508780",
+        "range_sha256": "6894fb628af02b8333f37ee93994cf38e0364e28f34d2bf64bb69c8d18fbf39f",
+        "http_etag": "\"c143e77a5ce2c63233fbc7ca5d1ad21d\""
+      },
+      "pages": [
+        {
+          "ifd_offset": 327624,
+          "next_ifd_offset": 655626,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              8,
+              16333
+            ],
+            [
+              16341,
+              16320
+            ],
+            [
+              32661,
+              16329
+            ],
+            [
+              48990,
+              16328
+            ],
+            [
+              65318,
+              16331
+            ],
+            [
+              81649,
+              16327
+            ],
+            [
+              97976,
+              16319
+            ],
+            [
+              114295,
+              16325
+            ],
+            [
+              130620,
+              16323
+            ],
+            [
+              146943,
+              16327
+            ],
+            [
+              163270,
+              16324
+            ],
+            [
+              179594,
+              16330
+            ],
+            [
+              195924,
+              16330
+            ],
+            [
+              212254,
+              16331
+            ],
+            [
+              228585,
+              16327
+            ],
+            [
+              244912,
+              16320
+            ],
+            [
+              261232,
+              16322
+            ],
+            [
+              277554,
+              16323
+            ],
+            [
+              293877,
+              16331
+            ],
+            [
+              310208,
+              16327
+            ],
+            [
+              326535,
+              1089
+            ]
+          ],
+          "decoded_pixel_sha256": "6e45c072173cb44937e9f59432e9f1f8dc583f2d14ee1bbc37ad315ba70f165d",
+          "matched_mat_page_1based": 5002,
+          "matched_round_1based": 2501,
+          "matched_image": 2,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            12996,
+            13526,
+            13067,
+            15056,
+            13262,
+            14959,
+            13190,
+            13177,
+            14656,
+            13029,
+            13352,
+            13277
+          ]
+        },
+        {
+          "ifd_offset": 655626,
+          "next_ifd_offset": 983566,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              327982,
+              16330
+            ],
+            [
+              344312,
+              16335
+            ],
+            [
+              360647,
+              16328
+            ],
+            [
+              376975,
+              16320
+            ],
+            [
+              393295,
+              16329
+            ],
+            [
+              409624,
+              16328
+            ],
+            [
+              425952,
+              16328
+            ],
+            [
+              442280,
+              16330
+            ],
+            [
+              458610,
+              16337
+            ],
+            [
+              474947,
+              16333
+            ],
+            [
+              491280,
+              16327
+            ],
+            [
+              507607,
+              16331
+            ],
+            [
+              523938,
+              16331
+            ],
+            [
+              540269,
+              16329
+            ],
+            [
+              556598,
+              16331
+            ],
+            [
+              572929,
+              16321
+            ],
+            [
+              589250,
+              16323
+            ],
+            [
+              605573,
+              16322
+            ],
+            [
+              621895,
+              16323
+            ],
+            [
+              638218,
+              16318
+            ],
+            [
+              654536,
+              1089
+            ]
+          ],
+          "decoded_pixel_sha256": "fdbe3ef53cda954928933b063e6ce639116c9807c139c3b4fbfee0fed2f98655",
+          "matched_mat_page_1based": 5003,
+          "matched_round_1based": 2502,
+          "matched_image": 1,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            13292,
+            15264,
+            15394,
+            13316,
+            14969,
+            14661,
+            15108,
+            14596,
+            13350,
+            14813,
+            14718,
+            13401
+          ]
+        }
+      ]
+    },
+    {
+      "source_range": {
+        "part": 2,
+        "edge": "end",
+        "name": "Exp34_X2.tif",
+        "doi": "10.25452/figshare.plus.24523198.v1",
+        "file_id": 43097950,
+        "url": "https://ndownloader.figshare.com/files/43097950",
+        "full_length": 459508780,
+        "full_md5": "c143e77a5ce2c63233fbc7ca5d1ad21d",
+        "range_start": 458460204,
+        "range_end": 459508779,
+        "http_status": 206,
+        "http_content_range": "bytes 458460204-459508779/459508780",
+        "range_sha256": "3666061ed222adda379c7ae8f5dfe0d2009947785cfdea3425cfab50c595ab37",
+        "http_etag": "\"c143e77a5ce2c63233fbc7ca5d1ad21d\""
+      },
+      "pages": [
+        {
+          "ifd_offset": 459180486,
+          "next_ifd_offset": 459508422,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              458852838,
+              16323
+            ],
+            [
+              458869161,
+              16330
+            ],
+            [
+              458885491,
+              16322
+            ],
+            [
+              458901813,
+              16327
+            ],
+            [
+              458918140,
+              16328
+            ],
+            [
+              458934468,
+              16331
+            ],
+            [
+              458950799,
+              16333
+            ],
+            [
+              458967132,
+              16325
+            ],
+            [
+              458983457,
+              16334
+            ],
+            [
+              458999791,
+              16331
+            ],
+            [
+              459016122,
+              16333
+            ],
+            [
+              459032455,
+              16334
+            ],
+            [
+              459048789,
+              16318
+            ],
+            [
+              459065107,
+              16333
+            ],
+            [
+              459081440,
+              16332
+            ],
+            [
+              459097772,
+              16324
+            ],
+            [
+              459114096,
+              16329
+            ],
+            [
+              459130425,
+              16328
+            ],
+            [
+              459146753,
+              16320
+            ],
+            [
+              459163073,
+              16324
+            ],
+            [
+              459179397,
+              1089
+            ]
+          ],
+          "decoded_pixel_sha256": "f697b2ad0f002ffee9614aa2383d9e6ccadd9fa0777458673b6a38a0128135e3",
+          "matched_mat_page_1based": 6401,
+          "matched_round_1based": 3201,
+          "matched_image": 1,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            15251,
+            13395,
+            13368,
+            13382,
+            13610,
+            13385,
+            13753,
+            14869,
+            14997,
+            13357,
+            13563,
+            15188
+          ]
+        },
+        {
+          "ifd_offset": 459508422,
+          "next_ifd_offset": 0,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              459180844,
+              16329
+            ],
+            [
+              459197173,
+              16327
+            ],
+            [
+              459213500,
+              16318
+            ],
+            [
+              459229818,
+              16321
+            ],
+            [
+              459246139,
+              16331
+            ],
+            [
+              459262470,
+              16331
+            ],
+            [
+              459278801,
+              16319
+            ],
+            [
+              459295120,
+              16330
+            ],
+            [
+              459311450,
+              16325
+            ],
+            [
+              459327775,
+              16317
+            ],
+            [
+              459344092,
+              16327
+            ],
+            [
+              459360419,
+              16327
+            ],
+            [
+              459376746,
+              16325
+            ],
+            [
+              459393071,
+              16325
+            ],
+            [
+              459409396,
+              16316
+            ],
+            [
+              459425712,
+              16318
+            ],
+            [
+              459442030,
+              16323
+            ],
+            [
+              459458353,
+              16317
+            ],
+            [
+              459474670,
+              16331
+            ],
+            [
+              459491001,
+              16334
+            ],
+            [
+              459507335,
+              1087
+            ]
+          ],
+          "decoded_pixel_sha256": "c2d3eb02c1f40ab651ffdd29bbc3291d768abc1dc526a7a7673b1d0b27592a96",
+          "matched_mat_page_1based": 6402,
+          "matched_round_1based": 3201,
+          "matched_image": 2,
+          "exact_sites": 12,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 0.0,
+          "sum_25_per_site": [
+            12975,
+            13372,
+            13255,
+            13036,
+            13408,
+            13397,
+            13449,
+            15204,
+            15007,
+            13388,
+            13388,
+            14647
+          ]
+        }
+      ]
+    },
+    {
+      "source_range": {
+        "part": 3,
+        "edge": "start",
+        "name": "Exp34_X3.tif",
+        "doi": "10.25452/figshare.plus.24523198.v1",
+        "file_id": 43097944,
+        "url": "https://ndownloader.figshare.com/files/43097944",
+        "full_length": 182363026,
+        "full_md5": "7f3a634d2276524693b4275c561680cd",
+        "range_start": 0,
+        "range_end": 786431,
+        "http_status": 206,
+        "http_content_range": "bytes 0-786431/182363026",
+        "range_sha256": "8f2d76e2c3296633d0d89b5f9b8bd70dfa09da27140187aa9bd62daa05eb310e",
+        "http_etag": "\"7f3a634d2276524693b4275c561680cd\""
+      },
+      "pages": [
+        {
+          "ifd_offset": 327734,
+          "next_ifd_offset": 655678,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              8,
+              16334
+            ],
+            [
+              16342,
+              16336
+            ],
+            [
+              32678,
+              16332
+            ],
+            [
+              49010,
+              16331
+            ],
+            [
+              65341,
+              16336
+            ],
+            [
+              81677,
+              16337
+            ],
+            [
+              98014,
+              16334
+            ],
+            [
+              114348,
+              16333
+            ],
+            [
+              130681,
+              16335
+            ],
+            [
+              147016,
+              16330
+            ],
+            [
+              163346,
+              16334
+            ],
+            [
+              179680,
+              16333
+            ],
+            [
+              196013,
+              16328
+            ],
+            [
+              212341,
+              16331
+            ],
+            [
+              228672,
+              16334
+            ],
+            [
+              245006,
+              16331
+            ],
+            [
+              261337,
+              16320
+            ],
+            [
+              277657,
+              16326
+            ],
+            [
+              293983,
+              16333
+            ],
+            [
+              310316,
+              16327
+            ],
+            [
+              326643,
+              1090
+            ]
+          ],
+          "decoded_pixel_sha256": "3f93ae055ec02b0c52d197872fdc0bed2a6ea26b0d196ee970051fb39fb9e8ab",
+          "matched_mat_page_1based": 6403,
+          "matched_round_1based": 3202,
+          "matched_image": 1,
+          "exact_sites": 3,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 13.84,
+          "sum_25_per_site": [
+            15368,
+            15267,
+            15128,
+            13562,
+            13436,
+            13407,
+            13879,
+            13302,
+            13659,
+            15177,
+            13448,
+            13426
+          ]
+        },
+        {
+          "ifd_offset": 655678,
+          "next_ifd_offset": 983682,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              328092,
+              16319
+            ],
+            [
+              344411,
+              16319
+            ],
+            [
+              360730,
+              16326
+            ],
+            [
+              377056,
+              16321
+            ],
+            [
+              393377,
+              16330
+            ],
+            [
+              409707,
+              16329
+            ],
+            [
+              426036,
+              16324
+            ],
+            [
+              442360,
+              16324
+            ],
+            [
+              458684,
+              16332
+            ],
+            [
+              475016,
+              16335
+            ],
+            [
+              491351,
+              16320
+            ],
+            [
+              507671,
+              16328
+            ],
+            [
+              523999,
+              16323
+            ],
+            [
+              540322,
+              16322
+            ],
+            [
+              556644,
+              16331
+            ],
+            [
+              572975,
+              16329
+            ],
+            [
+              589304,
+              16320
+            ],
+            [
+              605624,
+              16324
+            ],
+            [
+              621948,
+              16322
+            ],
+            [
+              638270,
+              16319
+            ],
+            [
+              654589,
+              1088
+            ]
+          ],
+          "decoded_pixel_sha256": "756147b03c5de128fd93335eaee056a97f071c182043792938ab9f7e24dd92d1",
+          "matched_mat_page_1based": 6404,
+          "matched_round_1based": 3202,
+          "matched_image": 2,
+          "exact_sites": 3,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 12.4,
+          "sum_25_per_site": [
+            13513,
+            14890,
+            13289,
+            13388,
+            13270,
+            13111,
+            13389,
+            13180,
+            13150,
+            13444,
+            13495,
+            13373
+          ]
+        }
+      ]
+    },
+    {
+      "source_range": {
+        "part": 3,
+        "edge": "end",
+        "name": "Exp34_X3.tif",
+        "doi": "10.25452/figshare.plus.24523198.v1",
+        "file_id": 43097944,
+        "url": "https://ndownloader.figshare.com/files/43097944",
+        "full_length": 182363026,
+        "full_md5": "7f3a634d2276524693b4275c561680cd",
+        "range_start": 181314450,
+        "range_end": 182363025,
+        "http_status": 206,
+        "http_content_range": "bytes 181314450-182363025/182363026",
+        "range_sha256": "67e3fe1f510daca9ad7bb789ce80ec302dd3a74583bbf7f97deec451eb7e1dff",
+        "http_etag": "\"7f3a634d2276524693b4275c561680cd\""
+      },
+      "pages": [
+        {
+          "ifd_offset": 182034690,
+          "next_ifd_offset": 182362668,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              181707074,
+              16327
+            ],
+            [
+              181723401,
+              16325
+            ],
+            [
+              181739726,
+              16327
+            ],
+            [
+              181756053,
+              16320
+            ],
+            [
+              181772373,
+              16333
+            ],
+            [
+              181788706,
+              16329
+            ],
+            [
+              181805035,
+              16320
+            ],
+            [
+              181821355,
+              16326
+            ],
+            [
+              181837681,
+              16322
+            ],
+            [
+              181854003,
+              16335
+            ],
+            [
+              181870338,
+              16320
+            ],
+            [
+              181886658,
+              16337
+            ],
+            [
+              181902995,
+              16341
+            ],
+            [
+              181919336,
+              16328
+            ],
+            [
+              181935664,
+              16331
+            ],
+            [
+              181951995,
+              16335
+            ],
+            [
+              181968330,
+              16325
+            ],
+            [
+              181984655,
+              16317
+            ],
+            [
+              182000972,
+              16310
+            ],
+            [
+              182017282,
+              16318
+            ],
+            [
+              182033600,
+              1089
+            ]
+          ],
+          "decoded_pixel_sha256": "a91d732c0e09bf848b7c1807e745d18a1b0511e5cb591829a4c79aaad5a87a01",
+          "matched_mat_page_1based": 6957,
+          "matched_round_1based": 3479,
+          "matched_image": 1,
+          "exact_sites": 3,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 17.84,
+          "sum_25_per_site": [
+            15202,
+            15394,
+            13285,
+            13413,
+            13677,
+            14842,
+            14862,
+            14952,
+            14704,
+            15465,
+            14843,
+            13373
+          ]
+        },
+        {
+          "ifd_offset": 182362668,
+          "next_ifd_offset": 0,
+          "strip_count": 21,
+          "strip_ranges_0based": [
+            [
+              182035048,
+              16321
+            ],
+            [
+              182051369,
+              16324
+            ],
+            [
+              182067693,
+              16321
+            ],
+            [
+              182084014,
+              16323
+            ],
+            [
+              182100337,
+              16332
+            ],
+            [
+              182116669,
+              16323
+            ],
+            [
+              182132992,
+              16340
+            ],
+            [
+              182149332,
+              16326
+            ],
+            [
+              182165658,
+              16325
+            ],
+            [
+              182181983,
+              16331
+            ],
+            [
+              182198314,
+              16326
+            ],
+            [
+              182214640,
+              16327
+            ],
+            [
+              182230967,
+              16325
+            ],
+            [
+              182247292,
+              16334
+            ],
+            [
+              182263626,
+              16330
+            ],
+            [
+              182279956,
+              16322
+            ],
+            [
+              182296278,
+              16328
+            ],
+            [
+              182312606,
+              16323
+            ],
+            [
+              182328929,
+              16325
+            ],
+            [
+              182345254,
+              16324
+            ],
+            [
+              182361578,
+              1089
+            ]
+          ],
+          "decoded_pixel_sha256": "1a7f9fb0065ea5ab78d67b108898ab5ede6f0543ebc53fdc596d23f83031456f",
+          "matched_mat_page_1based": 6958,
+          "matched_round_1based": 3479,
+          "matched_image": 2,
+          "exact_sites": 3,
+          "match_candidates": 1,
+          "checked_sites": 12,
+          "source_bit_matches": 12,
+          "max_abs_count_residual": 6.76,
+          "sum_25_per_site": [
+            13229,
+            12917,
+            13516,
+            13518,
+            13269,
+            13169,
+            13113,
+            13190,
+            14922,
+            14593,
+            13066,
+            13189
+          ]
+        }
+      ]
+    }
+  ],
+  "x3_center_alignment": {
+    "centers_inferred_from_mat_pages": [
+      6403,
+      6404
+    ],
+    "held_out_mat_pages": [
+      6957,
+      6958
+    ],
+    "results": [
+      {
+        "site_1based": 1,
+        "initial_center": [
+          66,
+          55
+        ],
+        "x1_center": [
+          64,
+          51
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            65,
+            51
+          ]
+        ],
+        "held_out_sums": [
+          15373,
+          13142
+        ],
+        "held_out_mat_sums": [
+          15373,
+          13142
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 2,
+        "initial_center": [
+          88,
+          54
+        ],
+        "x1_center": [
+          85,
+          51
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            86,
+            51
+          ]
+        ],
+        "held_out_sums": [
+          15840,
+          12968
+        ],
+        "held_out_mat_sums": [
+          15840,
+          12968
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 3,
+        "initial_center": [
+          108,
+          51
+        ],
+        "x1_center": [
+          105,
+          51
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            106,
+            51
+          ]
+        ],
+        "held_out_sums": [
+          13280,
+          13347
+        ],
+        "held_out_mat_sums": [
+          13280,
+          13347
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 4,
+        "initial_center": [
+          130,
+          52
+        ],
+        "x1_center": [
+          126,
+          50
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            127,
+            50
+          ]
+        ],
+        "held_out_sums": [
+          13499,
+          13666
+        ],
+        "held_out_mat_sums": [
+          13499,
+          13666
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 5,
+        "initial_center": [
+          150,
+          50
+        ],
+        "x1_center": [
+          146,
+          49
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            147,
+            49
+          ]
+        ],
+        "held_out_sums": [
+          13755,
+          13311
+        ],
+        "held_out_mat_sums": [
+          13755,
+          13311
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 6,
+        "initial_center": [
+          170,
+          49
+        ],
+        "x1_center": [
+          166,
+          48
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            167,
+            48
+          ]
+        ],
+        "held_out_sums": [
+          14992,
+          13107
+        ],
+        "held_out_mat_sums": [
+          14992,
+          13107
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 7,
+        "initial_center": [
+          192,
+          48
+        ],
+        "x1_center": [
+          188,
+          48
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            189,
+            48
+          ]
+        ],
+        "held_out_sums": [
+          15190,
+          13223
+        ],
+        "held_out_mat_sums": [
+          15190,
+          13223
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 8,
+        "initial_center": [
+          212,
+          48
+        ],
+        "x1_center": [
+          208,
+          47
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            209,
+            47
+          ]
+        ],
+        "held_out_sums": [
+          15267,
+          13122
+        ],
+        "held_out_mat_sums": [
+          15267,
+          13122
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 9,
+        "initial_center": [
+          232,
+          47
+        ],
+        "x1_center": [
+          229,
+          46
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            229,
+            46
+          ]
+        ],
+        "held_out_sums": [
+          14704,
+          14922
+        ],
+        "held_out_mat_sums": [
+          14704,
+          14922
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 10,
+        "initial_center": [
+          251,
+          44
+        ],
+        "x1_center": [
+          249,
+          46
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            250,
+            46
+          ]
+        ],
+        "held_out_sums": [
+          15386,
+          14546
+        ],
+        "held_out_mat_sums": [
+          15386,
+          14546
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 11,
+        "initial_center": [
+          271,
+          46
+        ],
+        "x1_center": [
+          269,
+          45
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            269,
+            45
+          ]
+        ],
+        "held_out_sums": [
+          14843,
+          13066
+        ],
+        "held_out_mat_sums": [
+          14843,
+          13066
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      },
+      {
+        "site_1based": 12,
+        "initial_center": [
+          291,
+          45
+        ],
+        "x1_center": [
+          289,
+          45
+        ],
+        "candidate_count": 1,
+        "candidates": [
+          [
+            289,
+            45
+          ]
+        ],
+        "held_out_sums": [
+          13373,
+          13189
+        ],
+        "held_out_mat_sums": [
+          13373,
+          13189
+        ],
+        "held_out_exact": 2,
+        "held_out_bit_matches": 2,
+        "held_out_max_count_residual": 0.0
+      }
+    ]
+  }
+}

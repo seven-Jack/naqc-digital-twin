@@ -1,0 +1,40 @@
+{
+  "isotope": 171,
+  "dataset": {
+    "version": "2026.11.11.1",
+    "sourceCommit": "2e2e9d5",
+    "contentHash": "4b5df2bd0e5679ce5576f6bcfa5fa99b0b4cd586c371766de6aab2f9ea193068"
+  },
+  "transitionId": "T3",
+  "lower": {
+    "levelId": "yb171-6s2-1s0",
+    "term": "¹S₀",
+    "allowedF": [
+      0.5
+    ]
+  },
+  "upper": {
+    "levelId": "yb171-6s6p-3p0",
+    "term": "³P₀",
+    "allowedF": [
+      0.5
+    ]
+  },
+  "sourceUrl": "https://arxiv.org/abs/2509.04416v2",
+  "frequency": {
+    "sourceLocator": "arXiv:2509.04416v2, Table 9, PDF/printed p.24, frequency_nu",
+    "siValue": 518295836590863.6,
+    "siDecimalValue": "518295836590863.63",
+    "siUncertainty": 0.1,
+    "evidenceKind": "literature-reported",
+    "reviewStatus": "original-source-located",
+    "sourceId": "ref-01",
+    "convention": "hyperfine-center-of-gravity; ordinary frequency nu=omega/(2*pi)",
+    "sourceDecimal": "518.29583659086363"
+  },
+  "wavelength": {
+    "value": 578.4195759161624,
+    "siValue": 5.784195759161625e-07,
+    "sourceLocator": "arXiv:2509.04416v2, Table 9, PDF/printed p.24, wavelength_vac"
+  }
+}
