@@ -1,0 +1,424 @@
+{
+  "batch": "241129_S23/P14",
+  "freeze_sha256": "faa9127608b995728168bbe5f2e22b100d55df9460a4b188f57b8e41f0b9aa9b",
+  "source_doi": "10.21942/uva.28166483.v1",
+  "archive_sha256": "16ba89851ae045172fb1e8139623128d0780ef348b2437f2c1e0fd8541b84802",
+  "source_manifest_sha256": "86bdba6122fbe52cf5797f9505f2073fed9a5c1cfbecf88a3e6664eed2d0ca06",
+  "evidence": "Same-sequence holdout on Knottnerus 88Sr; cross-apparatus comparison for Senoo 171Yb.",
+  "conditions": {
+    "comparison": {
+      ".txt": {
+        "p1_sha256": "decf88cefa7ae3ff87c34b3d155999fbc2ca79a01c48890362897504c79ff811",
+        "holdout_sha256": "304390b2a07669d0b41dbd551bee6f85ad1a717b9d7611301011491a74bc2fb8",
+        "identical": false
+      },
+      "ROIs.dat": {
+        "p1_sha256": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+        "holdout_sha256": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e",
+        "identical": true
+      },
+      "_timinglist.dat": {
+        "p1_sha256": "2f7d7b8fe1834d0388859471b1ca44bf5a8d584205952d4a1ec268b740b475d3",
+        "holdout_sha256": "2f7d7b8fe1834d0388859471b1ca44bf5a8d584205952d4a1ec268b740b475d3",
+        "identical": true
+      },
+      "_outputlist.dat": {
+        "p1_sha256": "08157a521f4acf7a0c24e0c0c38bc558edc521e9c8e05a75076a84d75a248d18",
+        "holdout_sha256": "08157a521f4acf7a0c24e0c0c38bc558edc521e9c8e05a75076a84d75a248d18",
+        "identical": true
+      }
+    },
+    "source_members_verified": 354,
+    "control_text_changes": [
+      {
+        "line": 4,
+        "p1": "DRbRepumpDPAOMB2Intensity1=1.00000",
+        "holdout": "DRbRepumpDPAOMB2Intensity1=14.00000"
+      },
+      {
+        "line": 1202,
+        "p1": "DLastEndTime=1361863.00000",
+        "holdout": "DLastEndTime=1366461.90600"
+      },
+      {
+        "line": 1410,
+        "p1": "SLastMessageList9=>> *0.0000000e+00-",
+        "holdout": "SLastMessageList9=>> *TweezerImage-"
+      },
+      {
+        "line": 1411,
+        "p1": "SLastMessageList8=>> *0.0000000e+00-",
+        "holdout": "SLastMessageList8=>> *      23-"
+      },
+      {
+        "line": 1412,
+        "p1": "SLastMessageList7=>> *0.0000000e+00-",
+        "holdout": "SLastMessageList7=>> *      13-"
+      },
+      {
+        "line": 1413,
+        "p1": "SLastMessageList6=<< Ready",
+        "holdout": "SLastMessageList6=>> *     100-"
+      },
+      {
+        "line": 1414,
+        "p1": "SLastMessageList5=<< 100110010110001010000110110001001001",
+        "holdout": "SLastMessageList5=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1415,
+        "p1": "SLastMessageList4=>> *TweezerCameraSeriesParameters-",
+        "holdout": "SLastMessageList4=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1416,
+        "p1": "SLastMessageList3=>> *       2-",
+        "holdout": "SLastMessageList3=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1417,
+        "p1": "SLastMessageList2=>> *NumberOfIdenticalExperimentalSequences-",
+        "holdout": "SLastMessageList2=>> *0.0000000e+00-"
+      },
+      {
+        "line": 1418,
+        "p1": "SLastMessageList1=>> *RbRepumpDPAOMB2Intensity1-",
+        "holdout": "SLastMessageList1=<< Ready"
+      },
+      {
+        "line": 1419,
+        "p1": "SLastMessageList0=>> *Stability measurement-",
+        "holdout": "SLastMessageList0=<< 000000000000000000000000000000000000"
+      }
+    ],
+    "program_imaging_settings": [
+      "DSortAtomsWithSLMImagingDutyCycle=12.00000",
+      "ISortAtomsWithSLMImagingCycles=20",
+      "DSortAtomsWithSLMImagingDuration=200.00000",
+      "DSortAtomsWithSLMImagingIntensity2=0.50000",
+      "DSortAtomsWithSLMImagingIntensity1=2.00000",
+      "DSortAtomsWithSLMImagingFrequency2=80.76000",
+      "DSortAtomsWithSLMImagingFrequency1=80.72000",
+      "FDoSortAtomsWithSLM=TRUE",
+      "BSortAtomsTakeVerificationImage=TRUE"
+    ],
+    "image_width": 100,
+    "image_height": 180,
+    "image_header_hex": "0000030000000000000000006400b4001000",
+    "rounds": 100,
+    "paired_frames": 200,
+    "targets_zero_based": [
+      7,
+      8,
+      9,
+      10,
+      13,
+      14,
+      15,
+      16,
+      19,
+      20,
+      21,
+      22,
+      25,
+      26,
+      27,
+      28
+    ],
+    "p1_rectangles_sha256": "518404c63edf75983eded294e786ace5f83f9fc74246598215730fe9439a047e"
+  },
+  "rule": "Strict raw 3x3 pixel sum > T in frozen P1 rectangles, without offsets or background correction.",
+  "baseline_candidate": 6436,
+  "p2_log_compatible_integer_thresholds": [
+    6499,
+    6500,
+    6501,
+    6502,
+    6503,
+    6504,
+    6505,
+    6506,
+    6507,
+    6508,
+    6509,
+    6510,
+    6511,
+    6512,
+    6513,
+    6514,
+    6515,
+    6516,
+    6517,
+    6518,
+    6519
+  ],
+  "p3_p4_focus_thresholds": [
+    6499,
+    6500,
+    6501,
+    6502,
+    6503,
+    6504,
+    6505,
+    6506,
+    6507
+  ],
+  "p2_thresholds_matching_all_holdout_decisions": [
+    6499,
+    6500,
+    6501,
+    6502,
+    6503,
+    6504,
+    6505,
+    6506,
+    6507,
+    6508,
+    6509,
+    6510,
+    6511,
+    6512,
+    6513,
+    6514,
+    6515,
+    6516,
+    6517,
+    6518,
+    6519
+  ],
+  "focus_matching_all_holdout_decisions": [
+    6499,
+    6500,
+    6501,
+    6502,
+    6503,
+    6504,
+    6505,
+    6506,
+    6507
+  ],
+  "minimum_first_frame_atoms": 16,
+  "thresholds": {
+    "6436": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6499": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6500": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6501": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6502": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6503": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6504": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6505": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6506": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6507": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6508": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6509": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6510": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6511": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6512": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6513": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6514": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6515": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6516": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6517": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6518": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    },
+    "6519": {
+      "decision_sha256": "8b92327b351c19444375a33a8f210e93e1ad7c849ada561482db884b070c5d02",
+      "disagreements": 0,
+      "decision_denominator": 7200,
+      "discrepant_shots": [],
+      "equal_to_threshold": 0,
+      "selected_log": [],
+      "selected_fixed": []
+    }
+  },
+  "decision_hash_encoding": "7200 ASCII 0/1 digits, ascending shot/frame/zero-based ROI, no delimiters",
+  "focus_schema_version": 2,
+  "focus_source_batches": [
+    "241129_S23/P3",
+    "241129_S23/P4",
+    "241129_S23/P5",
+    "241129_S23/P6",
+    "241129_S23/P7",
+    "241129_S23/P8",
+    "241129_S23/P9",
+    "241129_S23/P10",
+    "241129_S23/P11",
+    "241129_S23/P12",
+    "241129_S23/P13"
+  ],
+  "joint_focus_integer_thresholds": [
+    6499,
+    6500
+  ],
+  "joint_focus_matching_all_holdout_decisions": [
+    6499,
+    6500
+  ]
+}
