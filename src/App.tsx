@@ -138,7 +138,7 @@ export function App() {
         <Readouts model={model} openInfo={showModel} />
       </div>
       {!showcase && <Analysis {...analysis} seek={playback.seek} />}
-      <section className="research-section" id="research-models" aria-labelledby="research-title" hidden={showcase}>
+      <section className="research-section" id="research-models" tabIndex={-1} aria-labelledby="research-title" hidden={showcase}>
         <div className="section-heading"><h2 id="research-title">运动模型与实验校准</h2></div>
         <MotionSection model={analysis.model} />
         <Calibration model={analysis.model} />

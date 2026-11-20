@@ -29,16 +29,22 @@ function currentView(fragment: string): Workspace {
 }
 
 function RouteFocus({ view, fragment }: { view: Workspace; fragment: string }) {
-  const previous = useRef<Workspace>(view);
+  const mountedView = useRef<Workspace | null>(null);
   useLayoutEffect(() => {
+    const previous = mountedView.current;
+    mountedView.current = view;
+    if (previous === view) {
+      // Mounted section links already receive native fragment focus before hashchange.
+      if (fragment === view || fragment === '') window.scrollTo(0, 0);
+      return;
+    }
     const section = (machineAnchors.has(fragment) || clockAnchors.has(fragment))
       ? document.getElementById(fragment) : null;
     if (section) {
-      if (!section.hasAttribute('tabindex')) section.tabIndex = -1;
       section.focus({ preventScroll: true });
       section.scrollIntoView({ block: 'start' });
-    } else if (previous.current !== view || fragment === view || fragment === '') {
-      if (previous.current !== view) {
+    } else {
+      if (previous !== null) {
         const heading = document.querySelector<HTMLElement>('main h1');
         if (heading) {
           heading.tabIndex = -1;
@@ -47,7 +53,6 @@ function RouteFocus({ view, fragment }: { view: Workspace; fragment: string }) {
       }
       window.scrollTo(0, 0);
     }
-    previous.current = view;
   }, [view, fragment]);
   return null;
 }
