@@ -1,0 +1,11 @@
+Id=knottnerus-p14-holdout-20261120t013854z.service
+SubState=exited
+Result=success
+ExecMainStartTimestamp=Fri 2026-11-20 09:40:54 CST
+ExecMainExitTimestamp=Fri 2026-11-20 09:40:55 CST
+ExecMainStatus=0
+MemoryPeak=38105088
+CPUUsageNSec=984074000
+CPUQuotaPerSecUSec=1s
+MemoryMax=1073741824
+MemorySwapMax=0
