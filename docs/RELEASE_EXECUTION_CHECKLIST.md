@@ -1,8 +1,20 @@
 # 整机数字孪生演示发布执行清单
 
-核对日期为 2026-11-19。发布范围是整机示意流程、Senoo 文献复现与合成验收、钟跃迁模拟。483/460 nm 保持为演示光路，正式装置配置待定。实测报告的通过状态以项目科研清单为准。
+本页记录网站部署、科研资料归档及同装置实测收件。483/460 nm 为演示光路，正式装置配置待定。[网站交付清单](WHOLE_MACHINE_DELIVERY.md) · [科研项目清单](PROJECT_CHECKLIST.md)
 
-## 发布顺序
+## 整机网站 v0.2.0
+
+| 验收项 | 核对结果 |
+| --- | --- |
+| 版本与来源 | 网站应用 v0.2.0。GitHub 功能提交 `0c7bcd2`、Sites 源提交 `be5f489ca6e3b64263f35fbe880aebdcb5af9dd4` 生成的 36 份站点文件逐字节一致。[合并记录 #21](https://github.com/seven-Jack/naqc-digital-twin/pull/21) · [v0.2.0 发布页](https://github.com/seven-Jack/naqc-digital-twin/releases/tag/v0.2.0) |
+| 回放与交互 | 220 项项目单元测试、41 项本机生产浏览器用例通过。托管候选的 214 项单元测试通过。窄屏旧锚点至证据页的 Tab 焦点回跳已修复，独立验证连续通过 8 次。 |
+| 托管部署 | Sites v7，部署 ID `appgdep_6b006773f2e48191bf9191486ad58402`。托管包共 37 个文件，含托管配置。公开部署保留原网址。[网站](https://naqc-digital-twin.stonynote14.chatgpt.site/) |
+| 公网验证 | 北京时间 2026-11-20 23:30 经 HTTP 核对 HTML 版本、模块入口和样式，其他 35/35 个站点文件与发布包 SHA-256 一致。Chromium 在线验证整机光路与读出回退、证据筛选与 Senoo 深链，以及窄屏钟跃迁导航，3/3 项通过。[逐文件校验回执](https://github.com/seven-Jack/naqc-digital-twin/releases/download/v0.2.0/live-static.json) |
+| 静态发布包 | `neutral-atom-digital-twin-v0.2.0.zip` 的 SHA-256 为 `6f2841e0e19dc09a7fc26b18b77135ea8b8cf9968a7fe0b4108c1c7da29f7d02`。解压后从目录启动静态 HTTP 服务即可使用。 |
+
+P19 的 22 个判据分别与 7,200 个位点帧日志完全吻合，两帧全空，入选组 0/0 不可估计。本批用于跨装置对照。Senoo CAL 继续收件，冻结后再开独立 VAL。[P19 知识库](../references/knowledge/knottnerus-s23-p19-holdout.md)
+
+## 2026-11-19 的 Sites v6 发布顺序
 
 - [x] 核对已上线版本和原有访问权限。现有公开站点部署为 Sites v5，源提交为 `817e91c6cd8faa893caaabc22f7cd176076cd0e5`。
 - [x] 在独立的 Sites 源副本冻结候选，提交 `3e4b1e742a2d9d0f6c4b206c672d210d0209f99f`。归档有 26 个文件，仅含托管配置与构建产物。上传前压缩包 SHA-256 为 `0de7c506bd6b66574d0ab30c78a304a828469fbbd366110f66c275eea7912795`。
