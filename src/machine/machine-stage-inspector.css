@@ -1,0 +1,39 @@
+.machine-inspector {
+  padding: 1rem;
+}
+.machine-inspector header,
+.machine-inspector header > div {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.machine-inspector header {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.machine-inspector header svg, .machine-inspector a {
+  color: var(--md-mint);
+}
+.machine-inspector h2 { margin: 0; font-size: 1rem; }
+.machine-inspector a { font-size: .875rem; text-underline-offset: .23em; }
+.machine-inspector dl {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr 1fr;
+  gap: .75rem 1rem;
+  margin: .9rem 0 0;
+}
+.machine-inspector dt, .machine-inspector details p {
+  color: var(--md-muted);
+  font-size: .8125rem;
+}
+.machine-inspector dd { margin: .25rem 0 0; font-size: .9rem; overflow-wrap: anywhere; }
+.machine-inspector details { margin-top: .9rem; padding-top: .65rem; border-top: 1px solid var(--md-line); }
+.machine-inspector summary { width: fit-content; cursor: pointer; color: var(--md-muted); font-size: .875rem; }
+.machine-inspector ul { list-style: none; margin: .7rem 0; padding: 0; }
+.machine-inspector li { display: grid; gap: .15rem; padding: .4rem 0; font-size: .85rem; }
+.machine-inspector li code { font: .8rem var(--mono); overflow-wrap: anywhere; }
+.machine-inspector details p { margin: .45rem 0 0; }
+@media (max-width: 500px) {
+  .machine-inspector dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .machine-inspector dl > :first-child { grid-column: 1 / -1; }
+}

@@ -1,37 +1,74 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import '@fontsource-variable/geist';
 import '@fontsource-variable/geist-mono';
+import { WorkspaceHeader, type Workspace } from './components/WorkspaceHeader';
+import { useHashFragment } from './state/useHashFragment';
+import type { MachineWorkspaceSession } from './machine/MachineDashboard';
 import './styles.css';
 
 const Clock = lazy(() => import('./App').then(module => ({ default: module.App })));
 const Machine = lazy(() => import('./machine/MachineDashboard').then(module => ({ default: module.MachineDashboard })));
 const Senoo = lazy(() => import('./machine/SenooApparatus').then(module => ({ default: module.SenooApparatus })));
-const clockTitle = '¹⁷¹Yb 钟跃迁数字孪生';
-const machineTitle = '中性原子量子计算机整机数字孪生';
-const senooTitle = 'Senoo ¹⁷¹Yb 装置回放';
+const Evidence = lazy(() => import('./machine/TwinEvidenceWorkspace').then(module => ({ default: module.TwinEvidenceWorkspace })));
 
-function currentView() {
-  if (window.location.hash === '#machine') return 'machine';
-  if (window.location.hash === '#senoo') return 'senoo';
-  if (window.location.hash === '#clock' || new URLSearchParams(window.location.search).get('demo') === 'compensation') return 'clock';
+const titles: Record<Workspace, string> = {
+  machine: '中性原子量子计算机整机数字孪生',
+  clock: '¹⁷¹Yb 钟跃迁数字孪生',
+  senoo: 'Senoo ¹⁷¹Yb 装置回放',
+  evidence: '整机证据 · 中性原子数字孪生',
+};
+const clockAnchors = new Set(['optical-controls', 'research-models']);
+const machineAnchors = new Set(['machine/config', 'machine/scene', 'machine/results']);
+
+function currentView(fragment: string): Workspace {
+  const [route] = fragment.split(/[/?]/);
+  if (route === 'machine' || route === 'senoo' || route === 'clock' || route === 'evidence') return route;
+  if (clockAnchors.has(fragment) || new URLSearchParams(location.search).get('demo') === 'compensation') return 'clock';
   return 'machine';
 }
 
+function RouteFocus({ view, fragment }: { view: Workspace; fragment: string }) {
+  const mountedView = useRef<Workspace | null>(null);
+  useLayoutEffect(() => {
+    const previous = mountedView.current;
+    mountedView.current = view;
+    if (previous === view) {
+      // Mounted section links already receive native fragment focus before hashchange.
+      if (fragment === view || fragment === '') window.scrollTo(0, 0);
+      return;
+    }
+    const section = (machineAnchors.has(fragment) || clockAnchors.has(fragment))
+      ? document.getElementById(fragment) : null;
+    if (section) {
+      section.focus({ preventScroll: true });
+      section.scrollIntoView({ block: 'start' });
+    } else {
+      if (previous !== null) {
+        const heading = document.querySelector<HTMLElement>('main h1');
+        if (heading) {
+          heading.tabIndex = -1;
+          heading.focus({ preventScroll: true });
+        }
+      }
+      window.scrollTo(0, 0);
+    }
+  }, [view, fragment]);
+  return null;
+}
+
 function DigitalTwin() {
-  const [view, setView] = useState(currentView);
-  useEffect(() => {
-    const onNavigate = () => setView(currentView());
-    window.addEventListener('hashchange', onNavigate);
-    return () => window.removeEventListener('hashchange', onNavigate);
-  }, []);
-  useEffect(() => {
-    document.title = view === 'clock' ? clockTitle : view === 'senoo' ? senooTitle : machineTitle;
-    window.scrollTo(0, 0);
-  }, [view]);
+  const fragment = useHashFragment().slice(1);
+  const machineSession = useRef<MachineWorkspaceSession | null>(null);
+  const view = currentView(fragment);
+  useEffect(() => { document.title = titles[view]; }, [view]);
 
   return <Suspense fallback={<p className="twin-loading" role="status">正在加载数字孪生…</p>}>
-    {view === 'clock' ? <Clock /> : view === 'senoo' ? <Senoo /> : <Machine />}
+    {view === 'clock' && <Clock />}
+    {view === 'machine' && <Machine session={machineSession} />}
+    {view === 'senoo' && <Senoo />}
+    {view === 'evidence' && <><WorkspaceHeader current="evidence" /><Evidence /></>}
+    <RouteFocus view={view} fragment={fragment} />
   </Suspense>;
 }
 

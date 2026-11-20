@@ -1,5 +1,6 @@
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, Atom, Download, Expand, FlaskConical, Info, Minimize2, RotateCcw } from 'lucide-react';
+import { Download, Expand, FlaskConical, Info, Minimize2, RotateCcw } from 'lucide-react';
+import { WorkspaceHeader } from './components/WorkspaceHeader';
 import { atomicData, assumptions } from './data/atomicData';
 import { calculateModel, defaults, exportSnapshot, MODEL_VERSION, normalizeParameters, type PhysicsParameterState } from './physics/model';
 import { kHz, us } from './physics/units';
@@ -91,13 +92,8 @@ export function App() {
   const deferred = useDeferredValue(liveAnalysis);
   const analysis = deferred.model === model ? liveAnalysis : deferred;
   return <div className={`app ${showcase ? 'showcase' : ''}`}>
-    <header className="topbar">
-      <div className="brand">
-        <div className="brand-mark"><Atom size={24} strokeWidth={1.6} /></div>
-        <div><div className="brand-title">¹⁷¹Yb <span>钟跃迁数字孪生</span></div><div className="brand-subtitle">光镊俘获与钟跃迁</div></div>
-      </div>
+    <WorkspaceHeader current="clock">
       <div className="top-actions">
-        <a href="#machine" className="clock-home-link"><ArrowLeft size={13} />返回整机演示</a>
         <div className="mode-switch" role="group" aria-label="显示模式">
           <button aria-pressed={!showcase} className={!showcase ? 'selected' : ''} onClick={() => void setShowcaseMode(false)}><FlaskConical size={14} /> 研究</button>
           <button aria-pressed={showcase} className={showcase ? 'selected' : ''} onClick={() => void setShowcaseMode(!showcase)}>
@@ -108,7 +104,7 @@ export function App() {
         <button className="nav-button" onClick={showModel} aria-label="模型说明"><Info size={15} /><span>模型说明</span></button>
         <button className="export-button" aria-label="导出数据" onClick={download}><Download size={15} /><span>导出</span></button>
       </div>
-    </header>
+    </WorkspaceHeader>
     <main>
       <div className="intro">
         <div>
@@ -142,7 +138,7 @@ export function App() {
         <Readouts model={model} openInfo={showModel} />
       </div>
       {!showcase && <Analysis {...analysis} seek={playback.seek} />}
-      <section className="research-section" id="research-models" aria-labelledby="research-title" hidden={showcase}>
+      <section className="research-section" id="research-models" tabIndex={-1} aria-labelledby="research-title" hidden={showcase}>
         <div className="section-heading"><h2 id="research-title">运动模型与实验校准</h2></div>
         <MotionSection model={analysis.model} />
         <Calibration model={analysis.model} />

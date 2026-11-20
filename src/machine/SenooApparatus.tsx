@@ -1,8 +1,9 @@
 import {
-  ArrowUpRight, Atom, AudioWaveform, BarChart3, Boxes, Camera, Crosshair, Download, Focus, ListOrdered, Move, Pause, Play,
+  ArrowUpRight, Atom, BarChart3, Camera, Crosshair, Download, Focus, ListOrdered, Move, Pause, Play,
   RotateCcw, ScanLine, SkipForward, Snowflake, Upload, Waves, Zap,
 } from 'lucide-react';
-import { useRef, useState, type CSSProperties } from 'react';
+import { WorkspaceHeader } from '../components/WorkspaceHeader';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { SENOO_APPARATUS_PROFILE, SENOO_REPLAY_LENGTH, SENOO_REPLAY_STAGES } from '../data/senooApparatus';
 import { SENOO_CZ_BELL_SOURCE } from '../data/senooCzBellSource';
 import { SENOO_CZ_CHARACTERIZATION_SOURCE } from '../data/senooCzCharacterization';
@@ -21,6 +22,7 @@ import {
 } from '../physics/senooReplay';
 import { SenooOpticalScene } from '../scene/SenooOpticalScene';
 import { usePlayback } from '../state/usePlayback';
+import { useHashFragment } from '../state/useHashFragment';
 import { SenooBellReplay } from './SenooBellReplay';
 import { SenooCzCharacterization, type SenooCzSelectedDepth } from './SenooCzCharacterization';
 import { SenooCzWaveformInput } from './SenooCzWaveformInput';
@@ -73,8 +75,16 @@ const replayModes = {
 } as const;
 type ReplayMode = keyof typeof replayModes;
 
+function navigateToMode(mode: ReplayMode) {
+  window.location.hash = mode === 'readout' ? '#senoo' : `#senoo/${mode}`;
+}
+
 export function SenooApparatus() {
-  const [mode, setMode] = useState<ReplayMode>('readout');
+  const fragment = useHashFragment();
+  const [path, query] = fragment.split('?');
+  const modeName = path.slice('#senoo/'.length);
+  const mode: ReplayMode = Object.hasOwn(replayModes, modeName) ? modeName as ReplayMode : 'readout';
+  const panel = new URLSearchParams(query).get('panel');
   const [pxpSelection, setPxpSelection] = useState(createSenooPxpSelection);
   const [czSelection, setCzSelection] = useState(createSenooCzBellSelection);
   const [czDepth, setCzDepth] = useState<SenooCzSelectedDepth>(0);
@@ -93,12 +103,26 @@ export function SenooApparatus() {
   const complete = frame.position === SENOO_REPLAY_LENGTH;
   const activeMode = replayModes[mode];
 
+  useEffect(() => {
+    if (mode !== 'readout' && playback.running) playback.seek(playback.time);
+  }, [mode, playback.running, playback.seek, playback.time]);
+
+  useEffect(() => {
+    if (mode !== 'readout' || (panel !== 'transport' && panel !== 'workbook')) return;
+    const id = requestAnimationFrame(() => {
+      const element = document.getElementById(`senoo-intake-${panel}`);
+      element?.focus({ preventScroll: true });
+      element?.scrollIntoView({ block: 'start' });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [mode, panel]);
+
   function selectMode(nextMode: ReplayMode) {
     if (nextMode === mode) return;
     importId.current++;
     setFileStatus(null);
     playback.seek(frame.position);
-    setMode(nextMode);
+    navigateToMode(nextMode);
   }
 
   function updatePxpSelection(selection: SenooPxpReplaySelection) {
@@ -123,10 +147,11 @@ export function SenooApparatus() {
 
   async function openReplay(file: File) {
     const request = ++importId.current;
+    const originalRoute = window.location.hash;
     setFileStatus(null);
     try {
       const text = await file.text();
-      if (request !== importId.current) return;
+      if (request !== importId.current || window.location.hash !== originalRoute) return;
       let header: unknown;
       try {
         header = JSON.parse(text);
@@ -138,22 +163,22 @@ export function SenooApparatus() {
         const saved = importSenooPxpReplayRecord(text);
         playback.seek(frame.position);
         setPxpSelection(saved.selection);
-        setMode('pxp');
+        navigateToMode('pxp');
       } else if (schema === 'senoo-cz-bell-replay') {
         const saved = importSenooCzBellReplayRecord(text);
         playback.seek(frame.position);
         setCzSelection(saved.selection);
-        setMode('cz');
+        navigateToMode('cz');
       } else {
         const saved = importSenooReplayRecord(text);
         setGroupId(saved.sample.groupId);
         setSourceIndex(saved.sample.sourceIndex);
         playback.seek(saved.position);
-        setMode('readout');
+        navigateToMode('readout');
       }
       setFileStatus({ kind: 'loaded', text: file.name });
     } catch (error) {
-      if (request !== importId.current) return;
+      if (request !== importId.current || window.location.hash !== originalRoute) return;
       setFileStatus({ kind: 'error', text: error instanceof Error ? error.message : '读取回放文件失败。' });
     }
   }
@@ -187,16 +212,7 @@ export function SenooApparatus() {
 
   return <div className="md-app ss-app" data-replay-mode={mode}
     data-apparatus-profile={mode === 'readout' ? SENOO_APPARATUS_PROFILE.id : undefined}>
-    <header className="md-topbar">
-      <div className="md-topbar-inner">
-        <a className="md-brand" href="#machine"><span><Atom size={23} strokeWidth={1.5} /></span><div>NAQC 数字孪生<small>NEUTRAL ATOM SYSTEM</small></div></a>
-        <nav aria-label="演示导航">
-          <a href="#machine"><Boxes size={15} />整机演示</a>
-          <a className="md-nav-active" href="#senoo" aria-current="page"><Crosshair size={15} />Senoo 装置</a>
-          <a href="#clock"><AudioWaveform size={15} />钟跃迁子系统<ArrowUpRight size={12} /></a>
-        </nav>
-      </div>
-    </header>
+    <WorkspaceHeader current="senoo" />
     <main className="md-main ss-main">
       <div className="md-intro ss-intro">
         <div>
@@ -300,8 +316,8 @@ export function SenooApparatus() {
           </div>
         </section>
       </div>}
-      <SenooTransportReplayPanel />
-      <div hidden={mode !== 'readout'}><SenooMeasurementImport /></div>
+      <div id="senoo-intake-transport" tabIndex={-1}><SenooTransportReplayPanel /></div>
+      <div id="senoo-intake-workbook" tabIndex={-1} hidden={mode !== 'readout'}><SenooMeasurementImport /></div>
     </main>
   </div>;
 }

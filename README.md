@@ -6,6 +6,13 @@
 
 在浏览器中查看以 ¹⁷¹Yb 真机流程为依据的光镊装载、阱间交接、量子门与荧光读出。整机演示使用示意几何、理想量子电路与可复现的模拟采样。
 
+| 想做什么 | 入口 |
+| --- | --- |
+| 配置电路与批次，查看阵列、当前设备和逐轮读出 | [整机工作区](https://naqc-digital-twin.stonynote14.chatgpt.site/#machine) |
+| 从文献源点回放 767 nm 装置的双曝光、Rabi、阻塞、CZ 和 Bell 映射 | [Senoo 装置](https://naqc-digital-twin.stonynote14.chatgpt.site/#senoo) |
+| 调节钟光失谐和补偿，检查布居与 Bloch 矢量 | [钟跃迁子系统](https://naqc-digital-twin.stonynote14.chatgpt.site/#clock) |
+| 按子系统查找证据、数据与独立验收所缺记录 | [整机证据](https://naqc-digital-twin.stonynote14.chatgpt.site/#evidence) |
+
 整机导航中的 **Senoo 装置** 提供 767 nm 平台的文献回放，包括双曝光读出、单原子 Rabi、双原子阻塞、CZ 表征及 Bell 态制备与映射。可沿时间轴查看光路、原子态和观测，或用 `/#senoo` 直达。实际门波形、同装置读出标定和独立验收仍待实测。 [装置依据与数据缺口](docs/SENOO_APPARATUS.md)
 
 同页的 **Senoo 实测工作簿** 本地导入逐轮 XLSX，检查曝光配对、时序与筛选分母。 [模板与合成验收](docs/SENOO_APPARATUS.md#导入与校验)
@@ -32,6 +39,8 @@ npm run preview
 2. 启动播放或逐阶段观察首轮装载、重排、储备阱与科学阱交接、门、基变换及荧光读出。可旋转整机视图或聚焦阵列。
 3. 比较理想概率与批次直方图。Z 基查看布居，X 基查看奇偶相关。可调装载概率、末端丢失与单比特读出翻转。导出的 JSON 保留每次尝试的状态和有效位串。
 4. 在「真机实验依据」查看有条件和出处的公开实验结果。在「钟跃迁子系统」进入原有模拟器，或用 `/#clock` 和 `/?demo=compensation` 直达。
+
+沿时间轴选择一个门或曝光阶段，可在设备面板核对本帧的光路、寻址比特和已可用的相机观测。从「查看子系统依据」进入证据页，再用浏览器后退可以返回原运行和原时刻。483/460 nm 是演示配置，正式装置配置待定。
 
 ## 钟跃迁子系统
 
@@ -68,5 +77,6 @@ npm run build
 - [验收记录](docs/VALIDATION.md)
 - [架构](docs/ARCHITECTURE.md)
 - [扩展路线](docs/ROADMAP.md)
+- [整机网站交付清单、工业孪生参考与六项实测依赖](docs/WHOLE_MACHINE_DELIVERY.md)
 
 在科学分析下方展开「一维量子化运动」，可对比同一脉冲的静止原子解与热平均结果，查看载波、边带和基底截断差。展开「实验光移校准」可下载空白 CSV 模板，填写来源并导入实验光移，检查拟合、理论差异和留出验证残差。数据在当前浏览器会话中处理。
