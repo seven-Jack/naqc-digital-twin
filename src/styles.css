@@ -34,37 +34,8 @@ sub { font-size: 0.76em; vertical-align: -0.18em; }
 .twin-loading { display: grid; place-items: center; min-height: 100vh; color: var(--muted); font-size: 14px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .app { min-height: 100vh; background: radial-gradient(ellipse 70% 520px at 43% 0%, #101b2d 0%, #080d16 83%); }
-.topbar {
-  min-height: 66px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 22px;
-  padding: 0 max(26px, calc((100% - 1680px) / 2 + 24px));
-  border-bottom: 1px solid var(--line);
-  background: #0b111c;
-}
-.brand, .top-actions, .brand-mark, .mode-switch, .nav-button, .export-button, .intro-tags { display: flex; align-items: center; }
-.brand { gap: 11px; min-width: 0; }
-.brand-mark {
-  flex: 0 0 39px;
-  height: 39px;
-  justify-content: center;
-  border: 1px solid #30515f;
-  color: #79e8fa;
-  border-radius: 11px;
-  background: radial-gradient(circle at 40% 20%, #1b3b4b, #0c1c2b 85%);
-  box-shadow: inset 0 0 14px #3edaf417;
-}
-.brand-title { font-weight: 710; font-size: 14px; letter-spacing: 0.075em; white-space: nowrap; }
-.brand-title span { font-weight: 610; }
-.brand-subtitle { color: var(--muted); font-size: 11px; margin-top: 3px; }
+.top-actions, .mode-switch, .nav-button, .export-button, .intro-tags { display: flex; align-items: center; }
 .top-actions { gap: 10px; }
-.clock-home-link {
-  display: inline-flex; align-items: center; gap: 5px; color: #a6d7e1; white-space: nowrap;
-  padding: 7px 8px; font-size: 11px; border: 1px solid #28404e; border-radius: 6px; text-decoration: none;
-}
-.clock-home-link:hover { background: #142c38; }
 .mode-switch { gap: 3px; padding: 4px; background: #080e17; border: 1px solid #202f40; border-radius: 9px; }
 .mode-switch button, .nav-button, .export-button {
   display: inline-flex;
@@ -376,7 +347,6 @@ dialog::backdrop { background: #030711cc; backdrop-filter: blur(4px); }
 @media (max-width: 1120px) {
   .workspace { grid-template-columns: 206px minmax(0, 1fr) 202px; gap: 9px; }
   main { padding: 17px 13px 0; }
-  .topbar { padding: 0 14px; }
   .control-section, .readout-block { padding-left: 10px; padding-right: 10px; }
   .view-tabs button { padding-left: 5px; padding-right: 5px; }
   .site-badge span { display: none; }
@@ -384,7 +354,6 @@ dialog::backdrop { background: #030711cc; backdrop-filter: blur(4px); }
 }
 @media (max-width: 920px) {
   .top-actions { gap: 5px; }
-  .brand-title { font-size: 12px; }
   .nav-button { padding: 7px; }
   .nav-button span { display: none; }
   .workspace { grid-template-columns: minmax(180px, 225px) minmax(0, 1fr); }
@@ -394,10 +363,8 @@ dialog::backdrop { background: #030711cc; backdrop-filter: blur(4px); }
   .viewport { height: clamp(355px, 60vw, 515px); }
 }
 @media (max-width: 640px) {
-  .topbar { min-height: 0; padding: 9px 10px 7px; flex-wrap: wrap; gap: 8px; }
   .top-actions { width: 100%; flex-wrap: wrap; }
   .mode-switch { margin-right: auto; }
-  .brand-subtitle { font-size: 10px; }
   .intro { align-items: start; flex-direction: column; gap: 10px; margin-bottom: 11px; }
   .intro-tags { gap: 5px; }
   .intro h1 { font-size: 26px; }

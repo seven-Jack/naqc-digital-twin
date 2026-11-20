@@ -1,9 +1,11 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import {
   Aperture, ArrowDownToLine, ArrowDownUp, ArrowUpRight, Atom, AudioWaveform, BookOpen, Boxes, Camera, ChevronDown, ChevronRight,
   CircleDot, CircuitBoard, Crosshair, Focus, Info, ListOrdered, Move, Pause, Play, RotateCcw,
-  ScanLine, SkipForward, Snowflake, Zap, type LucideIcon,
+  ScanLine, SkipBack, SkipForward, Snowflake, Upload, Zap, type LucideIcon,
 } from 'lucide-react';
+import { WorkspaceHeader } from '../components/WorkspaceHeader';
+import { MachineStageInspector } from './MachineStageInspector';
 import { HardwareEvidence } from './HardwareEvidence';
 import { SenooReadoutSource } from './SenooReadoutSource';
 import { SenooPopulationSource } from './SenooPopulationSource';
@@ -49,7 +51,7 @@ function SectionInfo() {
   return <div className="md-model-info">
     <p>演示以 Muniz 等的 ¹⁷¹Yb 基态核自旋装置为流程参考。光路为示意，时间轴使用浏览器播放时间。</p>
     <ul>
-      <li>每次尝试独立装载和重排。只有计算位点完全填满，才执行量子线路。三维场景跟踪第 1 次尝试，右侧统计汇总整批尝试。</li>
+      <li>每次尝试独立装载和重排。只有计算位点完全填满，才执行量子线路。三维场景跟踪当前尝试，批次统计汇总截至回放位置的全部尝试。</li>
       <li>Bell 一次补位流程用合成占位观测触发至多一次储备区搬运。观测、判决和跳过操作随播放时间显示，复查填满后继续线路。</li>
       <li>门操作在科学阱中进行。测量 X 基时，在回到储备阱前对每个比特加一个 H，把 X 的本征态转成可用荧光判别的 Z 基布居。H 可用局部拉曼 Xπ/₂ 和虚拟 Z 旋转编译。</li>
       <li>每个已装配寄存器的原子独立发生模拟丢失，由理想末端存活检查标记。完整寄存器按 Born 概率采样，并独立模拟探测位翻转。</li>
@@ -123,7 +125,7 @@ function RunSettings({ config, protocol, update, setProtocol, imported, sourceCo
   imported: boolean;
   sourceControl: ReactNode;
 }) {
-  return <section className="md-panel md-settings">
+  return <section id="machine/config" tabIndex={-1} aria-label="运行配置" className="md-panel md-settings">
     <PanelHeader icon={CircuitBoard} aside={<span className="md-panel-hint">{imported ? '本地记录' : '仿真输入'}</span>}>运行配置</PanelHeader>
     {sourceControl}
     <fieldset className="md-settings-body" aria-label="运行参数" disabled={imported}>
@@ -226,7 +228,7 @@ function Readout({ run, frame, download, selectAttempt }: {
   const evenCount = run.outcomes.reduce((total, outcome, index) =>
     outcome.bitstring.replace(/0/g, '').length % 2 === 0 ? total + frame.outcomeCounts[index] : total, 0);
   const xCorrelation = frame.visibleShots ? (2 * evenCount / frame.visibleShots - 1).toFixed(3) : '—';
-  return <section className="md-panel md-readout" data-testid="machine-results">
+  return <section id="machine/results" tabIndex={-1} aria-label="批次读出" className="md-panel md-readout" data-testid="machine-results">
     <PanelHeader icon={AudioWaveform} aside={<button type="button" className="md-icon-button" aria-label="导出运行数据"
       title="导出运行数据" onClick={download} disabled={!frame.complete}><ArrowDownToLine size={15} /></button>}>批次测量 · {run.config.basis} 基</PanelHeader>
     <div className="md-readout-body">
@@ -266,16 +268,25 @@ function Readout({ run, frame, download, selectAttempt }: {
   </section>;
 }
 
-export function MachineDashboard() {
-  const [config, setConfig] = useState(DEFAULT_MACHINE_CONFIG);
-  const [elapsed, setElapsed] = useState(0);
+export interface MachineWorkspaceSession {
+  config: MachineConfig;
+  elapsed: number;
+  speed: number;
+  demoProtocol: MachineProtocol;
+  imported: { name: string; run: MachineRun } | null;
+  selectedAttempt: number;
+}
+
+export function MachineDashboard({ session }: { session: RefObject<MachineWorkspaceSession | null> }) {
+  const [config, setConfig] = useState(() => session.current?.config ?? DEFAULT_MACHINE_CONFIG);
+  const [elapsed, setElapsed] = useState(() => session.current?.elapsed ?? 0);
   const [playing, setPlaying] = useState(false);
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(() => session.current?.speed ?? 1);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [demoProtocol, setProtocol] = useState<MachineProtocol>('standard');
-  const [imported, setImported] = useState<{ name: string; run: MachineRun } | null>(null);
+  const [demoProtocol, setProtocol] = useState<MachineProtocol>(() => session.current?.demoProtocol ?? 'standard');
+  const [imported, setImported] = useState(() => session.current?.imported ?? null);
   const [importError, setImportError] = useState('');
-  const [selectedAttempt, setSelectedAttempt] = useState(0);
+  const [selectedAttempt, setSelectedAttempt] = useState(() => session.current?.selectedAttempt ?? 0);
   const readId = useRef(0);
   const run = useMemo(() => imported?.run ?? createMachineRun(config, MUNIZ_DEMO_PROFILE, demoProtocol), [config, demoProtocol, imported]);
   const frame = useMemo(() => machineFrame(run, elapsed, selectedAttempt), [run, elapsed, selectedAttempt]);
@@ -283,6 +294,11 @@ export function MachineDashboard() {
   const { rows, columns } = profile.array;
   const { protocol, timeline: { stages } } = run.plan;
   const attemptNumber = frame.attemptIndex + 1;
+
+  // Keep the current run in this tab when a user consults a source; the scene unmounts and playback pauses.
+  useLayoutEffect(() => {
+    session.current = { config, elapsed, speed, demoProtocol, imported, selectedAttempt };
+  }, [session, config, elapsed, speed, demoProtocol, imported, selectedAttempt]);
 
   useEffect(() => {
     if (!playing) return;
@@ -393,29 +409,27 @@ export function MachineDashboard() {
   };
 
   return <div className="md-app" data-machine-profile={profile.id} data-machine-protocol={protocol}>
-    <header className="md-topbar">
-      <div className="md-topbar-inner">
-        <a className="md-brand" href="#machine"><span><Atom size={23} strokeWidth={1.5} /></span><div>NAQC 数字孪生<small>NEUTRAL ATOM SYSTEM</small></div></a>
-        <nav aria-label="演示导航">
-          <a className="md-nav-active" href="#machine" aria-current="page"><Boxes size={15} />整机演示</a>
-          <a href="#senoo"><Crosshair size={15} />Senoo 装置</a>
-          <a href="#clock"><AudioWaveform size={15} />钟跃迁子系统<ArrowUpRight size={12} /></a>
-        </nav>
-        <button type="button" className="md-info-button" onClick={() => setInfoOpen(true)}><Info size={15} /> 模型说明</button>
-      </div>
-    </header>
+    <WorkspaceHeader current="machine">
+      <button type="button" className="md-info-button" onClick={() => setInfoOpen(true)}><Info size={15} />模型说明</button>
+    </WorkspaceHeader>
     <main className="md-main">
       <div className="md-intro">
         <div>
           <p className="md-intro-kicker"><i /> ¹⁷¹Yb <span>/</span> <strong>{profile.label}</strong></p>
-          <h1>{machineTitle}</h1>
+          <h1 className="md-machine-title">中性原子量子计算机<wbr />整机数字孪生</h1>
           <p className="md-intro-subtitle" lang="en">Neutral-Atom Quantum Computer Digital Twin</p>
-          <p className="md-intro-description">用基态核自旋编码，演示从光镊装载到量子门与荧光读出的完整流程。</p>
+          <p className="md-intro-description">沿光镊装载、原子重排、量子门与荧光读出，查看同一时刻的装置和测量结果。</p>
         </div>
         <div className="md-intro-actions">
           <button type="button" className="md-evidence-link" onClick={openEvidence}><BookOpen size={14} />真机实验依据</button>
           <div className={`md-run-status ${playing ? 'md-running' : ''}`}><i />{status}</div>
         </div>
+      </div>
+      <div className="md-run-strip">
+        <p><CircuitBoard size={16} aria-hidden="true" /><strong>{run.circuit.label}</strong><span>{run.circuit.qubits} 比特 · {run.config.basis} 基 · {run.config.shots} {imported ? '条导入记录' : '次合成尝试'}</span></p>
+        <nav aria-label="本次运行">
+          <a href="#machine/config">配置电路</a><a href="#machine/scene">三维回放</a><a href="#machine/results">批次读出</a>
+        </nav>
       </div>
       <div className="md-layout">
         <aside className="md-workflow-column">
@@ -431,7 +445,7 @@ export function MachineDashboard() {
           </section>
         </aside>
         <div className="md-visual-column">
-          <section className="md-panel md-scene-panel">
+          <section id="machine/scene" tabIndex={-1} aria-label="整机光路回放" className="md-panel md-scene-panel">
             <PanelHeader icon={Atom} aside={<span className="md-stage-indicator" data-testid="machine-stage" data-stage-id={frame.stage.id}>
               <i />{stageNumber} · {frame.stage.label}
             </span>}>整机光路</PanelHeader>
@@ -447,13 +461,17 @@ export function MachineDashboard() {
               </div>
               <div className="md-timeline">
                 <input type="range" aria-label="演示时间轴" min={0} max={run.durationMs} step="any" value={frame.elapsedMs} style={rangeFill(frame.elapsedMs, run.durationMs)}
+                  aria-valuetext={`${(frame.elapsedMs / 1000).toFixed(1)} 秒，${frame.stage.label}`}
                   onChange={event => seek(Number(event.target.value))} />
-                <code>{(frame.elapsedMs / 1000).toFixed(1)} / {(run.durationMs / 1000).toFixed(1)} s</code>
+                <code title="浏览器演示时间">演示 {(frame.elapsedMs / 1000).toFixed(1)} / {(run.durationMs / 1000).toFixed(1)} s</code>
               </div>
               <div className="md-controls">
                 <button type="button" className="md-play-button" onClick={play}>{playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
                   {playing ? '暂停' : frame.complete ? '重新演示' : frame.elapsedMs ? '继续演示' : '启动演示'}</button>
+                <button type="button" onClick={() => seek(frame.complete ? frame.stageStartMs : stages[Math.max(0, frame.stageIndex - 1)].startMs)}
+                  disabled={frame.elapsedMs === 0}><SkipBack size={15} />上一阶段</button>
                 <button type="button" onClick={() => seek(frame.stageEndMs)} disabled={frame.complete}><SkipForward size={15} />下一阶段</button>
+                <button type="button" onClick={() => seek(run.durationMs)} disabled={frame.complete}>批次末帧</button>
                 <button type="button" onClick={() => seek(0)}><RotateCcw size={15} />重置</button>
                 <label className="md-speed"><span className="sr-only">播放速度</span>
                   <select aria-label="播放速度" value={speed} onChange={event => setSpeed(Number(event.target.value))}>
@@ -463,12 +481,13 @@ export function MachineDashboard() {
               </div>
             </div>
           </section>
+          <MachineStageInspector run={run} frame={frame} />
           <CircuitDiagram run={run} frame={frame} />
         </div>
         <aside className="md-run-column">
           <RunSettings config={run.config} protocol={protocol} update={update} setProtocol={changeProtocol} imported={imported !== null}
             sourceControl={<><div className="md-run-source">
-              <label>导入运行 JSON<input type="file" accept=".json,application/json" onChange={event => {
+              <label className="md-import-run"><Upload size={14} aria-hidden="true" />导入运行 JSON<input className="sr-only" type="file" accept=".json,application/json" onChange={event => {
                 const file = event.currentTarget.files?.[0];
                 event.currentTarget.value = '';
                 if (file) void loadRecord(file);
