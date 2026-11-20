@@ -5,58 +5,15 @@ import type { MachineSceneProfile } from '../data/machineSceneProfile';
 import { glowTexture, gridLines } from './arrayGeometry';
 import type { MachineSceneFrame } from './machineSceneFrame';
 
+import { positionEquipmentLabels } from './machineSceneLabels';
+import { EquipmentAssembly } from './machineEquipmentAssembly';
+import { atomicSource, aodSystem, basic, box, colors, imagingSystem, laserSystem, outline, segment, slmSystem, table, tableY, vacuumChamber, vector } from './machineHardware';
+import type { EquipmentId } from '../data/machineEquipment';
+
 export type MachineView = 'machine' | 'array';
 
-const colors = {
-  atom: '#63f6cd', qubit: '#b49dff', bright: '#ffc081', dark: '#586887',
-  edge: '#647f99',
-};
-
-const tableY = -1.75;
-
-const vector = (x: number, y: number, z: number) => new T.Vector3(x, y, z);
 const beamAxis = vector(0, 1, 0);
 const beamDirection = new T.Vector3();
-
-function basic(color: string, opacity = 1) {
-  return new T.MeshBasicMaterial({ color, opacity, transparent: opacity < 1, depthWrite: opacity === 1 });
-}
-
-function metal(color: string, metalness = 0.42) {
-  return new T.MeshStandardMaterial({ color, roughness: 0.38, metalness });
-}
-
-function box(width: number, height: number, depth: number, material: T.Material, x: number, y: number, z: number) {
-  const mesh = new T.Mesh(new T.BoxGeometry(width, height, depth), material);
-  mesh.position.set(x, y, z);
-  return mesh;
-}
-
-function outline(mesh: T.Mesh, color: string, opacity = 0.37) {
-  mesh.add(new T.LineSegments(new T.EdgesGeometry(mesh.geometry, 24),
-    new T.LineBasicMaterial({ color, transparent: true, opacity, depthWrite: false })));
-  return mesh;
-}
-
-function cylinder(radius: number, height: number, material: T.Material, x: number, y: number, z: number, sides = 48) {
-  const mesh = new T.Mesh(new T.CylinderGeometry(radius, radius, height, sides), material);
-  mesh.position.set(x, y, z);
-  return mesh;
-}
-
-function ring(radius: number, tube: number, material: T.Material, x: number, y: number, z: number, sides = 64) {
-  const mesh = new T.Mesh(new T.TorusGeometry(radius, tube, 8, sides).rotateX(-Math.PI / 2), material);
-  mesh.position.set(x, y, z);
-  return mesh;
-}
-
-function segment(from: T.Vector3, to: T.Vector3, radius: number, material: T.Material, sides = 12) {
-  const difference = to.clone().sub(from);
-  const mesh = new T.Mesh(new T.CylinderGeometry(radius, radius, difference.length(), sides), material);
-  mesh.position.copy(from).lerp(to, 0.5);
-  mesh.quaternion.setFromUnitVectors(vector(0, 1, 0), difference.normalize());
-  return mesh;
-}
 
 function opticalPath(parent: T.Group, points: T.Vector3[], color: string, width = 0.12) {
   const core = new T.MeshBasicMaterial({
@@ -91,200 +48,17 @@ function focusBeam(color: string, endRadius: number, startRadius: number, opacit
   return beam;
 }
 
-function table() {
-  const table = new T.Group();
-  const rails = metal('#29384e');
-  const panels = metal('#18283d');
-  const plate = metal('#182538', 0.13);
-  const bolts = metal('#66859e');
-  table.add(
-    outline(box(18.95, 0.18, 7.36, rails, 0, tableY, 0), '#638ca9', 0.5),
-    outline(box(18.78, 0.43, 7.18, panels, 0, tableY - 0.3, 0), '#38516d', 0.7),
-    outline(box(18.72, 0.09, 7.10, plate, 0, tableY + 0.13, 0), '#426683', 0.75),
-  );
-  const mountingLines: number[] = [];
-  const top = tableY + 0.177;
-  for (let x = -9.2; x <= 9.3; x += 0.5) mountingLines.push(x, top, -3.46, x, top, 3.46);
-  for (let z = -3.44; z <= 3.45; z += 0.5) mountingLines.push(-9.23, top, z, 9.23, top, z);
-  table.add(new T.LineSegments(new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(mountingLines, 3)),
-    new T.LineBasicMaterial({ color: '#405b74', transparent: true, opacity: 0.32 })));
-  const feet = metal('#203245');
-  for (const x of [-8.56, 8.56]) {
-    for (const z of [-2.88, 2.88]) {
-      table.add(cylinder(0.13, 0.035, bolts, x, top, z, 8),
-        box(0.72, 0.29, 0.69, feet, x, tableY - 0.64, z));
-    }
-  }
-  table.add(box(17.4, 0.018, 0.015, basic('#254a68'), 0, tableY - 0.21, 3.6));
-  const tableSignal = basic('#46a4b8');
-  for (const x of [-8.9, -8.76, -8.62, 8.9]) {
-    table.add(box(0.055, 0.07, 0.025, tableSignal, x, tableY - 0.33, 3.60));
-  }
-  return table;
-}
-
-function vacuumChamber(glowMap: T.Texture, reservoirColor: string) {
-  const chamber = new T.Group();
-  const wall = new T.Mesh(new T.CylinderGeometry(2.41, 2.41, 2.29, 12, 1, true),
-    new T.MeshBasicMaterial({ color: '#7cb8e2', transparent: true, opacity: 0.055, side: T.DoubleSide, depthWrite: false }));
-  wall.position.y = 0.15;
-  chamber.add(wall);
-  const supports = metal('#445d73');
-  const base = metal('#273d51');
-  chamber.add(
-    outline(cylinder(2.67, 0.23, base, 0, -1.36, 0, 12), colors.edge),
-    outline(cylinder(2.49, 0.18, supports, 0, -1.17, 0, 12), colors.edge),
-    ring(2.42, 0.05, basic('#79a2bc', 0.71), 0, -0.98, 0, 12),
-    ring(2.43, 0.10, supports, 0, 1.21, 0, 12),
-    ring(2.52, 0.042, basic('#658fab', 0.8), 0, 1.29, 0, 12),
-    ring(2.35, 0.018, basic('#7da3c9', 0.41), 0, 1.27, 0, 12),
-  );
-  const seamMaterial = basic('#7299b3', 0.37);
-  for (let index = 0; index < 12; index++) {
-    const angle = index * Math.PI / 6;
-    const x = Math.sin(angle) * 2.43;
-    const z = Math.cos(angle) * 2.43;
-    chamber.add(segment(vector(x, -0.98, z), vector(x, 1.24, z), 0.018, seamMaterial, 4));
-    chamber.add(cylinder(0.062, 0.055, base, x, 1.305, z, 6));
-  }
-  const pumpDirection = vector(0, 0, -1);
-  const collar = metal('#354d67');
-  chamber.add(segment(vector(0, 0.39, -2.14), vector(0, 0.39, -3.16), 0.40, base, 24),
-    segment(vector(0, 0.39, -2.91), vector(0, 0.39, -3.16), 0.50, collar, 24));
-  const pump = cylinder(0.32, 0.09, basic('#19283d'), 0, 0.39, -3.18);
-  pump.quaternion.setFromUnitVectors(vector(0, 1, 0), pumpDirection);
-  chamber.add(pump);
-  const trapObjective = metal('#335464');
-  chamber.add(cylinder(0.57, 0.36, trapObjective, 0, -1.1, 0),
-    cylinder(0.45, 0.33, trapObjective, 0, -0.79, 0), ring(0.38, 0.041, basic(reservoirColor, 0.49), 0, -0.605, 0));
-  const halo = new T.Sprite(new T.SpriteMaterial({
-    map: glowMap, color: reservoirColor, transparent: true, opacity: 0.32, blending: T.AdditiveBlending, depthWrite: false,
-  }));
-  halo.position.set(0, 0.12, 0);
-  halo.scale.set(4.6, 2.8, 1);
-  chamber.add(halo);
-  return chamber;
-}
-
-function atomicSource() {
-  const source = new T.Group();
-  const housing = metal('#304761');
-  const flange = metal('#4a6784');
-  const opening = vector(-2.1, 0.34, -1.15);
-  const rear = vector(-5.44, 0.34, -2.44);
-  const bodyEnd = rear.clone().lerp(opening, 0.48);
-  source.add(
-    segment(rear, bodyEnd, 0.36, housing, 24),
-    segment(bodyEnd, opening, 0.14, flange, 20),
-    segment(rear, rear.clone().lerp(opening, 0.06), 0.42, flange, 24),
-    segment(bodyEnd, bodyEnd.clone().lerp(opening, 0.11), 0.32, flange, 24),
-    segment(opening.clone().lerp(bodyEnd, 0.12), opening, 0.26, flange, 24),
-    outline(box(1.25, 0.16, 0.78, housing, -4.69, -1.43, -2.17), '#55748c'),
-    box(0.33, 1.57, 0.36, housing, -4.69, -0.64, -2.17),
-  );
-  return source;
-}
-
-function slmSystem(reservoirColor: string, scienceColor: string) {
-  const system = new T.Group();
-  const body = metal('#243f51');
-  const trim = metal('#416473');
-  const screen = new T.Group();
-  const x = -7.25;
-  const z = 1.33;
-  system.add(outline(box(2.17, 0.20, 1.56, body, x, -1.44, z), '#517482'),
-    outline(box(1.83, 1.42, 1.36, body, x, -0.69, z), '#557585'),
-    outline(box(1.88, 0.12, 1.38, trim, x, 0.06, z), '#498b8a'),
-    box(1.48, 0.41, 0.028, basic('#101e2b'), x, -0.43, z + 0.69),
-    box(1.38, 0.019, 0.028, basic('#597b84'), x, -0.12, z + 0.694),
-    outline(box(0.69, 0.19, 0.68, trim, -4.25, -1.43, z), '#4a7186'),
-    segment(vector(-4.25, -1.36, z), vector(-4.25, -0.24, z), 0.12, body),
-    outline(box(0.44, 0.50, 0.18, trim, -4.25, 0.02, z), '#68acb4'));
-  const pixel = basic('#73e0b5', 0.66);
-  for (let row = 0; row < 4; row++) {
-    for (let column = 0; column < 14; column++) {
-      if ((row * 7 + column * 5 + 3) % 17 > 10) continue;
-      screen.add(box(0.039, 0.028, 0.012, pixel, x - 0.59 + column * 0.09, -0.53 + row * 0.065, z + 0.708));
-    }
-  }
-  for (const [offset, color] of [[-0.26, reservoirColor], [0.26, scienceColor]] as const) {
-    system.add(segment(vector(x + 0.95, 0.02, z + offset), vector(x + 1.26, 0.02, z + offset), 0.16, trim),
-      segment(vector(x + 1.26, 0.02, z + offset), vector(x + 1.31, 0.02, z + offset), 0.10, basic(color, 0.68)));
-  }
-  system.add(screen);
-  return system;
-}
-
-function aodSystem(transportColor: string) {
-  const system = new T.Group();
-  const body = metal('#284357');
-  const trim = metal('#42637b');
-  const x = -7.08;
-  const z = -1.17;
-  system.add(
-    outline(box(1.85, 0.18, 0.94, body, x, -1.44, z), '#557a94'),
-    box(0.27, 0.87, 0.35, body, x, -0.93, z),
-    outline(box(1.61, 0.66, 0.76, body, x, -0.21, z), '#557a94'),
-    outline(box(0.48, 0.53, 0.79, trim, x + 0.43, -0.21, z), '#648ba1'),
-    segment(vector(x + 0.78, 0.02, z), vector(x + 1.06, 0.02, z), 0.12, body),
-    box(0.31, 0.04, 0.02, basic(transportColor, 0.71), x - 0.38, -0.15, z + 0.39),
-  );
-  return system;
-}
-
-function laserSystem({ sidePathX, paths, arrayY }: MachineSceneProfile) {
-  const system = new T.Group();
-  const body = metal('#3a3658');
-  const trim = metal('#534a75');
-  const x = sidePathX[0] + 1.66;
-  const z = paths.rydberg.entranceZ;
-  for (const { entranceZ: centerZ, color: beamColor } of [paths.clock, paths.rydberg, paths.probe]) {
-    const color = basic(beamColor);
-    system.add(outline(box(2.13, 0.85, 0.74, body, x, 0.08, centerZ), '#6b5a91'),
-      outline(box(2.17, 0.11, 0.78, trim, x, 0.54, centerZ), '#7a63a4'),
-      segment(vector(x - 1.64, arrayY, centerZ), vector(x - 1, arrayY, centerZ), 0.16, trim),
-      segment(vector(x - 1.66, arrayY, centerZ), vector(x - 1.63, arrayY, centerZ), 0.10, color));
-  }
-  system.add(
-    outline(box(2.63, 0.19, 2.56, body, x, -1.44, z), '#68628a'),
-    outline(box(1.65, 1.16, 1.19, trim, x, -0.87, z), '#675987'),
-  );
-  const vents = basic('#191f34');
-  for (let index = 0; index < 8; index++) {
-    system.add(box(0.106, 0.25, 0.026, vents, x - 0.61 + index * 0.18, 0.00, z + 1.184));
-  }
-  return system;
-}
-
-function imagingSystem(probeColor: string) {
-  const system = new T.Group();
-  const dark = metal('#25374c');
-  const lintel = metal('#4c687e');
-  const warm = metal('#74594a');
-  system.add(
-    outline(box(0.96, 0.18, 0.83, dark, 2.88, -1.43, -1.87), '#5b7790'),
-    outline(box(0.31, 4.74, 0.36, lintel, 2.88, 1.0, -1.87), '#7898b0'),
-    outline(box(2.87, 0.27, 0.31, lintel, 1.47, 3.41, -1.87), '#738fac'),
-    outline(box(0.31, 0.26, 1.68, lintel, 0.13, 3.41, -0.92), '#738fac'),
-    outline(box(1.44, 0.89, 1.46, dark, 0, 3.44, 0), '#829eb4', 0.64),
-    outline(box(1.18, 0.075, 1.29, lintel, 0, 3.93, 0), '#6b8fa3', 0.52),
-    cylinder(0.63, 0.31, warm, 0, 2.90, 0),
-    cylinder(0.49, 0.26, dark, 0, 2.65, 0),
-    ring(0.40, 0.048, basic(probeColor, 0.79), 0, 2.50, 0),
-    cylinder(0.36, 0.038, basic('#94593c', 0.66), 0, 2.493, 0),
-    box(0.28, 0.075, 0.019, basic('#e4a96d', 0.74), 0.31, 3.59, 0.736),
-  );
-  const vents = basic('#142335');
-  for (let index = 0; index < 5; index++) {
-    system.add(box(0.08, 0.24, 0.018, vents, -0.50 + index * 0.14, 3.38, 0.735));
-  }
-  return system;
-}
-
 export class QuantumMachineRenderer {
   private scene = new T.Scene();
   private hardware = new T.Group();
-  private array = new T.Group();
+  private array = new EquipmentAssembly('array');
+  private assemblies: Record<EquipmentId, EquipmentAssembly>;
+  private inspection: EquipmentAssembly | null = null;
+  private selectedPart: string | null = null;
+  private inspectionSize = new T.Vector2();
+  private renderSize = new T.Vector2();
+  private savedCamera: { position: T.Vector3; target: T.Vector3; zoom: number } | null = null;
+  private pointer: { id: number; x: number; y: number } | null = null;
   private camera = new T.OrthographicCamera(-10, 10, 5, -5, 0.1, 180);
   private renderer = new T.WebGLRenderer({ antialias: true, alpha: true });
   private controls: OrbitControls;
@@ -314,7 +88,8 @@ export class QuantumMachineRenderer {
   private pendingFrame: MachineSceneFrame | null = null;
   private projected = new T.Vector3();
 
-  constructor(private host: HTMLDivElement, private profile: MachineProfile, private labels: Record<string, HTMLSpanElement | null>) {
+  constructor(private host: HTMLDivElement, private profile: MachineProfile,
+    private labels: Record<string, HTMLElement | null>, private onPick?: (module: EquipmentId, part?: string) => void) {
     const { rows, columns, registerRow } = profile.array;
     const { arrayY, arrayPitch: pitch, paths, sidePathX } = profile.scene;
     this.delivery = vector(...profile.scene.delivery);
@@ -343,7 +118,12 @@ export class QuantumMachineRenderer {
     const fill = new T.DirectionalLight('#96b9ff', 1.18);
     fill.position.set(9, -2, -8);
     this.scene.add(new T.HemisphereLight('#b5cae3', '#536075', 1.8), key, fill);
-    this.scene.add(this.hardware, this.array);
+    this.assemblies = {
+      table: table(), source: atomicSource(), vacuum: vacuumChamber(this.haloMap, paths.reservoir.color),
+      slm: slmSystem(paths.reservoir.color, paths.science.color), aod: aodSystem(paths.transport.color),
+      gate: laserSystem(profile.scene), imaging: imagingSystem(paths.probe.color), array: this.array,
+    };
+    this.scene.add(this.hardware, ...Object.values(this.assemblies));
     const floor = gridLines(21, 0.75, '#416787', 0.23);
     floor.position.y = tableY - 0.83;
     const floorGlow = new T.Sprite(new T.SpriteMaterial({
@@ -351,11 +131,7 @@ export class QuantumMachineRenderer {
     }));
     floorGlow.position.set(0, -1.85, -4);
     floorGlow.scale.set(30, 13.0, 1);
-    this.hardware.add(
-      floorGlow, floor, table(), vacuumChamber(this.haloMap, paths.reservoir.color), atomicSource(),
-      slmSystem(paths.reservoir.color, paths.science.color), aodSystem(paths.transport.color),
-      laserSystem(profile.scene), imagingSystem(paths.probe.color),
-    );
+    this.hardware.add(floorGlow, floor);
     // Common delivery objective for fixed/moving tweezers and local Raman beams.
     const createPath = ({ points, color, width }: MachineSceneProfile['paths']['reservoir']) =>
       opticalPath(this.hardware, points.map(point => vector(...point)), color, width);
@@ -379,14 +155,18 @@ export class QuantumMachineRenderer {
     this.ramanFocus = Array.from({ length: columns }, () => focusBeam(profile.scene.ramanColor, 0.04, 0.15, 0.50));
     this.hardware.add(this.transportFocus, this.collectionCone, ...this.ramanFocus);
 
+    const plane = this.array.part('plane', [0, -0.85, 0]);
+    const sites = this.array.part('sites', [0, 0, 0]);
+    const atomLayer = this.array.part('atoms', [0, 0.85, 0]);
     this.gridGlow = new T.Mesh(new T.PlaneGeometry((columns + 2) * pitch, (rows + 2) * pitch).rotateX(-Math.PI / 2),
       new T.MeshBasicMaterial({ color: '#238b80', map: this.haloMap, transparent: true, opacity: 0.20, blending: T.AdditiveBlending, depthWrite: false }));
     this.gridGlow.position.y = arrayY - 0.08;
-    this.array.add(this.gridGlow);
+    this.gridGlow.userData.ignorePick = true;
+    plane.add(this.gridGlow);
     const arrayWidth = columns * pitch;
     const arrayDepth = rows * pitch;
     const boundary = box(arrayWidth + 0.12, 0.018, arrayDepth + 0.12, basic('#132e38', 0.45), 0, arrayY - 0.13, 0);
-    this.array.add(outline(boundary, '#388981', 0.42));
+    plane.add(outline(boundary, '#388981', 0.42));
     const gridPoints: number[] = [];
     for (let column = 0; column <= columns; column++) {
       const x = column * pitch - arrayWidth / 2;
@@ -396,7 +176,7 @@ export class QuantumMachineRenderer {
       const z = row * pitch - arrayDepth / 2;
       gridPoints.push(-arrayWidth / 2, arrayY - 0.116, z, arrayWidth / 2, arrayY - 0.116, z);
     }
-    this.array.add(new T.LineSegments(new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(gridPoints, 3)),
+    plane.add(new T.LineSegments(new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(gridPoints, 3)),
       new T.LineBasicMaterial({ color: '#478d85', transparent: true, opacity: 0.29 })));
 
     const tweezerRays: number[] = [];
@@ -420,7 +200,8 @@ export class QuantumMachineRenderer {
         halo.visible = false;
         const qubitRing = new T.Mesh(addressGeometry, addressMaterial);
         qubitRing.visible = false;
-        this.array.add(site, atom, halo, qubitRing);
+        sites.add(site);
+        atomLayer.add(atom, halo, qubitRing);
         this.atomSlots.push({ atom, halo, ring: qubitRing });
       }
     }
@@ -435,7 +216,12 @@ export class QuantumMachineRenderer {
     );
     this.interactionLink.geometry.setDrawRange(0, 0);
     this.interactionLink.frustumCulled = false;
-    this.array.add(this.interactionLink);
+    atomLayer.add(this.interactionLink);
+
+    canvas.addEventListener('pointerdown', this.pointerDown);
+    canvas.addEventListener('pointermove', this.pointerMove);
+    canvas.addEventListener('pointerup', this.pointerUp);
+    canvas.addEventListener('pointercancel', this.pointerCancel);
 
     this.observer = new ResizeObserver(this.resize);
     this.observer.observe(host);
@@ -444,7 +230,8 @@ export class QuantumMachineRenderer {
 
   setView(view: MachineView) {
     this.view = view;
-    this.hardware.visible = view === 'machine';
+    if (this.inspection) return;
+    this.setVisibleModules();
     this.camera.zoom = 1;
     this.controls.target.set(0, view === 'machine' ? 0.35 : this.profile.scene.arrayY, 0);
     if (view === 'machine') this.camera.position.set(9.4, 13.8, 24.6);
@@ -452,6 +239,106 @@ export class QuantumMachineRenderer {
     this.controls.update();
     this.resize();
   }
+
+  private setVisibleModules() {
+    this.hardware.visible = !this.inspection && this.view === 'machine';
+    for (const assembly of Object.values(this.assemblies)) {
+      assembly.visible = this.inspection ? assembly === this.inspection : this.view === 'machine' || assembly === this.array;
+    }
+  }
+
+  setInspection(id: EquipmentId | null, explosion = 0, part: string | null = null) {
+    const next = id ? this.assemblies[id] : null;
+    const { dataset } = this.renderer.domElement;
+    if (next !== this.inspection) {
+      if (!this.inspection) {
+        this.savedCamera = { position: this.camera.position.clone(), target: this.controls.target.clone(), zoom: this.camera.zoom };
+      } else {
+        this.inspection.selectPart(null);
+        this.inspection.setExplosion(0);
+      }
+      this.selectedPart = null;
+      this.inspection = next;
+      this.setVisibleModules();
+      // Consume orbit inertia before installing either camera pose.
+      this.controls.enableDamping = false;
+      this.controls.update();
+      this.controls.enableDamping = true;
+      if (next) this.focusAssembly(next);
+      else if (this.savedCamera) {
+        this.camera.position.copy(this.savedCamera.position);
+        this.controls.target.copy(this.savedCamera.target);
+        this.camera.zoom = this.savedCamera.zoom;
+        this.savedCamera = null;
+      }
+      this.controls.update();
+      this.resize();
+    }
+    if (next) {
+      const amount = Math.max(0, Math.min(1, explosion));
+      next.setExplosion(amount);
+      if (part !== this.selectedPart) {
+        next.selectPart(part);
+        this.selectedPart = part;
+      }
+      dataset.inspectionModule = next.equipmentId;
+      dataset.explosion = String(amount);
+      if (part) dataset.inspectionPart = part;
+      else delete dataset.inspectionPart;
+      dataset.partLayout = JSON.stringify(Object.fromEntries([...next.parts].map(([key, { group }]) => [key, group.position.toArray()])));
+    } else {
+      delete dataset.inspectionModule;
+      delete dataset.explosion;
+      delete dataset.inspectionPart;
+      delete dataset.partLayout;
+    }
+    this.invalidate();
+  }
+
+  private focusAssembly(assembly: EquipmentAssembly) {
+    const bounds = assembly.inspectionBounds();
+    bounds.getCenter(this.controls.target);
+    // The chamber pump port faces the rear; look toward that side to expose the flange.
+    const direction = assembly.equipmentId === 'vacuum' ? vector(11, 5.5, -8) : vector(-6.2, 6.4, 12);
+    this.camera.position.copy(this.controls.target).add(direction);
+    this.camera.zoom = 1;
+    this.camera.lookAt(this.controls.target);
+    this.camera.updateMatrixWorld();
+    // Measure the bounding box in camera space so a long table fits a narrow screen.
+    const size = bounds.applyMatrix4(this.camera.matrixWorldInverse).getSize(new T.Vector3());
+    this.inspectionSize.set(size.x, size.y);
+  }
+
+  private pointerDown = (event: PointerEvent) => {
+    this.pointer = event.isPrimary && event.button === 0 ? { id: event.pointerId, x: event.clientX, y: event.clientY } : null;
+  };
+
+  private pointerMove = (event: PointerEvent) => {
+    if (this.pointer?.id === event.pointerId && Math.hypot(event.clientX - this.pointer.x, event.clientY - this.pointer.y) > 5) this.pointer = null;
+  };
+
+  private pointerCancel = () => { this.pointer = null; };
+
+  private pointerUp = (event: PointerEvent) => {
+    this.pointerMove(event);
+    const isTap = this.pointer?.id === event.pointerId;
+    this.pointer = null;
+    if (!isTap || !this.onPick) return;
+    const rect = this.renderer.domElement.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const cursor = new T.Vector2(2 * (event.clientX - rect.left) / rect.width - 1, 1 - 2 * (event.clientY - rect.top) / rect.height);
+    const ray = new T.Raycaster();
+    ray.setFromCamera(cursor, this.camera);
+    const solidMeshes: T.Mesh[] = [];
+    for (const assembly of Object.values(this.assemblies)) assembly.traverseVisible(object => {
+      if (object instanceof T.Mesh && !object.userData.ignorePick) solidMeshes.push(object);
+    });
+    const hit = ray.intersectObjects(solidMeshes, false)[0];
+    if (!hit) return;
+    let part = hit.object;
+    while (part.parent && !(part.parent instanceof EquipmentAssembly)) part = part.parent;
+    if (part.parent instanceof EquipmentAssembly) this.onPick(part.parent.equipmentId, this.inspection ? part.name : undefined);
+  };
 
   update(frame: MachineSceneFrame) {
     const { atoms, activeQubits, strengths, scienceWeight, readout, raman, blockade, transport, collecting, occupancyExposure } = frame;
@@ -535,14 +422,21 @@ export class QuantumMachineRenderer {
     const { clientWidth: width, clientHeight: height } = this.host;
     if (!width || !height) return;
     const aspect = width / height;
-    const frameHeight = this.view === 'machine' ? Math.max(5.5, 10.7 / aspect) : Math.max(2.68, 3.2 / aspect);
+    const frameHeight = this.inspection ? 0.56 * Math.max(this.inspectionSize.y, this.inspectionSize.x / aspect)
+      : this.view === 'machine' ? Math.max(5.5, 10.7 / aspect) : Math.max(2.68, 3.2 / aspect);
+    const offset = !this.inspection && this.view === 'machine' ? 0.53 : 0;
     this.camera.left = -frameHeight * aspect;
     this.camera.right = frameHeight * aspect;
-    this.camera.bottom = -frameHeight - (this.view === 'machine' ? 0.53 : 0);
-    this.camera.top = frameHeight - (this.view === 'machine' ? 0.53 : 0);
+    this.camera.bottom = -frameHeight - offset;
+    this.camera.top = frameHeight - offset;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(width, height, false);
-    this.invalidate();
+    this.renderer.getSize(this.renderSize);
+    if (this.renderSize.x !== width || this.renderSize.y !== height) {
+      this.renderer.setSize(width, height, false);
+      // Resizing clears the WebGL buffer. Redraw before this resize observation is painted.
+      cancelAnimationFrame(this.drawFrame);
+      this.draw();
+    } else this.invalidate();
   };
 
   private invalidate = () => {
@@ -575,24 +469,20 @@ export class QuantumMachineRenderer {
       }).join(';');
       this.pendingFrame = null;
     }
-    if (this.view !== 'machine') return;
-    const { clientWidth: width, clientHeight: height } = this.host;
-    for (const { id, position } of this.profile.scene.labels) {
-      const label = this.labels[id];
-      if (!label) continue;
-      this.projected.set(...position).project(this.camera);
-      const x = (this.projected.x / 2 + 0.5) * width;
-      const y = (0.5 - this.projected.y / 2) * height;
-      const visible = x >= 27 && x <= width - 27 && y >= 25 && y <= height - 27;
-      label.style.visibility = visible ? 'visible' : 'hidden';
-      label.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
-    }
+    positionEquipmentLabels(this.host, this.profile.scene, this.labels, this.camera, this.projected,
+      !this.inspection && this.view === 'machine');
   };
 
   dispose() {
     cancelAnimationFrame(this.drawFrame);
     this.observer.disconnect();
     this.controls.dispose();
+    const canvas = this.renderer.domElement;
+    canvas.removeEventListener('pointerdown', this.pointerDown);
+    canvas.removeEventListener('pointermove', this.pointerMove);
+    canvas.removeEventListener('pointerup', this.pointerUp);
+    canvas.removeEventListener('pointercancel', this.pointerCancel);
+    for (const assembly of Object.values(this.assemblies)) assembly.disposeHighlight();
     const geometries = new Set<T.BufferGeometry>();
     const materials = new Set<T.Material>();
     this.scene.traverse(object => {

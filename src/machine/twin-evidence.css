@@ -42,6 +42,9 @@
 .tw-evidence-index a:focus-visible { outline-offset: -3px; }
 .tw-system-head, .tw-evidence-record, .tw-evidence-pending { padding: 22px clamp(16px, 2.2vw, 32px); }
 .tw-system-head { background: linear-gradient(110deg, #192b37, #13202b); }
+.tw-system-equipment { margin-top: 12px; }
+.tw-system-equipment h3 { margin: 0; color: var(--tw-secondary); font-size: 12px; }
+.tw-system-equipment .tw-evidence-links { margin-top: 2px; }
 .tw-system-title { color: var(--tw-accent); margin-bottom: 7px; }
 .tw-system-title h2 { color: var(--tw-ink); font-size: clamp(21px, 2vw, 28px); letter-spacing: -.03em; }
 .tw-evidence-record, .tw-evidence-pending { border-top: 1px solid var(--tw-rule); }

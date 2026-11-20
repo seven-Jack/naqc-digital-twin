@@ -9,6 +9,7 @@
 | 想做什么 | 入口 |
 | --- | --- |
 | 配置电路与批次，查看阵列、当前设备和逐轮读出 | [整机工作区](https://naqc-digital-twin.stonynote14.chatgpt.site/#machine) |
+| 点选整机的 8 个设备，放大、拆开并定位 25 个部件 | [从真空腔开始](https://naqc-digital-twin.stonynote14.chatgpt.site/#machine/equipment/vacuum) · [全部设备与操作](docs/EQUIPMENT_EXPLORER.md) |
 | 从文献源点回放 767 nm 装置的双曝光、Rabi、阻塞、CZ 和 Bell 映射 | [Senoo 装置](https://naqc-digital-twin.stonynote14.chatgpt.site/#senoo) |
 | 调节钟光失谐和补偿，检查布居与 Bloch 矢量 | [钟跃迁子系统](https://naqc-digital-twin.stonynote14.chatgpt.site/#clock) |
 | 按子系统查找证据、数据与独立验收所缺记录 | [整机证据](https://naqc-digital-twin.stonynote14.chatgpt.site/#evidence) |

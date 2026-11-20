@@ -52,7 +52,10 @@
 .qc-scene-label::after {
   content: '';
   width: 1px;
-  height: 10px;
+  height: var(--leader-length, 10px);
+  transform: rotate(var(--leader-angle, 0rad));
+  transform-origin: top center;
+  pointer-events: none;
   background: color-mix(in srgb, var(--signal) 54%, transparent);
   position: absolute;
   left: 50%;

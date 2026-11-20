@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import {
   Aperture, ArrowDownToLine, ArrowDownUp, ArrowUpRight, Atom, AudioWaveform, BookOpen, Boxes, Camera, ChevronDown, ChevronRight,
   CircleDot, CircuitBoard, Crosshair, Focus, Info, ListOrdered, Move, Pause, Play, RotateCcw,
@@ -17,6 +17,7 @@ import {
   CIRCUITS, createMachineRun, DEFAULT_MACHINE_CONFIG, machineExport, machineFrame,
   type MachineConfig, type MachineFrame, type MachineProtocol, type MachineRun,
 } from '../physics/quantumComputer';
+import { EquipmentDirectory } from '../scene/EquipmentInspection';
 import { QuantumComputerScene } from '../scene/QuantumComputerScene';
 import './machine-dashboard.css';
 
@@ -281,6 +282,7 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
   const [config, setConfig] = useState(() => session.current?.config ?? DEFAULT_MACHINE_CONFIG);
   const [elapsed, setElapsed] = useState(() => session.current?.elapsed ?? 0);
   const [playing, setPlaying] = useState(false);
+  const pauseForInspection = useCallback(() => setPlaying(false), []);
   const [speed, setSpeed] = useState(() => session.current?.speed ?? 1);
   const [infoOpen, setInfoOpen] = useState(false);
   const [demoProtocol, setProtocol] = useState<MachineProtocol>(() => session.current?.demoProtocol ?? 'standard');
@@ -450,7 +452,7 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
               <i />{stageNumber} · {frame.stage.label}
             </span>}>整机光路</PanelHeader>
             <div className="md-scene-body">
-              <QuantumComputerScene profile={profile} frame={frame} />
+              <QuantumComputerScene profile={profile} frame={frame} pause={pauseForInspection} />
             </div>
             <div className="md-playback">
               <OccupancyStatus frame={frame} />
@@ -481,6 +483,7 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
               </div>
             </div>
           </section>
+          <EquipmentDirectory />
           <MachineStageInspector run={run} frame={frame} />
           <CircuitDiagram run={run} frame={frame} />
         </div>
