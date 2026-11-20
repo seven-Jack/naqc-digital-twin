@@ -1,3 +1,5 @@
+import { openEquipment } from '../scene/equipmentNavigation';
+import type { EquipmentId } from '../data/machineEquipment';
 import { Activity } from 'lucide-react';
 import type { MachineStageId } from '../data/machineProfile';
 import type { MachineFrame, MachineRun } from '../physics/quantumComputer';
@@ -5,24 +7,24 @@ import { projectMachineScene } from '../scene/machineSceneFrame';
 import './machine-stage-inspector.css';
 
 const stageEquipment = {
-  cooling: ['磁光阱', 'array'],
-  loading: ['储备光镊阵列', 'array'],
-  rearrangement: ['AOD 搬运光镊', 'transport'],
-  'occupancy-check': ['占位成像相机', 'transport'],
-  replenishment: ['AOD 补位光镊', 'transport'],
-  'occupancy-recheck': ['占位复查相机', 'transport'],
-  preparation: ['光抽运与制备光路', 'control'],
-  transfer: ['储备阱与计算阱', 'array'],
-  gates: ['量子门光路', 'control'],
-  analysis: ['测量基旋转光路', 'control'],
-  return: ['计算阱与储备阱', 'array'],
-  readout: ['荧光收集物镜与相机', 'readout'],
-} as const satisfies Record<MachineStageId, readonly [string, string]>;
+  cooling: ['磁光阱', 'array', 'vacuum'],
+  loading: ['储备光镊阵列', 'array', 'slm'],
+  rearrangement: ['AOD 搬运光镊', 'transport', 'aod'],
+  'occupancy-check': ['占位成像相机', 'transport', 'imaging'],
+  replenishment: ['AOD 补位光镊', 'transport', 'aod'],
+  'occupancy-recheck': ['占位复查相机', 'transport', 'imaging'],
+  preparation: ['光抽运与制备光路', 'control', 'gate'],
+  transfer: ['储备阱与计算阱', 'array', 'array'],
+  gates: ['量子门光路', 'control', 'gate'],
+  analysis: ['测量基旋转光路', 'control', 'gate'],
+  return: ['计算阱与储备阱', 'array', 'slm'],
+  readout: ['荧光收集物镜与相机', 'readout', 'imaging'],
+} as const satisfies Record<MachineStageId, readonly [string, string, EquipmentId]>;
 
 const eventNames = { operation: '设备操作', observe: '相机曝光', decide: '占位判决' } as const;
 
 export function MachineStageInspector({ run, frame }: { run: MachineRun; frame: MachineFrame }) {
-  const [equipment, evidence] = stageEquipment[frame.stage.id];
+  const [equipment, evidence, moduleId] = stageEquipment[frame.stage.id];
   const scene = projectMachineScene(frame, run.profile);
   const record = run.records[frame.attemptIndex];
   const events = record?.events.filter(event => event.stageId === frame.stage.id && event.startMs <= frame.elapsedMs
@@ -37,7 +39,7 @@ export function MachineStageInspector({ run, frame }: { run: MachineRun; frame: 
   return <section className="md-panel machine-inspector" aria-label="当前阶段设备">
     <header>
       <div><Activity size={16} aria-hidden="true" /><h2>{equipment}</h2></div>
-      <a href={`#evidence/${evidence}`}>查看子系统依据</a>
+      <div className="eq-stage-links"><button type="button" onClick={() => openEquipment(moduleId)}>拆解本阶段设备</button><a href={`#evidence/${evidence}`}>查看子系统依据</a></div>
     </header>
     <dl>
       <div><dt>当前光路</dt><dd data-testid="inspector-optics">{scene.activePath?.label ?? (frame.stageSkipped ? '已跳过' : '无激活光路')}</dd></div>

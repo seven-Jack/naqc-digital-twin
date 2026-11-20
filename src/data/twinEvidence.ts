@@ -1,4 +1,5 @@
 import { MUNIZ_DEMO_PROFILE } from './machineProfile';
+import type { EquipmentId } from './machineEquipment';
 import { munizEvidence } from './hardwareEvidence';
 import { SENOO_APPARATUS_PROFILE } from './senooApparatus';
 import { SENOO_READOUT_SOURCE } from './senooReadoutSource';
@@ -31,6 +32,7 @@ interface EvidenceRecord {
 
 interface Subsystem {
   id: SubsystemId;
+  equipment: readonly EquipmentId[];
   name: string;
   components: string;
   operation: string;
@@ -47,6 +49,7 @@ const paper = (label: string) => ({ label, href: apparatus.publication.url });
 export const twinSubsystems: readonly Subsystem[] = [
   {
     id: 'array', name: '俘获与阵列', components: '光镊阵列 · 真空腔 · 钟激光',
+    equipment: ['array', 'slm', 'vacuum', 'table'],
     operation: '将原子装入储备阱，在计算前完成阱间交接。可在钟跃迁模型中改变光镊功率、束腰与频率补偿，观察失谐和布居。',
     records: [
       { kind: 'demo', title: profile.label,
@@ -60,6 +63,7 @@ export const twinSubsystems: readonly Subsystem[] = [
   },
   {
     id: 'transport', name: '装载与搬运', components: 'AOD 搬运光镊 · SLM 目标阵列 · 占位相机',
+    equipment: ['source', 'aod'],
     operation: '比较搬运前后占位帧与目标位，沿原轮号追踪补位、原子存活和被排除的尝试。',
     records: [
       { kind: 'literature', title: 'Senoo 光镊重排流程',
@@ -76,6 +80,7 @@ export const twinSubsystems: readonly Subsystem[] = [
   },
   {
     id: 'control', name: '单原子与两原子门', components: '里德堡驱动 · 失谐与相位控制 · 两原子阻塞',
+    equipment: ['gate'],
     operation: '从单原子布居响应检查驱动，再按原子间距和磁场方向核对两原子能移，并按门深度查看 CZ 门表征。',
     records: [
       { kind: 'literature', title: '单原子 Rabi 与双原子阻塞',
@@ -94,6 +99,7 @@ export const twinSubsystems: readonly Subsystem[] = [
   },
   {
     id: 'readout', name: '双曝光读出', components: '态映射激光 · 荧光收集 · 相机',
+    equipment: ['imaging'],
     operation: '依次映射 m₁ 和 m₀，比较同一位点的两帧荧光计数，追踪丢失、歧义和有效判决分母。',
     records: [
       { kind: 'literature', title: '图 2b 配对计数',
@@ -112,6 +118,7 @@ export const twinSubsystems: readonly Subsystem[] = [
   },
   {
     id: 'bell', name: 'Bell 态与整机验证', components: '双比特门 · 基旋转 · 联合读出',
+    equipment: ['array', 'gate'],
     operation: '在两种制备路径下查看布居和奇偶振荡，比较亚稳态与钟比特映射后的目标态重叠。',
     records: [
       { kind: 'literature', title: 'CZ 与阻塞两条 Bell 制备路径',

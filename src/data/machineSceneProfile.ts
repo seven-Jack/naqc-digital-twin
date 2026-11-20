@@ -70,6 +70,9 @@ export const MUNIZ_DEMO_SCENE: MachineSceneProfile = {
   arrayPitch: 0.5,
   arrayY,
   labels: [
+    { id: 'source', text: '原子源', color: 'vacuum', position: [-4.38, 0.84, -2.40] },
+    { id: 'table', text: '光学平台', color: 'vacuum', position: [-5.8, -1.60, 3.20] },
+    { id: 'array', text: '原子阵列', color: 'science', position: [0.72, 0.56, 1.54] },
     { id: 'slm', text: 'SLM 固定光镊', color: 'tweezer', position: [-7.4, 1.65, 1.35] },
     { id: 'aod', text: 'AOD 搬运光镊', color: 'transport', position: [-7.05, 2.45, -1.25] },
     { id: 'vacuum', text: '真空腔', color: 'vacuum', position: [-2.35, 2.03, 0.75] },

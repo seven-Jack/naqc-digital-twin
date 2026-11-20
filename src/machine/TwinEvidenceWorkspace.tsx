@@ -7,6 +7,8 @@ import {
   evidenceKinds, evidenceRoute, resolveEvidenceRoute, twinSubsystems, type EvidenceFilter, type EvidenceLink,
 } from '../data/twinEvidence';
 import { useHashFragment } from '../state/useHashFragment';
+import { machineEquipment } from '../data/machineEquipment';
+import { equipmentHref } from '../scene/equipmentNavigation';
 import { readAcquisitionCsvCells } from '../physics/acquisitionCsv';
 import p19 from '../../references/knowledge/data/knottnerus-s23-p19/results/summary.json';
 import ranges from '../../references/knowledge/data/knottnerus-s23-p19/count-ranges.json';
@@ -117,6 +119,10 @@ export function TwinEvidenceWorkspace() {
         <header className="tw-system-head">
           <div className="tw-system-title"><Icon size={25} aria-hidden="true" /><h2 id="tw-system-title">{selected.name}</h2></div>
           <p>{selected.operation}</p>
+          <nav className="tw-system-equipment" aria-label="整机演示设备拆解">
+            <h3>整机演示设备拆解</h3>
+            <Links items={selected.equipment.map(id => ({ label: machineEquipment[id].label, href: equipmentHref(id) }))} />
+          </nav>
         </header>
         {records.map(record => <article className="tw-evidence-record" key={record.title}>
           <div className="tw-record-head"><span className={`tw-evidence-kind tw-kind-${record.kind}`}>{evidenceKinds[record.kind]}</span>
