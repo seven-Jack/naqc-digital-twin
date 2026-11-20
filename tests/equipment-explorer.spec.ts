@@ -107,20 +107,34 @@ test('原始画布点选命中设备，拖动只旋转视角，检查结束后�
   await page.mouse.up();
   await expect(panel).toHaveCount(0);
   await expect.poll(async () => changedPixels(start, await renderedPixels(page, canvas))).toBeGreaterThan(80);
-  // Compare the projected labels after the OrbitControls damping has settled.
-  const label = page.getByTestId('equipment-label-slm');
-  await expect(label).toBeVisible();
+  // Check integer screen positions exactly. Three.js can round-trip one floating-point ULP
+  // differently when it restores the camera and recomputes the leader-line geometry.
+  const labels = page.getByTestId(/^equipment-label-/);
+  await expect(labels).toHaveCount(Object.keys(modules).length);
+  const readPose = () => labels.evaluateAll(elements => elements.map(element => {
+    const { style } = element as HTMLElement;
+    return { label: element.getAttribute('data-testid'), visibility: style.visibility, position: style.transform,
+      length: parseFloat(style.getPropertyValue('--leader-length') || '0'),
+      angle: parseFloat(style.getPropertyValue('--leader-angle') || '0') };
+  }));
+  type Pose = Awaited<ReturnType<typeof readPose>>;
+  const samePose = (a: Pose, b: Pose) => a.length === b.length && a.every((point, i) =>
+    point.label === b[i].label && point.visibility === b[i].visibility && point.position === b[i].position
+      && Math.abs(point.length - b[i].length) < 1e-8 && Math.abs(point.angle - b[i].angle) < 1e-8);
   await expect.poll(async () => {
-    const first = await label.getAttribute('style');
-    await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
-    return first === await label.getAttribute('style');
+    const before = await readPose();
+    await page.evaluate(async () => {
+      for (let frame = 0; frame < 6; frame++) await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+    });
+    return samePose(before, await readPose());
   }).toBe(true);
-  const pose = await label.getAttribute('style');
+  const pose = await readPose();
+  expect(pose.filter(label => label.visibility === 'visible').length).toBeGreaterThan(1);
   await page.getByTestId('equipment-open-array').click();
   await expect(panel).toHaveAttribute('data-module', 'array');
   await page.keyboard.press('Escape');
   await expect(panel).toHaveCount(0);
-  await expect(label).toHaveAttribute('style', pose!);
+  await expect.poll(async () => samePose(pose, await readPose())).toBe(true);
 });
 
 test('窄屏八种设备均可从目录打开，键盘返回原入口并暂停当前演示', async ({ page }) => {
