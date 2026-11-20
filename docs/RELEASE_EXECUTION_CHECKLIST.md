@@ -2,6 +2,20 @@
 
 本页记录网站部署、科研资料归档及同装置实测收件。483/460 nm 为演示光路，正式装置配置待定。[网站交付清单](WHOLE_MACHINE_DELIVERY.md) · [科研项目清单](PROJECT_CHECKLIST.md)
 
+## 整机网站 v0.3.0
+
+| 交付检查 | 回执 |
+| --- | --- |
+| 点选与拆解 | 8 个设备、25 个部件。真实浏览器比较了合拢与完全拆开时的模型像素、部件选中、鼠标拾取和触摸拖动。禁用 WebGL 时核对八种二维图的实际位移和阵列占位。[设备清单与工业参考](EQUIPMENT_EXPLORER.md) |
+| 保留原运行 | 固定 Bell 一次补位协议、64 次尝试。第 3 轮停在 13,279 ms，有效读出 4/64。逐件拆解并返回后，原轮号、时间、分母、原子布局和相机姿态均通过复核。[浏览器用例](../tests/equipment-explorer.spec.ts) |
+| 候选构建 | GitHub 功能提交 `0837b6f6acf2`，Sites 源提交 `ddd7623192f1312c1ea19565eb1d61b19f1ba888`。36 个站点文件逐字节一致。228 项项目单测、222 项托管候选单测、47 项完整生产浏览器回归通过。[合并记录 #22](https://github.com/seven-Jack/naqc-digital-twin/pull/22) |
+| 线上发布 | Sites v8，部署 `appgdep_6b00cabc66ac8191bcfca464aef9f35b`。北京时间 2026-11-21 06:34 核对应用版本、HTML 入口与其余 35/35 个静态资源的 SHA-256，9/9 项公网 Chromium 回归通过。[在线真空腔](https://naqc-digital-twin.stonynote14.chatgpt.site/#machine/equipment/vacuum) · [逐文件回执](https://github.com/seven-Jack/naqc-digital-twin/releases/download/v0.3.0/live-static.json) · [线上交互回执](https://github.com/seven-Jack/naqc-digital-twin/releases/download/v0.3.0/browser-acceptance.json) |
+| 发布包 | `neutral-atom-digital-twin-v0.3.0.zip` 的 SHA-256 为 `0e270588aa862c99710c539535d4d464945203dfe887509f51b6c64eb835490a`。[GitHub v0.3.0](https://github.com/seven-Jack/naqc-digital-twin/releases/tag/v0.3.0) |
+
+首次公网比较中，SLM 标签返回前后同为 (274, 346) 像素，引线长度相差约 5.5 × 10⁻¹⁴ 像素。复核改为八个投影标签的像素坐标严格相等，引线长度与角度分别按 10⁻⁸ 像素及弧度容差比较。该用例在公开站点另行连续复测 5/5 通过。
+
+装配以演示光路和已有几何为依据。尺寸与拆解位移属于结构示意。Senoo 同装置双曝光 CAL 继续收件，冻结后再开启独立 VAL。[六项科研依赖](WHOLE_MACHINE_DELIVERY.md#正式定量验收仍需六项证据)
+
 ## 整机网站 v0.2.0
 
 | 验收项 | 核对结果 |
