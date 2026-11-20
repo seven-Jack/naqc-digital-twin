@@ -1,0 +1,18 @@
+{
+  "source": "sites.csv.gz",
+  "sha256": "058a1eded5ee71563e91c34460318af3e503aaa1721ac799c590dd1c92131f23",
+  "frames": {
+    "1": {
+      "site_decisions": 3600,
+      "min_counts": 3328,
+      "max_counts": 6100,
+      "logged_occupied": 0
+    },
+    "2": {
+      "site_decisions": 3600,
+      "min_counts": 3341,
+      "max_counts": 5962,
+      "logged_occupied": 0
+    }
+  }
+}
