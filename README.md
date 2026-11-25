@@ -6,11 +6,11 @@
 
 ## 在线演示
 
-[打开公开演示](https://naqc-digital-twin.stonynote14.chatgpt.site/) · [直接查看真空腔拆解](https://naqc-digital-twin.stonynote14.chatgpt.site/#machine/equipment/vacuum) · [GitHub v0.3.0 发布包](https://github.com/seven-Jack/naqc-digital-twin/releases/tag/v0.3.0)
+[打开 GitHub Pages 整机演示](https://seven-jack.github.io/naqc-digital-twin/) · [直接查看门操作](https://seven-jack.github.io/naqc-digital-twin/#machine/gates) · [直接查看真空腔拆解](https://seven-jack.github.io/naqc-digital-twin/#machine/equipment/vacuum)
 
-公开演示由 ChatGPT Sites 托管，当前为 v0.3.0。可点选、放大和拆解 8 个整机设备，并沿时间轴回放实验。源码、测试和静态发布包维护在 GitHub 仓库。
+GitHub Pages 上线的是 Muniz 整机重构版，采用石墨灰 × 香槟金界面。可以点选并拆解 8 个设备，以最低 0.1× 回放，逐步查看钟跃迁、里德堡激发与局域拉曼旋转。[部署记录](https://github.com/seven-Jack/naqc-digital-twin/actions/runs/45526071366) · [整机与门操作更新 #23](https://github.com/seven-Jack/naqc-digital-twin/pull/23)
 
-`main` 分支已合入石墨灰 × 香槟金界面、更新后的 Muniz 三维装置、0.1× 慢放，以及可逐步查看钟跃迁、里德堡激发和局域拉曼旋转的门操作面板。按下方步骤本地启动即可体验这些更新。[整机与门操作更新 #23](https://github.com/seven-Jack/naqc-digital-twin/pull/23)
+此前的 v0.3.0 设备拆解版仍可访问，也可下载该版本的静态发布包。[ChatGPT Sites 演示](https://naqc-digital-twin.stonynote14.chatgpt.site/) · [GitHub v0.3.0 发布包](https://github.com/seven-Jack/naqc-digital-twin/releases/tag/v0.3.0)
 
 ## 本地启动
 
