@@ -2,7 +2,7 @@ import { MUNIZ_DEMO_SCENE, MUNIZ_DEMO_WAVELENGTHS_NM, type MachineSceneProfile }
 
 const wavelengths = MUNIZ_DEMO_WAVELENGTHS_NM;
 const stageDefinitions = [
-  { id: 'cooling', label: '冷却与俘获', durationMs: 1100, description: '磁光阱汇集并冷却原子，为光镊装载准备原子样品。' },
+  { id: 'cooling', label: '冷却与俘获', durationMs: 1100, description: '磁光阱先在冷却腔汇集原子，随后 532 nm 移动晶格将冷原子送至科学腔的储备光镊。' },
   { id: 'loading', label: '光镊装载', durationMs: 1500, description: `装载 ${wavelengths.reservoir} nm 储备阱，并根据预先成像获得各位点的占据状态。` },
   { id: 'rearrangement', label: '原子重排', durationMs: 1750, description: '移动光镊沿空阱位搬运原子，填充电路所需的寄存器。' },
   { id: 'preparation', label: '量子态制备', durationMs: 1150, description: '在储备阱中进一步冷却，并用光抽运将已分配的原子制备到 |0⟩。' },

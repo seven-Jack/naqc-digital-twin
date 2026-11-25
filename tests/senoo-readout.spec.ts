@@ -30,19 +30,10 @@ async function expectLogPlacement(plot: Locator, first: number, second: number) 
   expect(positions.actual.y).toBeCloseTo(positions.expected.y, 4);
 }
 
-test('Senoo 双曝光源表配对读数与固定对数坐标正确，并保持暂停的 Bell 分支', async ({ page }) => {
+test('Senoo 双曝光源表配对读数与固定对数坐标正确', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/#machine');
-  await page.getByLabel('实验协议', { exact: true }).selectOption('bell-replenishment');
-  await page.getByLabel('尝试次数', { exact: true }).selectOption('64');
-  await page.getByRole('slider', { name: '单比特读出翻转' }).fill('0');
-  const timeline = page.getByRole('slider', { name: '演示时间轴' });
-  const canvas = page.getByTestId('quantum-scene-canvas');
-  await timeline.fill('5900');
-  await expect(canvas).toHaveAttribute('data-moving-atom', 'D6');
-  const layout = await canvas.getAttribute('data-atom-layout');
-
+  await page.goto('/#sources');
   const source = page.getByTestId('senoo-readout-source');
   const plot = source.getByTestId('senoo-readout-plot');
   const groupControl = source.getByLabel('显示制备组', { exact: true });
@@ -86,21 +77,12 @@ test('Senoo 双曝光源表配对读数与固定对数坐标正确，并保持�
   await groupControl.selectOption('all');
   await expect(plot.locator('circle[data-source-point]')).toHaveCount(765);
 
-  await expect(timeline).toHaveValue('5900');
-  await expect(canvas).toHaveAttribute('data-atom-layout', layout!);
-  await expect(canvas).toHaveAttribute('data-moving-atom', 'D6');
-  await expect(page.getByTestId('machine-shots')).toHaveAttribute('data-completed-shots', '0');
-  await timeline.fill('4700');
-  await expect(canvas).toHaveAttribute('data-stage', 'occupancy-check');
-  await expect.poll(() => canvas.getAttribute('data-moving-atom')).toBeNull();
-  await expect.poll(() => canvas.getAttribute('data-occupancy')).toBeNull();
-  await expect(page.getByTestId('machine-occupancy')).toHaveAttribute('data-decision', 'pending');
   expect(errors).toEqual([]);
 });
 
 test('390 px 源表选择支持数值输入并保持双曝光配对', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/#machine');
+  await page.goto('/#sources');
   const source = page.getByTestId('senoo-readout-source');
   await source.scrollIntoViewIfNeeded();
   await source.getByLabel('显示制备组', { exact: true }).selectOption('spin1');
@@ -118,7 +100,7 @@ test('390 px 源表选择支持数值输入并保持双曝光配对', async ({ p
 });
 
 test('双曝光阈值联动判决和全部制备组的计数', async ({ page }) => {
-  await page.goto('/#machine');
+  await page.goto('/#sources');
   const source = page.getByTestId('senoo-readout-source');
   const plot = source.getByTestId('senoo-readout-plot');
   const firstInput = source.getByRole('spinbutton', { name: 'Image 1 阈值', exact: true });

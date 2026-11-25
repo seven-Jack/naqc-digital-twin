@@ -39,7 +39,7 @@ export function positionEquipmentLabels(host: HTMLElement, profile: MachineScene
       if (b.width && b.height) occupied.push({ left: b.left - rect.left, right: b.right - rect.left, top: b.top - rect.top, bottom: b.bottom - rect.top });
     }
   }
-  const anchors = profile.labels.flatMap(({ id, position }) => {
+  const anchors = profile.labels.flatMap(({ id, position, offset }) => {
     const label = refs[id];
     if (!label) return [];
     projected.set(...position).project(camera);
@@ -48,17 +48,18 @@ export function positionEquipmentLabels(host: HTMLElement, profile: MachineScene
       label.style.visibility = 'hidden';
       return [];
     }
-    return [{ label, x, y, width: label.offsetWidth, height: label.offsetHeight }];
+    return [{ label, x, y, offset, width: label.offsetWidth, height: label.offsetHeight }];
   });
   for (const anchor of anchors) {
     const { label, x, y } = anchor;
-    const box = place(x, y, anchor.width, anchor.height, viewport, occupied);
+    const screenScale = width < 550 ? 0.55 : 1;
+    const box = place(x + anchor.offset[0] * screenScale, y + anchor.offset[1] * screenScale, anchor.width, anchor.height, viewport, occupied);
     if (!box) { label.style.visibility = 'hidden'; continue; }
     occupied.push(box);
     const cx = Math.round((box.left + box.right) / 2), cy = Math.round(box.bottom);
     label.style.visibility = 'visible';
     label.style.transform = `translate(${cx}px, ${cy}px)`;
-    label.style.setProperty('--leader-length', `${Math.hypot(x - cx, y + 8 - cy)}px`);
-    label.style.setProperty('--leader-angle', `${Math.atan2(cx - x, y + 8 - cy)}rad`);
+    label.style.setProperty('--leader-length', `${Math.hypot(x - cx, y - cy)}px`);
+    label.style.setProperty('--leader-angle', `${Math.atan2(cx - x, y - cy)}rad`);
   }
 }

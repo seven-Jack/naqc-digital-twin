@@ -1,20 +1,33 @@
-import { useLayoutEffect, useRef, type CSSProperties, type RefObject } from 'react';
-import { Aperture, ArrowLeft, Atom, Box, Camera, ChevronRight, Crosshair, ExternalLink, Grid3X3, Layers3, ScanLine, Table2, Waves } from 'lucide-react';
+import { useLayoutEffect, useRef, type CSSProperties, type ReactNode, type RefObject } from 'react';
+import { ArrowLeft, Atom, Box, Camera, ChevronRight, Crosshair, ExternalLink, Grid3X3, Layers3, ScanLine, Table2, Waves } from 'lucide-react';
 import { equipmentIds, machineEquipment, type EquipmentId } from '../data/machineEquipment';
-import { closeEquipment, openEquipment } from './equipmentNavigation';
+import { ApparatusDimensions } from './ApparatusDimensions';
+import { equipmentResources } from '../data/equipmentResources';
+import { closeEquipment, openEquipment, restoreEquipmentFocus } from './equipmentNavigation';
 import './equipment-inspection.css';
 
 const icons = { table: Table2, source: Atom, slm: Grid3X3, aod: Waves, vacuum: Box, array: Crosshair, gate: ScanLine, imaging: Camera };
 
+const groups = [
+  { label: '原子供给与俘获', devices: ['source', 'vacuum'] },
+  { label: '光镊与阵列', devices: ['slm', 'aod', 'array'] },
+  { label: '操控与读出', devices: ['gate', 'imaging'] },
+  { label: '支承结构', devices: ['table'] },
+] as const;
+
 export function EquipmentDirectory() {
-  return <section className="md-panel eq-directory" aria-labelledby="equipment-directory-title">
-    <header><Layers3 size={16} /><h2 id="equipment-directory-title">设备拆解</h2></header>
-    <div>{equipmentIds.map(id => {
-      const Icon = icons[id];
-      return <button type="button" data-testid={`equipment-open-${id}`} key={id} onClick={() => openEquipment(id)}>
-        <Icon size={16} /><span>{machineEquipment[id].label}</span><ChevronRight size={13} />
-      </button>;
-    })}</div>
+  return <section className="eq-directory" aria-labelledby="equipment-directory-title">
+    <header><Layers3 size={16} /><h2 id="equipment-directory-title">设备导航</h2></header>
+    <p>选择设备，放大结构并回放相关阶段。</p>
+    <div>{groups.map(group => <section className="eq-group" key={group.label}>
+      <h3>{group.label}</h3>
+      {group.devices.map(id => {
+        const Icon = icons[id];
+        return <button type="button" data-testid={`equipment-open-${id}`} key={id} onClick={() => openEquipment(id)}>
+          <Icon size={16} /><span>{machineEquipment[id].label}</span><ChevronRight size={13} />
+        </button>;
+      })}
+    </section>)}</div>
   </section>;
 }
 
@@ -25,12 +38,10 @@ interface InspectionProps {
   part: string | null;
   setSplit: (value: number) => void;
   setPart: (value: string | null) => void;
-  stage: string;
-  attempt: number;
-  milliseconds: number;
+  operation: ReactNode;
 }
 
-export function EquipmentInspection({ id, slot, split, part, setSplit, setPart, stage, attempt, milliseconds }: InspectionProps) {
+export function EquipmentInspection({ id, slot, split, part, setSplit, setPart, operation }: InspectionProps) {
   const dialog = useRef<HTMLDialogElement>(null);
   useLayoutEffect(() => {
     const element = dialog.current!;
@@ -38,7 +49,7 @@ export function EquipmentInspection({ id, slot, split, part, setSplit, setPart, 
     element.showModal();
     return () => {
       element.close();
-      if (trigger instanceof HTMLElement && trigger !== document.body && trigger.isConnected) trigger.focus({ preventScroll: true });
+      restoreEquipmentFocus(trigger);
     };
   }, []);
   const item = machineEquipment[id];
@@ -55,6 +66,7 @@ export function EquipmentInspection({ id, slot, split, part, setSplit, setPart, 
     <div className="eq-workbench">
       <div className="eq-visual">
         <div className="eq-focus-host" ref={slot} />
+        {operation}
         <div className="eq-explosion">
           <div><label htmlFor="eq-split"><Layers3 size={15} />拆解程度</label><output htmlFor="eq-split">{split}%</output></div>
           <div><button type="button" onClick={() => setSplit(0)}>合拢</button>
@@ -70,10 +82,20 @@ export function EquipmentInspection({ id, slot, split, part, setSplit, setPart, 
           <span>{String(i + 1).padStart(2, '0')}</span>{p.label}<ChevronRight size={14} />
         </button>)}</div>
         <p className="eq-part-desc" aria-live="polite">{selected ? selected.description : '点选部件可在模型中定位并查看用途。'}</p>
-        <p className="eq-frame"><Aperture size={15} />第 {attempt} 轮 · {stage} · {(milliseconds / 1000).toFixed(2)} s</p>
+        {(id === 'array' || id === 'source' || id === 'vacuum') && <details className="eq-boundary" key={`dimensions-${id}`}>
+          <summary>{id === 'array' ? '实验阵列尺寸' : '两腔输运尺寸'}</summary>
+          <ApparatusDimensions initial={id === 'array' ? 'array' : 'transport'} fixed />
+        </details>}
         <details className="eq-boundary"><summary>结构示意与资料来源</summary><p>{item.boundary}</p>
           <a href={item.sourceUrl} target="_blank" rel="noreferrer">{item.sourceLabel}<ExternalLink size={12} /></a>
-          <a href={item.evidenceHref}>查看子系统证据<ChevronRight size={13} /></a>
+        </details>
+        <details className="eq-boundary eq-reading" key={id}><summary>相关文章与视频</summary>
+          <ul>{equipmentResources.filter(resource => resource.devices.includes(id)).map(resource =>
+            <li key={resource.url}>
+              <small>{resource.kind} · {resource.publisher}</small>
+              <a href={resource.url} target="_blank" rel="noreferrer">{resource.title} ↗</a>
+              <p>{resource.guide}</p>
+            </li>)}</ul>
         </details>
       </div>
     </div>

@@ -6,7 +6,7 @@ import type { ScenePoint } from '../data/machineSceneProfile';
 export class EquipmentAssembly extends T.Group {
   readonly parts = new Map<string, { group: T.Group; offset: T.Vector3 }>();
   private highlight: T.LineSegments[] = [];
-  private highlightMaterial = new T.LineBasicMaterial({ color: '#b9fff0', toneMapped: false });
+  private highlightMaterial = new T.LineBasicMaterial({ color: '#f2dbaf', toneMapped: false });
 
   constructor(readonly equipmentId: EquipmentId) {
     super();
@@ -34,7 +34,7 @@ export class EquipmentAssembly extends T.Group {
     if (!id) return;
     const meshes: T.Mesh[] = [];
     this.parts.get(id)?.group.traverseVisible(object => {
-      if (object instanceof T.Mesh) meshes.push(object);
+      if (object instanceof T.Mesh && !(object instanceof T.InstancedMesh)) meshes.push(object);
     });
     for (const mesh of meshes) {
       const outline = new T.LineSegments(new T.EdgesGeometry(mesh.geometry, 26), this.highlightMaterial);
