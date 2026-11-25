@@ -13,20 +13,23 @@ React 和 TypeScript 提供面板及单一参数状态。Vite 打包静态文件
 - `src/machine/MachineDashboard.tsx` 持有演示配置、所选协议、尝试编号与播放时刻。各视图共用一帧。标准协议使用 JSON v2，补位协议使用 v3，保存配置、种子和逐次几何、事件、观测与判决。`src/physics/machineRunImport.ts` 校验并读取本地文件，播放器直接使用保存的运行。旧文件缺失的逐轮布局标为缺测。
 - `src/scene/machineSceneFrame.ts` 将播放帧按光路配置投影为显示状态。Three.js 场景和光路说明共用投影，WebGL 不可用时同一帧驱动二维阵列和光路说明。
 - `src/data/hardwareEvidence.ts` 存放真机实验出处与条件，供 `HardwareEvidence.tsx` 展示。求解器使用独立的仿真假设。
-- `src/data/senooReadoutSource.ts` 保存 Senoo 图 2b 的三组配对计数与逐列出处。`src/machine/SenooReadoutSource.tsx` 提供固定对数坐标、组别筛选和配对样本查看。数据由本地原件按哈希校验导入，面板选择只改变文献观测视图。
-- `src/data/senooPopulationSource.ts` 保存 Senoo 图 2c 右图两条布居轨迹的源值、上下误差与工作表定位。`src/machine/SenooPopulationSource.tsx` 在共用源时刻显示配对的两态布居。
 - `src/data/yb171AtomicSnapshot.generated.json` 固定本地原子数据库版本并保留来源、条件与证据状态。演示 v3 的 578 nm 通道引用该快照的 T3 跃迁，装置驱动参数由未来的同装置观测填入。
-- `src/physics/dualExposureReadout.ts` 定义双曝光阈值规则及四种判决。`src/data/senooReadoutEvaluation.ts` 从图源构建带制备标签和工作簿定位的观测，生成逐点判决和交叉计数。图表、样本详情、计数与 JSON 导出共享同一规则快照。
 
 当前批次模型使用矩形网格与连续寄存器位点。演示配置的几何和阶段时长分别描述示意场景与浏览器时间。更换真实装置时，按其分区、连通性和实验时标补充相应的模型与配置。
 
 Bell 补位协议使用 15.2 秒的示意尝试时间。每次占位采集在阶段开始后 600 ms 产生合成布尔观测，判决于阶段结束的 900 ms 可用。第一次判决选择继续或补位，复查判决选择继续或跳过。满寄存器跳过补位和复查，储备区无可用原子时记录 `no-source`。跳过操作保留计划窗口供检查。三维与二维阵列跟随所选尝试，批次计数在荧光读出窗口按所有尝试推进。切换与回退均从同一运行投影。
 
-## Senoo 文献装置
+## 独立验证的文献组件
+
+生产入口 `src/main.tsx` 只挂载整机演示。以下保留的文献组件由浏览器测试单独加载。
+
+- `src/data/senooReadoutSource.ts` 保存 Senoo 图 2b 的三组配对计数与逐列出处。`src/machine/SenooReadoutSource.tsx` 提供固定对数坐标、组别筛选和配对样本查看。数据由本地原件按哈希校验导入，面板选择只改变文献观测视图。
+- `src/data/senooPopulationSource.ts` 保存 Senoo 图 2c 右图两条布居轨迹的源值、上下误差与工作表定位。`src/machine/SenooPopulationSource.tsx` 在共用源时刻显示配对的两态布居。
+- `src/physics/dualExposureReadout.ts` 定义双曝光阈值规则及四种判决。`src/data/senooReadoutEvaluation.ts` 从图源构建带制备标签和工作簿定位的观测，生成逐点判决和交叉计数。图表、样本详情、计数与 JSON 导出共享同一规则快照。
 
 - `src/data/senooApparatus.ts` 定义 767 nm 装置、通道、相关态和文献工序。工序顺序用于无量纲的播放进度。论文给出的典型物理量按 SI 另存。
 - `src/physics/senooReplay.ts` 将图 2b 的样本和播放进度投影成当前光路、名义态、可用观测和探索判决。回放 JSON v1 校验装置、工作簿哈希、配对样本及规则后恢复进度。
-- `src/machine/SenooApparatus.tsx` 的 `#senoo` 路由把同一帧传给装置场景和计数面板。三维与二维示意共享通道状态。 [文献依据及实测缺项](SENOO_APPARATUS.md)
+- `src/machine/SenooApparatus.tsx` 把同一帧传给装置场景和计数面板。三维与二维示意共享通道状态。 [文献依据及实测缺项](SENOO_APPARATUS.md)
 - `src/data/senooMeasurementWorkbook.ts` 在浏览器读取模板四张 XLSX 数据表，并保留原行号、字符串 ID 和数值缺测。独立的 `src/physics/senooMeasurements.ts` 验证关系键、曝光与事件时标，汇总原记录在各阶段的分母。`src/machine/SenooMeasurementImport.tsx` 展示报告、逐帧记录和来源声明。
 - `src/physics/senooMeasurementReplay.ts` 将选中位点的曝光和关联事件投影为纯回放帧。相机和光路使用记录的区间，计数与判决按各自的可用时标释放。`src/machine/SenooMeasurementReplay.tsx` 用同一帧渲染三维、时间轴和双曝光面板，分母共用导入校验口径。工作簿内容哈希用于同一页面重导时保留游标。 [双曝光逐轮回放](SENOO_APPARATUS.md#双曝光逐轮回放)
 - `src/physics/senooSyntheticWorkflow.ts` 仅从选定的合成标定批次求中点阈值，冻结双曝光规则、分母及样本出处。验证函数使用该规则判读另一个合成采集运行。`src/machine/SenooSyntheticWorkflow.tsx` 将冻结与留出判读分为两个操作，并可导出验收 JSON。 [合成结果](SENOO_APPARATUS.md#合成阈值冻结与独立验证)
@@ -43,15 +46,6 @@ Bell 补位协议使用 15.2 秒的示意尝试时间。每次占位采集在阶
 - `src/physics/senooCzBenchmark.ts`、`senooCzBenchmarkStatistics.ts` 和 `senooCzBenchmarkFit.ts` 分别验证独立 gRB 批次、按实际掩码和采集块统计、计算非 echo 的描述性拟合。`src/machine/SenooCzBenchmarkPanel.tsx` 按深度查看逐轮证据并导出报告。 [独立 gRB 与丢失批次](SENOO_CALIBRATION.md#独立-grb-与丢失批次)
 - `src/data/senooRabiCharacterization.ts` 绑定图 2c 源表、归档拟合和已实现的 SI 前向模型。`src/data/senooPairCharacterization.ts` 校验图 5f 的双轴误差和图 4f 两组频率的逐点与逐窗证据。三个观测使用 `src/machine/SenooFitPlot.tsx` 绘制源点、拟合及误差条，游标由各自的源点编号驱动。 [图 2c](SENOO_APPARATUS.md#图-2c-单原子-rabi) · [图 5f、4f](SENOO_APPARATUS.md#扩展数据图-5f-能移与图-4f-阻塞-rabi)
 
-## 钟跃迁子系统
+## 钟跃迁物理模型记录
 
-- `src/data/atomicData.ts` 保存可替换的带版本原子输入和假设。
-- `src/physics/` 包含常数、单位、高斯束、势能、阱频、复振幅和 SI 快照。物理代码可从测试或未来的计算适配器独立调用。
-- `src/App.tsx` 更新 `PhysicsParameterState`，统一校验输入，由 `calculateModel` 生成参数快照。改动动力学参数时复位时间。阵列的所有位点同参，选择位点时保留时间。
-- `src/state/usePlayback.ts` 维护唯一的模拟时刻。布居、曲线游标、Bloch 球、原子颜色与 JSON 使用该时刻。
-- `src/scene/` 接收同一模型。原子、光束、束腰环及发光 billboard 使用 GPU instancing。轨道操作和模拟动态触发按需渲染。束腰改变才重建光束几何，势面以类型和光镊参数为键。
-- `src/plots/` 在模型或剖面改变时生成数据。Rabi 迹线与时间游标分开渲染。快速参数输入时，低优先级图表更新以整份快照为单位。
-- `src/panels/` 实现输入、科研读数、补偿比较和脉冲时间轴。
-- `tests/` 验证数值基准、解析不变量、渲染和用户交互。
-
-画质控制限制 WebGL 像素比例。Glow 关闭后保留束腰环、光束几何和科学读数。解析传播和曲线采样可在未来由同一输入输出约定下的 Worker 或计算适配器扩展。
+`src/data/atomicData.ts` 保存带版本的原子输入，`src/physics/` 保留势能、驱动与 SI 快照的计算及单元测试。整机门序列通过 `machineSceneFrame.ts` 显示其中的 578 nm 态转移光路。[物理模型与假设](PHYSICS.md)

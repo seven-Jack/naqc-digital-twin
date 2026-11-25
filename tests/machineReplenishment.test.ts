@@ -115,6 +115,9 @@ describe('synthetic Bell occupancy and one replenishment', () => {
     expect(observed.atoms.filter(atom => atom.qubit !== undefined)).toHaveLength(1);
     const moving = machineFrame(run, 5900);
     expect(moving.atoms.filter(atom => atom.moving)).toHaveLength(1);
+    expect(moving.activeMove).toEqual(run.records[0].move);
+    expect(moving.activeMove?.atomId).toBe(moving.atoms.find(atom => atom.moving)?.id);
+    expect(before.activeMove).toBeNull();
     expect(moving.occupancy?.replenishment).toBe('moving');
 
     const final = machineFrame(run, run.durationMs);
@@ -126,5 +129,18 @@ describe('synthetic Bell occupancy and one replenishment', () => {
     expect(machineFrame(run, run.durationMs)).toEqual(final);
     expect(machineExport(run)).toEqual(original);
     expect(machineExport(createMachineRun(run.config, run.profile, 'bell-replenishment'))).toEqual(original);
+  });
+
+  it('uses the selected round for both the moving atom and its route', () => {
+    const run = createMachineRun({ ...config, loadProbability: 0.09 }, MUNIZ_DEMO_PROFILE, 'bell-replenishment');
+    const stage = run.plan.timeline.stages.find(item => item.id === 'rearrangement')!;
+    const later = run.records.findIndex((record, index) => index > 0 && !!record.initialMoves?.length &&
+      record.initialMoves[0].atomId !== run.moves[0]?.atomId);
+    expect(later).toBeGreaterThan(0);
+    const routes = run.records[later].initialMoves!;
+    const frame = machineFrame(run, stage.startMs + stage.durationMs / routes.length / 2, later);
+    expect(frame.activeMove).toEqual(routes[0]);
+    expect(frame.atoms.find(atom => atom.moving)?.id).toBe(routes[0].atomId);
+    expect(machineFrame(run, stage.endMs, later).activeMove).toBeNull();
   });
 });

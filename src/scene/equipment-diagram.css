@@ -1,11 +1,12 @@
 .equipment-diagram { position: relative; z-index: 1; display: block; width: 100%; height: 100%; min-height: 0; max-height: 480px; overflow: visible; }
-.equipment-diagram .eqd-caption { fill: #a8bfd0; font-size: 10px; font-family: inherit; }
-.equipment-diagram .eqd-part { fill: #304d60; stroke: #86a8b8; stroke-width: 1.2; stroke-linejoin: round; cursor: pointer; }
-.equipment-diagram .eqd-engrave { fill: none; stroke: #7897a7; stroke-width: .9; }
-.equipment-diagram .eqd-inset { fill: #142c39; }
-.equipment-diagram .eqd-port, .equipment-diagram .eqd-glass { fill: #4c9297; }
-.equipment-diagram .eqd-site { fill: #1f383f; stroke: #6fada5; stroke-width: .75; }
-.equipment-diagram .eqd-part:hover, .equipment-diagram .eqd-part:focus-visible { stroke: #e1f5ff; }
-.equipment-diagram .eqd-part[aria-pressed="true"] { fill: #376c64; stroke: #a6ffdd; stroke-width: 2; }
+.equipment-diagram .eqd-caption { fill: var(--md-muted); font-size: 10px; font-family: inherit; }
+.equipment-diagram .eqd-part { fill: var(--md-accent-border); stroke: var(--md-muted); stroke-width: 1.2; stroke-linejoin: round; cursor: pointer; }
+.equipment-diagram .eqd-engrave { fill: none; stroke: var(--md-dim); stroke-width: .9; }
+.equipment-diagram .eqd-inset { fill: var(--md-line); }
+.equipment-diagram .eqd-port, .equipment-diagram .eqd-glass { fill: var(--md-dim); }
+.equipment-diagram .eqd-site { fill: var(--md-border); stroke: var(--md-accent); stroke-width: .75; }
+.equipment-diagram .eqd-part:hover, .equipment-diagram .eqd-part:focus-visible { stroke: var(--md-ink); }
+.equipment-diagram .eqd-part[aria-pressed="true"] { fill: var(--md-accent-border); stroke: var(--md-accent-ink); stroke-width: 2; }
+.equipment-diagram .eqd-part[data-illuminated] { stroke: var(--md-accent-ink); stroke-width: 2; }
 .equipment-diagram .eqd-part[aria-pressed="true"] .eqd-engrave,
-.equipment-diagram .eqd-part[aria-pressed="true"] .eqd-site { stroke: #acffe4; }
+.equipment-diagram .eqd-part[aria-pressed="true"] .eqd-site { stroke: var(--md-accent-ink); }

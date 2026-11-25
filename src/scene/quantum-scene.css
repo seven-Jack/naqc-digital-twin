@@ -6,22 +6,22 @@
   --scene-science: #85b8ff;
   --scene-clock: #ffcf85;
   --scene-raman: #f39ae5;
-  --scene-orange: #ffc183;
-  --scene-blue: #a3c9e9;
+  --scene-imaging: #a4e9b5;
+  --scene-structure: #d1c9b9;
   position: relative;
   isolation: isolate;
   width: 100%;
   height: 100%;
   min-height: 350px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 45%, #14263b 0%, #0b1524 48%, #080f19 82%);
+  background: radial-gradient(ellipse at 50% 42%, #414644 0%, #282d2e 39%, #1b1e20 75%, #181a1b 100%);
 }
 .qc-scene::before {
   content: '';
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-image: radial-gradient(#4e76943b 0.7px, transparent 0.7px);
+  background-image: radial-gradient(#d1c9ac20 0.7px, transparent 0.7px);
   background-size: 18px 18px;
   mask-image: radial-gradient(ellipse at 50% 48%, transparent 26%, #000 85%);
 }
@@ -41,7 +41,7 @@
   padding: 5px 8px;
   border: 1px solid color-mix(in srgb, var(--signal) 33%, transparent);
   color: var(--signal);
-  background: #08121de8;
+  background: #202427ec;
   border-radius: 4px;
   font-size: 10px;
   line-height: 1.15;
@@ -68,8 +68,8 @@
 .qc-scene [data-color='clock'] { --signal: var(--scene-clock); }
 .qc-scene [data-color='raman'] { --signal: var(--scene-raman); }
 .qc-scene [data-color='gate'] { --signal: var(--scene-purple); }
-.qc-scene [data-color='imaging'] { --signal: var(--scene-orange); }
-.qc-scene [data-color='vacuum'] { --signal: var(--scene-blue); }
+.qc-scene [data-color='imaging'] { --signal: var(--scene-imaging); }
+.qc-scene [data-color='vacuum'] { --signal: var(--scene-structure); }
 .qc-scene-tools { position: absolute; top: 12px; right: 12px; display: flex; gap: 4px; }
 .qc-scene-tools button {
   display: inline-flex;
@@ -79,15 +79,15 @@
   min-height: 33px;
   min-width: 33px;
   padding: 0 8px;
-  border: 1px solid #283e56;
+  border: 1px solid var(--md-border);
   border-radius: 5px;
-  background: #101c2be8;
-  color: #9bb1c8;
+  background: #232729ee;
+  color: var(--md-muted);
   font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
 }
-.qc-scene-tools button:hover, .qc-scene-tools button[aria-pressed='true'] { color: #c1fff0; border-color: #397167; background: #163331; }
+.qc-scene-tools button:hover, .qc-scene-tools button[aria-pressed='true'] { color: var(--md-accent-ink); border-color: var(--md-accent-border); background: var(--md-selected); }
 .qc-scene-footer {
   position: absolute;
   inset: auto 14px 13px;
@@ -95,7 +95,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  color: #9db3c9;
+  color: var(--md-muted);
   font-size: 10px;
   line-height: 1.2;
   pointer-events: none;
@@ -106,7 +106,7 @@
   gap: 7px;
   padding: 5px 7px;
   color: var(--signal);
-  background: #0a1723eb;
+  background: #1a1d1feb;
   border: 1px solid color-mix(in srgb, var(--signal) 32%, transparent);
   border-radius: 5px;
   font: 550 10px/1.3 var(--mono);
@@ -119,19 +119,52 @@
   background: var(--signal);
   box-shadow: 0 0 8px var(--signal);
 }
-.qc-scene-fallback { position: absolute; inset: 45px 22px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; }
-.qc-scene-fallback p { font-size: 12px; color: #abc3da; }
-.qc-scene-fallback-grid { display: grid; gap: 9px; width: min(270px, 100%); padding: 12px; border-radius: 8px; background: #08131f; border: 1px solid #274255; }
-.qc-scene-fallback-grid span { aspect-ratio: 1; border-radius: 40%; display: grid; place-items: center; background: #142438; border: 1px solid #2f4b63; }
-.qc-scene-fallback-grid span:not([data-state='empty'])::after { content: ''; width: 43%; aspect-ratio: 1; border-radius: 50%; background: var(--atom, #75f4d3); box-shadow: 0 0 10px var(--atom, #75f4d3); }
-.qc-scene-fallback-grid [data-state='qubit'] { --atom: var(--scene-purple); }
-.qc-scene-fallback-grid [data-state='moving'] { --atom: var(--scene-transport); }
-.qc-scene-fallback-grid [data-state='bright'] { --atom: var(--scene-orange); }
-.qc-scene-fallback-grid [data-state='dark'] { --atom: #61718f; }
+.qc-map-layer { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 48%, var(--md-line), var(--md-inset) 80%); }
+.qc-architecture-map { position: absolute; inset: 28px 8px 31px; }
+.qc-architecture-map > svg { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+.qc-architecture-map > svg path { fill: none; stroke: var(--md-dim); vector-effect: non-scaling-stroke; stroke-width: 1.5; }
+.qc-architecture-map > svg path[data-lit] { stroke: var(--md-accent-ink); stroke-width: 3; }
+.qc-map-raman { position: absolute; top: 2%; left: 50%; transform: translateX(-50%); color: var(--md-accent-ink); font-size: 11px; }
+.qc-architecture-map .qc-structural { stroke-dasharray: 4 5; stroke: var(--md-dim); }
+.qc-architecture-map button { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 3px; min-height: 36px; align-content: center; width: max-content; max-width: 30%; padding: 6px 12px; background: var(--md-line); border: 1px solid var(--md-accent-border); border-radius: 6px; color: var(--md-ink); font-size: 13px; cursor: zoom-in; }
+.qc-architecture-map button[data-active], .qc-architecture-map button:hover { background: var(--md-selected); border-color: var(--md-accent); color: var(--md-accent-ink); }
+.qc-architecture-map p { position: absolute; bottom: 0; width: 100%; color: var(--md-muted); font-size: 11px; text-align: center; }
+@media (max-width: 550px) {
+  .qc-architecture-map button { padding-inline: 5px; font-size: 11px; min-height: 40px; }
+  .qc-architecture-map .eq-array-readout { height: 29px; }
+}
 @media (max-width: 550px) {
   .qc-scene { min-height: 315px; }
   .qc-scene-label { font-size: 9px; padding: 4px 5px; }
   .qc-scene-tools { top: 9px; right: 9px; }
   .qc-scene-tools button { min-height: 36px; min-width: 36px; }
   .qc-scene-footer { inset: auto 10px 11px; }
+}
+
+.qc-metric-layer { position: absolute; inset: 0; display: grid; place-items: center; padding: 52px 10px 14px; background: radial-gradient(ellipse at 45% 46%, #2b3434, #1b1f21 72%); }
+.apparatus-dimensions { width: 100%; min-height: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--md-ink); text-align: center; }
+.apparatus-dimensions svg { min-height: 0; width: 100%; max-width: 530px; height: auto; flex-shrink: 1; font: 600 14px var(--sans, sans-serif); fill: var(--md-ink); }
+.apparatus-dimensions p { margin: 0 0 4px; color: var(--md-muted); font-size: 11px; line-height: 1.5; }
+.apparatus-dimensions a { color: var(--md-accent-ink); font-size: 11px; text-underline-offset: 3px; }
+.metric-switch { display: flex; gap: 4px; }
+.metric-switch button { padding: 5px 12px; border: 1px solid var(--md-border); border-radius: 4px; background: var(--md-inset); color: var(--md-muted); font-size: 12px; }
+.metric-switch button[aria-pressed=true] { color: var(--md-accent-ink); border-color: var(--md-accent-border); }
+.metric-gauge, .metric-guide, .metric-transfer { fill: none; stroke: var(--md-accent); stroke-width: 1.2; }
+.metric-shell { fill: #424a49; stroke: #95a49c; stroke-width: 1.15; }
+.metric-guide { stroke: #929d94; stroke-width: .7; stroke-dasharray: 3 4; }
+.metric-transfer { stroke: var(--md-mint); stroke-width: 1.6; }
+.metric-site { fill: var(--md-mint); }
+.metric-site-outline { fill: #324941; stroke: #6c9e8c; }
+.apparatus-dimensions .metric-value { fill: var(--md-accent-ink); font: 550 14px var(--mono); }
+.apparatus-dimensions .metric-sub { fill: var(--md-muted); font-size: 11px; font-weight: 400; }
+.eq-boundary .apparatus-dimensions { padding: 4px 0 8px; }
+.qc-array-switch { position: absolute; top: 12px; left: 12px; }
+.qc-array-topology { position: absolute; left: 16px; bottom: 19px; display: flex; gap: 10px; align-items: center; pointer-events: none; }
+.qc-array-topology svg { width: 32px; height: 52px; }
+.qc-array-topology strong, .qc-array-topology span { display: block; font-size: 11px; }
+.qc-array-topology span { color: var(--md-muted); margin-top: 4px; }
+@media (max-width: 760px) {
+  .qc-array-switch { top: 55px; left: 50%; transform: translateX(-50%); }
+  .qc-array-topology { bottom: 35px; left: 10px; }
+  .qc-array-topology svg { width: 22px; height: 36px; }
 }

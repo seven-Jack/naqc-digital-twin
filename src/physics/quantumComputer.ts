@@ -133,6 +133,7 @@ export interface MachineFrame {
   stageSkipReason: MachineEvent['reason'] | null;
   occupancy: OccupancyPlayback | null;
   atoms: MachineAtom[];
+  activeMove: MachineMove | null;
   activeQubits: readonly number[];
   representativeReady: boolean;
   representativeBitstring: string | null;
@@ -563,13 +564,15 @@ export function machineFrame(run: MachineRun, timeMs: number, selectedAttempt = 
   let atoms = [...run.rearrangedAtoms];
   const loadedAtoms = attemptIndex === 0 ? run.loadedAtoms : record?.loadedAtoms;
   const initialMoves = attemptIndex === 0 ? run.moves : record?.initialMoves;
+  let routes: readonly MachineMove[] = [];
   let geometryRecorded = true;
   let occupancy: OccupancyPlayback | null = null;
   if (record) {
     const replenishmentStage = stages.find(candidate => candidate.id === 'replenishment')!;
     atoms = [...(elapsedMs < replenishmentStage.endMs ? record.initialAtoms : record.replenishedAtoms)];
     if (stage.id === 'replenishment' && record.move) {
-      atoms = movingAtoms(record.initialAtoms, record.replenishedAtoms, [record.move], stageProgress);
+      routes = [record.move];
+      atoms = movingAtoms(record.initialAtoms, record.replenishedAtoms, routes, stageProgress);
     }
     const replenishing = decisions[0]?.result === 'replenish';
     let replenishment: OccupancyPlayback['replenishment'] = null;
@@ -589,8 +592,9 @@ export function machineFrame(run: MachineRun, timeMs: number, selectedAttempt = 
   }
   if (stage.id === 'rearrangement') {
     geometryRecorded = loadedAtoms !== undefined && initialMoves !== undefined;
+    routes = initialMoves ?? [];
     atoms = loadedAtoms && initialMoves
-      ? movingAtoms(loadedAtoms, record?.initialAtoms ?? run.rearrangedAtoms, initialMoves, stageProgress)
+      ? movingAtoms(loadedAtoms, record?.initialAtoms ?? run.rearrangedAtoms, routes, stageProgress)
       : [];
   }
   if (representativeLostQubits.length > 0) {
@@ -614,10 +618,12 @@ export function machineFrame(run: MachineRun, timeMs: number, selectedAttempt = 
   )) activeQubits = allPrepared;
   if (gateIndex !== null) activeQubits = run.circuit.gates[gateIndex].qubits;
 
+  const movingAtom = atoms.find(atom => atom.moving);
+  const activeMove = movingAtom ? routes.find(move => move.atomId === movingAtom.id) ?? null : null;
   return {
     attemptIndex, geometryRecorded, parallelTrapHandoff,
     stage, stageIndex, stageStartMs: stage.startMs, stageEndMs: stage.endMs,
-    elapsedMs, progress: elapsedMs / run.durationMs, stageProgress, complete, atoms,
+    elapsedMs, progress: elapsedMs / run.durationMs, stageProgress, complete, atoms, activeMove,
     activeQubits, gateIndex, gateProgress, stageSkipped, stageSkipReason: skippedEvent?.reason ?? null, occupancy,
     representativeReady, representativeBitstring, representativeLostQubits,
     visibleAttempts, visibleShots, visibleRejectedShots, visibleLostShots, outcomeCounts, latestBitstring,

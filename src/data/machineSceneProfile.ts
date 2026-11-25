@@ -1,3 +1,5 @@
+import { norciaTransport } from './hardwareEvidence';
+
 export const MUNIZ_DEMO_WAVELENGTHS_NM = {
   reservoir: 483,
   science: 460,
@@ -16,13 +18,17 @@ interface OpticalPath {
 }
 
 interface SidePath {
-  entranceZ: number;
+  /** Output collimator and turning mirrors, ordered from source to interaction row. */
+  approach: readonly ScenePoint[];
+  rowEntranceX: number;
+  rowExitX: number;
   color: string;
   width: number;
 }
 
 const highlights = {
   cooling: { color: 'cooling', label: '磁光阱冷却' },
+  elevator: { color: 'tweezer', label: '532 nm 晶格输运 · 示意' },
   reservoir: { color: 'tweezer', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.reservoir} nm 储备光镊` },
   transport: { color: 'transport', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.transport} nm AOD 搬运` },
   preparation: { color: 'imaging', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.probe} nm 光抽运` },
@@ -31,7 +37,7 @@ const highlights = {
   'to-science': { color: 'science', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.reservoir} → ${MUNIZ_DEMO_WAVELENGTHS_NM.science} nm 光镊交接` },
   raman: { color: 'raman', label: '局域 Raman 旋转' },
   'clock-shelve': { color: 'clock', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.clock} nm · 转入钟态` },
-  rydberg: { color: 'gate', label: `${Math.round(MUNIZ_DEMO_WAVELENGTHS_NM.rydberg)} nm · Rydberg 条件相位` },
+  rydberg: { color: 'gate', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.rydberg} nm · Rydberg 条件相位` },
   'clock-return': { color: 'clock', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.clock} nm · 返回基态` },
   'raman-analysis': { color: 'raman', label: '局域 Raman 分析旋转' },
   'to-reservoir': { color: 'tweezer', label: `${MUNIZ_DEMO_WAVELENGTHS_NM.science} → ${MUNIZ_DEMO_WAVELENGTHS_NM.reservoir} nm 光镊交接` },
@@ -40,61 +46,67 @@ const highlights = {
 
 export type MachineOpticalHighlight = keyof typeof highlights;
 
-/** Display geometry and visual labels for the schematic. Scene coordinates have no physical units. */
+/** The sample-to-sample transport has a metric scale. Housings and replay sites are illustrative. */
 export interface MachineSceneProfile {
   arrayPitch: number;
   arrayY: number;
-  labels: readonly { id: string; text: string; color: string; position: ScenePoint }[];
+  motY: number;
+  labels: readonly { id: string; text: string; color: string; position: ScenePoint; offset: readonly [number, number] }[];
   delivery: ScenePoint;
   collection: ScenePoint;
-  sidePathX: readonly [entrance: number, fold: number, exit: number];
   paths: {
     reservoir: OpticalPath;
     science: OpticalPath;
     transport: OpticalPath;
     objective: OpticalPath;
+    raman: OpticalPath;
     cooling: readonly OpticalPath[];
     clock: SidePath;
     rydberg: SidePath;
     probe: SidePath;
   };
-  ramanColor: string;
   highlights: Record<MachineOpticalHighlight, { color: string; label: string }>;
 }
 
-const arrayY = 0.36;
+export function interactionPath(path: SidePath, arrayY: number, rowOffset: number): OpticalPath {
+  return { ...path, points: [...path.approach, [path.rowEntranceX, arrayY - rowOffset, 0], [path.rowExitX, arrayY - rowOffset, 0]] };
+}
+
+export const sceneUnitsPerMetre = 10;
+const arrayY = 2.35;
+const motY = arrayY - norciaTransport.separationM * sceneUnitsPerMetre;
 const merge: ScenePoint = [-4.25, 0.02, 1.33];
-const delivery: ScenePoint = [0, -0.55, 0];
+const delivery: ScenePoint = [0, arrayY, -0.83];
+const collection: ScenePoint = [0, arrayY, 0.83];
 
 export const MUNIZ_DEMO_SCENE: MachineSceneProfile = {
-  arrayPitch: 0.5,
-  arrayY,
+  arrayPitch: 0.145,
+  arrayY, motY,
   labels: [
-    { id: 'source', text: '原子源', color: 'vacuum', position: [-4.38, 0.84, -2.40] },
-    { id: 'table', text: '光学平台', color: 'vacuum', position: [-5.8, -1.60, 3.20] },
-    { id: 'array', text: '原子阵列', color: 'science', position: [0.72, 0.56, 1.54] },
-    { id: 'slm', text: 'SLM 固定光镊', color: 'tweezer', position: [-7.4, 1.65, 1.35] },
-    { id: 'aod', text: 'AOD 搬运光镊', color: 'transport', position: [-7.05, 2.45, -1.25] },
-    { id: 'vacuum', text: '真空腔', color: 'vacuum', position: [-2.35, 2.03, 0.75] },
-    { id: 'imaging', text: '荧光收集物镜', color: 'imaging', position: [0.20, 4.42, 0] },
-    { id: 'gate', text: '门与探测激光', color: 'gate', position: [7.13, 1.76, 0.1] },
+    { id: 'source', text: '原子源', color: 'vacuum', position: [-2.95, motY, 0], offset: [-16, 35] },
+    { id: 'table', text: '光学平台', color: 'vacuum', position: [-5.7, -1.60, 3.78], offset: [2, -8] },
+    { id: 'array', text: '原子阵列', color: 'science', position: [0, arrayY, 0], offset: [47, 23] },
+    { id: 'slm', text: 'SLM 固定光镊', color: 'tweezer', position: [-7.27, 0.28, 1.64], offset: [-12, -17] },
+    { id: 'aod', text: 'AOD 搬运光镊', color: 'transport', position: [-7.48, 0.12, -1.30], offset: [-28, -24] },
+    { id: 'vacuum', text: '真空腔', color: 'vacuum', position: [-1.15, arrayY + 0.45, 0.3], offset: [-30, -24] },
+    { id: 'imaging', text: '荧光收集物镜', color: 'imaging', position: [0.35, arrayY, 2.55], offset: [-82, -12] },
+    { id: 'gate', text: '门与探测激光', color: 'gate', position: [6.50, arrayY, 1.82], offset: [0, -24] },
   ],
-  delivery,
-  collection: [0, 2.49, 0],
-  sidePathX: [5.18, 3.85, -2.15],
+  delivery, collection,
   paths: {
-    reservoir: { points: [[-5.95, 0.02, 1.07], merge], color: '#4feab7' },
-    science: { points: [[-5.95, 0.02, 1.59], merge], color: '#74adfc' },
-    transport: { points: [[-6.02, 0.02, -1.17], [-5.1, 0.02, -1.17], merge], color: '#5beafb' },
-    objective: { points: [merge, [-3.16, -0.74, 0], [0, -0.74, 0], delivery], color: '#4feab7', width: 0.18 },
+    reservoir: { points: [[-5.95, 0.02, 1.07], merge], color: '#60debe' },
+    science: { points: [[-5.95, 0.02, 1.59], merge], color: '#78a8ff' },
+    transport: { points: [[-6.02, 0.02, -1.17], [-4.25, 0.02, -1.17], merge], color: '#62d9f5' },
+    raman: { points: [[-4.25, 0.02, 2.26], merge], color: '#f18de1', width: 0.075 },
+    objective: { points: [merge, [-3.65, 0.02, 1.33], [-3.65, 0.02, -2.85], [-3.65, arrayY, -2.85], [0, arrayY, -2.85], delivery], color: '#60debe', width: 0.11 },
     cooling: [
-      { points: [[-2.28, 0.55, -1.44], [0, arrayY, 0], [1.94, 0.21, 1.68]], color: '#4fb7fe', width: 0.37 },
-      { points: [[-1.96, 0.31, 1.48], [0, arrayY, 0], [1.96, 0.47, -1.48]], color: '#4fb7fe', width: 0.33 },
+      { points: [[-1.55, motY, -1.3], [0, motY, 0], [1.55, motY, 1.3]], color: '#7dc7ec', width: 0.14 },
+      { points: [[1.55, motY, -1.3], [0, motY, 0], [-1.55, motY, 1.3]], color: '#7dc7ec', width: 0.14 },
     ],
-    clock: { entranceZ: -0.57, color: '#ffcc7e', width: 0.18 },
-    rydberg: { entranceZ: 0.24, color: '#b089fc', width: 0.22 },
-    probe: { entranceZ: 1.05, color: '#ffad69', width: 0.30 },
+    // Fig. 1a: clock and UV point toward +x; readout points toward −x.
+    clock: { approach: [[5.38, arrayY + 0.82, 2.55], [-2.55, arrayY + 0.82, 2.55]], rowEntranceX: -2.55, rowExitX: 1.93, color: '#f3c16d', width: 0.10 },
+    rydberg: { approach: [[5.38, arrayY + 0.82, 3.28], [-2.55, arrayY + 0.82, 3.28]], rowEntranceX: -2.55, rowExitX: 1.93, color: '#b694ff', width: 0.12 },
+    probe: { approach: [[5.38, arrayY, 1.82], [3.72, arrayY, 1.82]], rowEntranceX: 3.72, rowExitX: -1.93, color: '#94e3a7', width: 0.12 },
   },
-  ramanColor: '#f18de1',
   highlights,
 };

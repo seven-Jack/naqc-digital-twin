@@ -2,9 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
 test('Senoo 双曝光回放按步骤联动光路、源表计数和判决', async ({ page }) => {
-  await page.goto('/#machine');
-  await page.getByRole('link', { name: 'Senoo 装置', exact: true }).click();
-  await expect(page).toHaveURL(/#senoo$/);
+  await page.goto('/#senoo');
   await page.getByLabel('文献制备组', { exact: true }).selectOption('spin0');
   await page.getByRole('spinbutton', { name: '图 2b 样本序号', exact: true }).fill('129');
 
@@ -63,9 +61,7 @@ test('Senoo 双曝光回放按步骤联动光路、源表计数和判决', async
 
 test('移动端可导出并恢复 Senoo 回放位置和配对样本', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/#machine');
-  await page.getByRole('link', { name: 'Senoo 装置', exact: true }).click();
-  await expect(page).toHaveURL(/#senoo$/);
+  await page.goto('/#senoo');
   const group = page.getByLabel('文献制备组', { exact: true });
   const sample = page.getByRole('spinbutton', { name: '图 2b 样本序号', exact: true });
   const decide = page.getByRole('button', { name: /双帧判决/ });
@@ -116,8 +112,43 @@ test('移动端可导出并恢复 Senoo 回放位置和配对样本', async ({ p
   await expect(second).toContainText('26.17751863 counts');
   await expect(outcome).toHaveAttribute('data-outcome', 'm1');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
 
-  await page.getByRole('link', { name: '整机演示', exact: true }).click();
-  await expect(page).toHaveURL(/#machine$/);
-  await expect(page.getByLabel('实验协议', { exact: true })).toHaveValue('standard');
+test('五个子系统可定位和筛选，文献深链与浏览器历史保留所选依据', async ({ page }) => {
+  await page.goto('/#evidence');
+  const systems = page.getByRole('navigation', { name: '整机子系统' });
+  const detail = page.getByTestId('twin-evidence-detail');
+  await expect(systems.getByRole('link')).toHaveCount(5);
+  for (const id of ['array', 'transport', 'control', 'readout', 'bell']) {
+    await systems.locator(`a[href="#evidence/${id}"]`).click();
+    await expect(detail).toHaveAttribute('data-subsystem', id);
+  }
+
+  const kind = page.getByLabel('证据类型', { exact: true });
+  await kind.selectOption('comparison');
+  await expect(systems.getByRole('link')).toHaveCount(1);
+  await expect(detail).toHaveAttribute('data-subsystem', 'transport');
+  await expect(page).toHaveURL(/#evidence\/transport\?kind=comparison$/);
+  const p19 = page.getByTestId('p19-holdout-evidence');
+  await expect(p19).toBeVisible();
+  const threshold = p19.getByLabel('P19 占位阈值');
+  await threshold.selectOption('6500');
+  await expect(threshold).toHaveValue('6500');
+  await expect(p19.getByRole('row', { name: /Pic1/ })).toContainText('3,348–5,539');
+  await expect(p19.getByRole('row', { name: /Pic2/ })).toContainText('3,319–5,407');
+  await expect(p19).toContainText('0/7,200');
+  await expect(p19).toContainText('不可估计');
+  await page.reload();
+  await expect(kind).toHaveValue('comparison');
+  await expect(p19).toBeVisible();
+
+  await kind.selectOption('all');
+  await systems.locator('a[href="#evidence/control"]').click();
+  await detail.getByRole('link', { name: '核对单原子 Rabi' }).click();
+  await expect(page).toHaveURL(/#senoo\/rabi$/);
+  await expect(page.getByTestId('senoo-rabi-characterization')).toBeVisible();
+  await page.goBack();
+  await expect(detail).toHaveAttribute('data-subsystem', 'control');
+  await page.goForward();
+  await expect(page.getByTestId('senoo-rabi-characterization')).toBeVisible();
 });

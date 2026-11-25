@@ -1,0 +1,65 @@
+.gate-workspace { --gate-gold: #dfc393; --gate-violet: #c5abe8; --gate-rose: #deb4cf; margin: 0 0 14px; }
+.gate-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--md-line); }
+.gate-heading h2 { font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.gate-heading h2 svg { color: var(--md-accent); }
+.gate-heading > span, .gate-workspace footer { color: var(--md-muted); font-size: 11px; }
+.gate-body { display: grid; grid-template-columns: minmax(245px, 0.9fr) minmax(0, 2fr); }
+.gate-levels { margin: 0; padding: 14px 16px 8px; background: radial-gradient(ellipse at 55% 62%, #323637, #202426 84%); border-right: 1px solid var(--md-line); display: grid; align-content: center; }
+.gate-levels figcaption { display: flex; align-items: baseline; gap: 9px; color: var(--md-muted); font-size: 11px; }
+.gate-levels figcaption b { color: var(--md-ink); font-size: 13px; }
+.gate-levels svg { width: 100%; max-height: 178px; min-height: 96px; display: block; }
+.gate-levels svg text { font: 12px var(--mono); }
+.gate-level-lines { fill: var(--md-ink); }
+.gate-level-lines path { stroke: #acb6b4; stroke-width: 2; }
+.gate-level-lines .gate-detuning { fill: var(--md-muted); font-size: 10px; }
+.gate-coupling { color: var(--gate-gold); opacity: .53; fill: currentColor; }
+.gate-coupling[data-tone=violet] { color: var(--gate-violet); }
+.gate-coupling[data-tone=rose] { color: var(--gate-rose); }
+.gate-coupling path { stroke: currentColor; stroke-width: 1.7; fill: none; }
+.gate-coupling[data-lit] { opacity: 1; }
+.gate-coupling[data-lit] path { stroke-width: 3; }
+.gate-sequence { min-width: 0; padding: 14px 16px; display: grid; align-content: start; gap: 12px; }
+.gate-toolbar, .gate-play, .gate-toolbar label, .gate-workspace footer, .gate-workspace footer a { display: flex; align-items: center; gap: 8px; }
+.gate-toolbar, .gate-workspace footer { justify-content: space-between; flex-wrap: wrap; }
+.gate-toolbar label, .gate-explanation { font-size: 12px; color: var(--md-muted); }
+.gate-toolbar select, .gate-play button { min-height: 32px; padding: 4px 9px; border-radius: 5px; border: 1px solid var(--md-border); background: var(--md-inset); color: var(--md-ink); font-size: 12px; }
+.gate-play .md-speed select { padding-right: 23px; }
+.gate-play button { display: inline-flex; gap: 6px; align-items: center; background: var(--md-accent); color: var(--md-inset); font-weight: 650; }
+.gate-steps { display: grid; grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; gap: 7px; }
+.gate-steps button { --pulse-color: var(--gate-gold); position: relative; text-align: left; display: grid; gap: 5px; align-content: start; padding: 9px 11px; border: 1px solid var(--md-border); border-radius: 6px; background: var(--md-inset); overflow: hidden; }
+.gate-steps button[data-pulse=rydberg] { --pulse-color: var(--gate-violet); }
+.gate-steps button[data-pulse=raman] { --pulse-color: var(--gate-rose); }
+.gate-steps button[aria-pressed=true], .gate-steps button:hover:enabled { border-color: var(--pulse-color); background: color-mix(in srgb, var(--pulse-color) 8%, var(--md-inset)); }
+.gate-steps small { font: 11px var(--mono); color: var(--pulse-color); }
+.gate-step-light { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2px 4px; }
+.gate-step-light svg { width: clamp(25px, 4vw, 46px); height: 14px; fill: none; stroke: var(--pulse-color); stroke-width: 1.5; }
+.gate-steps b { font-size: 14px; color: var(--md-ink); }
+.gate-steps span { font: 11px var(--mono); color: var(--md-muted); }
+.gate-steps i { position: absolute; inset: auto 0 0; height: 2px; background: var(--pulse-color); transform-origin: left; }
+.gate-branch { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 16px; padding: 7px 0; border-block: 1px solid var(--md-line); }
+.gate-branch label, .gate-branch output, .gate-branch > span { display: flex; align-items: center; gap: 7px; color: var(--md-muted); font-size: 12px; }
+.gate-branch select { padding: 3px 6px; color: var(--md-ink); background: var(--md-inset); border: 1px solid var(--md-border); border-radius: 4px; font: 12px var(--mono); }
+.gate-branch output { flex-wrap: wrap; }
+.gate-branch output small { font-size: 11px; }
+.gate-branch b { color: var(--md-ink); font: 13px var(--mono); }
+.gate-explanation { line-height: 1.65; }
+.gate-workspace footer { border-top: 1px solid var(--md-line); padding: 8px 16px; }
+.gate-links { display: flex; align-items: center; gap: 14px; }
+.gate-links button { border: 0; background: none; padding: 3px 0; color: var(--md-accent-ink); font-size: inherit; }
+.gate-workspace footer a { color: var(--md-accent-ink); text-decoration: none; }
+.gate-workspace button:disabled { opacity: .5; }
+.gate-compact { margin: 4px 0 12px; border: 1px solid var(--md-border); border-radius: 6px; background: var(--md-panel); }
+.gate-compact .gate-body { display: block; }
+.gate-compact .gate-heading, .gate-compact footer { padding: 7px 10px; }
+.gate-compact .gate-sequence { padding: 9px 10px; gap: 7px; }
+.gate-compact .gate-steps button { padding: 7px; }
+@media (max-width: 740px) {
+  .gate-body { grid-template-columns: 1fr; }
+  .gate-levels { border-right: 0; border-bottom: 1px solid var(--md-line); padding: 10px 12px 4px; }
+  .gate-levels svg { max-height: 135px; }
+  .gate-sequence { padding: 12px; gap: 10px; }
+  .gate-steps { gap: 4px; }
+  .gate-steps button { padding: 8px 6px; }
+  .gate-steps b { font-size: 12px; }
+  .gate-toolbar { gap: 6px; }
+}

@@ -12,7 +12,7 @@
   flex-wrap: wrap;
 }
 .machine-inspector header svg, .machine-inspector a {
-  color: var(--md-mint);
+  color: var(--md-accent);
 }
 .machine-inspector h2 { margin: 0; font-size: 1rem; }
 .machine-inspector a { font-size: .875rem; text-underline-offset: .23em; }

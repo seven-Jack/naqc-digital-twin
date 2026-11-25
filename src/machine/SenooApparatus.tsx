@@ -2,7 +2,6 @@ import {
   ArrowUpRight, Atom, BarChart3, Camera, Crosshair, Download, Focus, ListOrdered, Move, Pause, Play,
   RotateCcw, ScanLine, SkipForward, Snowflake, Upload, Waves, Zap,
 } from 'lucide-react';
-import { WorkspaceHeader } from '../components/WorkspaceHeader';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { SENOO_APPARATUS_PROFILE, SENOO_REPLAY_LENGTH, SENOO_REPLAY_STAGES } from '../data/senooApparatus';
 import { SENOO_CZ_BELL_SOURCE } from '../data/senooCzBellSource';
@@ -212,7 +211,6 @@ export function SenooApparatus() {
 
   return <div className="md-app ss-app" data-replay-mode={mode}
     data-apparatus-profile={mode === 'readout' ? SENOO_APPARATUS_PROFILE.id : undefined}>
-    <WorkspaceHeader current="senoo" />
     <main className="md-main ss-main">
       <div className="md-intro ss-intro">
         <div>

@@ -39,6 +39,7 @@ describe('local machine run import', () => {
     const imported = importMachineRun(JSON.stringify(saved));
     expect(imported.records[1].loadedAtoms).toBeUndefined();
     expect(imported.records[1].initialMoves).toBeUndefined();
+    expect(machineFrame(imported, 3400, 1)).toMatchObject({ geometryRecorded: false, activeMove: null });
     expect(imported.records[1].observations).toEqual(run.records[1].observations);
     expect(imported.records[1].events.filter(event => event.stageId === 'transfer')).toHaveLength(1);
     expect(imported).not.toHaveProperty('atomicReference');

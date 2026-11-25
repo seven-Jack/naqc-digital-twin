@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import {
-  Aperture, ArrowDownToLine, ArrowDownUp, ArrowUpRight, Atom, AudioWaveform, BookOpen, Boxes, Camera, ChevronDown, ChevronRight,
+  Aperture, ArrowDownToLine, ArrowDownUp, ArrowUpRight, Atom, AudioWaveform, BookOpen, Boxes, Camera, ChevronRight,
   CircleDot, CircuitBoard, Crosshair, Focus, Info, ListOrdered, Move, Pause, Play, RotateCcw,
   ScanLine, SkipBack, SkipForward, Snowflake, Upload, Zap, type LucideIcon,
 } from 'lucide-react';
 import { WorkspaceHeader } from '../components/WorkspaceHeader';
+import { PlaybackSpeed } from '../components/PlaybackSpeed';
 import { MachineStageInspector } from './MachineStageInspector';
+import { GateOperations } from './GateOperations';
 import { HardwareEvidence } from './HardwareEvidence';
-import { SenooReadoutSource } from './SenooReadoutSource';
-import { SenooPopulationSource } from './SenooPopulationSource';
 import { munizEvidence as reference } from '../data/hardwareEvidence';
 import { MUNIZ_DEMO_PROFILE, type MachineStage } from '../data/machineProfile';
 import { Dialog } from '../components/Dialog';
@@ -19,6 +19,7 @@ import {
 } from '../physics/quantumComputer';
 import { EquipmentDirectory } from '../scene/EquipmentInspection';
 import { QuantumComputerScene } from '../scene/QuantumComputerScene';
+import { gateClip } from '../scene/gateSequence';
 import './machine-dashboard.css';
 
 const machineTitle = '中性原子量子计算机整机数字孪生';
@@ -88,14 +89,15 @@ function Sequence({ stages, frame, seek }: { stages: readonly MachineStage[]; fr
   </section>;
 }
 
-function CircuitDiagram({ run, frame }: { run: MachineRun; frame: MachineFrame }) {
+function CircuitDiagram({ run, frame, seek }: { run: MachineRun; frame: MachineFrame; seek: (time: number) => void }) {
   const xBasis = run.config.basis === 'X';
+  const stage = run.plan.timeline.stages.find(item => item.id === 'gates')!;
   return <section className="md-panel md-circuit">
     <PanelHeader icon={CircuitBoard} aside={<code>{circuitDetails[run.circuit.id].target}</code>}>
       量子线路
     </PanelHeader>
     <div className="md-circuit-scroll">
-      <div className="md-circuit-grid" role="img"
+      <div className="md-circuit-grid" role="group"
         aria-label={`量子线路，${run.circuit.qubits} 个量子比特，${run.circuit.gates.map(gate => `${gate.name} ${gate.qubits.map(q => `q${q}`).join(' 和 ')}`).join('，')}，${xBasis ? '各位加 H 后做 Z 基荧光读出，实现 X 基测量' : 'Z 基荧光读出'}`}
         style={{ gridTemplateColumns: `52px repeat(${run.circuit.gates.length + (xBasis ? 2 : 1)}, minmax(31px, 1fr))` }}>
         {Array.from({ length: run.circuit.qubits }, (_, q) => <div className="md-wire-row" key={q}>
@@ -103,11 +105,15 @@ function CircuitDiagram({ run, frame }: { run: MachineRun; frame: MachineFrame }
           {run.circuit.gates.map((gate, index) => {
             const addressed = gate.qubits.includes(q);
             const joined = gate.name === 'CZ' && q >= Math.min(...gate.qubits) && q < Math.max(...gate.qubits);
+            const cueLabel = `查看第 ${index + 1} 个门 · ${gate.name}（${gate.qubits.map(bit => 'q' + bit).join('、')}）`;
             return <div className="md-wire" key={index}>
               {joined && <i className="md-cz-link" aria-hidden="true" />}
-              {addressed && <span className={`md-gate ${gate.name === 'CZ' ? 'md-cz' : ''} ${frame.gateIndex === index ? 'md-gate-active' : ''}`}>
-                {gate.name === 'CZ' ? '●' : 'H'}
-              </span>}
+              {addressed && <a className="md-gate-cue" href="#machine/gates" title={cueLabel} aria-label={cueLabel}
+                tabIndex={q === gate.qubits[0] ? undefined : -1} onClick={() => seek(gateClip(stage, run.circuit.gates.length, index).startMs)}>
+                <span className={`md-gate ${gate.name === 'CZ' ? 'md-cz' : ''} ${frame.gateIndex === index ? 'md-gate-active' : ''}`}>
+                  {gate.name === 'CZ' ? '●' : 'H'}
+                </span>
+              </a>}
             </div>;
           })}
           {xBasis && <div className="md-wire"><span title="X 基变换" className={`md-gate md-basis-gate ${frame.stage.id === 'analysis' && frame.representativeReady ? 'md-gate-active' : ''}`}>H</span></div>}
@@ -269,26 +275,18 @@ function Readout({ run, frame, download, selectAttempt }: {
   </section>;
 }
 
-export interface MachineWorkspaceSession {
-  config: MachineConfig;
-  elapsed: number;
-  speed: number;
-  demoProtocol: MachineProtocol;
-  imported: { name: string; run: MachineRun } | null;
-  selectedAttempt: number;
-}
-
-export function MachineDashboard({ session }: { session: RefObject<MachineWorkspaceSession | null> }) {
-  const [config, setConfig] = useState(() => session.current?.config ?? DEFAULT_MACHINE_CONFIG);
-  const [elapsed, setElapsed] = useState(() => session.current?.elapsed ?? 0);
-  const [playing, setPlaying] = useState(false);
-  const pauseForInspection = useCallback(() => setPlaying(false), []);
-  const [speed, setSpeed] = useState(() => session.current?.speed ?? 1);
+export function MachineDashboard() {
+  const [config, setConfig] = useState(DEFAULT_MACHINE_CONFIG);
+  const [elapsed, setElapsed] = useState(0);
+  const [playUntilMs, setPlayUntilMs] = useState<number | null>(null);
+  const playing = playUntilMs !== null && elapsed < playUntilMs;
+  const pause = useCallback(() => setPlayUntilMs(null), []);
+  const [speed, setSpeed] = useState(1);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [demoProtocol, setProtocol] = useState<MachineProtocol>(() => session.current?.demoProtocol ?? 'standard');
-  const [imported, setImported] = useState(() => session.current?.imported ?? null);
+  const [demoProtocol, setProtocol] = useState<MachineProtocol>('standard');
+  const [imported, setImported] = useState<{ name: string; run: MachineRun } | null>(null);
   const [importError, setImportError] = useState('');
-  const [selectedAttempt, setSelectedAttempt] = useState(() => session.current?.selectedAttempt ?? 0);
+  const [selectedAttempt, setSelectedAttempt] = useState(0);
   const readId = useRef(0);
   const run = useMemo(() => imported?.run ?? createMachineRun(config, MUNIZ_DEMO_PROFILE, demoProtocol), [config, demoProtocol, imported]);
   const frame = useMemo(() => machineFrame(run, elapsed, selectedAttempt), [run, elapsed, selectedAttempt]);
@@ -297,31 +295,22 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
   const { protocol, timeline: { stages } } = run.plan;
   const attemptNumber = frame.attemptIndex + 1;
 
-  // Keep the current run in this tab when a user consults a source; the scene unmounts and playback pauses.
-  useLayoutEffect(() => {
-    session.current = { config, elapsed, speed, demoProtocol, imported, selectedAttempt };
-  }, [session, config, elapsed, speed, demoProtocol, imported, selectedAttempt]);
-
   useEffect(() => {
-    if (!playing) return;
+    if (!playing || playUntilMs === null) return;
     let animation = 0;
     let last = performance.now();
     const tick = (now: number) => {
       const delta = Math.max(0, now - last);
       last = now;
-      setElapsed(time => Math.min(run.durationMs, time + delta * speed));
+      setElapsed(time => Math.min(playUntilMs, time + delta * speed));
       animation = requestAnimationFrame(tick);
     };
     animation = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animation);
-  }, [playing, run.durationMs, speed]);
-
-  useEffect(() => {
-    if (frame.complete) setPlaying(false);
-  }, [frame.complete]);
+  }, [playing, playUntilMs, speed]);
 
   const seek = (time: number) => {
-    setPlaying(false);
+    pause();
     setElapsed(time);
   };
   const update = (patch: Partial<MachineConfig>) => {
@@ -338,7 +327,11 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
   };
   const play = () => {
     if (frame.complete) setElapsed(0);
-    setPlaying(!playing);
+    setPlayUntilMs(playing ? null : run.durationMs);
+  };
+  const playRange = (start: number, end: number) => {
+    setElapsed(start);
+    setPlayUntilMs(end);
   };
   const loadRecord = async (file: File) => {
     const id = ++readId.current;
@@ -363,7 +356,7 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
     seek(0);
   };
   const selectAttempt = (index: number) => {
-    setPlaying(false);
+    pause();
     setSelectedAttempt(index);
   };
 
@@ -383,12 +376,9 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
   const visibleLoaded = protocol === 'bell-replenishment' ? frame.atoms.length : loadingComplete ? run.loadedCount : frame.atoms.length;
   const visibleQubits = loadingComplete ? frame.atoms.filter(atom => atom.qubit !== undefined).length : 0;
 
-  let stageDescription: string = frame.stage.description;
-  if (frame.stage.id === 'analysis') {
-    stageDescription = run.config.basis === 'X' ? '对各比特施加 H，将 X 基测量转换为 Z 基荧光测量。' : '选择 Z 基，保持量子态并直接进入荧光读出。';
-  }
+  let frameNotice: string | null = null;
   if (protocol === 'standard' && loadingComplete && frame.stage.id !== 'rearrangement' && !frame.representativeReady) {
-    stageDescription = '第 1 次尝试重排后仍有空位，跳过该次的制备、门和读出。';
+    frameNotice = '第 1 次尝试重排后仍有空位，跳过该次的制备、门和读出。';
   }
   if (frame.stageSkipped) {
     const skipDescriptions = {
@@ -397,41 +387,75 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
       vacant: '复查仍有空位，该次跳过制备、门和读出。',
       'atom-lost': '末端检测到原子丢失，该次跳过位串读出。',
     };
-    stageDescription = frame.stageSkipReason ? skipDescriptions[frame.stageSkipReason] : '该次跳过当前操作。';
+    frameNotice = frame.stageSkipReason ? skipDescriptions[frame.stageSkipReason] : '该次跳过当前操作。';
   }
   if (frame.representativeLostQubits.length) {
-    stageDescription = `第 ${attemptNumber} 次尝试检测到 ${frame.representativeLostQubits.map(q => `q${q}`).join('、')} 丢失，本次无有效位串。`;
+    frameNotice = `第 ${attemptNumber} 次尝试检测到 ${frame.representativeLostQubits.map(q => `q${q}`).join('、')} 丢失，本次无有效位串。`;
   }
-  if (!frame.geometryRecorded) stageDescription = '该轮记录缺少此阶段的原子坐标或重排路径。';
+  if (!frame.geometryRecorded) frameNotice = '该轮记录缺少此阶段的原子坐标或重排路径。';
+  let stageDescription: string = frame.stage.description;
+  if (frame.stage.id === 'analysis') {
+    stageDescription = run.config.basis === 'X' ? '对各比特施加 H，将 X 基测量转换为 Z 基荧光测量。' : '选择 Z 基，保持量子态并直接进入荧光读出。';
+  }
 
-  const openEvidence = () => {
-    const heading = document.getElementById('hardware-evidence-heading');
-    heading?.focus({ preventScroll: true });
-    heading?.scrollIntoView({ block: 'start' });
-  };
-
+  const playback = { run, frame, playing, pause, seek, playRange, speed, setSpeed };
   return <div className="md-app" data-machine-profile={profile.id} data-machine-protocol={protocol}>
-    <WorkspaceHeader current="machine">
+    <WorkspaceHeader>
       <button type="button" className="md-info-button" onClick={() => setInfoOpen(true)}><Info size={15} />模型说明</button>
     </WorkspaceHeader>
     <main className="md-main">
-      <div className="md-intro">
+      <div className="md-intro md-machine-intro">
         <div>
           <p className="md-intro-kicker"><i /> ¹⁷¹Yb <span>/</span> <strong>{profile.label}</strong></p>
           <h1 className="md-machine-title">中性原子量子计算机<wbr />整机数字孪生</h1>
           <p className="md-intro-subtitle" lang="en">Neutral-Atom Quantum Computer Digital Twin</p>
-          <p className="md-intro-description">沿光镊装载、原子重排、量子门与荧光读出，查看同一时刻的装置和测量结果。</p>
         </div>
         <div className="md-intro-actions">
-          <button type="button" className="md-evidence-link" onClick={openEvidence}><BookOpen size={14} />真机实验依据</button>
+          <a className="md-evidence-link" href="#hardware-evidence-heading"><BookOpen size={14} />真机实验依据</a>
           <div className={`md-run-status ${playing ? 'md-running' : ''}`}><i />{status}</div>
         </div>
       </div>
+      <section id="machine/scene" tabIndex={-1} aria-label="整机光路回放" className="md-panel md-scene-panel md-architecture">
+        <PanelHeader icon={Atom} aside={<div className="md-controls md-architecture-actions">
+          <span className="md-stage-indicator" data-testid="machine-stage" data-stage-id={frame.stage.id}>
+            <i />{stageNumber} · {frame.stage.label}
+          </span>
+          <button type="button" className="md-play-button" onClick={play}>{playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
+            {playing ? '暂停' : frame.complete ? '重新演示' : frame.elapsedMs ? '继续演示' : '启动演示'}</button>
+        </div>}>整机架构</PanelHeader>
+        <div className="md-architecture-body">
+          <div className="md-scene-body">
+            <QuantumComputerScene {...playback}
+              source={imported ? '本地导入回放' : '合成演示'} frameNotice={frameNotice} />
+          </div>
+          <EquipmentDirectory />
+        </div>
+        <div className="md-playback">
+          <OccupancyStatus frame={frame} />
+          <div className="md-playback-note">
+            <p>{frameNotice ?? stageDescription}</p>
+            {frame.parallelTrapHandoff && <p className="md-panel-hint">483 nm 与 460 nm 光路并行</p>}
+            {frame.representativeBitstring && <code>第 {attemptNumber} 次位串 {frame.representativeBitstring}</code>}
+          </div>
+          <div className="md-timeline">
+            <input type="range" aria-label="演示时间轴" min={0} max={run.durationMs} step="any" value={frame.elapsedMs} style={rangeFill(frame.elapsedMs, run.durationMs)}
+              aria-valuetext={`${(frame.elapsedMs / 1000).toFixed(1)} 秒，${frame.stage.label}`}
+              onChange={event => seek(Number(event.target.value))} />
+            <code title="浏览器演示时间">演示 {(frame.elapsedMs / 1000).toFixed(1)} / {(run.durationMs / 1000).toFixed(1)} s</code>
+          </div>
+          <div className="md-controls">
+            <button type="button" onClick={() => seek(frame.complete ? frame.stageStartMs : stages[Math.max(0, frame.stageIndex - 1)].startMs)}
+              disabled={frame.elapsedMs === 0}><SkipBack size={15} />上一阶段</button>
+            <button type="button" onClick={() => seek(frame.stageEndMs)} disabled={frame.complete}><SkipForward size={15} />下一阶段</button>
+            <button type="button" onClick={() => seek(run.durationMs)} disabled={frame.complete}>批次末帧</button>
+            <button type="button" onClick={() => seek(0)}><RotateCcw size={15} />重置</button>
+            <PlaybackSpeed value={speed} onChange={setSpeed} />
+          </div>
+        </div>
+      </section>
+      <GateOperations {...playback} />
       <div className="md-run-strip">
         <p><CircuitBoard size={16} aria-hidden="true" /><strong>{run.circuit.label}</strong><span>{run.circuit.qubits} 比特 · {run.config.basis} 基 · {run.config.shots} {imported ? '条导入记录' : '次合成尝试'}</span></p>
-        <nav aria-label="本次运行">
-          <a href="#machine/config">配置电路</a><a href="#machine/scene">三维回放</a><a href="#machine/results">批次读出</a>
-        </nav>
       </div>
       <div className="md-layout">
         <aside className="md-workflow-column">
@@ -447,49 +471,12 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
           </section>
         </aside>
         <div className="md-visual-column">
-          <section id="machine/scene" tabIndex={-1} aria-label="整机光路回放" className="md-panel md-scene-panel">
-            <PanelHeader icon={Atom} aside={<span className="md-stage-indicator" data-testid="machine-stage" data-stage-id={frame.stage.id}>
-              <i />{stageNumber} · {frame.stage.label}
-            </span>}>整机光路</PanelHeader>
-            <div className="md-scene-body">
-              <QuantumComputerScene profile={profile} frame={frame} pause={pauseForInspection} />
-            </div>
-            <div className="md-playback">
-              <OccupancyStatus frame={frame} />
-              <div className="md-playback-note">
-                <p>{stageDescription}</p>
-                {frame.parallelTrapHandoff && <p className="md-panel-hint">483 nm 与 460 nm 光路并行</p>}
-                {frame.representativeBitstring && <code>第 {attemptNumber} 次位串 {frame.representativeBitstring}</code>}
-              </div>
-              <div className="md-timeline">
-                <input type="range" aria-label="演示时间轴" min={0} max={run.durationMs} step="any" value={frame.elapsedMs} style={rangeFill(frame.elapsedMs, run.durationMs)}
-                  aria-valuetext={`${(frame.elapsedMs / 1000).toFixed(1)} 秒，${frame.stage.label}`}
-                  onChange={event => seek(Number(event.target.value))} />
-                <code title="浏览器演示时间">演示 {(frame.elapsedMs / 1000).toFixed(1)} / {(run.durationMs / 1000).toFixed(1)} s</code>
-              </div>
-              <div className="md-controls">
-                <button type="button" className="md-play-button" onClick={play}>{playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
-                  {playing ? '暂停' : frame.complete ? '重新演示' : frame.elapsedMs ? '继续演示' : '启动演示'}</button>
-                <button type="button" onClick={() => seek(frame.complete ? frame.stageStartMs : stages[Math.max(0, frame.stageIndex - 1)].startMs)}
-                  disabled={frame.elapsedMs === 0}><SkipBack size={15} />上一阶段</button>
-                <button type="button" onClick={() => seek(frame.stageEndMs)} disabled={frame.complete}><SkipForward size={15} />下一阶段</button>
-                <button type="button" onClick={() => seek(run.durationMs)} disabled={frame.complete}>批次末帧</button>
-                <button type="button" onClick={() => seek(0)}><RotateCcw size={15} />重置</button>
-                <label className="md-speed"><span className="sr-only">播放速度</span>
-                  <select aria-label="播放速度" value={speed} onChange={event => setSpeed(Number(event.target.value))}>
-                    {[0.5, 1, 2].map(value => <option key={value} value={value}>{value}×</option>)}
-                  </select><ChevronDown size={12} />
-                </label>
-              </div>
-            </div>
-          </section>
-          <EquipmentDirectory />
-          <MachineStageInspector run={run} frame={frame} />
-          <CircuitDiagram run={run} frame={frame} />
+          <MachineStageInspector run={run} frame={frame} synthetic={!imported} />
+          <CircuitDiagram run={run} frame={frame} seek={seek} />
         </div>
         <aside className="md-run-column">
           <RunSettings config={run.config} protocol={protocol} update={update} setProtocol={changeProtocol} imported={imported !== null}
-            sourceControl={<><div className="md-run-source">
+            sourceControl={<div className="md-run-source">
               <label className="md-import-run"><Upload size={14} aria-hidden="true" />导入运行 JSON<input className="sr-only" type="file" accept=".json,application/json" onChange={event => {
                 const file = event.currentTarget.files?.[0];
                 event.currentTarget.value = '';
@@ -498,20 +485,10 @@ export function MachineDashboard({ session }: { session: RefObject<MachineWorksp
               {imported && <div><p data-testid="machine-record-source">本地回放 · {imported.name}</p>
                 <button type="button" onClick={returnToSimulation}>返回仿真</button></div>}
               {importError && <p role="alert">{importError}</p>}
-            </div>
-              {run.atomicReference && <details className="md-run-source md-atomic-reference">
-                <summary>578 nm 原子参考</summary>
-                <p>¹⁷¹Yb ¹S₀ → ³P₀ · F = 1/2 → 1/2</p>
-                <p><code>{run.atomicReference.frequencyDecimalHz} Hz</code></p>
-                <p>超精细重心频率。装置驱动频率和 Rabi 频率待测。</p>
-                <a href={run.atomicReference.sourceUrl} target="_blank" rel="noreferrer">查看原始来源</a>
-              </details>}
-            </>} />
+            </div>} />
           <Readout run={run} frame={frame} download={download} selectAttempt={selectAttempt} />
         </aside>
       </div>
-      <SenooReadoutSource />
-      <SenooPopulationSource />
       <HardwareEvidence />
       <footer className="md-footer"><span>{machineTitle}</span><button type="button" onClick={() => setInfoOpen(true)}>仿真模型与参考文献 <ArrowUpRight size={13} /></button></footer>
     </main>

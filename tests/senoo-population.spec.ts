@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('Senoo 布居图的样本选择保留两条曲线的源值和上下误差', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/#machine');
+  await page.goto('/#sources');
   const panel = page.getByTestId('senoo-population-source');
   const plot = panel.getByRole('img', { name: '带丢失检测的 m₁ 与 r₀ 布居观测及上下误差' });
   await expect(plot.locator('circle.sr-point')).toHaveCount(160);

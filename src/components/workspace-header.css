@@ -1,19 +1,19 @@
-.ws-header { background: #0a121b; border-bottom: 1px solid #263540; }
+.ws-header { background: var(--md-inset); border-bottom: 1px solid var(--md-border); }
 .ws-header-inner {
   width: 100%; max-width: 1552px; min-height: 64px; margin-inline: auto; padding: 8px clamp(13px, 2.4vw, 32px);
   display: flex; align-items: center; flex-wrap: wrap; gap: 6px clamp(16px, 3vw, 46px);
 }
-.ws-brand { display: inline-flex; align-items: center; gap: 9px; color: #eff8f6; text-decoration: none; font-size: 15px; font-weight: 680; white-space: nowrap; }
-.ws-brand svg { color: #86e8c6; }
+.ws-brand { display: inline-flex; align-items: center; gap: 9px; color: var(--md-ink); text-decoration: none; font-size: 15px; font-weight: 680; white-space: nowrap; }
+.ws-brand svg { color: var(--md-accent); }
 .ws-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 2px; }
 .ws-nav a {
   display: inline-flex; position: relative; align-items: center; gap: 6px; padding: 10px 12px;
-  min-height: 42px; border-radius: 5px; color: #a7b8c5; text-decoration: none; font-size: 12px; font-weight: 560; white-space: nowrap;
+  min-height: 42px; border-radius: 5px; color: var(--md-muted); text-decoration: none; font-size: 12px; font-weight: 560; white-space: nowrap;
 }
-.ws-nav a:hover { color: #e8f7f1; background: #12202a; }
-.ws-nav a[aria-current="page"] { color: #a7f0d4; background: #152a2c; }
-.ws-nav a[aria-current="page"]::after {
-  content: ''; position: absolute; bottom: 3px; inset-inline: 12px; height: 2px; background: #7bdfba; border-radius: 2px;
+.ws-nav a:hover { color: var(--md-ink); background: var(--md-raised); }
+.ws-nav a[aria-current="location"] { color: var(--md-accent-ink); background: var(--md-line); }
+.ws-nav a[aria-current="location"]::after {
+  content: ''; position: absolute; bottom: 3px; inset-inline: 12px; height: 2px; background: var(--md-accent); border-radius: 2px;
 }
 .ws-actions { margin-left: auto; }
 @media (max-width: 715px) {
@@ -21,9 +21,6 @@
   .ws-brand { min-height: 35px; }
   .ws-nav { order: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
   .ws-nav a { justify-content: center; padding: 7px 2px; gap: 4px; font-size: 11px; min-height: 44px; }
-  .ws-nav a[aria-current="page"]::after { inset-inline: 7px; }
+  .ws-nav a[aria-current="location"]::after { inset-inline: 7px; }
   .ws-actions { max-width: 100%; }
-}
-@media (max-width: 370px) {
-  .ws-nav a { flex-direction: column; gap: 2px; }
 }

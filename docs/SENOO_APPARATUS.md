@@ -1,6 +1,6 @@
 # Senoo 767 nm 装置与文献回放
 
-首套具名装置采用 Senoo 等的 ¹⁷¹Yb 767 nm 光镊平台，主协议为亚稳态核自旋 m 比特的双曝光读出。实验依据为 2026 年刊版图 2a 上排的 m 比特方案、图 2b 的双曝光计数、Methods 及扩展数据图 1–2。整机入口使用 `#senoo`，483/460 nm 的 Bell 补位保留为独立演示。 [Senoo 等，Nature Physics 22, 903–909](https://doi.org/10.1038/s41567-026-03258-8) · [本地刊版 PDF](../references/library/171yb/yb-senoo-mapping-publisher.pdf)
+首套具名装置采用 Senoo 等的 ¹⁷¹Yb 767 nm 光镊平台，主协议为亚稳态核自旋 m 比特的双曝光读出。实验依据为 2026 年刊版图 2a 上排的 m 比特方案、图 2b 的双曝光计数、Methods 及扩展数据图 1–2。本文记录的 767 nm 回放组件在独立浏览器测试中验证。当前整机演示采用 483/460 nm 配置。 [Senoo 等，Nature Physics 22, 903–909](https://doi.org/10.1038/s41567-026-03258-8) · [本地刊版 PDF](../references/library/171yb/yb-senoo-mapping-publisher.pdf)
 
 ## 装置与工序
 

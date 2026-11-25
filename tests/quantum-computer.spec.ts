@@ -163,7 +163,7 @@ test('独立统计未填满和末端丢失，首轮失败仍可采集有效位�
   expect(rejected + lost + measured).toBe(256);
   await expect(page.getByText(/^第 1 次位串/)).toHaveCount(0);
 
-  await page.getByRole('button', { name: '真机实验依据' }).click();
+  await page.getByRole('link', { name: '真机实验依据' }).click();
   await expect(page.getByRole('heading', { name: '真机实验依据' })).toBeFocused();
   await expect(page.getByRole('link', { name: /Muniz 等/ })).toHaveAttribute('href', 'https://doi.org/10.1103/PRXQuantum.6.020334');
 });
@@ -188,16 +188,16 @@ test('播放可暂停，且三维视图可切换与复位', async ({ page }) => 
   await expect(time).toHaveValue(pausedTime);
 });
 
-test('移动端可操作整机界面并切换钟跃迁子系统', async ({ page }) => {
+test('移动端从整机导航查看批次读出并返回架构', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await expect(page.getByTestId('quantum-scene')).toBeVisible();
   const pageWidth = await page.evaluate(() => ({ view: window.innerWidth, content: document.documentElement.scrollWidth }));
   expect(pageWidth.content).toBeLessThanOrEqual(pageWidth.view);
 
-  await page.getByRole('link', { name: '钟跃迁子系统' }).click();
-  await expect(page).toHaveURL(/#clock$/);
-  await expect(page.getByRole('heading', { name: '钟跃迁模拟器' })).toBeVisible();
-  await page.getByRole('link', { name: '返回整机演示' }).click();
-  await expect(page).toHaveTitle('中性原子量子计算机整机数字孪生');
+  const navigation = page.getByRole('navigation', { name: '整机导航' });
+  await navigation.getByRole('link', { name: '批次读出' }).click();
+  await expect(page.getByTestId('machine-results')).toBeFocused();
+  await navigation.getByRole('link', { name: '整机架构' }).click();
+  await expect(page.getByRole('region', { name: '整机光路回放' })).toBeFocused();
 });

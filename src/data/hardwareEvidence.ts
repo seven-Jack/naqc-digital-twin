@@ -12,7 +12,25 @@ export const munizEvidence = {
   transferMs: 2,
   imageMs: 5,
   trapSites: 84,
+  trapRows: 12,
+  trapColumns: 7,
   gatePitchUm: 3,
+  interactionRowGapUm: 6,
+  objectiveNA: 0.65,
+  fieldOfViewMm: 0.5,
+  apparatusUrl: 'https://arxiv.org/html/2411.11708#A1',
+} as const;
+
+export const interactionSiteXUm = Array.from({ length: munizEvidence.trapColumns },
+  (_, column) => (column - (munizEvidence.trapColumns - 1) / 2) * munizEvidence.gatePitchUm);
+
+// Predecessor ¹⁷¹Yb apparatus cited in Muniz Appendix A. Distance between the
+// trapped atom samples, not a mechanical flange-to-flange specification.
+export const norciaTransport = {
+  separationM: 0.300,
+  wavelengthNm: 532,
+  sourceUrl: 'https://doi.org/10.1103/PhysRevX.13.041034',
+  figureUrl: 'https://arxiv.org/pdf/2401.16177#page=2',
 } as const;
 
 export const hardwareComparisons = [
