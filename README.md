@@ -4,6 +4,14 @@
 
 首页展示 ¹⁷¹Yb 中性原子量子计算机的整机架构。点击任一设备，可以放大查看内部部件，并播放它在冷却、装载、原子搬运、量子门或荧光读出中的工作片段。装置参考 Muniz / Atom Computing。两腔间距采用同团队前序平台数据，交互行采用 Muniz 的阱心间距。腔壁、镜筒和支架外形为示意。
 
+## 在线演示
+
+[打开公开演示](https://naqc-digital-twin.stonynote14.chatgpt.site/) · [直接查看真空腔拆解](https://naqc-digital-twin.stonynote14.chatgpt.site/#machine/equipment/vacuum) · [GitHub v0.3.0 发布包](https://github.com/seven-Jack/naqc-digital-twin/releases/tag/v0.3.0)
+
+公开演示由 ChatGPT Sites 托管，当前为 v0.3.0。可点选、放大和拆解 8 个整机设备，并沿时间轴回放实验。源码、测试和静态发布包维护在 GitHub 仓库。
+
+`main` 分支已合入石墨灰 × 香槟金界面、更新后的 Muniz 三维装置、0.1× 慢放，以及可逐步查看钟跃迁、里德堡激发和局域拉曼旋转的门操作面板。按下方步骤本地启动即可体验这些更新。[整机与门操作更新 #23](https://github.com/seven-Jack/naqc-digital-twin/pull/23)
+
 ## 本地启动
 
 需要 Node.js 22.12 或更高版本。3D 需要 WebGL 2。
@@ -20,7 +28,7 @@ npm run build
 npm run preview
 ```
 
-## 整机演示
+## 本地整机操作
 
 1. 在整机三维视图中点击设备本体或标签，也可从设备导航或功能图打开。八台设备共包含 25 个可定位部件。进入设备后可以旋转、拆解、选择部件或播放对应阶段。可用 `/#machine/equipment/aod` 直接打开搬运光镊。[设备与操作](docs/EQUIPMENT_EXPLORER.md)
 2. 整机与设备片段均可从 0.1× 到 2× 按 0.1× 调速。「阵列」默认放大论文交互行，可切至「本轮占位」查看 6 × 8 回放。点击「返回整机」，继续同一轮、同一时刻的演示。顶部导航的「门操作」可逐步回放拉曼单比特门和 CZ 的钟跃迁转存、里德堡激发与钟跃迁返回，能级图与同一轮三维光路同步。
